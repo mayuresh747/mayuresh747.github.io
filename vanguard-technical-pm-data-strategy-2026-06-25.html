@@ -390,7 +390,7 @@
       padding:0 28px;
     }
     /* align masthead + footer to the grid width so the name, rule, and rail share one left edge */
-    header.masthead > .wrap, footer > .wrap{max-width:calc(var(--maxw) + 248px);}
+    header.masthead > .wrap, footer > .wrap{max-width:calc(var(--maxw) + 248px);padding-left:calc(28px + 248px);}
     /* sections already carry their own .wrap; neutralize its extra padding
        inside the grid so the content column keeps its readable width */
     main#main > section{grid-column:2;padding-left:0;padding-right:0;}
