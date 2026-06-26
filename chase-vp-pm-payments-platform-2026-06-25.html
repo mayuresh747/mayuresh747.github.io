@@ -27,6 +27,8 @@
     --body:"Newsreader",Georgia,"Times New Roman",serif;
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --maxw:880px;
+    --railw:200px;
+    --railgap:48px;
     --r:10px;
   }
   *{box-sizing:border-box}
@@ -82,7 +84,7 @@
   }
   .prepared{
     font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ink-faint);margin:0;
+    color:var(--ink-faint);margin:0 0 20px;
   }
   .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);border:0;margin:6px 0 0}
 
@@ -98,6 +100,7 @@
     text-transform:uppercase;
     color:var(--accent);
     margin:0 0 18px;
+    scroll-margin-top:1.5rem;
   }
   h2{margin:0} /* kicker carries the heading visually; keep h2 semantic */
   h2.kicker{font-size:1rem}
@@ -257,6 +260,79 @@
   /* focus visibility */
   a:focus-visible,th:focus-visible,td:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 
+  /* ---- On this page: shared nav styling ---- */
+  .toc-head{
+    font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 12px;
+  }
+  .toc-list{list-style:none;margin:0;padding:0}
+  .toc-list li{margin:0}
+  .toc-list a{
+    display:block;
+    font-family:var(--mono);font-size:.78rem;line-height:1.3;
+    color:var(--ink-faint);text-decoration:none;
+    padding:6px 0 6px 12px;
+    border-left:2px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .toc-list a:hover,.toc-list a:focus{color:var(--accent);border-color:var(--accent-soft)}
+  .toc-list a[aria-current="true"]{
+    color:var(--accent);font-weight:600;border-left-color:var(--accent);
+  }
+
+  /* ---- mobile / narrow: Contents disclosure (default; works with no JS) ---- */
+  .toc-mobile{
+    margin:0 0 4px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--r);
+  }
+  .toc-mobile > summary{
+    list-style:none;cursor:pointer;
+    font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+    padding:14px 16px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .toc-mobile > summary::-webkit-details-marker{display:none}
+  .toc-mobile > summary::after{
+    content:"";width:8px;height:8px;flex:0 0 auto;
+    border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);
+    transform:rotate(45deg);transition:transform .2s ease;margin-top:-3px;
+  }
+  .toc-mobile[open] > summary::after{transform:rotate(-135deg);margin-top:3px}
+  .toc-mobile .toc-list{padding:0 16px 14px}
+  @media (prefers-reduced-motion:reduce){.toc-mobile > summary::after{transition:none}}
+
+  /* ---- desktop: two-column layout with sticky left rail (>=960px) ---- */
+  .toc-rail{display:none}
+  @media (min-width:960px){
+    .toc-mobile{display:none}
+    /* header + footer indent so their content lines up with the content column */
+    header.top .wrap,
+    footer .wrap{
+      max-width:calc(var(--maxw) + var(--railw) + var(--railgap));
+      padding-left:calc(24px + var(--railw) + var(--railgap));
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:var(--railw) minmax(0,var(--maxw));
+      gap:var(--railgap);
+      max-width:calc(var(--maxw) + var(--railw) + var(--railgap));
+      margin:0 auto;
+      padding:0 24px;
+      align-items:start;
+    }
+    .layout > main{min-width:0}
+    /* content column supplies its own .wrap padding; neutralise it inside the grid */
+    .layout > main .wrap{max-width:none;margin:0;padding:0}
+    .toc-rail{
+      display:block;
+      position:sticky;top:2rem;
+      align-self:start;
+    }
+  }
+
   /* reveal animation */
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
@@ -275,11 +351,55 @@
     <h1>Mayuresh More</h1>
     <p class="role-line">How I would solve the consumer payments problem for the VP Product Manager, Payments Platform role at JPMorgan Chase.</p>
     <p class="prepared">Prepared June 2026 &middot; Wallets &amp; Lending Innovations, Consumer &amp; Community Banking</p>
+
+    <!-- mobile / narrow: Contents disclosure (no JS required) -->
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <nav aria-label="On this page">
+        <ul class="toc-list">
+          <li><a href="#s-thesis">The bet</a></li>
+          <li><a href="#s-problem">The problem</a></li>
+          <li><a href="#s-jtbd">Who it is for</a></li>
+          <li><a href="#s-rice">Prioritization</a></li>
+          <li><a href="#s-approach">Approach</a></li>
+          <li><a href="#s-mvp">What I would ship first</a></li>
+          <li><a href="#s-metrics">Metrics</a></li>
+          <li><a href="#s-impact">Business impact</a></li>
+          <li><a href="#s-plan">30 / 60 / 90</a></li>
+          <li><a href="#s-risks">Risks</a></li>
+          <li><a href="#s-questions">Questions</a></li>
+          <li><a href="#s-fit">Why me</a></li>
+        </ul>
+      </nav>
+    </details>
   </div>
   <div class="wrap"><hr class="rule"></div>
 </header>
 
-<main id="main">
+<div class="layout">
+
+  <!-- desktop: sticky left rail -->
+  <aside class="toc-rail">
+    <p class="toc-head">On this page</p>
+    <nav aria-label="On this page">
+      <ul class="toc-list">
+        <li><a href="#s-thesis">The bet</a></li>
+        <li><a href="#s-problem">The problem</a></li>
+        <li><a href="#s-jtbd">Who it is for</a></li>
+        <li><a href="#s-rice">Prioritization</a></li>
+        <li><a href="#s-approach">Approach</a></li>
+        <li><a href="#s-mvp">What I would ship first</a></li>
+        <li><a href="#s-metrics">Metrics</a></li>
+        <li><a href="#s-impact">Business impact</a></li>
+        <li><a href="#s-plan">30 / 60 / 90</a></li>
+        <li><a href="#s-risks">Risks</a></li>
+        <li><a href="#s-questions">Questions</a></li>
+        <li><a href="#s-fit">Why me</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main id="main">
 
   <!-- THESIS -->
   <section class="reveal" aria-labelledby="s-thesis">
@@ -695,7 +815,8 @@
     </div>
   </section>
 
-</main>
+  </main>
+</div>
 
 <footer>
   <div class="wrap">
@@ -714,14 +835,54 @@
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       els.forEach(function(el){ el.classList.add('in'); });
-      return;
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(function(el){ io.observe(el); });
     }
-    var io = new IntersectionObserver(function(entries){
+  })();
+
+  /* Scroll-spy for the "On this page" rail. JS enhancement only:
+     with JS off, every link still jumps to its section and all content is visible. */
+  (function(){
+    if (!('IntersectionObserver' in window)) return;
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc-rail .toc-list a'));
+    if (!links.length) return;
+    var byId = {};
+    var targets = [];
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if (el){ byId[id] = a; targets.push(el); }
+    });
+    var current = null;
+    function setCurrent(id){
+      if (id === current) return;
+      current = id;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      if (byId[id]) byId[id].setAttribute('aria-current', 'true');
+    }
+    var visible = {};
+    var spy = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        var id = e.target.id;
+        if (e.isIntersecting){ visible[id] = e.intersectionRatio; }
+        else { delete visible[id]; }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    els.forEach(function(el){ io.observe(el); });
+      // pick the topmost visible section
+      var best = null, bestTop = Infinity;
+      targets.forEach(function(el){
+        if (visible[el.id] != null){
+          var top = el.getBoundingClientRect().top;
+          if (top < bestTop){ bestTop = top; best = el.id; }
+        }
+      });
+      if (best) setCurrent(best);
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, 1] });
+    targets.forEach(function(el){ spy.observe(el); });
   })();
 </script>
 </body>

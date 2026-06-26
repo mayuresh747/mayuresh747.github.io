@@ -337,6 +337,103 @@
     figure.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;}
     figure.diagram svg{min-width:540px;}
   }
+
+  /* ---------- on this page: table of contents ---------- */
+  /* Mobile-first: a native <details> disclosure under the name/role line.
+     Works with no JS and causes no horizontal overflow. */
+  .toc-mobile{
+    margin:18px 0 2px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--card);
+  }
+  .toc-mobile > summary{
+    list-style:none;cursor:pointer;
+    font-family:var(--mono);
+    font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    color:var(--accent);
+    padding:13px 16px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .toc-mobile > summary::-webkit-details-marker{display:none;}
+  .toc-mobile > summary::after{
+    content:"";flex:none;width:9px;height:9px;
+    border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);
+    transform:rotate(45deg);transition:transform .2s ease;margin-bottom:3px;
+  }
+  .toc-mobile[open] > summary::after{transform:rotate(-135deg);margin-bottom:-2px;}
+  @media (prefers-reduced-motion:reduce){.toc-mobile > summary::after{transition:none;}}
+  .toc-mobile ol{
+    list-style:none;margin:0;padding:4px 0 10px;
+  }
+  .toc-mobile li{margin:0;}
+  .toc-mobile a{
+    display:block;
+    font-family:var(--display);font-size:15px;
+    color:var(--ink-soft);text-decoration:none;
+    padding:8px 16px;
+    border-left:2px solid transparent;
+  }
+  .toc-mobile a:hover,.toc-mobile a:focus{color:var(--accent);}
+
+  /* Desktop two-column layout: sticky left rail + content column.
+     Below 960px the rail is hidden and the <details> version shows. */
+  .toc-rail{display:none;}
+  @media (min-width:960px){
+    main#main{
+      max-width:calc(var(--maxw) + 248px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:208px minmax(0,1fr);
+      column-gap:40px;
+      align-items:start;
+      padding:0 28px;
+    }
+    /* align masthead + footer to the grid width so the name, rule, and rail share one left edge */
+    header.masthead > .wrap, footer > .wrap{max-width:calc(var(--maxw) + 248px);}
+    /* sections already carry their own .wrap; neutralize its extra padding
+       inside the grid so the content column keeps its readable width */
+    main#main > section{grid-column:2;padding-left:0;padding-right:0;}
+    main#main > section > .wrap{max-width:var(--maxw);padding:0;}
+
+    .toc-rail{
+      display:block;
+      grid-column:1;
+      grid-row:1 / 9999;
+      position:sticky;
+      top:2rem;
+      align-self:start;
+    }
+    .toc-rail .toc-title{
+      font-family:var(--mono);
+      font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+    }
+    .toc-rail ol{
+      list-style:none;margin:0;padding:0;
+      border-left:1px solid var(--line);
+    }
+    .toc-rail li{margin:0;}
+    .toc-rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:13.5px;line-height:1.3;
+      color:var(--ink-mute);text-decoration:none;
+      padding:7px 0 7px 14px;
+      margin-left:-1px;
+      border-left:2px solid transparent;
+      transition:color .15s ease,border-color .15s ease;
+    }
+    .toc-rail a:hover,.toc-rail a:focus{color:var(--accent);}
+    .toc-rail a[aria-current="true"]{
+      color:var(--accent);font-weight:600;
+      border-left-color:var(--accent);
+    }
+    /* on desktop the mobile disclosure is not needed */
+    .toc-mobile{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){.toc-rail a{transition:none;}}
 </style>
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
@@ -349,10 +446,46 @@
     <h1 class="name">Mayuresh More</h1>
     <p class="frame">How I would solve the <span class="accent">master and reference data problem</span> for the Technical Product Manager, Data Strategy role at Vanguard</p>
     <p class="prepared">Prepared June 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#s-thesis">The bet</a></li>
+        <li><a href="#s-problem">The problem</a></li>
+        <li><a href="#s-users">Who it is for</a></li>
+        <li><a href="#s-rice">Why this problem</a></li>
+        <li><a href="#s-approach">Approach</a></li>
+        <li><a href="#s-mvp">What I would ship first</a></li>
+        <li><a href="#s-metrics">Metrics</a></li>
+        <li><a href="#s-business">Business impact</a></li>
+        <li><a href="#s-plan">First 90 days</a></li>
+        <li><a href="#s-risks">Risks</a></li>
+        <li><a href="#s-questions">Questions</a></li>
+        <li><a href="#s-fit">Why me</a></li>
+      </ol>
+    </details>
   </div>
 </header>
 
 <main id="main">
+
+  <nav class="toc-rail" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#s-thesis">The bet</a></li>
+      <li><a href="#s-problem">The problem</a></li>
+      <li><a href="#s-users">Who it is for</a></li>
+      <li><a href="#s-rice">Why this problem</a></li>
+      <li><a href="#s-approach">Approach</a></li>
+      <li><a href="#s-mvp">What I would ship first</a></li>
+      <li><a href="#s-metrics">Metrics</a></li>
+      <li><a href="#s-business">Business impact</a></li>
+      <li><a href="#s-plan">First 90 days</a></li>
+      <li><a href="#s-risks">Risks</a></li>
+      <li><a href="#s-questions">Questions</a></li>
+      <li><a href="#s-fit">Why me</a></li>
+    </ol>
+  </nav>
 
   <!-- ===================== THESIS ===================== -->
   <section aria-labelledby="s-thesis" class="reveal">
@@ -822,6 +955,61 @@
       });
     },{rootMargin:'0px 0px -8% 0px', threshold:0.06});
     els.forEach(function(e){ io.observe(e); });
+  })();
+
+  /* scroll-spy for the desktop table-of-contents rail (JS enhancement only).
+     With JS off the links still work and all content is visible. */
+  (function(){
+    var rail = document.querySelector('.toc-rail');
+    if(!rail || !('IntersectionObserver' in window)) return;
+
+    var links = Array.prototype.slice.call(rail.querySelectorAll('a[href^="#"]'));
+    var map = {};            // section id -> link
+    var sections = [];       // observed <section> elements
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var heading = document.getElementById(id);
+      if(!heading) return;
+      var sec = heading.closest('section');
+      if(!sec) return;
+      map[id] = a;
+      sec.dataset.tocId = id;
+      sections.push(sec);
+    });
+    if(!sections.length) return;
+
+    var currentId = null;
+    function setCurrent(id){
+      if(id === currentId) return;
+      currentId = id;
+      links.forEach(function(a){
+        if(a.getAttribute('href') === '#' + id){ a.setAttribute('aria-current','true'); }
+        else { a.removeAttribute('aria-current'); }
+      });
+    }
+
+    var visible = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var id = en.target.dataset.tocId;
+        if(en.isIntersecting){ visible[id] = en.intersectionRatio; }
+        else { delete visible[id]; }
+      });
+      // choose the topmost section currently in view
+      var best = null, bestTop = Infinity;
+      sections.forEach(function(sec){
+        var id = sec.dataset.tocId;
+        if(id in visible){
+          var top = sec.getBoundingClientRect().top;
+          if(top < bestTop){ bestTop = top; best = id; }
+        }
+      });
+      if(best) setCurrent(best);
+    },{rootMargin:'-15% 0px -70% 0px', threshold:[0,0.1,0.5,1]});
+
+    sections.forEach(function(sec){ io.observe(sec); });
+    // sensible initial highlight
+    setCurrent(sections[0].dataset.tocId);
   })();
 </script>
 </body>

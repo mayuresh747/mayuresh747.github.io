@@ -366,6 +366,112 @@
   .inout .ship h4 { color: var(--good); }
   .inout .later h4 { color: var(--ink-faint); }
 
+  /* ---------- On this page: table of contents ---------- */
+  /* Default (narrow / mobile): only the disclosure shows; desktop rail hidden */
+  .layout { display: block; }
+  .toc-rail { display: none; }
+  .toc-head {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  .toc-list { list-style: none; margin: 0; padding: 0; }
+  .toc-list li { margin: 0; }
+  .toc-list a {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 7px 0 7px 13px;
+    border-left: 2px solid var(--line);
+    transition: color .16s ease, border-color .16s ease;
+  }
+  .toc-list a:hover, .toc-list a:focus-visible {
+    color: var(--ink-soft);
+    border-color: var(--ink-faint);
+  }
+  .toc-list a[aria-current="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Mobile / narrow disclosure (native details, no JS) */
+  .toc-mobile {
+    margin: 22px 0 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--panel);
+  }
+  .toc-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile summary::after {
+    content: "+";
+    font-size: 16px;
+    color: var(--ink-faint);
+    line-height: 1;
+  }
+  .toc-mobile[open] summary::after { content: "\2212"; }
+  .toc-mobile .toc-list { padding: 0 16px 14px; }
+  .toc-mobile .toc-list a {
+    border-left: 2px solid var(--line-soft);
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  .toc-mobile .toc-list a[aria-current="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* Desktop: two-column layout with a sticky left rail */
+  @media (min-width: 960px) {
+    .toc-mobile { display: none; }
+    .layout {
+      display: grid;
+      grid-template-columns: 200px minmax(0, var(--maxw));
+      gap: 40px;
+      max-width: calc(var(--maxw) + 240px);
+      margin: 0 auto;
+      padding: 0 24px;
+      align-items: start;
+    }
+    .layout > main.wrap {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+    /* align masthead + footer to the grid width so the name, rule, and rail share one left edge */
+    header.masthead > .wrap, footer > .wrap { max-width: calc(var(--maxw) + 240px); }
+    aside.toc-rail {
+      display: block;
+      position: sticky;
+      top: 2rem;
+      padding-top: 8px;
+    }
+    aside.toc-rail nav { max-height: calc(100vh - 4rem); overflow-y: auto; }
+  }
+
   @media (max-width: 640px) {
     body { font-size: 16.5px; }
     header.masthead { padding: 44px 0 30px; }
@@ -391,8 +497,48 @@
     <p class="name">Mayuresh More</p>
     <h1 class="frame">How I would solve the platform problem for the Product Lead, Platform role at Astra</h1>
     <p class="prepared">Prepared June 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ul class="toc-list">
+        <li><a href="#thesis">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#users">Who it is for</a></li>
+        <li><a href="#rice">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I would ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#impact">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ul>
+    </details>
   </div>
 </header>
+
+<div class="layout">
+
+  <aside class="toc-rail">
+    <nav aria-label="On this page">
+      <p class="toc-head">On this page</p>
+      <ul class="toc-list">
+        <li><a href="#thesis">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#users">Who it is for</a></li>
+        <li><a href="#rice">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I would ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#impact">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ul>
+    </nav>
+  </aside>
 
 <main class="wrap" id="main-content">
 
@@ -956,6 +1102,8 @@
 
 </main>
 
+</div>
+
 <footer>
   <div class="wrap">
     <p class="footer-name">Mayuresh More</p>
@@ -994,6 +1142,45 @@
         sortBy(btn.getAttribute('data-sort'));
       });
     });
+  })();
+
+  // Progressive enhancement: scroll-spy for the desktop "On this page" rail.
+  // Content and links work fully without JS; this only moves the active highlight.
+  (function () {
+    var rail = document.querySelector('aside.toc-rail');
+    if (!rail || !('IntersectionObserver' in window)) return;
+    var links = Array.prototype.slice.call(rail.querySelectorAll('.toc-list a'));
+    if (!links.length) return;
+
+    var linkById = {};
+    var sections = [];
+    links.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) { linkById[id] = a; sections.push(sec); }
+    });
+
+    var visible = {};
+    function setCurrent(id) {
+      links.forEach(function (a) {
+        if (a.getAttribute('href') === '#' + id) { a.setAttribute('aria-current', 'true'); }
+        else { a.removeAttribute('aria-current'); }
+      });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        visible[e.target.id] = e.isIntersecting;
+      });
+      // pick the topmost section currently intersecting
+      var current = null;
+      for (var i = 0; i < sections.length; i++) {
+        if (visible[sections[i].id]) { current = sections[i].id; break; }
+      }
+      if (current) setCurrent(current);
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { observer.observe(s); });
   })();
 </script>
 
