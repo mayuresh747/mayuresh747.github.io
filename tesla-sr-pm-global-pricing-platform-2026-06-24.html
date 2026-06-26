@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: Sr. Product Manager, Global Pricing Platform at Tesla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+<style>
+  :root{
+    --paper:#f6f3ec;
+    --paper-2:#fffdf8;
+    --panel:#f0ece2;
+    --ink:#1c1f24;
+    --ink-soft:#3a3f47;
+    --ink-mute:#6b7178;
+    --ink-faint:#8d939a;
+    --line:#d9d3c6;
+    --line-soft:#e6e1d6;
+    --accent:#1f5f8b;        /* steel blue */
+    --accent-deep:#16486b;
+    --accent-soft:#e3edf4;
+    --warn:#9a5b1f;
+    --good:#2f6b4a;
+    --maxw:980px;
+    --radius:3px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background-image:
+      radial-gradient(circle at 18% 0%, rgba(31,95,139,.04), transparent 42%),
+      radial-gradient(circle at 92% 8%, rgba(31,95,139,.03), transparent 40%);
+  }
+
+  /* skip link */
+  .skip{
+    position:absolute;left:-999px;top:0;z-index:50;
+    background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:0 0 var(--radius) 0;
+    font-family:"IBM Plex Mono",monospace;font-size:.8rem;text-decoration:none;
+  }
+  .skip:focus{left:0}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---- masthead ---- */
+  header.masthead{padding:54px 0 8px}
+  .name{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;font-size:clamp(1.5rem,4vw,2rem);
+    letter-spacing:-.01em;margin:0;color:var(--ink);
+  }
+  .frame{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:500;font-size:clamp(1.05rem,2.4vw,1.3rem);
+    line-height:1.35;color:var(--ink-soft);
+    margin:.55rem 0 0;max-width:760px;
+  }
+  .frame b{color:var(--accent);font-weight:600}
+  .prepared{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);margin:.95rem 0 0;
+  }
+  .rule{height:1px;background:var(--line);border:0;margin:30px 0 0}
+
+  /* ---- sections ---- */
+  main{padding:8px 0 0}
+  section{padding:42px 0;border-bottom:1px solid var(--line-soft)}
+  section:last-of-type{border-bottom:0}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px;display:flex;align-items:baseline;gap:.6rem;
+  }
+  .kicker .num{font-size:.7em;color:var(--ink-faint);font-weight:500}
+  h2.lead{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:600;font-size:clamp(1.25rem,2.8vw,1.6rem);
+    line-height:1.32;letter-spacing:-.01em;color:var(--ink);
+    margin:0 0 16px;max-width:780px;
+  }
+  .take{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:500;font-size:clamp(1.05rem,2.2vw,1.2rem);
+    line-height:1.4;color:var(--ink);margin:0 0 16px;max-width:780px;
+  }
+  p{margin:0 0 14px;max-width:760px}
+  p.body{color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+
+  /* citation links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:.5px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line);
+    font-style:normal;
+  }
+  a.src:hover,a.src:focus{color:var(--accent);text-decoration-color:var(--accent)}
+
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;
+  }
+
+  /* lists */
+  ul.clean{margin:0 0 6px;padding:0;list-style:none;max-width:790px}
+  ul.clean>li{
+    position:relative;padding:0 0 0 22px;margin:0 0 12px;color:var(--ink-soft);
+  }
+  ul.clean>li::before{
+    content:"";position:absolute;left:2px;top:.66em;
+    width:7px;height:7px;background:var(--accent);transform:rotate(45deg);
+  }
+  ul.clean>li strong{color:var(--ink)}
+
+  /* tables */
+  .tbl-wrap{overflow-x:auto;margin:6px 0 4px;-webkit-overflow-scrolling:touch}
+  table{
+    border-collapse:collapse;width:100%;min-width:520px;
+    font-size:.94rem;line-height:1.45;background:var(--paper-2);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  }
+  thead th{
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:600;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;
+    text-align:left;color:var(--ink-mute);background:var(--panel);
+    padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:bottom;
+  }
+  tbody td{
+    padding:12px 14px;border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);vertical-align:top;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  tbody td:first-child{color:var(--ink);font-weight:500}
+  td .role-tag{
+    display:block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;margin-bottom:2px;
+  }
+  .num-cell{font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;font-size:.86rem;white-space:nowrap}
+  .rank-spine{color:var(--accent);font-weight:600}
+  .jtbd{font-style:italic;color:var(--ink-mute)}
+
+  /* figure / diagram */
+  figure{
+    margin:22px 0 6px;background:var(--paper-2);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 18px 14px;
+  }
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{
+    font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.06em;
+    color:var(--ink-faint);margin-top:12px;text-transform:uppercase;
+  }
+
+  /* diagram primitives (shared) */
+  .d-node{fill:var(--paper-2);stroke:var(--accent);stroke-width:1.4}
+  .d-node-soft{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+  .d-node-ns{fill:var(--accent);stroke:var(--accent-deep);stroke-width:1.4}
+  .d-decision{fill:#fff;stroke:var(--warn);stroke-width:1.4}
+  .d-guard{fill:var(--panel);stroke:var(--ink-faint);stroke-width:1.2;stroke-dasharray:4 3}
+  .d-text{fill:var(--ink);font-family:"Space Grotesk",sans-serif;font-size:13px}
+  .d-text-mut{fill:var(--ink-mute);font-family:"IBM Plex Mono",monospace;font-size:11px}
+  .d-text-inv{fill:#fff;font-family:"Space Grotesk",sans-serif;font-size:13px;font-weight:600}
+  .d-edge{stroke:var(--ink-mute);stroke-width:1.4;fill:none}
+  .d-edge-roll{stroke:var(--warn);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+  .d-edge-guard{stroke:var(--ink-faint);stroke-width:1.2;fill:none;stroke-dasharray:4 3}
+  .d-edge-lbl{fill:var(--ink-mute);font-family:"IBM Plex Mono",monospace;font-size:10.5px}
+  .d-axis{stroke:var(--line);stroke-width:1}
+  .d-axis-lbl{fill:var(--ink-faint);font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}
+  .d-quad-lbl{fill:var(--ink-faint);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em}
+  .d-dot{fill:var(--accent);stroke:var(--paper-2);stroke-width:1.5}
+  .d-dot-spine{fill:var(--accent-deep)}
+  .d-dot-lbl{fill:var(--ink);font-family:"Space Grotesk",sans-serif;font-size:11.5px;font-weight:500}
+
+  /* metrics extras */
+  .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 4px}
+  .mini{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 14px 12px;
+  }
+  .mini h3{
+    font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 6px;font-weight:600;
+  }
+  .mini p{font-size:.88rem;color:var(--ink-soft);margin:0;line-height:1.45;max-width:none}
+  .mini.warn h3{color:var(--warn)}
+
+  .fit-intro{max-width:780px;color:var(--ink-soft)}
+  .fit-intro strong{color:var(--ink)}
+
+  /* footer */
+  footer{padding:40px 0 60px;border-top:1px solid var(--line)}
+  .foot-row{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center}
+  .foot-name{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;color:var(--ink);
+    font-size:.95rem;
+  }
+  .foot-links{display:flex;flex-wrap:wrap;gap:8px 22px}
+  .foot-links a{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.04em;
+    color:var(--ink-mute);text-decoration:none;
+  }
+  .foot-links a:hover,.foot-links a:focus{color:var(--accent);text-decoration:underline}
+
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+
+  /* fade-in (progressive, reduced-motion safe) */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in{opacity:1;transform:none}
+  }
+
+  @media (max-width:640px){
+    body{font-size:16.5px}
+    .mini-grid{grid-template-columns:1fr}
+    section{padding:34px 0}
+    header.masthead{padding:38px 0 6px}
+    .d-text,.d-text-inv{font-size:12px}
+    .d-text-mut{font-size:10px}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main-content">Skip to content</a>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the <b>pricing-platform problem</b> for the Sr. Product Manager, Global Pricing Platform role at Tesla.</p>
+    <p class="prepared">Prepared June 2026</p>
+    <hr class="rule">
+  </header>
+</div>
+
+<main id="main-content">
+<div class="wrap">
+
+  <!-- THE BET -->
+  <section class="reveal" aria-labelledby="k-bet">
+    <h2 class="kicker" id="k-bet"><span class="num">01</span> The bet</h2>
+    <p class="lead">The platform wins by becoming the layer that lets an analyst simulate a price move, then ship it across every market without a single wrong price.</p>
+    <p class="body">Tesla's automotive margin swung 670 basis points in a year, and the pricing team now makes surgical, trim-level moves under heavy public scrutiny. My bet: trust and zero-defect execution come first. An analyst should be able to model a move against history before it ships, propagate it to every market and product correctly, and keep a full audit trail. Smarter simulation and an LLM query layer build on top of that foundation, not before it.</p>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="reveal" aria-labelledby="k-problem">
+    <h2 class="kicker" id="k-problem"><span class="num">02</span> The problem</h2>
+    <p class="take">The pricing team needs to move fast and be right, on a system that punishes both speed and error.</p>
+    <p class="body">Tesla sells direct, with no franchised dealers. A price entered into the platform appears live on tesla.com within minutes, in every market, with no dealer buffer to absorb a mistake (<a class="src" href="https://www.tesla.com/careers/search/job/sr-product-manager-global-pricing-platform--274919" target="_blank" rel="noopener">role brief, direct-to-consumer model</a>). That makes the platform high-stakes by design. Five things hurt today:</p>
+    <ul class="clean">
+      <li><strong>Pricing moves are now surgical, not blunt.</strong> On May 16, 2026, Tesla raised three higher Model Y trims by $500 to $1,000 and held the base trims flat, the first increase in roughly two years after cutting as much as $13,000 since January 2023 (<a class="src" href="https://electrek.co/2026/05/16/tesla-tsla-raises-model-y-prices-first-time-two-years/" target="_blank" rel="noopener">Electrek, May 2026</a>). A move that precise has to be modeled before it ships, not guessed.</li>
+      <li><strong>Margin is volatile and visible.</strong> Automotive gross margin ex-credits fell from over 25% in early 2023 to 12.5% in Q1 2025, then rebounded to 19.2% in Q1 2026 (<a class="src" href="https://news.alphastreet.com/tesla-tsla-posts-margin-rebound-in-q1-2026-but-25b-capex-surge-raises-stakes/" target="_blank" rel="noopener">AlphaStreet, Apr 2026</a>). Every price decision lands directly on that number.</li>
+      <li><strong>Demand levers are shrinking.</strong> The $7,500 federal EV credit expired September 30, 2025 (<a class="src" href="https://cleanenergycalc.com/blog/ev-tax-credits-2026-complete-guide" target="_blank" rel="noopener">CleanEnergyCalc, 2026</a>), so more of the incentive burden now sits inside Tesla's own pricing tools, on top of two consecutive years of delivery decline: 1.79M in 2024 and about 1.636M in 2025 (<a class="src" href="https://www.cnbc.com/2025/01/02/tesla-tsla-q4-2024-vehicle-delivery-and-production-numbers.html" target="_blank" rel="noopener">CNBC, Jan 2025</a>).</li>
+      <li><strong>Spreadsheets are the real incumbent.</strong> Internal pricing teams often run elaborate Excel workflows that predate the platform. If the platform is slower or less flexible than a spreadsheet, analysts route around it, and the audit trail breaks (<a class="src" href="https://lambr.medium.com/the-internal-platform-product-manager-1e569920ea89" target="_blank" rel="noopener">brief, internal-tools craft</a>).</li>
+      <li><strong>One system, four pricing models.</strong> The same platform must now price one-time vehicle purchases, per-ride Robotaxi trips (live in Austin since January 2026), FSD subscriptions ($99/month, subscription-only since February 2026), and B2B energy contracts (<a class="src" href="https://electrek.co/2026/06/03/tesla-robotaxi-expands-entire-austin-metro-only-20-vehicles/" target="_blank" rel="noopener">Electrek, Jun 2026</a>).</li>
+    </ul>
+    <p class="body">The cost of getting this wrong is concrete: a wrong price on a bestselling trim is instant lost margin and instant media coverage, and frequent unannounced cuts already damaged resale values and owner trust (<a class="src" href="https://www.fastcompany.com/91291006/tesla-prices-depreciated-more-than-any-other-automaker-in-2024" target="_blank" rel="noopener">Fast Company, 2024</a>).</p>
+  </section>
+
+  <!-- WHO IT IS FOR -->
+  <section class="reveal" aria-labelledby="k-users">
+    <h2 class="kicker" id="k-users"><span class="num">03</span> Who it is for</h2>
+    <p class="take">The platform's customers are colleagues with deep domain expertise. They will spot a wrong simulation, and they will route around a tool they do not trust.</p>
+    <p class="body">I would design for three roles, split by what they hire the platform to do.</p>
+    <div class="tbl-wrap">
+      <table>
+        <caption class="sr-only">Three platform roles and the job each one hires the platform to do.</caption>
+        <thead>
+          <tr><th scope="col">Role</th><th scope="col">Who</th><th scope="col">Job they hire the platform to do</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="role-tag">User</span>Pricing analyst</td>
+            <td>Sets and proposes price changes by market and trim</td>
+            <td class="jtbd">"When I am proposing a price move, I want to model its margin and volume impact against similar past moves, so I can defend the number before it goes live."</td>
+          </tr>
+          <tr>
+            <td><span class="role-tag">Decision-maker</span>Finance / margin owner</td>
+            <td>Approves moves against margin targets</td>
+            <td class="jtbd">"When I review a proposed change, I want to see its modeled effect on automotive gross margin at current volumes, so I can approve or reject with confidence."</td>
+          </tr>
+          <tr>
+            <td><span class="role-tag">Gatekeeper</span>Sales / regional lead</td>
+            <td>Owns market-level outcomes and execution risk</td>
+            <td class="jtbd">"When a global price change touches my market, I want it to apply correctly with currency and tax handled, so I am not firefighting a wrong price on tesla.com."</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body">The functional job is "model it, then ship it without error." The emotional job matters as much: analysts want to stop being afraid of the publish button, and finance wants to stop reconciling pricing in spreadsheets after the fact.</p>
+  </section>
+
+  <!-- RICE -->
+  <section class="reveal" aria-labelledby="k-rice">
+    <h2 class="kicker" id="k-rice"><span class="num">04</span> Why this problem, in this order</h2>
+    <p class="take">I would sequence bets so trust and data integrity come before cleverness.</p>
+    <p class="body">A simulation engine is worthless if the underlying price data is wrong, and an LLM layer is dangerous if propagation is not already zero-defect. RICE here scores Reach (pricing decisions or analysts touched per quarter), Impact (per-decision value on the fixed tiers 0.25 / 0.5 / 1 / 2 / 3), Confidence (50 / 80 / 100%), and Effort (person-months). Higher score ranks first.</p>
+    <div class="tbl-wrap">
+      <table>
+        <caption class="sr-only">RICE prioritization of seven bets, ranked by score.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Bet</th><th scope="col">Reach</th><th scope="col">Impact</th>
+            <th scope="col">Conf.</th><th scope="col">Effort</th><th scope="col">RICE</th><th scope="col">Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Error-free multi-market propagation + pre-publish validation</td><td>High</td><td class="num-cell">3</td><td class="num-cell">100%</td><td class="num-cell">6 pm</td><td>Highest</td><td class="rank-spine">1 (spine)</td></tr>
+          <tr><td>Approval workflow + audit trail + one-click rollback</td><td>High</td><td class="num-cell">2</td><td class="num-cell">100%</td><td class="num-cell">4 pm</td><td>High</td><td class="rank-spine">2 (spine)</td></tr>
+          <tr><td>Simulation / what-if engine: historical vs forecast margin and volume</td><td>Med-high</td><td class="num-cell">3</td><td class="num-cell">80%</td><td class="num-cell">8 pm</td><td>High</td><td class="num-cell">3</td></tr>
+          <tr><td>Finance / margin-analysis integration (cost-of-goods to margin)</td><td>Medium</td><td class="num-cell">2</td><td class="num-cell">80%</td><td class="num-cell">6 pm</td><td>Medium</td><td class="num-cell">4</td></tr>
+          <tr><td>Replace spreadsheet workflows (adoption + flexibility parity)</td><td>High</td><td class="num-cell">2</td><td class="num-cell">80%</td><td class="num-cell">5 pm</td><td>Medium</td><td class="num-cell">5</td></tr>
+          <tr><td>LLM natural-language query layer over pricing data (read-only first)</td><td>Medium</td><td class="num-cell">1</td><td class="num-cell">50%</td><td class="num-cell">5 pm</td><td>Lower</td><td class="num-cell">6</td></tr>
+          <tr><td>Multi-model support: Robotaxi / FSD / energy pricing</td><td>Lower, rising</td><td class="num-cell">2</td><td class="num-cell">50%</td><td class="num-cell">10 pm</td><td>Lower</td><td class="num-cell">7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body">The top two are spine bets. They stay first regardless of score because everything else consumes them: there is no point simulating a move you cannot then execute correctly or roll back. The LLM layer and multi-model expansion are real and rising, but they sit on a foundation that has to be trustworthy first.</p>
+
+    <!-- DIAGRAM 1: quadrant -->
+    <figure>
+      <svg viewBox="0 0 760 480" role="img" aria-label="Impact versus effort quadrant of the seven bets. Propagation plus validation and the simulation engine sit high on impact. Propagation plus validation and approval plus audit plus rollback are the lower-effort do-first spine bets. The LLM query layer is lower impact. Multi-model pricing is high effort.">
+        <!-- quadrant fills -->
+        <rect x="70" y="40" width="320" height="180" fill="var(--accent-soft)" opacity=".5"/>
+        <rect x="390" y="40" width="300" height="180" fill="var(--paper)"/>
+        <rect x="70" y="220" width="320" height="200" fill="var(--paper)"/>
+        <rect x="390" y="220" width="300" height="200" fill="var(--panel)" opacity=".6"/>
+        <!-- frame + mid lines -->
+        <rect x="70" y="40" width="620" height="380" fill="none" class="d-axis"/>
+        <line x1="390" y1="40" x2="390" y2="420" class="d-axis"/>
+        <line x1="70" y1="220" x2="690" y2="220" class="d-axis"/>
+        <!-- axis labels -->
+        <text x="75" y="448" class="d-axis-lbl">Lower effort</text>
+        <text x="685" y="448" class="d-axis-lbl" text-anchor="end">Higher effort</text>
+        <text x="52" y="44" class="d-axis-lbl" transform="rotate(-90 52 44)" style="text-anchor:end">Higher impact</text>
+        <text x="52" y="416" class="d-axis-lbl" transform="rotate(-90 52 416)" style="text-anchor:start">Lower impact</text>
+        <!-- quadrant corner captions (pushed into the actual corners, away from points) -->
+        <text x="80" y="56" class="d-quad-lbl">Do first</text>
+        <text x="680" y="56" class="d-quad-lbl" text-anchor="end">Big bets, sequence carefully</text>
+        <text x="80" y="412" class="d-quad-lbl">Fill-in</text>
+        <text x="680" y="412" class="d-quad-lbl" text-anchor="end">Question</text>
+        <!-- Propagation + validation (spine 1): high impact, lower/mid effort -> top-left -->
+        <circle cx="230" cy="80" r="6" class="d-dot d-dot-spine"/>
+        <text x="242" y="77" class="d-dot-lbl">Propagation + validation</text>
+        <text x="242" y="91" class="d-text-mut">spine 1</text>
+        <!-- Approval + audit + rollback (spine 2): high impact, lower effort -> top-left -->
+        <circle cx="180" cy="150" r="6" class="d-dot d-dot-spine"/>
+        <text x="192" y="147" class="d-dot-lbl">Approval + audit + rollback</text>
+        <text x="192" y="161" class="d-text-mut">spine 2</text>
+        <!-- Simulation engine: high impact, higher effort -> top-right -->
+        <circle cx="470" cy="95" r="6" class="d-dot"/>
+        <text x="482" y="112" class="d-dot-lbl">Simulation engine</text>
+        <!-- Finance integration: mid -->
+        <circle cx="360" cy="170" r="6" class="d-dot"/>
+        <text x="348" y="167" class="d-dot-lbl" text-anchor="end">Finance integration</text>
+        <!-- Spreadsheet replacement: mid -->
+        <circle cx="300" cy="205" r="6" class="d-dot"/>
+        <text x="288" y="209" class="d-dot-lbl" text-anchor="end">Spreadsheet replacement</text>
+        <!-- LLM query layer: lower impact -> bottom-left -->
+        <circle cx="300" cy="300" r="6" class="d-dot"/>
+        <text x="312" y="297" class="d-dot-lbl">LLM query layer</text>
+        <!-- Multi-model pricing: high impact, high effort -> top-right -->
+        <circle cx="600" cy="180" r="6" class="d-dot"/>
+        <text x="588" y="177" class="d-dot-lbl" text-anchor="end">Multi-model pricing</text>
+      </svg>
+      <figcaption>RICE read: impact vs effort. Darker dots are the two spine bets.</figcaption>
+    </figure>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="reveal" aria-labelledby="k-approach">
+    <h2 class="kicker" id="k-approach"><span class="num">05</span> The approach</h2>
+    <p class="take">Three sequenced bets, each one earning the right to the next.</p>
+    <p class="body">I would not chase the LLM headline first. I would make the foundation boring and reliable, then add intelligence on top.</p>
+    <ul class="clean">
+      <li><strong>1. Trustworthy foundations and data integrity.</strong> Get price propagation to zero defects across markets, with pre-publish validation that catches a bad number before it reaches checkout, plus an approval workflow, audit trail, and rollback. This is the safe-execution layer.</li>
+      <li><strong>2. Simulation and decision-support.</strong> Build the what-if engine the role names: compare a proposed move against historical outcomes of similar moves and against forecast, and connect it to finance for margin modeling. This is the decision-support layer.</li>
+      <li><strong>3. LLM query layer and multi-model expansion.</strong> Add a read-only natural-language interface so an analyst can ask "what was our Model Y margin in Germany in Q3 2024, and how does the proposed $2K cut compare" without writing SQL, then extend pricing models to Robotaxi, FSD, and energy. Decision-support, never autonomous execution.</li>
+    </ul>
+
+    <!-- DIAGRAM 2: propagation flow -->
+    <figure>
+      <svg viewBox="0 0 760 408" role="img" aria-label="Pricing flow. An analyst proposes a change, the simulation engine compares historical versus forecast margin and volume, then finance reviews. If finance rejects, the change returns to the analyst to revise. If finance approves, pre-publish validation checks currency, tax and config. If validation fails, the change returns to the analyst to revise. If it passes, the change propagates to all markets and channels, goes live on tesla.com and writes an audit trail, with a rollback path from live back to propagation.">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-mute)"/>
+          </marker>
+          <marker id="arrow-roll" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warn)"/>
+          </marker>
+        </defs>
+
+        <!-- ===== TOP ROW (forward path) ===== -->
+        <!-- A: propose -->
+        <rect class="d-node" x="20" y="150" width="160" height="74" rx="4"/>
+        <text class="d-text" x="100" y="183" text-anchor="middle">Analyst proposes</text>
+        <text class="d-text" x="100" y="200" text-anchor="middle">a price change</text>
+
+        <!-- B: simulation -->
+        <rect class="d-node-soft" x="225" y="145" width="180" height="84" rx="4"/>
+        <text class="d-text" x="315" y="170" text-anchor="middle">Simulation engine:</text>
+        <text class="d-text-mut" x="315" y="188" text-anchor="middle">historical vs forecast</text>
+        <text class="d-text-mut" x="315" y="204" text-anchor="middle">margin and volume</text>
+
+        <!-- C: finance decision (diamond) -->
+        <polygon class="d-decision" points="555,187 620,135 685,187 620,239"/>
+        <text class="d-text" x="620" y="183" text-anchor="middle">Finance /</text>
+        <text class="d-text" x="620" y="199" text-anchor="middle">margin owner?</text>
+
+        <!-- ===== BOTTOM ROW (execution path, right to left) ===== -->
+        <!-- D: validation -->
+        <rect class="d-node-soft" x="535" y="300" width="170" height="84" rx="4"/>
+        <text class="d-text" x="620" y="325" text-anchor="middle">Pre-publish check:</text>
+        <text class="d-text-mut" x="620" y="343" text-anchor="middle">currency, tax,</text>
+        <text class="d-text-mut" x="620" y="359" text-anchor="middle">config checks</text>
+
+        <!-- E: propagate -->
+        <rect class="d-node" x="290" y="300" width="170" height="84" rx="4"/>
+        <text class="d-text" x="375" y="333" text-anchor="middle">Propagate to all</text>
+        <text class="d-text" x="375" y="350" text-anchor="middle">markets + channels</text>
+
+        <!-- F: live -->
+        <rect class="d-node" x="45" y="300" width="170" height="84" rx="4"/>
+        <text class="d-text" x="130" y="333" text-anchor="middle">Live on tesla.com</text>
+        <text class="d-text-mut" x="130" y="350" text-anchor="middle">plus audit trail</text>
+
+        <!-- ===== EDGES ===== -->
+        <!-- A -> B -->
+        <path class="d-edge" d="M180,187 L220,187" marker-end="url(#arrow)"/>
+        <!-- B -> C -->
+        <path class="d-edge" d="M405,187 L550,187" marker-end="url(#arrow)"/>
+        <!-- C -No-> A (top lane) -->
+        <path class="d-edge" d="M620,135 L620,60 L100,60 L100,146" marker-end="url(#arrow)"/>
+        <text class="d-edge-lbl" x="360" y="52" text-anchor="middle">No, revise</text>
+        <!-- C -Yes-> D -->
+        <path class="d-edge" d="M620,239 L620,296" marker-end="url(#arrow)"/>
+        <text class="d-edge-lbl" x="632" y="272">Yes</text>
+        <!-- D -Fails-> A (left lane, into A bottom) -->
+        <path class="d-edge" d="M535,342 L500,342 L500,272 L12,272 L12,235 L100,235 L100,228" marker-end="url(#arrow)"/>
+        <text class="d-edge-lbl" x="490" y="266" text-anchor="end">Fails, revise</text>
+        <!-- D -Passes-> E -->
+        <path class="d-edge" d="M535,342 L464,342" marker-end="url(#arrow)"/>
+        <text class="d-edge-lbl" x="499" y="334" text-anchor="middle">Passes</text>
+        <!-- E -> F -->
+        <path class="d-edge" d="M290,342 L219,342" marker-end="url(#arrow)"/>
+        <!-- F .rollback. -> E (lower lane) -->
+        <path class="d-edge-roll" d="M130,384 L130,398 L375,398 L375,388" marker-end="url(#arrow-roll)"/>
+        <text class="d-edge-lbl" x="252" y="394" text-anchor="middle" fill="var(--warn)">rollback</text>
+      </svg>
+      <figcaption>Pricing flow: simulate, approve, validate, propagate, with rollback.</figcaption>
+    </figure>
+  </section>
+
+  <!-- MVP -->
+  <section class="reveal" aria-labelledby="k-mvp">
+    <h2 class="kicker" id="k-mvp"><span class="num">06</span> What I would ship first</h2>
+    <p class="take">The smallest test of the biggest assumption: pre-publish validation plus one-click rollback on the existing propagation path.</p>
+    <p class="body">The riskiest assumption under everything else is that a price change can be executed without error. Until that holds, no simulation output is safe to act on. The first slice would:</p>
+    <ul class="clean">
+      <li>Add a <strong>validation gate</strong> that runs before any price publishes: checks currency, tax rule, trim config, and flags a value that deviates beyond a set threshold from the current price.</li>
+      <li>Record every change as an <strong>auditable event</strong> (who proposed, who approved, when it went live) with a <strong>one-click rollback</strong> to the prior known-good state.</li>
+    </ul>
+    <p class="body">What it deliberately leaves out for now: the full simulation engine, the LLM layer, and Robotaxi / FSD / energy models. Those are bets 2 and 3. The MVP exists to prove the publish button is safe, which is the precondition for everything that follows.</p>
+  </section>
+
+  <!-- METRICS -->
+  <section class="reveal" aria-labelledby="k-metrics">
+    <h2 class="kicker" id="k-metrics"><span class="num">07</span> How I would measure success</h2>
+    <p class="take">North Star: the percentage of price changes published correctly and on time through the platform.</p>
+    <p class="body">It passes the three tests. If it rises, the pricing team genuinely won (fast and right). It moves before margin shows up in a quarterly filing. And the team can directly influence it.</p>
+
+    <!-- DIAGRAM 3: metrics tree -->
+    <figure>
+      <svg viewBox="0 0 760 404" role="img" aria-label="North Star metrics tree. The North Star is the percentage of price changes published correctly and on time. Four leading inputs feed it: time to publish a change, price-propagation error rate with a target of zero, simulation accuracy versus actuals, and platform adoption. Two guards sit beside it: a guardrail on manual-workaround and spreadsheet rate as a trust proxy, and an anti-metric warning not to chase raw change volume or speed alone.">
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-mute)"/>
+          </marker>
+          <marker id="arrow2-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-faint)"/>
+          </marker>
+        </defs>
+
+        <!-- North star -->
+        <rect class="d-node-ns" x="265" y="20" width="230" height="74" rx="4"/>
+        <text class="d-text-inv" x="380" y="46" text-anchor="middle">North Star</text>
+        <text x="380" y="64" text-anchor="middle" fill="#fff" font-family="Space Grotesk, sans-serif" font-size="11.5">% of price changes published</text>
+        <text x="380" y="80" text-anchor="middle" fill="#fff" font-family="Space Grotesk, sans-serif" font-size="11.5">correctly and on time</text>
+
+        <!-- four leading inputs -->
+        <rect class="d-node" x="20" y="220" width="160" height="78" rx="4"/>
+        <text class="d-text" x="100" y="250" text-anchor="middle">Time to publish</text>
+        <text class="d-text-mut" x="100" y="268" text-anchor="middle">decision to live</text>
+
+        <rect class="d-node" x="200" y="220" width="160" height="78" rx="4"/>
+        <text class="d-text" x="280" y="244" text-anchor="middle">Propagation</text>
+        <text class="d-text" x="280" y="260" text-anchor="middle">error rate</text>
+        <text class="d-text-mut" x="280" y="278" text-anchor="middle">target: zero</text>
+
+        <rect class="d-node" x="400" y="220" width="160" height="78" rx="4"/>
+        <text class="d-text" x="480" y="244" text-anchor="middle">Simulation</text>
+        <text class="d-text" x="480" y="260" text-anchor="middle">accuracy vs actuals</text>
+        <text class="d-text-mut" x="480" y="278" text-anchor="middle">predicted vs realized</text>
+
+        <rect class="d-node" x="580" y="220" width="160" height="78" rx="4"/>
+        <text class="d-text" x="660" y="244" text-anchor="middle">Platform</text>
+        <text class="d-text" x="660" y="260" text-anchor="middle">adoption</text>
+        <text class="d-text-mut" x="660" y="278" text-anchor="middle">% via platform</text>
+
+        <!-- guards -->
+        <rect class="d-guard" x="40" y="352" width="320" height="44" rx="4"/>
+        <text class="d-text-mut" x="200" y="370" text-anchor="middle" fill="var(--ink-soft)">Guardrail: manual-workaround /</text>
+        <text class="d-text-mut" x="200" y="385" text-anchor="middle" fill="var(--ink-soft)">spreadsheet rate (trust proxy)</text>
+
+        <rect class="d-guard" x="400" y="352" width="320" height="44" rx="4" style="stroke:var(--warn)"/>
+        <text class="d-text-mut" x="560" y="370" text-anchor="middle" fill="var(--warn)">Anti-metric: do not chase raw</text>
+        <text class="d-text-mut" x="560" y="385" text-anchor="middle" fill="var(--warn)">change volume or speed alone</text>
+
+        <!-- edges leading -> NS -->
+        <path class="d-edge" d="M100,220 L100,140 L300,140 L322,98" marker-end="url(#arrow2)"/>
+        <path class="d-edge" d="M280,220 L280,150 L350,108" marker-end="url(#arrow2)"/>
+        <path class="d-edge" d="M480,220 L480,150 L410,108" marker-end="url(#arrow2)"/>
+        <path class="d-edge" d="M660,220 L660,140 L460,140 L438,98" marker-end="url(#arrow2)"/>
+
+        <!-- guards -.-> NS -->
+        <path class="d-edge-guard" d="M200,352 L200,170 L300,170 L332,98" marker-end="url(#arrow2-g)"/>
+        <path class="d-edge-guard" d="M560,352 L560,170 L460,170 L428,98" marker-end="url(#arrow2-g)"/>
+        <text class="d-edge-lbl" x="232" y="186">guards</text>
+      </svg>
+      <figcaption>North Star metrics tree: four leading inputs, two guards.</figcaption>
+    </figure>
+
+    <div class="mini-grid">
+      <div class="mini">
+        <h3>Leading indicators</h3>
+        <p>Time to publish a change, propagation error rate, simulation accuracy versus actual outcomes, and adoption (share of pricing decisions flowing through the platform).</p>
+      </div>
+      <div class="mini">
+        <h3>Guardrail</h3>
+        <p>Manual-workaround rate. If analysts keep pricing in spreadsheets, the platform is not trusted no matter what the other numbers say.</p>
+      </div>
+      <div class="mini warn">
+        <h3>Anti-metrics</h3>
+        <p>Raw count of changes shipped, and publish speed on its own. A fast wrong price is the worst outcome. Speed only counts when it is also correct.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 30/60/90 -->
+  <section class="reveal" aria-labelledby="k-plan">
+    <h2 class="kicker" id="k-plan"><span class="num">08</span> 30 / 60 / 90 day plan</h2>
+    <p class="take">Listen first, ship a small safe win, then propose the roadmap.</p>
+    <p class="body">Tesla runs lean, builds in-house, and expects end-to-end ownership (<a class="src" href="https://builtin.com/company/tesla/faq/culture-values" target="_blank" rel="noopener">brief, engineering culture</a>), so I would plan to own outcomes with a small engineering partnership, not manage vendors.</p>
+    <div class="tbl-wrap">
+      <table>
+        <caption class="sr-only">First 90 days, in three windows.</caption>
+        <thead>
+          <tr><th scope="col">Window</th><th scope="col">Focus</th><th scope="col">What I would do</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num-cell">0 to 30</td>
+            <td>Listen and map</td>
+            <td>Shadow pricing analysts through a real change end to end. Map the current propagation path, the approval flow, and every spreadsheet workaround. Pull baselines with analytics on time-to-publish and error rate. Meet finance, eng, analytics, and sales leads.</td>
+          </tr>
+          <tr>
+            <td class="num-cell">30 to 60</td>
+            <td>Sharpen and quick win</td>
+            <td>Ship the validation gate and rollback (the MVP). Sharpen the problem with evidence from the shadowing. Align finance and eng on the simulation-engine spec and on what "historical vs forecast" needs as data inputs.</td>
+          </tr>
+          <tr>
+            <td class="num-cell">60 to 90</td>
+            <td>Validate and propose</td>
+            <td>Validate the MVP against real changes (did it catch errors, did rollback work). Set the metric baseline for the North Star and guardrails. Propose the simulation-engine roadmap and the read-only LLM query layer as the next bets, with RICE reasoning.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RISKS -->
+  <section class="reveal" aria-labelledby="k-risks">
+    <h2 class="kicker" id="k-risks"><span class="num">09</span> Risks and what I would validate first</h2>
+    <p class="take">These are open questions about the work, and what I would test in week one.</p>
+    <ul class="clean">
+      <li><strong>Simulation accuracy risk.</strong> A model that systematically over- or under-predicts margin is a liability, because the team will act on it. First test: backtest the engine against past moves (for example the 2023 to 2025 cuts and the May 2026 hike) and only ship once predictions fall within a stated range of actuals.</li>
+      <li><strong>LLM consistency and bias risk.</strong> In a context where a wrong number costs millions instantly, LLM output cannot be trusted blind. Research shows the same prompt can yield varying results and systematic bias (<a class="src" href="https://sloanreview.mit.edu/article/how-to-use-generative-ai-for-pricing/" target="_blank" rel="noopener">MIT Sloan, 2025</a>). First test: keep the LLM layer read-only and human-reviewed, and measure agreement against ground-truth queries before it touches any draft or publish path.</li>
+      <li><strong>Propagation-latency risk.</strong> A price change must reach 35+ markets without one market going stale or wrong. First test: define a per-market consistency check and measure end-to-end propagation time and error rate before scaling features on top.</li>
+      <li><strong>Scope ambiguity.</strong> The role brief says "part of pricing platform," and it is unclear whether this role owns checkout / order integration, Robotaxi dynamic pricing, and which markets (the brief flags China as high-sensitivity). First step: pin the scope boundary with the team before committing the roadmap.</li>
+    </ul>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="reveal" aria-labelledby="k-questions">
+    <h2 class="kicker" id="k-questions"><span class="num">10</span> Questions I would ask the team</h2>
+    <ul class="clean">
+      <li>What is the current state of the platform: stack, number of internal users, and where the technical debt sits today?</li>
+      <li>Does this role's scope include the checkout / order integration downstream, or only the pricing rule layer upstream of it?</li>
+      <li>Does simulation tooling exist today, or is this a build from zero? What does "historical vs forecast" need as data inputs?</li>
+      <li>Who owns Robotaxi dynamic per-ride pricing: this role, or a separate PM? Same question for energy B2B and FSD subscription pricing.</li>
+      <li>How does the platform handle regulatory-credit accounting in margin views ($380M in Q1 2026, 1.9% of auto revenue)?</li>
+      <li>Which markets are in scope, and is China included given its pricing volatility?</li>
+    </ul>
+  </section>
+
+  <!-- WHY ME -->
+  <section class="reveal" aria-labelledby="k-fit">
+    <h2 class="kicker" id="k-fit"><span class="num">11</span> Why me</h2>
+    <p class="fit-intro">I am a product manager with <strong>6+ years across technology, finance, and AI</strong>. I hold an MBA in Finance and am finishing an MS in Information Management at the University of Washington. The reason I fit this role: I have built internal finance and decision-support tools for power users in high-stakes settings, I am comfortable querying and interpreting data with SQL and Python, and I have shipped LLM products where accuracy and trust were the whole game.</p>
+    <p class="body" style="margin-top:14px">The work that maps most directly to this role:</p>
+    <div class="tbl-wrap">
+      <table>
+        <caption class="sr-only">What the role needs, mapped to what I have done.</caption>
+        <thead>
+          <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Internal-tools and finance product for power users</td>
+            <td>I owned discovery-to-launch of a finance budgeting application at Nomura, ran user research with 15+ stakeholders to define the MVP, prioritized a budget-vs-actual analytics layer, and drove adoption across cost-center owners, delivering a 30% reduction in spend.</td>
+          </tr>
+          <tr>
+            <td>Simulation and decision-support tooling tied to business outcomes</td>
+            <td>I shipped a real-time reporting dashboard for senior management that cut manual report compilation by 40+ hours a week and surfaced loan volumes, disbursements, and funnel bottlenecks across all branches.</td>
+          </tr>
+          <tr>
+            <td>Governance, audit trail, and approval workflows</td>
+            <td>I led a bank-wide AI assistant rollout to 15,000+ users with compliance and governance features in a phased adoption strategy, and led operational risk transformation for Global Markets, cutting events by 20% and losses by 15% across FI/FX, tech, audit, and risk.</td>
+          </tr>
+          <tr>
+            <td>Querying and interpreting data, financial fluency</td>
+            <td>I have an MBA in Finance and built 25+ automated reporting pipelines in C#, Python, and SQL for fund accounting at BNY Mellon, plus market-data sourcing connecting directly to Tradeweb that delivered $700K in annual savings.</td>
+          </tr>
+          <tr>
+            <td>LLM work where accuracy and trust matter</td>
+            <td>I am building a policy conflict-detection AI agent at UW for the City of Seattle: I evaluated 5+ RAG platforms, assessed 4 retrieval architectures on accuracy, groundedness, and hallucination, and owned the ingestion pipeline for 9,000+ policy documents with quality gates for trustworthy retrieval.</td>
+          </tr>
+          <tr>
+            <td>Scaling a platform under load with cross-functional partners</td>
+            <td>I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<div class="wrap">
+  <footer>
+    <div class="foot-row">
+      <span class="foot-name">Mayuresh More</span>
+      <div class="foot-links">
+        <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+        <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+        <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Progressive reveal on scroll. Content is fully visible without JS.
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>

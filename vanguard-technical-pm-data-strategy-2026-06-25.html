@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I would solve the master and reference data problem for the Technical Product Manager, Data Strategy role at Vanguard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea;
+    --paper-2:#efe9dd;
+    --card:#fffdf8;
+    --ink:#211c16;
+    --ink-soft:#433b30;
+    --ink-mute:#6f6557;
+    --ink-faint:#94897a;
+    --line:#ddd3c2;
+    --line-soft:#e7ddcc;
+    --accent:#7a1f2b;        /* deep claret, conservative and editorial */
+    --accent-soft:#9a3540;
+    --accent-wash:#f1e3df;
+    --gold:#a06a16;
+    --teal:#2f5d54;
+    --blue:#2f4d7a;
+    --maxw:980px;
+    --radius:10px;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #fbf7ef 0%, rgba(251,247,239,0) 60%),
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.66;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:100;
+    background:var(--accent);color:#fff;padding:12px 18px;border-radius:0 0 8px 0;
+    font-family:var(--display);font-weight:600;font-size:15px;text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  /* ---------- top masthead ---------- */
+  header.masthead{
+    padding:54px 0 30px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 14px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(30px,5vw,44px);
+    line-height:1.04;
+    letter-spacing:-0.02em;
+    margin:0 0 16px;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.4vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:42ch;
+    margin:0 0 18px;
+  }
+  .frame .accent{color:var(--accent);}
+  .prepared{
+    font-family:var(--mono);
+    font-size:12.5px;letter-spacing:.06em;
+    color:var(--ink-faint);margin:0;
+  }
+
+  /* ---------- sections ---------- */
+  main{display:block;}
+  section{
+    padding:46px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  section:last-of-type{border-bottom:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2{margin:0;}
+  .section-head{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-0.015em;
+    color:var(--ink);
+    margin:0 0 22px;
+    max-width:34ch;
+  }
+  .takeaway{
+    font-size:18.5px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    max-width:68ch;
+  }
+  .takeaway strong{color:var(--ink);font-weight:600;}
+
+  p{margin:0 0 18px;max-width:72ch;}
+  p:last-child{margin-bottom:0;}
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:30px 0 12px;
+  }
+
+  strong{color:var(--ink);font-weight:600;}
+  em{color:var(--ink-soft);}
+
+  /* citation links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line);
+    transition:color .15s ease, text-decoration-color .15s ease;
+  }
+  a.src:hover, a.src:focus{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px;}
+
+  /* definition / callout cards */
+  .defs{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 6px;
+  }
+  .def{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .def h3{
+    font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.01em;
+    margin:0 0 8px;color:var(--accent);
+  }
+  .def p{font-size:16px;margin:0;color:var(--ink-soft);}
+
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:18px 0;}
+  ul.clean > li{
+    position:relative;padding-left:24px;margin-bottom:14px;max-width:72ch;color:var(--ink-soft);
+  }
+  ul.clean > li::before{
+    content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;
+    background:var(--accent);border-radius:2px;transform:rotate(45deg);
+  }
+  ul.clean > li strong{color:var(--ink);}
+
+  ol.steps{padding-left:0;list-style:none;counter-reset:step;margin:18px 0;}
+  ol.steps > li{
+    position:relative;padding-left:44px;margin-bottom:16px;counter-increment:step;color:var(--ink-soft);max-width:72ch;
+  }
+  ol.steps > li::before{
+    content:counter(step);position:absolute;left:0;top:-1px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--accent-wash);color:var(--accent);
+    font-family:var(--display);font-weight:600;font-size:14px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid #e3cfca;
+  }
+  ol.steps > li strong{color:var(--ink);}
+
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--card);margin:22px 0;
+  }
+  table{border-collapse:collapse;width:100%;min-width:540px;font-size:15.5px;}
+  table.tight{min-width:480px;}
+  thead th{
+    background:var(--paper-2);
+    font-family:var(--display);font-weight:600;font-size:13px;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--ink-mute);
+    text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:13px 16px;border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);vertical-align:top;line-height:1.5;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even){background:rgba(0,0,0,0.012);}
+  td strong, th strong{color:var(--ink);}
+  td .num{font-family:var(--mono);font-size:14px;color:var(--ink);}
+  .rank-1{color:var(--accent);font-weight:700;}
+
+  .caption{
+    font-size:14.5px;color:var(--ink-mute);font-style:italic;
+    margin:0 0 16px;max-width:66ch;
+  }
+
+  /* diagram frame */
+  figure.diagram{
+    margin:26px 0;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 18px;overflow:hidden;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  figcaption{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-faint);margin-top:14px;text-align:center;
+  }
+
+  /* diagram text tokens */
+  .d-label{font-family:var(--display);font-weight:600;}
+  .d-sub{font-family:var(--serif);}
+
+  /* quadrant legend */
+  ol.quad-legend{
+    list-style:none;padding:0;margin:18px auto 0;max-width:560px;
+    display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;
+  }
+  ol.quad-legend li{
+    font-size:14.5px;color:var(--ink-soft);display:flex;align-items:center;gap:9px;line-height:1.3;
+  }
+  ol.quad-legend .qn{
+    flex:none;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;
+    font-family:var(--display);font-weight:700;font-size:12.5px;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* 30/60/90 phases */
+  .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;}
+  .phase{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;position:relative;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;
+    color:var(--accent);text-transform:uppercase;margin:0 0 4px;
+  }
+  .phase .ph-title{
+    font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 14px;
+  }
+  .phase ul{list-style:none;padding:0;margin:0;}
+  .phase li{
+    font-size:15px;color:var(--ink-soft);padding-left:18px;position:relative;margin-bottom:10px;line-height:1.45;
+  }
+  .phase li::before{
+    content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-soft);
+  }
+  .phase li:last-child{margin-bottom:0;}
+
+  /* fit intro */
+  .fit-intro{
+    background:var(--paper-2);border-radius:var(--radius);padding:24px 26px;margin:0 0 22px;
+    border:1px solid var(--line-soft);
+  }
+  .fit-intro p{font-size:18px;color:var(--ink-soft);margin:0;}
+
+  /* footer */
+  footer{
+    padding:42px 0 60px;border-top:1px solid var(--line);
+  }
+  .foot-name{
+    font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 10px;
+  }
+  .contact{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    font-family:var(--mono);font-size:13.5px;
+  }
+  .contact a{
+    color:var(--ink-mute);text-decoration:none;
+    border-bottom:1px solid var(--line);padding-bottom:1px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contact a:hover,.contact a:focus{color:var(--accent);border-color:var(--accent);}
+
+  .visually-hidden{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+
+  /* reveal animation (progressive enhancement) */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1 !important;transform:none !important;transition:none;}
+  }
+
+  /* responsive */
+  @media (max-width:760px){
+    body{font-size:16.5px;}
+    .wrap{padding:0 18px;}
+    header.masthead{padding:40px 0 24px;}
+    section{padding:36px 0;}
+    .defs{grid-template-columns:1fr;}
+    .phases{grid-template-columns:1fr;}
+    .frame{max-width:none;}
+    ol.quad-legend{grid-template-columns:1fr;}
+  }
+
+  /* mobile diagram legibility: keep SVG labels readable by allowing the
+     diagram wrapper to scroll horizontally instead of shrinking the SVG.
+     Overflow stays contained to figure.diagram, like the table wrappers. */
+  @media (max-width:600px){
+    figure.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    figure.diagram svg{min-width:540px;}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">PM Pitch &middot; Data Strategy</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the <span class="accent">master and reference data problem</span> for the Technical Product Manager, Data Strategy role at Vanguard</p>
+    <p class="prepared">Prepared June 2026</p>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== THESIS ===================== -->
+  <section aria-labelledby="s-thesis" class="reveal">
+    <div class="wrap">
+      <h2 id="s-thesis" class="kicker">The bet</h2>
+      <p class="section-head">Treat each high-pain data domain as a product: one golden source, a published contract, and a data-quality SLA.</p>
+      <p>My bet is that governed, SLA-bound, trusted master and reference data is the prerequisite that unlocks AI, faster analytics, and lower compliance risk. Vanguard's own Virtual Analyst project proved the bottleneck for every AI and analytics initiative is the data architecture, not the model <a class="src" href="https://aws.amazon.com/blogs/machine-learning/building-ai-ready-data-vanguards-virtual-analyst-journey/" target="_blank" rel="noopener">(AWS ML Blog, 2026)</a>.</p>
+      <p>A quick definition of the two terms, since the whole pitch rests on them.</p>
+      <div class="defs">
+        <div class="def">
+          <h3>Master data</h3>
+          <p>The core business records everyone shares: the securities a fund holds, the accounts a client owns, the funds themselves.</p>
+        </div>
+        <div class="def">
+          <h3>Reference data</h3>
+          <p>The standardized codes that classify and validate master data: currency codes, country codes, asset-class hierarchies, exchange identifiers.</p>
+        </div>
+      </div>
+      <p style="margin-top:18px;">When either is inconsistent across source systems, every downstream transaction that touches it throws an exception.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PROBLEM ===================== -->
+  <section aria-labelledby="s-problem" class="reveal">
+    <div class="wrap">
+      <h2 id="s-problem" class="kicker">The problem</h2>
+      <p class="takeaway">Vanguard has the platform (Data Product Fast Lane, Marketplace) and the proof (Virtual Analyst), so the gap is not tooling. It is getting the highest-pain master and reference domains to a state where downstream consumers actually trust them.</p>
+      <ul class="clean">
+        <li><strong>Conflicting source systems and the golden-record problem.</strong> The same security or legal entity arrives from multiple systems and vendors with conflicting attributes. Vendor A says ISIN X has a 5.0% coupon, vendor B says 5.25%. Someone has to codify which source wins for each attribute (the survivorship rule) and keep those rules current. A securities master can hold millions of instruments across asset classes and jurisdictions <a class="src" href="https://www.neoxam.com/mdm/" target="_blank" rel="noopener">(NeoXam)</a>.</li>
+        <li><strong>Reference data inconsistency drives downstream exceptions.</strong> A trade needs a security (master) plus a market identifier, currency, and asset-class code (reference). When either side is inconsistent, exceptions spike across pricing, accounting, and compliance <a class="src" href="https://www.greshamtech.com/blog/what-is-reference-data-anyway" target="_blank" rel="noopener">(Gresham Tech)</a>.</li>
+        <li><strong>Bad data is expensive.</strong> Gartner's baseline is $9.7 million per year as the average financial impact of poor data quality, and over 25% of organizations lose more than $5 million a year from it <a class="src" href="https://www.ibm.com/think/insights/cost-of-poor-data-quality" target="_blank" rel="noopener">(IBM, 2025)</a>. In financial services the tail is worse: Citibank paid $400 million in 2020 and $136 million more in 2024 for inadequate data governance and controls <a class="src" href="https://www.dataversity.net/articles/data-errors-in-financial-services-addressing-the-real-cost-of-poor-data-quality/" target="_blank" rel="noopener">(Dataversity)</a>.</li>
+        <li><strong>The AI-readiness gap is current and specific.</strong> Through 2026, organizations will abandon 60% of AI projects for lack of AI-ready data <a class="src" href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk" target="_blank" rel="noopener">(Gartner, 2025)</a>. In asset management, roughly half of firms lack basic processes to clean, normalize, and tag their internal data <a class="src" href="https://www.grantthornton.com/insights/articles/asset-management/2025/ai-is-transforming-asset-management" target="_blank" rel="noopener">(Grant Thornton, 2025)</a>. Vanguard is ahead of that average, but the Virtual Analyst pattern still needs to scale to more domains.</li>
+        <li><strong>The "lip-service domain" failure.</strong> Data mesh stalls when teams rebrand existing IT tables as "data products" without taking real business ownership <a class="src" href="https://www.thoughtworks.com/insights/blog/data-strategy/the-state-of-data-mesh-in-2026-from-hype-to-hard-won-maturity" target="_blank" rel="noopener">(Thoughtworks, 2026)</a>. Vanguard's Fast Lane defines the standard; the hard part is genuine domain accountability.</li>
+      </ul>
+
+      <h3>The golden-source and contract shape I would build toward</h3>
+      <figure class="diagram">
+        <svg viewBox="0 0 900 360" role="img" aria-label="Flow diagram. Source system A, source system B, and vendor reference-data feeds flow into an MDM survivorship process that decides which source wins per attribute. That produces one golden record, which is published as a data contract and SLA covering schema, quality, freshness, and owner. The contract then serves three consumers shown below: analytics and BI, compliance and risk, and AI and Virtual Analyst." font-family="'Space Grotesk', sans-serif">
+          <defs>
+            <marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L7.5,3 L0,6 Z" fill="#9a8d79"></path>
+            </marker>
+          </defs>
+          <g aria-hidden="true">
+            <!-- SOURCES -->
+            <rect x="14" y="26" width="170" height="54" rx="9" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.6"></rect>
+            <text x="99" y="57" text-anchor="middle" class="d-label" font-size="15" fill="#1e3a5f">Source system A</text>
+
+            <rect x="14" y="150" width="170" height="54" rx="9" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.6"></rect>
+            <text x="99" y="181" text-anchor="middle" class="d-label" font-size="15" fill="#1e3a5f">Source system B</text>
+
+            <rect x="14" y="274" width="170" height="62" rx="9" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.6"></rect>
+            <text x="99" y="300" text-anchor="middle" class="d-label" font-size="15" fill="#1e3a5f">Vendor feeds</text>
+            <text x="99" y="320" text-anchor="middle" class="d-sub" font-size="13" fill="#3c5378">(reference data)</text>
+
+            <!-- MDM -->
+            <rect x="250" y="120" width="184" height="120" rx="10" fill="#fbeec6" stroke="#a06a16" stroke-width="1.8"></rect>
+            <text x="342" y="168" text-anchor="middle" class="d-label" font-size="15" fill="#6b4710">MDM survivorship</text>
+            <text x="342" y="190" text-anchor="middle" class="d-sub" font-size="12.5" fill="#6b4710">which source wins</text>
+            <text x="342" y="207" text-anchor="middle" class="d-sub" font-size="12.5" fill="#6b4710">per attribute</text>
+
+            <!-- GOLDEN -->
+            <rect x="500" y="120" width="170" height="120" rx="10" fill="#fbeec6" stroke="#a06a16" stroke-width="1.8"></rect>
+            <text x="585" y="168" text-anchor="middle" class="d-label" font-size="15" fill="#6b4710">Golden record</text>
+            <text x="585" y="192" text-anchor="middle" class="d-sub" font-size="12.5" fill="#6b4710">one version</text>
+            <text x="585" y="209" text-anchor="middle" class="d-sub" font-size="12.5" fill="#6b4710">of truth</text>
+
+            <!-- CONTRACT -->
+            <rect x="700" y="120" width="186" height="120" rx="10" fill="#f1e3df" stroke="#7a1f2b" stroke-width="1.8"></rect>
+            <text x="793" y="160" text-anchor="middle" class="d-label" font-size="14.5" fill="#7a1f2b">Data contract</text>
+            <text x="793" y="178" text-anchor="middle" class="d-label" font-size="14.5" fill="#7a1f2b">+ SLA</text>
+            <text x="793" y="200" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7a1f2b">schema, quality,</text>
+            <text x="793" y="216" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7a1f2b">freshness, owner</text>
+
+            <!-- arrows sources -> mdm -->
+            <path d="M184,53 C214,53 222,150 248,168" fill="none" stroke="#9a8d79" stroke-width="1.6" marker-end="url(#arrow)"></path>
+            <path d="M184,177 L246,180" fill="none" stroke="#9a8d79" stroke-width="1.6" marker-end="url(#arrow)"></path>
+            <path d="M184,305 C214,305 222,210 248,196" fill="none" stroke="#9a8d79" stroke-width="1.6" marker-end="url(#arrow)"></path>
+            <!-- mdm -> gold -->
+            <path d="M434,180 L497,180" fill="none" stroke="#9a8d79" stroke-width="1.8" marker-end="url(#arrow)"></path>
+            <!-- gold -> contract -->
+            <path d="M670,180 L697,180" fill="none" stroke="#9a8d79" stroke-width="1.8" marker-end="url(#arrow)"></path>
+          </g>
+        </svg>
+        <svg viewBox="0 0 900 120" role="img" aria-label="The published data contract and SLA serves three downstream consumers: analytics and business intelligence, compliance and risk, and AI and the Virtual Analyst." font-family="'Space Grotesk', sans-serif" style="margin-top:6px;">
+          <defs>
+            <marker id="arrow2" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L7.5,3 L0,6 Z" fill="#9a8d79"></path>
+            </marker>
+          </defs>
+          <g aria-hidden="true">
+            <rect x="350" y="8" width="200" height="34" rx="8" fill="#f1e3df" stroke="#7a1f2b" stroke-width="1.6"></rect>
+            <text x="450" y="30" text-anchor="middle" class="d-label" font-size="13.5" fill="#7a1f2b">Published contract + SLA</text>
+
+            <rect x="40" y="78" width="220" height="34" rx="8" fill="#dcefe4" stroke="#2f5d54" stroke-width="1.6"></rect>
+            <text x="150" y="100" text-anchor="middle" class="d-label" font-size="13.5" fill="#1d3f38">Analytics and BI</text>
+
+            <rect x="340" y="78" width="220" height="34" rx="8" fill="#dcefe4" stroke="#2f5d54" stroke-width="1.6"></rect>
+            <text x="450" y="100" text-anchor="middle" class="d-label" font-size="13.5" fill="#1d3f38">Compliance and risk</text>
+
+            <rect x="640" y="78" width="220" height="34" rx="8" fill="#dcefe4" stroke="#2f5d54" stroke-width="1.6"></rect>
+            <text x="750" y="100" text-anchor="middle" class="d-label" font-size="13.5" fill="#1d3f38">AI and Virtual Analyst</text>
+
+            <path d="M430,42 C380,55 250,60 175,76" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow2)"></path>
+            <path d="M450,42 L450,76" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow2)"></path>
+            <path d="M470,42 C520,55 650,60 725,76" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow2)"></path>
+          </g>
+        </svg>
+        <figcaption>Sources and vendor feeds to MDM survivorship to a golden record, published as a contract to analytics, compliance, and AI</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== JTBD ===================== -->
+  <section aria-labelledby="s-users" class="reveal">
+    <div class="wrap">
+      <h2 id="s-users" class="kicker">Who it is for</h2>
+      <p class="takeaway">A master or reference data product has three distinct audiences, and a product that no one consumes is a failure regardless of technical quality.</p>
+      <p>JTBD means the job a user is hiring the product to do. I would name three.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Role</th><th>Who</th><th>The job they hire the data product to do</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>User</strong><br>daily consumer</td>
+              <td>Analytics and data-science teams, the 500+ analysts on the Redshift platform <a class="src" href="https://aws.amazon.com/blogs/big-data/how-vanguard-transformed-analytics-with-amazon-redshift-multi-warehouse-architecture/" target="_blank" rel="noopener">(AWS Big Data Blog)</a></td>
+              <td>"When I build a report or train a model, give me one trusted version of the securities or fund data so I stop reconciling sources by hand and can answer the business in minutes, not days."</td>
+            </tr>
+            <tr>
+              <td><strong>Decision-maker</strong><br>economic buyer</td>
+              <td>Domain leaders and the CDAO's office (Ryan Swann's centralized data org)</td>
+              <td>"Show me that this data product moves one of our four value categories: revenue, cost savings, cost avoidance, or risk reduction, so I can fund it against everything else."</td>
+            </tr>
+            <tr>
+              <td><strong>Gatekeeper</strong></td>
+              <td>Data governance, stewards, compliance and risk</td>
+              <td>"Prove this product has documented lineage, ownership, audit attributes, and quality checks before it publishes, so we stay defensible to the SEC and to our own controls."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The split matters because the Marketplace publishing standard already encodes all three: foundational (ownership, SLA, findability), technical (quality, format, encryption), and governance (domain alignment, stewardship, audit) <a class="src" href="https://medium.com/vanguard-technology/data-product-fastlane-fd187167ed52" target="_blank" rel="noopener">(Vanguard Tech, 2025)</a>. My job is to make a domain pass all three layers and then drive consumers to adopt it.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RICE ===================== -->
+  <section aria-labelledby="s-rice" class="reveal">
+    <div class="wrap">
+      <h2 id="s-rice" class="kicker">Why this problem: prioritization</h2>
+      <p class="takeaway">I would not boil the ocean. I would make one or two highest-pain domains trustworthy and contract-bound first, then catalog and lineage, then the AI-ready semantic layer.</p>
+      <p>RICE scores each bet on Reach (how many consumers or systems it touches), Impact (how much it moves trust and value), Confidence (how sure I am, given evidence), and Effort (relative build cost). Score is Reach times Impact times Confidence, divided by Effort. I treat this as a starting read to pressure-test with the team, not a final answer.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Data-product bet</th><th>Reach</th><th>Impact</th><th>Conf.</th><th>Effort</th><th>Score</th><th>Rank</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Data-quality SLA + contract framework</strong> on top master/reference domains</td><td class="num">9</td><td class="num">3</td><td class="num">0.9</td><td class="num">3</td><td class="num">8.1</td><td class="num rank-1">1</td></tr>
+            <tr><td>Metadata catalog + lineage + discoverability (Marketplace publish-readiness)</td><td class="num">9</td><td class="num">2</td><td class="num">0.9</td><td class="num">4</td><td class="num">4.1</td><td class="num">2</td></tr>
+            <tr><td>Golden-record / survivorship for the securities/instrument master</td><td class="num">8</td><td class="num">3</td><td class="num">0.8</td><td class="num">5</td><td class="num">3.8</td><td class="num">3</td></tr>
+            <tr><td>Pipeline observability + incident / root-cause reduction</td><td class="num">8</td><td class="num">2</td><td class="num">0.8</td><td class="num">4</td><td class="num">3.2</td><td class="num">4</td></tr>
+            <tr><td>AI-ready semantic layer for natural-language consumption</td><td class="num">7</td><td class="num">3</td><td class="num">0.7</td><td class="num">6</td><td class="num">2.5</td><td class="num">5</td></tr>
+            <tr><td>Domain-ownership operating model (avoid lip-service domains)</td><td class="num">9</td><td class="num">3</td><td class="num">0.6</td><td class="num">7</td><td class="num">2.3</td><td class="num">6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>How to read this. The contract and SLA framework ranks first because it is reusable across every domain, has direct evidence behind it (Vanguard already runs 100% ETL SLA adherence on analytics), and is cheaper than building any single golden record. Catalog and lineage rank second because they are the publish-readiness gate and the AI prerequisite. The securities-master golden record is high impact but heavier effort, so it follows. The domain operating model scores lowest on confidence and highest on effort, not because it is unimportant but because it is organizational change that I would earn through proof, not mandate.</p>
+
+      <h3>The same read as impact versus effort</h3>
+      <p class="caption">Each bet plotted by effort (horizontal) against impact (vertical). Top-left is where I would start: high impact, lower effort, reusable across domains.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 560 540" role="img" aria-label="Quadrant chart of data product bets, impact on the vertical axis and effort on the horizontal axis. Do First, top-left low effort high impact, holds point 1 the contract plus SLA framework, point 2 catalog plus lineage, and point 4 pipeline observability. Plan Carefully, top-right high effort high impact, holds point 3 the securities golden record, point 5 the AI-ready semantic layer, and point 6 the domain operating model. The lower Quick Wins and Reconsider quadrants are empty." font-family="'Space Grotesk', sans-serif">
+          <rect x="80" y="50" width="220" height="220" fill="#eef3ec"></rect>
+          <rect x="300" y="50" width="220" height="220" fill="#f6f1e6"></rect>
+          <rect x="80" y="270" width="220" height="220" fill="#f3efe7"></rect>
+          <rect x="300" y="270" width="220" height="220" fill="#f3efe7"></rect>
+          <rect x="80" y="50" width="440" height="440" fill="none" stroke="#cfc4b0" stroke-width="1.4"></rect>
+          <line x1="300" y1="50" x2="300" y2="490" stroke="#cfc4b0" stroke-width="1.2" stroke-dasharray="4 4"></line>
+          <line x1="80" y1="270" x2="520" y2="270" stroke="#cfc4b0" stroke-width="1.2" stroke-dasharray="4 4"></line>
+
+          <text x="300" y="522" text-anchor="middle" class="d-label" font-size="13" fill="#6f6557">Effort: low to high</text>
+          <text x="48" y="270" text-anchor="middle" class="d-label" font-size="13" fill="#6f6557" transform="rotate(-90 48 270)">Impact: low to high</text>
+
+          <text x="92" y="70" class="d-label" font-size="13" fill="#2f5d54" font-weight="700">DO FIRST</text>
+          <text x="508" y="70" text-anchor="end" class="d-label" font-size="13" fill="#a06a16" font-weight="700">PLAN CAREFULLY</text>
+          <text x="92" y="482" class="d-label" font-size="13" fill="#94897a" font-weight="700">QUICK WINS</text>
+          <text x="508" y="482" text-anchor="end" class="d-label" font-size="13" fill="#94897a" font-weight="700">RECONSIDER</text>
+
+          <!-- numbered points. map: cx = 80 + x*440 ; cy = 490 - y*440 -->
+          <g><circle cx="212" cy="116" r="13" fill="#7a1f2b"></circle><text x="212" y="121" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">1</text></g>
+          <g><circle cx="278" cy="182" r="13" fill="#7a1f2b"></circle><text x="278" y="187" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">2</text></g>
+          <g><circle cx="278" cy="203" r="13" fill="#7a1f2b"></circle><text x="278" y="208" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">4</text></g>
+          <g><circle cx="388" cy="116" r="13" fill="#7a1f2b"></circle><text x="388" y="121" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">3</text></g>
+          <g><circle cx="432" cy="160" r="13" fill="#7a1f2b"></circle><text x="432" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">5</text></g>
+          <g><circle cx="470" cy="204" r="13" fill="#7a1f2b"></circle><text x="470" y="209" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" class="d-label">6</text></g>
+        </svg>
+        <ol class="quad-legend" aria-label="Key to the plotted points">
+          <li><span class="qn">1</span> Contract + SLA framework</li>
+          <li><span class="qn">2</span> Catalog + lineage</li>
+          <li><span class="qn">3</span> Securities golden record</li>
+          <li><span class="qn">4</span> Pipeline observability</li>
+          <li><span class="qn">5</span> AI-ready semantic layer</li>
+          <li><span class="qn">6</span> Domain operating model</li>
+        </ol>
+        <figcaption>Data product bets: impact versus effort</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== APPROACH ===================== -->
+  <section aria-labelledby="s-approach" class="reveal">
+    <div class="wrap">
+      <h2 id="s-approach" class="kicker">Approach and hypotheses</h2>
+      <p class="takeaway">Sequence over scope. Prove the model end to end on one domain, then reuse the framework.</p>
+      <p>Three directions, and how I would decide between them.</p>
+      <ol class="steps">
+        <li><strong>Contract-first on one domain.</strong> Pick the single highest-pain master or reference domain, publish a data contract and quality SLA, and make it the reference example. I would decide for this if defect tickets and reconciliation breaks cluster in one domain. This is my lead hypothesis.</li>
+        <li><strong>Lineage-and-catalog-first across many domains.</strong> Improve discoverability and lineage coverage broadly before deepening any one domain. I would decide for this if the bigger pain is consumers not finding or not trusting what exists, rather than the data itself being wrong.</li>
+        <li><strong>Semantic-layer-first for AI.</strong> Build the natural-language consumption layer early to ride the Virtual Analyst momentum. I would decide for this only after one domain is contract-bound, because the Virtual Analyst lesson is that the semantic layer fails without the catalog and quality checks underneath it.</li>
+      </ol>
+      <p>My sequence: make one or two highest-pain domains trustworthy and contract-bound, then add catalog, lineage, and discoverability so they publish cleanly to the Marketplace, then build the AI-ready semantic layer and roll the framework out to more domains.</p>
+    </div>
+  </section>
+
+  <!-- ===================== MVP ===================== -->
+  <section aria-labelledby="s-mvp" class="reveal">
+    <div class="wrap">
+      <h2 id="s-mvp" class="kicker">What I would ship first</h2>
+      <p class="takeaway">The smallest test of the biggest assumption is one golden-source data product for one high-pain domain, published with a contract, an SLA, and lineage, proving the model end to end.</p>
+      <p>The biggest assumption is that a contract-and-SLA wrapper on a single domain measurably raises downstream trust and adoption. I would test that, not assume it.</p>
+      <h3>What the first slice is</h3>
+      <ul class="clean">
+        <li>One golden-source data product for one agreed high-pain domain (my hypothesis: securities/instrument master or a heavily-used reference set, confirmed by where defects and reconciliation breaks actually cluster).</li>
+        <li>A published data contract: schema, ownership, freshness, and quality thresholds for accuracy, completeness, consistency, and timeliness.</li>
+        <li>Survivorship rules documented for the attributes that conflict most across sources.</li>
+        <li>Lineage from source to the published product, and a Marketplace catalog entry with example usage.</li>
+      </ul>
+      <p>What it deliberately leaves out: the full semantic layer, all five master domains, and the broad domain operating model. Those come after the single domain proves the pattern. The RICE read backs this: the contract framework is rank 1 and reusable, so proving it once on real data is the highest-impact first move.</p>
+    </div>
+  </section>
+
+  <!-- ===================== METRICS ===================== -->
+  <section aria-labelledby="s-metrics" class="reveal">
+    <div class="wrap">
+      <h2 id="s-metrics" class="kicker">How I would measure success</h2>
+      <p class="takeaway">One North Star tied to trusted consumption, guardrails so I do not buy quality with speed or speed with quality, and every metric mapped to Vanguard's four value categories.</p>
+      <p><strong>North Star:</strong> trusted downstream consumption of governed master and reference data products, measured as the number of teams and queries consuming contract-bound products that meet their SLA. It captures both quality (SLA met) and value (someone actually uses it).</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 880 470" role="img" aria-label="Metrics tree. The North Star is trusted consumption of contract-bound data products. It is supported by three inputs: data quality measured by SLA adherence on the domain, which breaks down into accuracy, completeness, consistency, and timeliness; trust and discoverability measured by lineage and catalog coverage, which breaks down into percent of assets with lineage and a Marketplace entry; and reliability and speed measured by time-to-data and time-to-insight, which breaks down into days to minutes on data access. Two guardrail anti-metrics sit below: data incidents and pipeline failures reaching production, and duplicate or ungoverned sources of the same entity." font-family="'Space Grotesk', sans-serif">
+          <defs>
+            <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L6.5,3 L0,6 Z" fill="#9a8d79"></path>
+            </marker>
+          </defs>
+          <!-- North Star -->
+          <rect x="290" y="20" width="300" height="64" rx="11" fill="#fbeec6" stroke="#a06a16" stroke-width="2"></rect>
+          <text x="440" y="46" text-anchor="middle" class="d-label" font-size="15" fill="#6b4710">North Star</text>
+          <text x="440" y="66" text-anchor="middle" class="d-sub" font-size="12.5" fill="#6b4710">trusted consumption of contract-bound products</text>
+
+          <!-- inputs -->
+          <rect x="40" y="150" width="240" height="62" rx="10" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.7"></rect>
+          <text x="160" y="176" text-anchor="middle" class="d-label" font-size="14" fill="#1e3a5f">Data quality</text>
+          <text x="160" y="195" text-anchor="middle" class="d-sub" font-size="12" fill="#2f4d7a">SLA adherence on the domain</text>
+
+          <rect x="320" y="150" width="240" height="62" rx="10" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.7"></rect>
+          <text x="440" y="176" text-anchor="middle" class="d-label" font-size="14" fill="#1e3a5f">Trust and discoverability</text>
+          <text x="440" y="195" text-anchor="middle" class="d-sub" font-size="12" fill="#2f4d7a">lineage and catalog coverage</text>
+
+          <rect x="600" y="150" width="240" height="62" rx="10" fill="#dde7f3" stroke="#2f4d7a" stroke-width="1.7"></rect>
+          <text x="720" y="176" text-anchor="middle" class="d-label" font-size="14" fill="#1e3a5f">Reliability and speed</text>
+          <text x="720" y="195" text-anchor="middle" class="d-sub" font-size="12" fill="#2f4d7a">time-to-data, time-to-insight</text>
+
+          <!-- leaves -->
+          <rect x="40" y="270" width="240" height="58" rx="9" fill="#f1ece3" stroke="#cfc4b0" stroke-width="1.3"></rect>
+          <text x="160" y="294" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">accuracy, completeness,</text>
+          <text x="160" y="311" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">consistency, timeliness</text>
+
+          <rect x="320" y="270" width="240" height="58" rx="9" fill="#f1ece3" stroke="#cfc4b0" stroke-width="1.3"></rect>
+          <text x="440" y="294" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">percent assets with lineage</text>
+          <text x="440" y="311" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">and Marketplace entry</text>
+
+          <rect x="600" y="270" width="240" height="58" rx="9" fill="#f1ece3" stroke="#cfc4b0" stroke-width="1.3"></rect>
+          <text x="720" y="294" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">days to minutes</text>
+          <text x="720" y="311" text-anchor="middle" class="d-sub" font-size="12" fill="#433b30">on data access</text>
+
+          <!-- guardrails -->
+          <rect x="120" y="380" width="290" height="66" rx="10" fill="#f6e0df" stroke="#b3433f" stroke-width="1.7"></rect>
+          <text x="265" y="406" text-anchor="middle" class="d-label" font-size="13" fill="#7f1d1d">Guardrail</text>
+          <text x="265" y="425" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7f1d1d">data incidents and pipeline</text>
+          <text x="265" y="440" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7f1d1d">failures reaching prod</text>
+
+          <rect x="470" y="380" width="290" height="66" rx="10" fill="#f6e0df" stroke="#b3433f" stroke-width="1.7"></rect>
+          <text x="615" y="406" text-anchor="middle" class="d-label" font-size="13" fill="#7f1d1d">Guardrail</text>
+          <text x="615" y="425" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7f1d1d">duplicate or ungoverned</text>
+          <text x="615" y="440" text-anchor="middle" class="d-sub" font-size="11.5" fill="#7f1d1d">sources of the same entity</text>
+
+          <!-- arrows -->
+          <path d="M340,84 C260,110 200,120 160,148" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow3)"></path>
+          <path d="M440,84 L440,148" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow3)"></path>
+          <path d="M540,84 C620,110 680,120 720,148" fill="none" stroke="#9a8d79" stroke-width="1.5" marker-end="url(#arrow3)"></path>
+          <path d="M160,212 L160,268" fill="none" stroke="#9a8d79" stroke-width="1.4" marker-end="url(#arrow3)"></path>
+          <path d="M440,212 L440,268" fill="none" stroke="#9a8d79" stroke-width="1.4" marker-end="url(#arrow3)"></path>
+          <path d="M720,212 L720,268" fill="none" stroke="#9a8d79" stroke-width="1.4" marker-end="url(#arrow3)"></path>
+          <path d="M380,84 C300,200 240,300 265,378" fill="none" stroke="#b3433f" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrow3)"></path>
+          <path d="M500,84 C580,200 640,300 615,378" fill="none" stroke="#b3433f" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrow3)"></path>
+        </svg>
+        <figcaption>North Star metrics tree with quality, trust, and reliability inputs, plus two guardrails</figcaption>
+      </figure>
+
+      <h3>Mapping to Vanguard's four value categories <a class="src" href="https://www.pymnts.com/artificial-intelligence-2/2025/vanguards-data-chief-on-embedding-ai-and-data-across-the-enterprise/" target="_blank" rel="noopener" style="font-size:14px;">(PYMNTS, 2025)</a></h3>
+      <div class="table-wrap">
+        <table class="tight">
+          <thead><tr><th>Metric</th><th>Value category</th></tr></thead>
+          <tbody>
+            <tr><td>Time-to-data and time-to-insight (days to minutes)</td><td>Cost savings (analyst hours) and revenue (faster decisions)</td></tr>
+            <tr><td>Data-quality SLA adherence, fewer downstream breaks</td><td>Cost avoidance (rework) and risk reduction (compliance)</td></tr>
+            <tr><td>Lineage and catalog coverage</td><td>Risk reduction (audit readiness)</td></tr>
+            <tr><td>Fewer duplicate / ungoverned sources</td><td>Cost savings (less duplicated maintenance)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Guardrails (anti-metrics): I would not let data incidents and pipeline failures reaching production rise, and I would not let the count of duplicate or ungoverned sources of the same entity grow. Speed bought by skipping governance shows up here first.</p>
+    </div>
+  </section>
+
+  <!-- ===================== BUSINESS IMPACT ===================== -->
+  <section aria-labelledby="s-business" class="reveal">
+    <div class="wrap">
+      <h2 id="s-business" class="kicker">Business and revenue impact</h2>
+      <p class="takeaway">Master and reference data quality is the input to the value Vanguard already measures, not a cost center beside it.</p>
+      <p>Vanguard reported over $300 million in incremental value from data and AI in one year and tracks every data initiative across revenue, cost savings, cost avoidance, and risk reduction <a class="src" href="https://www.pymnts.com/artificial-intelligence-2/2025/vanguards-data-chief-on-embedding-ai-and-data-across-the-enterprise/" target="_blank" rel="noopener">(PYMNTS, 2025)</a>. My hypotheses for how this work moves those numbers:</p>
+      <ul class="clean">
+        <li><strong>Cost avoidance and risk reduction.</strong> Poor data quality averages $9.7 million a year in impact, and financial-services penalties for weak data governance run into the hundreds of millions <a class="src" href="https://www.ibm.com/think/insights/cost-of-poor-data-quality" target="_blank" rel="noopener">(IBM)</a>, <a class="src" href="https://www.dataversity.net/articles/data-errors-in-financial-services-addressing-the-real-cost-of-poor-data-quality/" target="_blank" rel="noopener">(Dataversity)</a>. Contract-bound master and reference data with lineage reduces the exceptions and reporting breaks that drive that exposure.</li>
+        <li><strong>Cost savings.</strong> Cutting time-to-data from days to minutes, the outcome Vanguard already hit with the Virtual Analyst, returns analyst hours across a 500+ analyst population.</li>
+        <li><strong>Revenue and AI enablement.</strong> With 60% of AI projects abandoned for lack of AI-ready data <a class="src" href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk" target="_blank" rel="noopener">(Gartner)</a>, trusted master and reference products are the gate that lets more AI use cases reach production rather than stall.</li>
+      </ul>
+      <p>I would put a baseline against each of these in the first 90 days so the roadmap argues in the Value Measurement Office's own language.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 30/60/90 ===================== -->
+  <section aria-labelledby="s-plan" class="reveal">
+    <div class="wrap">
+      <h2 id="s-plan" class="kicker">First 90 days</h2>
+      <p class="takeaway">Listen and find the real constraint, ship one proof, then propose the scaled roadmap.</p>
+      <div class="phases" role="list">
+        <div class="phase" role="listitem">
+          <p class="ph-tag">Days 0 to 30</p>
+          <p class="ph-title">Listen and locate the pain</p>
+          <ul>
+            <li>Sit in data-engineering standups on pipeline health: SLA adherence, overnight failures, root-cause on misses.</li>
+            <li>Profile candidate domains in SQL to see where source data diverges from what the business says it holds.</li>
+            <li>Map current Marketplace state: how many products exist, how many pass all three publish layers, where the gaps are.</li>
+            <li>Meet the consumers (analytics, compliance, domain stewards) and the CDAO's office to learn how they fund and measure value.</li>
+          </ul>
+        </div>
+        <div class="phase" role="listitem">
+          <p class="ph-tag">Days 30 to 60</p>
+          <p class="ph-title">A quick win and a sharpened problem</p>
+          <ul>
+            <li>Pick the one highest-pain domain with the team, backed by defect and reconciliation evidence, not opinion.</li>
+            <li>Draft the first data contract and quality SLA for it. Document survivorship rules for the worst-conflicting attributes.</li>
+            <li>Land a quick win: close a recurring data-quality defect at root cause so consumers feel the change early.</li>
+            <li>Align stakeholders on the value-category baseline for that domain.</li>
+          </ul>
+        </div>
+        <div class="phase" role="listitem">
+          <p class="ph-tag">Days 60 to 90</p>
+          <p class="ph-title">Ship the first bet and propose the roadmap</p>
+          <ul>
+            <li>Publish the golden-source data product with its contract, SLA, lineage, and Marketplace entry.</li>
+            <li>Set the metric baseline: SLA adherence, time-to-data, consumers, incident count.</li>
+            <li>Present the scaled roadmap: which domains come next, mapped to the four value categories, with the contract framework as the reusable backbone.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RISKS ===================== -->
+  <section aria-labelledby="s-risks" class="reveal">
+    <div class="wrap">
+      <h2 id="s-risks" class="kicker">Risks and what I would validate first</h2>
+      <p class="takeaway">The risks are in the proposed work and the org, and each has a week-one test.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Risk or open assumption</th><th>What I would validate first</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lip-service domain risk.</strong> The chosen domain team rebrands existing tables instead of taking real ownership.</td><td>In week one, confirm a named steward with decision rights and budget for the domain, not just a contact.</td></tr>
+            <tr><td><strong>Survivorship-rule maintenance.</strong> Rules go stale as vendors and systems change, silently corrupting the golden record.</td><td>Validate that there is an owner and a review cadence for survivorship rules before publishing, not just a one-time definition.</td></tr>
+            <tr><td><strong>Governance-versus-speed tension.</strong> The JD names this directly. Too much rigor stalls delivery; too little erodes trust.</td><td>Test the minimum publish-ready bar with governance in week one: what is truly required to publish versus what can follow.</td></tr>
+            <tr><td><strong>Scope ambiguity.</strong> It is unclear which master domains this role owns (securities, client, fund, counterparty, entity).</td><td>Confirm the owned domains and the single starting domain with the CDAO's office before committing the roadmap.</td></tr>
+            <tr><td><strong>Vendor and reference-data dependency.</strong> Reference data is licensed from external vendors whose feeds and formats drive quality.</td><td>Trace where vendor feeds land in the architecture and which attributes depend on which vendor before setting SLAs I cannot meet.</td></tr>
+            <tr><td><strong>Adoption risk.</strong> A technically clean product that no consumer adopts is a failure under the Marketplace model.</td><td>Line up at least one committed downstream consumer for the first domain before building it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUESTIONS ===================== -->
+  <section aria-labelledby="s-questions" class="reveal">
+    <div class="wrap">
+      <h2 id="s-questions" class="kicker">Questions I would ask the team</h2>
+      <ol class="steps">
+        <li>Which master domains does this role own first: securities/instrument, client/account, fund, counterparty, or entity? And which single domain has the most downstream pain today?</li>
+        <li>Is there an existing MDM platform (a vendor tool, or custom on AWS following the Fast Lane Blueprint pattern), or is the golden-record approach still to be decided per domain?</li>
+        <li>Where does this role sit relative to Ryan Swann's centralized org and the business-aligned spokes? Who holds the steward decision rights for the target domain?</li>
+        <li>What is the current Marketplace maturity: how many products are published, and what share pass all three foundational, technical, and governance layers?</li>
+        <li>Which reference-data vendors feed securities and market data, and where do those feeds land before they reach consumers?</li>
+        <li>How does the Value Measurement Office want a master-data roadmap item expressed against the four value categories, so I frame priorities in your language from day one?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== WHY ME ===================== -->
+  <section aria-labelledby="s-fit" class="reveal">
+    <div class="wrap">
+      <h2 id="s-fit" class="kicker">Why me</h2>
+      <div class="fit-intro">
+        <p>I am a product manager with 6+ years across technology, finance, and AI, finishing a Master of Science in Information Management at the University of Washington (expected June 2026), with an MBA in Finance and a Bachelor of Engineering in Computer Engineering. I have spent most of my career on financial-services data: market-data sourcing, reporting pipelines, data-quality and governance, and most recently a data-ingestion pipeline built for AI consumption. That is the exact stack this role runs on, so the work below maps directly.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>What the role needs</th><th>What I have done</th></tr></thead>
+          <tbody>
+            <tr><td>Own data products across the lifecycle, with quality gates</td><td>I owned the end-to-end data-ingestion strategy and pipeline for 9,000+ policy documents across 8 agencies at UW, setting standards and quality gates for trustworthy retrieval at scale.</td></tr>
+            <tr><td>Hands-on SQL and data pipelines</td><td>I built 25+ automated reporting pipelines in C#, Python, and SQL for fund accounting and asset management systems at BNY Mellon, feeding downstream reporting.</td></tr>
+            <tr><td>Drive data quality and reduce defects and risk</td><td>I led operational risk transformation for Global Markets at Nomura, cutting risk events by 20% and losses by 15% through remediation roadmaps, incident analysis, and preventive controls.</td></tr>
+            <tr><td>Improve reference and market data quality, manage vendor feeds</td><td>I drove a firm-wide market-data sourcing program at Nomura connecting to Tradeweb and replacing Refinitiv distribution, delivering $700K in annual savings with improved data quality across Fixed Income applications.</td></tr>
+            <tr><td>Translate business needs into requirements, schemas, and SLAs</td><td>I owned discovery-to-launch of a finance budgeting application at Nomura, running research with 15+ stakeholders to define MVP scope and a Budget vs. Actual layer that cut spend 30%.</td></tr>
+            <tr><td>Build AI-ready data and a semantic foundation</td><td>I evaluated 5+ RAG platforms and 4 retrieval architectures at UW on accuracy, groundedness, hallucination, latency, and cost, and built a policy-conflict AI agent on top of the ingestion pipeline.</td></tr>
+            <tr><td>Drive governance and adoption at enterprise scale</td><td>I led the rollout of an internal AI assistant to 15,000+ users at Nomura with compliance and governance features in a phased adoption strategy.</td></tr>
+            <tr><td>Reporting and BI for stakeholders</td><td>I shipped a real-time reporting dashboard for senior management that cut manual report compilation by 40+ hours a week and surfaced funnel bottlenecks across 3,000+ branches.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-name">Mayuresh More</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(e){e.classList.add('in');});
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    },{rootMargin:'0px 0px -8% 0px', threshold:0.06});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

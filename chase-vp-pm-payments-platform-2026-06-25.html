@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayuresh More: solving the consumer payments problem for the VP Product Manager, Payments Platform role at JPMorgan Chase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-2:#efe8da;
+    --card:#fbf8f1;
+    --ink:#26211b;
+    --ink-soft:#4a423a;
+    --ink-faint:#8a7f70;
+    --line:#ddd2bf;
+    --line-soft:#e7ddca;
+    --accent:#1c4f8a;        /* trustworthy blue, payments/bank feel */
+    --accent-soft:#2c66ad;
+    --accent-wash:#e7eef6;
+    --gold:#9a6b1f;
+    --danger:#9a3b2e;
+    --ok:#2f6b46;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:880px;
+    --r:10px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(28,79,138,0.05), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(154,107,31,0.05), transparent 55%);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* skip link */
+  .skip{
+    position:absolute;left:-999px;top:0;z-index:200;
+    background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:.85rem;text-decoration:none;
+  }
+  .skip:focus{left:0}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---- top identity ---- */
+  header.top{padding:64px 0 26px}
+  .eyebrow{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 18px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.9rem,4.6vw,2.7rem);
+    line-height:1.04;
+    letter-spacing:-0.02em;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.02rem,2.4vw,1.28rem);
+    line-height:1.32;
+    color:var(--ink-soft);
+    max-width:42ch;
+    margin:0 0 16px;
+  }
+  .prepared{
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0;
+  }
+  .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);border:0;margin:6px 0 0}
+
+  /* ---- sections ---- */
+  main{padding-bottom:20px}
+  section{padding:44px 0;border-bottom:1px solid var(--line-soft)}
+  section:last-of-type{border-bottom:0}
+  .kicker{
+    font-family:var(--mono);
+    font-size:1rem;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2{margin:0} /* kicker carries the heading visually; keep h2 semantic */
+  h2.kicker{font-size:1rem}
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.25rem,3vw,1.62rem);
+    line-height:1.28;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:34ch;
+  }
+  .takeaway{
+    font-size:1.04rem;
+    color:var(--ink);
+    margin:0 0 18px;
+    padding-left:16px;
+    border-left:3px solid var(--accent);
+  }
+  .takeaway b{color:var(--accent-soft)}
+  p{margin:0 0 16px;color:var(--ink-soft)}
+  p.body{color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:26px 0 10px;
+  }
+
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:0 0 16px}
+  ul.clean li{
+    position:relative;padding:0 0 0 22px;margin:0 0 12px;color:var(--ink-soft);
+  }
+  ul.clean li::before{
+    content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;
+    background:var(--accent);border-radius:2px;transform:rotate(45deg);
+  }
+  ul.clean li strong{color:var(--ink)}
+
+  /* citation links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line);
+    transition:color .15s ease,text-decoration-color .15s ease;
+  }
+  a.src:hover,a.src:focus{color:var(--accent);text-decoration-color:var(--accent)}
+
+  /* tables */
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 8px;border-radius:var(--r)}
+  table{
+    width:100%;border-collapse:collapse;font-size:.96rem;min-width:560px;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  }
+  thead th{
+    background:var(--paper-2);
+    font-family:var(--display);font-weight:600;font-size:.82rem;letter-spacing:.02em;
+    text-align:left;color:var(--ink);padding:12px 14px;border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--line-soft);color:var(--ink-soft);vertical-align:top}
+  tbody tr:last-child td{border-bottom:0}
+  tbody td strong{color:var(--ink)}
+  td.rank,th.rank{text-align:center;white-space:nowrap}
+  .pill{
+    display:inline-block;font-family:var(--mono);font-size:.74rem;font-weight:600;
+    padding:2px 8px;border-radius:999px;background:var(--accent-wash);color:var(--accent);
+  }
+  .pill.spine{background:#efe2c9;color:var(--gold)}
+
+  /* figure / diagrams */
+  figure.diagram{
+    margin:22px 0 10px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--r);
+    padding:18px 16px 10px;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto}
+  figcaption{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);margin-top:10px;text-align:center;
+  }
+  /* mobile diagram legibility: scroll the wrapper, not the page */
+  @media (max-width:600px){
+    figure.diagram{
+      overflow-x:auto;-webkit-overflow-scrolling:touch;
+      position:relative;
+      /* subtle right-edge fade hints the diagram scrolls horizontally */
+      background-image:linear-gradient(to left, rgba(38,33,27,0.12), rgba(38,33,27,0) 36px);
+      background-position:right center;
+      background-repeat:no-repeat;
+      background-size:36px 100%;
+      background-attachment:local;
+    }
+    figure.diagram svg{min-width:540px}
+    figure.diagram figcaption{min-width:540px}
+    figure.diagram .scrollhint{
+      display:block;
+      font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--ink-faint);text-align:right;margin-top:6px;min-width:540px;
+    }
+  }
+  .scrollhint{display:none}
+  .legend{
+    list-style:none;padding:0;margin:14px 0 2px;
+    display:grid;grid-template-columns:1fr;gap:8px;
+  }
+  @media(min-width:560px){.legend{grid-template-columns:1fr 1fr}}
+  .legend li{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--ink-soft)}
+  .legend .num{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:#fff;font-family:var(--mono);font-weight:600;font-size:.78rem;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .legend .num.spine{background:var(--gold)}
+  .legend b{color:var(--ink)}
+
+  /* callout */
+  .note{
+    background:var(--accent-wash);
+    border:1px solid #cfdcec;
+    border-radius:var(--r);
+    padding:16px 18px;
+    margin:0 0 16px;
+    font-size:.98rem;
+    color:var(--ink-soft);
+  }
+  .note strong{color:var(--accent)}
+
+  /* fit intro */
+  .fit-intro{font-size:1.05rem;color:var(--ink-soft);max-width:60ch}
+
+  /* footer */
+  footer{
+    background:var(--paper-2);
+    border-top:1px solid var(--line);
+    padding:40px 0 52px;
+  }
+  .foot-name{font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--ink);margin:0 0 6px}
+  .foot-sub{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px}
+  .contacts{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0}
+  .contacts a{
+    font-family:var(--mono);font-size:.84rem;color:var(--ink-faint);
+    text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus{color:var(--accent);border-color:var(--accent)}
+
+  /* focus visibility */
+  a:focus-visible,th:focus-visible,td:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1 !important;transform:none !important;transition:none}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Product Strategy Pitch</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the consumer payments problem for the VP Product Manager, Payments Platform role at JPMorgan Chase.</p>
+    <p class="prepared">Prepared June 2026 &middot; Wallets &amp; Lending Innovations, Consumer &amp; Community Banking</p>
+  </div>
+  <div class="wrap"><hr class="rule"></div>
+</header>
+
+<main id="main">
+
+  <!-- THESIS -->
+  <section class="reveal" aria-labelledby="s-thesis">
+    <div class="wrap">
+      <h2 class="kicker" id="s-thesis">The bet</h2>
+      <p class="lede">Win the checkout surface Chase already controls, then extend that credential outward.</p>
+      <p class="body">Chase owns the rails, the scale, and the trust. But it captures only <strong>5.2% of its customers' $450 billion</strong> in addressable commerce spend, and its bank wallet Paze has <strong>165 million enrolled cards</strong> with almost no consumer habit.</p>
+      <p class="body">My bet: turn bank-grade trust and the rails Chase owns into a payment customers reach for without thinking. Win the surface Chase already controls first, then extend that credential into the agentic commerce layer, all built inside the risk and controls environment.</p>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="reveal" aria-labelledby="s-problem">
+    <div class="wrap">
+      <h2 class="kicker" id="s-problem">The problem</h2>
+      <p class="takeaway">Chase has the infrastructure. It does not yet have the everyday habit, and the checkout surface is being claimed by Big Tech, PayPal, and now AI agents.</p>
+      <p class="body">Chase moved <strong>$7 trillion</strong> in consumer payments volume in 2025, growing at an 11% CAGR since 2019 (<a class="src" href="https://www.jpmorganchase.com/ir/annual-report/2025/ar-ceo-letter-marianne-lake" target="_blank" rel="noopener">Marianne Lake 2025 letter</a>). It has 75 million digital users and the #1 ranked US digital banking platform. The rails are not the problem. Five gaps are.</p>
+      <ul class="clean">
+        <li><strong>The commerce capture gap.</strong> Chase captures 5.2% of the $450 billion its own cardholders spend, up from 3.0% in 2021. The stated target is 10% (<a class="src" href="https://www.jpmorganchase.com/ir/annual-report/2025/ar-ceo-letter-marianne-lake" target="_blank" rel="noopener">Lake 2025 letter</a>). That gap is roughly $22 billion in annual spend Chase touches but does not yet own at checkout.</li>
+        <li><strong>The distribution versus habit gap.</strong> Paze, the bank consortium e-commerce wallet Chase co-owns, has 165 million eligible cards and processor integrations with Fiserv, Worldpay, Nuvei, and ACI. But consumer awareness sits far below PayPal's 82% awareness and 37% online preference (<a class="src" href="https://www.spreedly.com/blog/examining-paze-digital-wallet" target="_blank" rel="noopener">Spreedly 2026</a>). The rails exist. The reflex to use them does not.</li>
+        <li><strong>Someone else owns the checkout surface.</strong> Apple Pay carries 54% of mobile taps at the point of sale, and PayPal is the default online checkout brand (<a class="src" href="https://www.spreedly.com/blog/examining-paze-digital-wallet" target="_blank" rel="noopener">Spreedly 2026</a>). Chase cards are tokenized into those wallets, but the device maker and the wallet brand own the customer relationship and the network token economics.</li>
+        <li><strong>The credential layer is shifting to AI agents.</strong> On June 10, 2026, Visa and Mastercard both launched frameworks that let AI agents complete purchases using scoped network credentials, and JPMorgan's own research projects agents will handle 15% to 25% of US e-commerce by 2030 (<a class="src" href="https://www.jpmorgan.com/insights/payments/trends-innovation/five-payment-trends-in-2026" target="_blank" rel="noopener">JPMorgan, Visa, Digital Commerce 360</a>). If network agent tokens become the default credential, the bank wallet risks becoming invisible.</li>
+        <li><strong>Speed versus controls.</strong> Every new payment product at Chase requires sign-off from Risk, Controls, Legal, and Compliance before any customer touches it, under live regulator scrutiny. A new wallet is not just an engineering build. It is a controls translation problem. This is what makes the role hard and why the JD names controls as a co-equal responsibility.</li>
+      </ul>
+      <p class="body">The cost of standing still: a customer who reaches for Apple Pay or PayPal at checkout is a customer whose commerce spend, interchange, and data Chase does not capture, and a relationship the network or device maker deepens instead of Chase.</p>
+
+      <figure class="diagram" role="img" aria-label="Decision flow. A Chase customer at checkout chooses which button to press. Today, by reflex, they choose Apple Pay or PayPal, so spend, interchange, and data go elsewhere. What I would win is the Chase or Paze surface, which keeps the commerce relationship with Chase.">
+        <svg viewBox="0 0 820 250" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+          <defs>
+            <marker id="arrowMuted" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#9a3b2e"></path>
+            </marker>
+            <marker id="arrowOk" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#2f6b46"></path>
+            </marker>
+            <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#1c4f8a"></path>
+            </marker>
+          </defs>
+          <!-- node 1: customer -->
+          <rect x="14" y="98" width="150" height="54" rx="9" fill="#e7eef6" stroke="#cfdcec"></rect>
+          <text x="89" y="120" text-anchor="middle" font-size="12.5" fill="#26211b">Chase customer</text>
+          <text x="89" y="138" text-anchor="middle" font-size="12.5" fill="#26211b">at checkout</text>
+          <!-- diamond: which button -->
+          <polygon points="270,125 320,90 370,125 320,160" fill="#fbf8f1" stroke="#1c4f8a" stroke-width="1.5"></polygon>
+          <text x="320" y="121" text-anchor="middle" font-size="12" fill="#26211b">Which</text>
+          <text x="320" y="137" text-anchor="middle" font-size="12" fill="#26211b">button?</text>
+          <!-- arrow customer -> diamond -->
+          <line x1="164" y1="125" x2="266" y2="125" stroke="#1c4f8a" stroke-width="1.6" marker-end="url(#arrowBlue)" aria-hidden="true"></line>
+          <!-- branch up: reflex -->
+          <line x1="358" y1="100" x2="486" y2="58" stroke="#9a3b2e" stroke-width="1.6" marker-end="url(#arrowMuted)" aria-hidden="true"></line>
+          <text x="392" y="68" font-size="10.5" fill="#9a3b2e">Reflex today</text>
+          <!-- branch down: would win (label sits on the connector, clear of the node) -->
+          <line x1="358" y1="150" x2="486" y2="192" stroke="#1c4f8a" stroke-width="1.6" marker-end="url(#arrowBlue)" aria-hidden="true"></line>
+          <text x="422" y="160" text-anchor="middle" font-size="10.5" fill="#1c4f8a">What I would win</text>
+          <!-- node: Apple Pay / PayPal -->
+          <rect x="490" y="33" width="150" height="50" rx="9" fill="#f3e3e0" stroke="#e0c2bc"></rect>
+          <text x="565" y="54" text-anchor="middle" font-size="12" fill="#26211b">Apple Pay</text>
+          <text x="565" y="70" text-anchor="middle" font-size="12" fill="#26211b">or PayPal</text>
+          <!-- node: Chase / Paze surface -->
+          <rect x="490" y="168" width="150" height="50" rx="9" fill="#e3efe8" stroke="#bfdcca"></rect>
+          <text x="565" y="189" text-anchor="middle" font-size="12" fill="#26211b">Chase or Paze</text>
+          <text x="565" y="205" text-anchor="middle" font-size="12" fill="#26211b">surface</text>
+          <!-- outcomes -->
+          <line x1="640" y1="58" x2="664" y2="58" stroke="#9a3b2e" stroke-width="1.6" marker-end="url(#arrowMuted)" aria-hidden="true"></line>
+          <text x="668" y="44" font-size="10.5" fill="#9a3b2e">Spend, interchange,</text>
+          <text x="668" y="58" font-size="10.5" fill="#9a3b2e">data go</text>
+          <text x="668" y="72" font-size="10.5" fill="#9a3b2e">elsewhere</text>
+          <line x1="640" y1="193" x2="664" y2="193" stroke="#2f6b46" stroke-width="1.6" marker-end="url(#arrowOk)" aria-hidden="true"></line>
+          <text x="668" y="186" font-size="10.5" fill="#2f6b46">Chase keeps the</text>
+          <text x="668" y="200" font-size="10.5" fill="#2f6b46">commerce relationship</text>
+        </svg>
+        <figcaption>Who owns the button decides who owns the relationship</figcaption>
+        <p class="scrollhint">Scroll to see more &rarr;</p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- JTBD -->
+  <section class="reveal" aria-labelledby="s-jtbd">
+    <div class="wrap">
+      <h2 class="kicker" id="s-jtbd">Who it is for</h2>
+      <p class="takeaway">Three different people decide whether a Chase payment experience wins. I would design for all three, not just the cardholder.</p>
+      <p class="body">Jobs-to-be-Done framing: a job is the progress a person is trying to make in a moment. People hire a payment method to make that progress and fire the old one when something does it better.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Persona</th><th>The job they hire a payment for</th><th>What "winning" looks like</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>The everyday cardholder</strong><br>(user)</td>
+              <td>"When I am at checkout, I want to pay in one tap without re-entering my card or worrying about fraud, so I can finish and move on."</td>
+              <td>They reach for the Chase or Paze button by reflex, not the device wallet.</td>
+            </tr>
+            <tr>
+              <td><strong>The merchant</strong><br>(acceptance side)</td>
+              <td>"When I build my checkout, I want a payment option that lifts approval rates and cuts fraud without a wallet fee, so I sell more and lose less."</td>
+              <td>Paze tokenization already shows roughly 3% authorization lift, 28% fraud reduction, and up to 10 bps interchange savings (<a class="src" href="https://www.spreedly.com/blog/examining-paze-digital-wallet" target="_blank" rel="noopener">Spreedly 2026</a>). I would make that the merchant pitch.</td>
+            </tr>
+            <tr>
+              <td><strong>The risk and controls gatekeeper</strong><br>(internal decision-maker)</td>
+              <td>"When a new payment product ships, I want it to clear Risk, Legal, and Compliance with traceable controls, so we launch without regulatory exposure."</td>
+              <td>The product spec is controls-ready, so sign-off is fast, not a fight.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body">The functional job is "pay quickly." The emotional job, and the one Chase can win on, is "pay safely, from a name I trust." That is the bank's structural advantage over a fintech, and it is the wedge I would build on.</p>
+    </div>
+  </section>
+
+  <!-- RICE -->
+  <section class="reveal" aria-labelledby="s-rice">
+    <div class="wrap">
+      <h2 class="kicker" id="s-rice">Why this problem: prioritization</h2>
+      <p class="takeaway">I would not chase every payment idea at once. I would fund the bets where Chase controls distribution first, then the credential bets that protect the future.</p>
+      <p class="body">RICE scores each bet on Reach (how many customers it touches), Impact (per-customer effect, on a fixed scale of 0.25 to 3), Confidence (50%, 80%, or 100%), and Effort (person-months), then ranks by (Reach times Impact times Confidence) divided by Effort. The numbers below are my judgment calls to show the reasoning, not Chase's internal data. I would re-score them against real analytics in week one.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Payments bet</th><th>Reach</th><th>Impact</th><th>Conf.</th><th>Effort</th><th>Score</th><th class="rank">Rank</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Chase-owned quick checkout</strong> to close the commerce-capture gap</td><td>High (75M users)</td><td>3</td><td>80%</td><td>High</td><td>Highest</td><td class="rank"><span class="pill">1</span></td></tr>
+            <tr><td><strong>Drive Paze habit</strong> where Chase controls the surface</td><td>High (165M cards)</td><td>2</td><td>80%</td><td>Medium</td><td>High</td><td class="rank"><span class="pill">2</span></td></tr>
+            <tr><td><strong>Agentic-commerce credential readiness</strong></td><td>Medium (growing)</td><td>3</td><td>50%</td><td>High</td><td>Medium</td><td class="rank"><span class="pill">3</span></td></tr>
+            <tr><td><strong>Fraud and controls at the point of payment</strong> as a product</td><td>High (all txns)</td><td>2</td><td>100%</td><td>Medium</td><td>Med-high</td><td class="rank"><span class="pill spine">spine</span></td></tr>
+            <tr><td><strong>Pay Over Time / BNPL surfacing</strong> at checkout</td><td>Medium (6M)</td><td>1</td><td>80%</td><td>Low</td><td>Medium</td><td class="rank"><span class="pill">4</span></td></tr>
+            <tr><td><strong>Real-time consumer money movement</strong> experience</td><td>Medium</td><td>1</td><td>50%</td><td>High</td><td>Lower</td><td class="rank"><span class="pill">5</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Why this ranking</h3>
+      <ul class="clean">
+        <li><strong>Bet 1 ranks first</strong> because Chase controls its own digital surface, so distribution is not a fight. Closing even part of the 5.2% to 10% gap on $450 billion is the single largest prize, and the JD is written for exactly this 0-to-1 surface.</li>
+        <li><strong>Bet 2 ranks second</strong> because the rails and 165 million cards already exist. The work is habit, not infrastructure, which is cheaper than a ground-up build.</li>
+        <li><strong>Fraud and controls is treated as a spine, not a feature.</strong> It does not compete on RICE. Everything else depends on it clearing Risk and Compliance, so it stays in scope regardless of score.</li>
+        <li><strong>Agentic readiness ranks high on impact but low on confidence</strong>, because Marianne Lake has said publicly she does not expect consumer agentic commerce to take off soon (<a class="src" href="https://www.jpmorgan.com/insights/payments/trends-innovation/five-payment-trends-in-2026" target="_blank" rel="noopener">Banking Dive 2026</a>). I would fund it as a small readiness bet, not a big build, so Chase stays in the credential layer without overspending on a market that is not here yet.</li>
+      </ul>
+
+      <figure class="diagram" role="img" aria-label="Impact versus effort quadrant chart. The vertical axis is impact, low at the bottom to high at the top. The horizontal axis is effort, low on the left to high on the right. The four corners are: top left quick wins, top right big bets, bottom left deprioritize, bottom right money pits. Quick checkout sits top right as a high impact, high effort big bet. Agentic readiness sits top right as a high impact, high effort big bet. Paze habit sits in the upper middle. Fraud at the point of payment sits in the middle. Pay Over Time surfacing sits lower middle left. Real-time money movement sits bottom right, a money pit with low impact and high effort.">
+        <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+          <!-- plot area -->
+          <rect x="70" y="30" width="480" height="340" fill="#fbf8f1" stroke="#ddd2bf"></rect>
+          <!-- quadrant fills -->
+          <rect x="70" y="30" width="240" height="170" fill="#e3efe8" opacity="0.5"></rect>
+          <rect x="310" y="30" width="240" height="170" fill="#e7eef6" opacity="0.6"></rect>
+          <rect x="70" y="200" width="240" height="170" fill="#f1ece1" opacity="0.6"></rect>
+          <rect x="310" y="200" width="240" height="170" fill="#f3e3e0" opacity="0.45"></rect>
+          <!-- mid lines -->
+          <line x1="310" y1="30" x2="310" y2="370" stroke="#ddd2bf" stroke-dasharray="4 4"></line>
+          <line x1="70" y1="200" x2="550" y2="200" stroke="#ddd2bf" stroke-dasharray="4 4"></line>
+          <!-- corner labels -->
+          <text x="80" y="50" font-size="12" font-weight="600" fill="#2f6b46">Quick wins</text>
+          <text x="540" y="50" text-anchor="end" font-size="12" font-weight="600" fill="#1c4f8a">Big bets</text>
+          <text x="80" y="362" font-size="12" font-weight="600" fill="#8a7f70">Deprioritize</text>
+          <text x="540" y="362" text-anchor="end" font-size="12" font-weight="600" fill="#9a3b2e">Money pits</text>
+          <!-- axis labels -->
+          <text x="310" y="402" text-anchor="middle" font-size="11.5" fill="#4a423a">Effort: low to high</text>
+          <text x="44" y="200" text-anchor="middle" font-size="11.5" fill="#4a423a" transform="rotate(-90 44 200)">Impact: low to high</text>
+          <!-- axis arrows -->
+          <line x1="70" y1="382" x2="550" y2="382" stroke="#8a7f70" stroke-width="1" marker-end="url(#axArrow)" aria-hidden="true"></line>
+          <line x1="58" y1="370" x2="58" y2="30" stroke="#8a7f70" stroke-width="1" marker-end="url(#axArrow)" aria-hidden="true"></line>
+          <defs>
+            <marker id="axArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#8a7f70"></path>
+            </marker>
+          </defs>
+          <!-- plotted numbered dots. x: 70 + effort*480 ; y: 370 - impact*340 -->
+          <!-- 1 Quick checkout [0.75,0.92] -->
+          <circle cx="430" cy="57" r="13" fill="#1c4f8a"></circle>
+          <text x="430" y="61.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">1</text>
+          <!-- 2 Paze habit [0.5,0.7] -->
+          <circle cx="310" cy="132" r="13" fill="#1c4f8a"></circle>
+          <text x="310" y="136.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">2</text>
+          <!-- 3 Agentic readiness [0.8,0.78] -->
+          <circle cx="454" cy="105" r="13" fill="#1c4f8a"></circle>
+          <text x="454" y="109.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">3</text>
+          <!-- S Fraud at point of payment [0.45,0.6] -->
+          <circle cx="286" cy="166" r="13" fill="#9a6b1f"></circle>
+          <text x="286" y="170.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">S</text>
+          <!-- 4 Pay Over Time surfacing [0.25,0.45] -->
+          <circle cx="190" cy="217" r="13" fill="#1c4f8a"></circle>
+          <text x="190" y="221.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">4</text>
+          <!-- 5 Real-time money movement [0.8,0.35] -->
+          <circle cx="454" cy="251" r="13" fill="#1c4f8a"></circle>
+          <text x="454" y="255.5" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">5</text>
+        </svg>
+        <figcaption>Numbered dots map to the bets below</figcaption>
+        <p class="scrollhint">Scroll to see more &rarr;</p>
+        <ul class="legend">
+          <li><span class="num">1</span><span><b>Quick checkout</b> to close the capture gap</span></li>
+          <li><span class="num">2</span><span><b>Paze habit</b> where Chase controls the surface</span></li>
+          <li><span class="num">3</span><span><b>Agentic credential readiness</b>, scoped small</span></li>
+          <li><span class="num spine">S</span><span><b>Fraud and controls</b> at the point of payment (the spine)</span></li>
+          <li><span class="num">4</span><span><b>Pay Over Time</b> surfacing at checkout</span></li>
+          <li><span class="num">5</span><span><b>Real-time money movement</b> experience</span></li>
+        </ul>
+      </figure>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="reveal" aria-labelledby="s-approach">
+    <div class="wrap">
+      <h2 class="kicker" id="s-approach">Approach</h2>
+      <p class="takeaway">Win an owned surface first, prove the habit, then extend the credential outward. Decide between directions with evidence, not opinion.</p>
+      <p class="body">I would explore three directions and sequence them deliberately:</p>
+      <ul class="clean">
+        <li><strong>Owned-surface checkout first.</strong> Build the quick-checkout habit where Chase controls distribution, inside the Chase app and Chase-issued card experiences. This is the lowest-distribution-risk way to test whether a bank-branded surface can earn reflexive use.</li>
+        <li><strong>Extend to Paze surfacing.</strong> Use what I learn about habit on the owned surface to drive Paze where Chase controls the prompt, then push outward to third-party checkouts. The same trust story, a wider footprint.</li>
+        <li><strong>Agentic credential readiness, scoped small.</strong> Make the Chase credential agent-ready so that when consumer agentic commerce arrives, Chase is in the credential layer, not bypassed by network tokens.</li>
+      </ul>
+      <p class="body">How I would decide between them: I would treat each as a bet with a kill criterion. If the owned-surface checkout does not lift repeat usage in a contained test, I would not pour effort into Paze surfacing on the same assumption. Habit-formation evidence on the smallest surface decides whether the bigger bets are funded.</p>
+    </div>
+  </section>
+
+  <!-- MVP -->
+  <section class="reveal" aria-labelledby="s-mvp">
+    <div class="wrap">
+      <h2 class="kicker" id="s-mvp">What I would ship first</h2>
+      <p class="takeaway">The smallest test of the biggest assumption is whether a Chase-branded button earns reflexive reuse on a surface Chase already controls.</p>
+      <p class="body">The riskiest assumption is not "can we build it." Paze proves Chase can build payment rails. The riskiest assumption is <strong>"will customers form the habit of reaching for a bank payment button when Apple Pay and PayPal are right there."</strong></p>
+      <p class="body">So I would ship a <strong>Chase quick-checkout experience to a contained cohort of Chase digital users</strong>, on a surface Chase controls end to end, with one-tap pay using already-tokenized cards.</p>
+      <ul class="clean">
+        <li><strong>What it tests:</strong> repeat usage rate, not just first use. First use is curiosity. Reuse is habit.</li>
+        <li><strong>What it deliberately leaves out:</strong> broad third-party merchant rollout, agentic credential support, and net-new money-movement rails. Those wait until the habit signal is real.</li>
+        <li><strong>Why this first (RICE logic):</strong> highest reach on a surface with the lowest distribution risk, and it produces the one piece of evidence every later bet depends on. It is the cheapest way to learn the most.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="reveal" aria-labelledby="s-metrics">
+    <div class="wrap">
+      <h2 class="kicker" id="s-metrics">How I would measure success</h2>
+      <p class="takeaway">One North Star tied to Chase's stated business goal, with fraud and controls as guardrails that can stop a launch, not just metrics to admire.</p>
+      <p class="body"><strong>North Star: commerce spend capture rate</strong> on Chase cards, the move from 5.2% toward the 10% target (<a class="src" href="https://www.jpmorganchase.com/ir/annual-report/2025/ar-ceo-letter-marianne-lake" target="_blank" rel="noopener">Lake 2025 letter</a>). It passes the three tests: if it rises the customer genuinely chose Chase at checkout, it moves before revenue, and the team can influence it.</p>
+
+      <figure class="diagram" role="img" aria-label="North Star metrics tree. The North Star is commerce capture rate, moving from 5.2 percent to 10 percent. It breaks into two drivers: adoption, meaning enrolled and active checkout users; and total payment volume through the surface. Adoption breaks into repeat usage rate, the habit signal, and checkout button click-through. Total payment volume breaks into authorization or approval rate and checkout abandonment reduction. Four guardrails gate the North Star and can stop a launch: fraud rate below 15 basis points on card-not-present, chargeback rate below 0.5 percent, controls sign-off on time, and 99.99 percent uptime.">
+        <svg viewBox="0 0 772 470" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace">
+          <defs>
+            <marker id="treeArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#1c4f8a"></path>
+            </marker>
+            <marker id="gateArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#9a3b2e"></path>
+            </marker>
+          </defs>
+          <!-- North star -->
+          <rect x="250" y="18" width="260" height="56" rx="10" fill="#1c4f8a"></rect>
+          <text x="380" y="41" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">North Star: commerce capture rate</text>
+          <text x="380" y="59" text-anchor="middle" font-size="12" fill="#cfe0f3">5.2% to 10%</text>
+          <!-- level 2 -->
+          <rect x="120" y="138" width="220" height="50" rx="9" fill="#e7eef6" stroke="#cfdcec"></rect>
+          <text x="230" y="159" text-anchor="middle" font-size="11.5" fill="#26211b">Adoption: enrolled and</text>
+          <text x="230" y="175" text-anchor="middle" font-size="11.5" fill="#26211b">active checkout users</text>
+          <rect x="420" y="138" width="220" height="50" rx="9" fill="#e7eef6" stroke="#cfdcec"></rect>
+          <text x="530" y="159" text-anchor="middle" font-size="11.5" fill="#26211b">Total payment volume</text>
+          <text x="530" y="175" text-anchor="middle" font-size="11.5" fill="#26211b">through the surface</text>
+          <!-- links NS -> level2 -->
+          <path d="M340,74 C300,100 240,110 230,136" fill="none" stroke="#1c4f8a" stroke-width="1.4" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <path d="M420,74 C460,100 520,110 530,136" fill="none" stroke="#1c4f8a" stroke-width="1.4" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <!-- level 3 leaves -->
+          <rect x="20" y="248" width="200" height="48" rx="8" fill="#fbf8f1" stroke="#ddd2bf"></rect>
+          <text x="120" y="268" text-anchor="middle" font-size="11" fill="#26211b">Repeat usage rate</text>
+          <text x="120" y="283" text-anchor="middle" font-size="11" fill="#9a6b1f">(the habit signal)</text>
+          <rect x="240" y="248" width="200" height="48" rx="8" fill="#fbf8f1" stroke="#ddd2bf"></rect>
+          <text x="340" y="268" text-anchor="middle" font-size="11" fill="#26211b">Checkout button</text>
+          <text x="340" y="283" text-anchor="middle" font-size="11" fill="#26211b">click-through</text>
+          <rect x="320" y="316" width="200" height="48" rx="8" fill="#fbf8f1" stroke="#ddd2bf"></rect>
+          <text x="420" y="336" text-anchor="middle" font-size="11" fill="#26211b">Authorization /</text>
+          <text x="420" y="351" text-anchor="middle" font-size="11" fill="#26211b">approval rate</text>
+          <rect x="540" y="316" width="200" height="48" rx="8" fill="#fbf8f1" stroke="#ddd2bf"></rect>
+          <text x="640" y="336" text-anchor="middle" font-size="11" fill="#26211b">Checkout abandonment</text>
+          <text x="640" y="351" text-anchor="middle" font-size="11" fill="#26211b">reduction</text>
+          <!-- links adoption -> leaves -->
+          <path d="M200,188 C160,210 130,224 120,246" fill="none" stroke="#1c4f8a" stroke-width="1.3" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <path d="M260,188 C300,210 330,224 340,246" fill="none" stroke="#1c4f8a" stroke-width="1.3" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <!-- links volume -> leaves -->
+          <path d="M500,188 C460,250 440,280 420,314" fill="none" stroke="#1c4f8a" stroke-width="1.3" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <path d="M560,188 C600,250 620,280 640,314" fill="none" stroke="#1c4f8a" stroke-width="1.3" marker-end="url(#treeArrow)" aria-hidden="true"></path>
+          <!-- guardrails band -->
+          <rect x="20" y="398" width="720" height="56" rx="9" fill="#f3e3e0" stroke="#e0c2bc"></rect>
+          <text x="32" y="392" font-size="10.5" font-weight="600" fill="#9a3b2e" letter-spacing="0.08em">GUARDRAILS THAT STOP OR GATE LAUNCH</text>
+          <text x="36" y="422" font-size="10.5" fill="#26211b">Fraud below 15 bps CNP</text>
+          <text x="206" y="422" font-size="10.5" fill="#26211b">Chargebacks below 0.5%</text>
+          <text x="386" y="422" font-size="10.5" fill="#26211b">Controls sign-off on time</text>
+          <text x="566" y="422" font-size="10.5" fill="#26211b">99.99% uptime</text>
+          <text x="36" y="440" font-size="9.5" fill="#9a3b2e">stops launch</text>
+          <text x="206" y="440" font-size="9.5" fill="#9a3b2e">stops launch</text>
+          <text x="386" y="440" font-size="9.5" fill="#9a3b2e">gates launch</text>
+          <text x="566" y="440" font-size="9.5" fill="#9a3b2e">stops launch</text>
+          <!-- gate arrow from guardrail band up to north star (kept inside the viewBox) -->
+          <line x1="724" y1="398" x2="724" y2="50" stroke="#9a3b2e" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#gateArrow)" aria-hidden="true"></line>
+          <text x="702" y="240" font-size="9.5" fill="#9a3b2e" transform="rotate(-90 702 240)">guardrails veto the North Star</text>
+        </svg>
+        <figcaption>The North Star, its drivers, and the guardrails that can halt a launch</figcaption>
+        <p class="scrollhint">Scroll to see more &rarr;</p>
+      </figure>
+
+      <ul class="clean">
+        <li><strong>Leading indicators (move first):</strong> repeat usage rate, checkout click-through, authorization rate. Target authorization above 85%, since each point is revenue-accretive at Chase scale (<a class="src" href="https://www.primer.io/blog/payment-metrics-and-kpis" target="_blank" rel="noopener">Primer 2026</a>).</li>
+        <li><strong>Guardrails (treated as veto, not vanity):</strong> fraud rate below 15 bps on card-not-present, chargeback rate below 0.5%, 99.99% uptime, and controls sign-off on time. A win on adoption that breaks a guardrail is not a win. Fraud and controls can halt a launch.</li>
+        <li><strong>Anti-metric I would not chase:</strong> raw transaction count or first-time enrollments alone. A spike in one-time use with no reuse is a marketing result, not a habit. Repeat usage is the number that matters.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BUSINESS IMPACT -->
+  <section class="reveal" aria-labelledby="s-impact">
+    <div class="wrap">
+      <h2 class="kicker" id="s-impact">Business impact</h2>
+      <p class="takeaway">Closing the commerce-capture gap is the largest revenue lever this role touches, and it also reduces a real single-point dependency.</p>
+      <p class="body">Three places this work moves the numbers:</p>
+      <ul class="clean">
+        <li><strong>The capture gap is the prize.</strong> Moving from 5.2% to 10% of $450 billion in addressable commerce spend is roughly $22 billion in annual spend Chase would own at checkout instead of ceding to Apple Pay or PayPal (<a class="src" href="https://www.jpmorganchase.com/ir/annual-report/2025/ar-ceo-letter-marianne-lake" target="_blank" rel="noopener">Lake 2025 letter</a>). Even a fraction of that gap is material at Chase's $7 trillion volume base.</li>
+        <li><strong>Authorization lift compounds.</strong> Paze tokenization shows roughly 3% authorization lift; at Chase scale each point of approval rate is directly revenue-accretive (<a class="src" href="https://www.spreedly.com/blog/examining-paze-digital-wallet" target="_blank" rel="noopener">Spreedly 2026</a>).</li>
+        <li><strong>It reduces interchange concentration risk.</strong> The Credit Card Competition Act is alive in 2026 with executive backing and would force routing competition on issuers with over $100 billion in assets, putting interchange and rewards economics in play (<a class="src" href="https://ktslaw.com/en/Blog/Consumer-Financial-Services/2026/1/Credit-Card-Competition-Act-of-2026" target="_blank" rel="noopener">KTS Law 2026</a>). Building commerce-capture and embedded-lending revenue surfaces reduces Chase's reliance on a single interchange-driven engine.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 30/60/90 -->
+  <section class="reveal" aria-labelledby="s-plan">
+    <div class="wrap">
+      <h2 class="kicker" id="s-plan">30 / 60 / 90 day plan</h2>
+      <p class="takeaway">Listen and find the real constraints, then sharpen the problem with evidence, then ship the first contained test inside controls.</p>
+
+      <h3>Days 0 to 30: listen and map the constraints</h3>
+      <ul class="clean">
+        <li>Meet Product, Technology, Design, and Analytics partners, and sit down early with Risk, Controls, Legal, and Compliance to learn the controls path before I design anything.</li>
+        <li>Confirm exact team scope: which products Wallets &amp; Lending Innovations owns (Paze surfacing, Chase quick checkout, Pay Over Time, Pay in 4), since the JD is written broadly.</li>
+        <li>Pull the real funnel data: where Chase customers drop at checkout, what the current capture rate and authorization rates are, and where Paze sits today.</li>
+        <li>Meet the junior PMs I would mentor and learn what they own.</li>
+      </ul>
+
+      <h3>Days 30 to 60: a quick win and a sharpened problem</h3>
+      <ul class="clean">
+        <li>Ship one quick win that is cheap and controls-friendly, likely Pay Over Time or Paze surfacing on a Chase-controlled prompt, to build delivery trust and learn the sign-off rhythm.</li>
+        <li>Replace my RICE judgment calls with real numbers and re-rank the bets with Analytics.</li>
+        <li>Align stakeholders on the North Star (commerce capture rate) and the guardrails, and get Risk and Compliance to agree the controls criteria up front, not at the gate.</li>
+      </ul>
+
+      <h3>Days 60 to 90: ship and validate the first bet</h3>
+      <ul class="clean">
+        <li>Ship the contained quick-checkout MVP to a defined cohort with controls sign-off, a baseline measured, and clear success and kill criteria.</li>
+        <li>Set the repeat-usage baseline and read the habit signal.</li>
+        <li>Bring a sequenced roadmap to Sunil and Josh: what the habit evidence says about funding Paze surfacing and the agentic readiness bet next.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RISKS -->
+  <section class="reveal" aria-labelledby="s-risks">
+    <div class="wrap">
+      <h2 class="kicker" id="s-risks">Risks and what I would validate first</h2>
+      <p class="takeaway">The real risks are in the work, not the build. I would test the habit assumption first, because every later bet rests on it.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Risk in the proposed work</th><th>What I would validate first</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Habit-formation risk.</strong> A bank wallet can have full distribution and still not earn reflexive use, exactly Paze's situation today.</td><td>The contained checkout MVP, read on repeat usage, not first use. This is the first thing I would test.</td></tr>
+            <tr><td><strong>Controls and regulatory timeline risk.</strong> Sign-off from Risk, Legal, and Compliance can stretch a 0-to-1 launch, under live scrutiny like the NY AG action against EWS.</td><td>Agree controls criteria with Risk and Compliance at design time, in days 0 to 30, so sign-off is a checklist, not a negotiation.</td></tr>
+            <tr><td><strong>Agentic timing risk.</strong> Consumer agentic commerce may be a 2027+ story for Chase per Marianne Lake, so over-investing early wastes effort.</td><td>Keep agentic a small readiness bet, scoped to keep the credential agent-ready, and gate further spend on market signal.</td></tr>
+            <tr><td><strong>Interchange dependency.</strong> The CCCA could reshape interchange and rewards economics that the card moat depends on.</td><td>Build capture and embedded-lending revenue surfaces that do not depend solely on interchange.</td></tr>
+            <tr><td><strong>Scope ambiguity.</strong> It is not public exactly which products this team owns.</td><td>Confirm team scope and product boundaries in week one with the hiring managers.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="reveal" aria-labelledby="s-questions">
+    <div class="wrap">
+      <h2 class="kicker" id="s-questions">Questions I would ask the team</h2>
+      <ul class="clean">
+        <li>Which products does Wallets &amp; Lending Innovations own end to end today, and where does the boundary sit with Connected Commerce and the Paze owner-bank organization?</li>
+        <li>What is Chase's current authorization rate and checkout abandonment rate on its owned surfaces, and what does Analytics see as the biggest leak in the capture funnel?</li>
+        <li>How does Chase want to surface Paze: inside its own properties, in third-party checkouts via Chase-issued cards, or both, and who owns that prompt?</li>
+        <li>What is the controls sign-off path for a new consumer payment product, and what is the typical timeline from spec to launch?</li>
+        <li>How aggressive does leadership want to be on agentic credential readiness, given Marianne Lake's public view that consumer agentic commerce is not imminent?</li>
+        <li>What does success look like to Sunil and Josh in the first year for this role: capture rate, a shipped surface, or controls-clean delivery velocity?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHY ME -->
+  <section class="reveal" aria-labelledby="s-fit">
+    <div class="wrap">
+      <h2 class="kicker" id="s-fit">Why me</h2>
+      <p class="fit-intro">I am a product manager with 6+ years building and scaling products across technology, finance, and AI, with a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering. I have spent most of that time doing 0-to-1 product work inside banks: building a lending platform from MVP to scale, integrating financial APIs, and shipping inside risk and controls environments. That is the substance of this role, and it is the work I would bring to Chase's consumer payments surface.</p>
+      <div class="table-scroll" style="margin-top:18px">
+        <table>
+          <thead>
+            <tr><th>What the role needs</th><th>What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>0-to-1 platform build and scale to many users</strong></td><td>I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td></tr>
+            <tr><td><strong>API and engineering fluency</strong></td><td>I delivered API integrations with credit bureaus (CIBIL, Equifax, Experian) and partners, improving loan decision accuracy by 10% and cutting manual review by 35%, automating credit decisioning and KYC.</td></tr>
+            <tr><td><strong>Financial services and a strong risk and controls environment</strong></td><td>I led operational risk transformation for Global Markets at Nomura, reducing events by 20% and losses by 15%, owning remediation strategy and preventive controls across tech, audit, and risk; and I shipped an internal AI assistant to 15,000+ users with compliance and governance built in.</td></tr>
+            <tr><td><strong>KPIs, experimentation, user stories</strong></td><td>I translated customer interviews and usability tests into 25+ product flows and specs across web and Android, running A/B tests that improved the loan approval flow and reduced drop-off.</td></tr>
+            <tr><td><strong>Discovery to launch ownership</strong></td><td>I owned discovery-to-launch of a finance budgeting application at Nomura, defining MVP scope with 15+ stakeholders and driving a 30% reduction in spend.</td></tr>
+            <tr><td><strong>Stakeholder leadership across functions</strong></td><td>I drove a firm-wide market data sourcing program connecting directly to Tradeweb, delivering $700K in annual savings across multiple Fixed Income applications, working across FI/FX, tech, audit, and risk.</td></tr>
+            <tr><td><strong>Mentoring and cross-functional delivery</strong></td><td>I led cross-functional teams from requirements through production at Nomura, Lentra, and BNY Mellon, partnering with engineering, QA, and business analysts end to end.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-sub">VP Product Manager, Payments Platform &middot; JPMorgan Chase pitch</p>
+    <nav class="contacts" aria-label="Contact links">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
