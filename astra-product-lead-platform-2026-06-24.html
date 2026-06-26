@@ -9,38 +9,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f7f5f0;
-    --panel: #fffdf9;
-    --panel-2: #f1efe8;
-    --ink: #1b2330;
-    --ink-soft: #3c4658;
-    --ink-faint: #8a8f9c;
-    --line: #e2ddd2;
-    --line-soft: #ece8de;
-    --accent: #2f54eb;
-    --accent-deep: #1d3bb0;
-    --accent-wash: #e8edff;
-    --signal: #b4530a;
-    --signal-wash: #fbeede;
-    --good: #1f7a4d;
-    --good-wash: #e3f3ea;
-    --warn: #b22e2e;
-    --warn-wash: #fbe7e7;
-    --star: #9a6a06;
-    --star-wash: #fbf2cf;
+    --bg: #f6f4ee;
+    --panel: #fffdf8;
+    --panel-2: #efece3;
+    --ink: #1a2230;
+    --ink-soft: #3a4456;
+    --ink-faint: #6c7589;
+    --rule: #ddd8cc;
+    --rule-soft: #e7e2d6;
+    --accent: #0b6a64;
+    --accent-deep: #084e49;
+    --accent-wash: #e2efed;
+    --amber: #b3791b;
+    --amber-wash: #f6edd9;
+    --blue: #2b5f9e;
+    --blue-wash: #e2eaf3;
+    --green: #2f7d4f;
+    --green-wash: #dcefe2;
 
-    --font-head: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
     --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-    --maxw: 920px;
-    --radius: 14px;
-    --radius-sm: 9px;
+    --wrap: 1080px;
+    --content-max: 720px;
+    --rail-w: 200px;
+    --rail-gap: 56px;
+    --pad: 28px;
   }
 
   * { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
 
   body {
     margin: 0;
@@ -52,1062 +56,969 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background-image:
-      radial-gradient(circle at 12% -5%, rgba(47,84,235,0.05), transparent 42%),
-      radial-gradient(circle at 92% 4%, rgba(180,83,10,0.045), transparent 40%);
+      radial-gradient(circle at 18% -8%, rgba(11,106,100,0.05), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(179,121,27,0.045), transparent 38%);
     background-attachment: fixed;
   }
 
-  .skip-link { position:absolute; left:-9999px; top:auto; }
-  .skip-link:focus { left:1rem; top:1rem; z-index:1000; background:#fff; padding:.5rem .75rem; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,.15); }
-
-  .wrap {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ---------- Masthead ---------- */
-  header.masthead {
-    padding: 64px 0 40px;
-    border-bottom: 1px solid var(--line);
-  }
-  .name {
+  /* skip link */
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 0 0 8px 0;
+    z-index: 1000;
     font-family: var(--font-mono);
     font-size: 13px;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  a { color: var(--accent); }
+
+  :focus-visible {
+    outline: 2.5px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ---------- layout wraps ---------- */
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* masthead + footer align to the content column (indented past the rail) on desktop */
+  .band-inner {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead {
+    padding-top: 58px;
+    padding-bottom: 26px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--accent);
+    margin: 0 0 14px;
     font-weight: 600;
-    margin: 0 0 18px;
   }
-  h1.frame {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: clamp(1.55rem, 4.2vw, 2.55rem);
-    line-height: 1.16;
-    letter-spacing: -0.01em;
-    margin: 0 0 16px;
+  h1.name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5.2vw, 2.85rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 14px;
     color: var(--ink);
-    max-width: 21ch;
+  }
+  .role-line {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 40ch;
+    margin: 0 0 16px;
+    font-weight: 500;
   }
   .prepared {
     font-family: var(--font-mono);
-    font-size: 12.5px;
-    letter-spacing: 0.05em;
+    font-size: 12px;
+    letter-spacing: 0.06em;
     color: var(--ink-faint);
     margin: 0;
   }
 
-  /* ---------- Sections ---------- */
-  main { padding: 8px 0 0; }
-  section {
-    padding: 46px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  section:last-of-type { border-bottom: none; }
-
-  .kicker {
-    font-family: var(--font-mono);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 18px;
-  }
-  h2.lede {
-    font-family: var(--font-head);
-    font-weight: 500;
-    font-size: clamp(1.3rem, 3vw, 1.85rem);
-    line-height: 1.28;
-    letter-spacing: -0.01em;
-    margin: 0 0 18px;
-    color: var(--ink);
-  }
-  .takeaway {
-    font-size: 1.06rem;
-    color: var(--ink-soft);
-    margin: 0 0 22px;
-    max-width: 70ch;
-  }
-  .takeaway strong { color: var(--ink); font-weight: 600; }
-
-  p { margin: 0 0 18px; max-width: 72ch; }
-  p:last-child { margin-bottom: 0; }
-  .lead-in { color: var(--ink-soft); }
-
-  h3 {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 1.06rem;
-    letter-spacing: 0.01em;
-    color: var(--ink);
-    margin: 30px 0 12px;
-  }
-
-  strong { font-weight: 600; }
-  em { font-style: italic; }
-
-  /* citation link */
-  a.src {
-    color: var(--ink-faint);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    text-decoration-color: var(--line);
-    transition: color .18s ease, text-decoration-color .18s ease;
-  }
-  a.src:hover, a.src:focus-visible { color: var(--accent); text-decoration-color: var(--accent); }
-
-  a { color: var(--accent); }
-  :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
-
-  /* lists */
-  ul.clean { list-style: none; padding: 0; margin: 0 0 6px; }
-  ul.clean > li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 14px;
-    max-width: 72ch;
-  }
-  ul.clean > li::before {
-    content: "";
-    position: absolute;
-    left: 4px; top: 0.62em;
-    width: 7px; height: 7px;
-    background: var(--accent);
-    border-radius: 2px;
-    transform: rotate(45deg);
-  }
-  ul.clean > li strong { color: var(--ink); }
-
-  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
-  ol.steps > li {
-    position: relative;
-    padding-left: 52px;
-    margin-bottom: 18px;
-    max-width: 72ch;
-  }
-  ol.steps > li::before {
-    counter-increment: s;
-    content: counter(s);
-    position: absolute; left: 0; top: -2px;
-    width: 34px; height: 34px;
-    display: grid; place-items: center;
-    font-family: var(--font-mono);
-    font-weight: 600; font-size: 14px;
-    color: var(--accent-deep);
-    background: var(--accent-wash);
-    border: 1px solid #cfd9ff;
-    border-radius: 9px;
-  }
-
-  /* ---------- Tables ---------- */
-  .table-scroll { overflow-x: auto; margin: 6px 0 4px; -webkit-overflow-scrolling: touch; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.93rem;
-    line-height: 1.5;
-    min-width: 540px;
-  }
-  table.fit, table.jtbd { min-width: 580px; }
-  thead th {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    text-align: left;
-    padding: 11px 14px;
-    border-bottom: 2px solid var(--line);
-    background: var(--panel-2);
-    vertical-align: bottom;
-  }
-  tbody td {
-    padding: 13px 14px;
-    border-bottom: 1px solid var(--line-soft);
-    vertical-align: top;
-    color: var(--ink-soft);
-  }
-  tbody td strong { color: var(--ink); }
-  tbody tr:last-child td { border-bottom: none; }
-  tbody tr:nth-child(even) { background: rgba(241,239,232,0.45); }
-  td.num { font-family: var(--font-mono); text-align: center; font-size: 0.86rem; color: var(--ink); white-space: nowrap; }
-  th.num { text-align: center; }
-  .rank-badge {
-    display: inline-grid; place-items: center;
-    width: 26px; height: 26px;
-    font-family: var(--font-mono); font-weight: 600; font-size: 13px;
-    color: #fff; background: var(--accent); border-radius: 7px;
-  }
-  .rank-badge.low { background: var(--ink-faint); }
-
-  /* ---------- Callout panel ---------- */
-  .panel {
+  /* ---------- mobile contents disclosure ---------- */
+  .toc-mobile {
+    margin: 22px 0 8px;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
     background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    margin: 22px 0;
-    box-shadow: 0 1px 0 rgba(27,35,48,0.02);
-  }
-  .panel.accent { border-left: 3px solid var(--accent); }
-
-  /* ---------- Diagram cards ---------- */
-  figure.diagram {
-    margin: 24px 0 8px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 20px 16px;
     overflow: hidden;
   }
-  figure.diagram svg { display: block; width: 100%; height: auto; }
-  figcaption {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    letter-spacing: 0.04em;
-    color: var(--ink-faint);
-    text-transform: uppercase;
-    margin-top: 14px;
-    text-align: center;
-  }
-
-  /* diagram node text */
-  .d-title { font-family: var(--font-head); font-weight: 600; }
-  .d-sub { font-family: var(--font-mono); }
-
-  /* legend chips */
-  .legend { display: flex; flex-wrap: wrap; gap: 14px 22px; margin: 4px 0 18px; font-size: 0.84rem; color: var(--ink-soft); }
-  .legend span { display: inline-flex; align-items: center; gap: 8px; }
-  .legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; border: 1.5px solid; }
-  .lg-ctrl { background: var(--accent-wash); border-color: var(--accent); }
-  .lg-data { background: var(--good-wash); border-color: var(--good); }
-  .lg-lead { background: var(--accent-wash); border-color: var(--accent); }
-  .lg-star { background: var(--star-wash); border-color: var(--star); }
-  .lg-guard { background: var(--warn-wash); border-color: var(--warn); }
-
-  /* ---------- Footer ---------- */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 40px 0 64px;
-    margin-top: 8px;
-  }
-  .footer-name {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin: 0 0 14px;
-    color: var(--ink);
-  }
-  .contacts {
-    display: flex; flex-wrap: wrap; gap: 10px 22px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.02em;
-  }
-  .contacts a {
-    color: var(--ink-faint);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 1px;
-    transition: color .18s ease, border-color .18s ease;
-  }
-  .contacts a:hover, .contacts a:focus-visible { color: var(--accent); border-color: var(--accent); }
-
-  /* ---------- Interactive: RICE sort toggle ---------- */
-  .ctrl-row {
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    margin: 0 0 16px;
-  }
-  .ctrl-row .ctrl-label {
-    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--ink-faint);
-  }
-  .seg {
-    display: inline-flex; border: 1px solid var(--line); border-radius: 9px;
-    overflow: hidden; background: var(--panel);
-  }
-  .seg button {
-    font-family: var(--font-mono); font-size: 12px; font-weight: 500;
-    letter-spacing: 0.03em;
-    border: none; background: transparent; color: var(--ink-soft);
-    padding: 7px 14px; cursor: pointer;
-    transition: background .15s ease, color .15s ease;
-  }
-  .seg button + button { border-left: 1px solid var(--line); }
-  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
-
-  /* number flow line in business impact */
-  .stat-row {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 14px; margin: 4px 0 22px;
-  }
-  .stat {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: var(--radius-sm); padding: 16px 18px;
-  }
-  .stat .v {
-    font-family: var(--font-head); font-weight: 700;
-    font-size: 1.5rem; color: var(--accent-deep); line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-  .stat .k { font-size: 0.86rem; color: var(--ink-soft); margin-top: 6px; }
-
-  /* MVP in/out */
-  .inout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 4px; }
-  .inout .col { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 18px 18px 8px; background: var(--panel); }
-  .inout .col h4 {
-    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.07em;
-    text-transform: uppercase; margin: 0 0 12px; font-weight: 600;
-  }
-  .inout .ship h4 { color: var(--good); }
-  .inout .later h4 { color: var(--ink-faint); }
-
-  /* ---------- On this page: table of contents ---------- */
-  /* Default (narrow / mobile): only the disclosure shows; desktop rail hidden */
-  .layout { display: block; }
-  .toc-rail { display: none; }
-  .toc-head {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 0 0 14px;
-  }
-  .toc-list { list-style: none; margin: 0; padding: 0; }
-  .toc-list li { margin: 0; }
-  .toc-list a {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 12.5px;
-    line-height: 1.35;
-    letter-spacing: 0.01em;
-    color: var(--ink-faint);
-    text-decoration: none;
-    padding: 7px 0 7px 13px;
-    border-left: 2px solid var(--line);
-    transition: color .16s ease, border-color .16s ease;
-  }
-  .toc-list a:hover, .toc-list a:focus-visible {
-    color: var(--ink-soft);
-    border-color: var(--ink-faint);
-  }
-  .toc-list a[aria-current="true"] {
-    color: var(--accent);
-    border-color: var(--accent);
-    font-weight: 600;
-  }
-
-  /* Mobile / narrow disclosure (native details, no JS) */
-  .toc-mobile {
-    margin: 22px 0 0;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--panel);
-  }
   .toc-mobile summary {
-    list-style: none;
     cursor: pointer;
+    list-style: none;
+    padding: 13px 18px;
     font-family: var(--font-mono);
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink-soft);
-    padding: 13px 16px;
+    color: var(--accent);
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
   }
   .toc-mobile summary::-webkit-details-marker { display: none; }
   .toc-mobile summary::after {
     content: "+";
-    font-size: 16px;
-    color: var(--ink-faint);
+    font-size: 18px;
     line-height: 1;
+    color: var(--ink-faint);
   }
   .toc-mobile[open] summary::after { content: "\2212"; }
-  .toc-mobile .toc-list { padding: 0 16px 14px; }
-  .toc-mobile .toc-list a {
-    border-left: 2px solid var(--line-soft);
+  .toc-mobile ol {
+    list-style: none;
+    margin: 0;
+    padding: 4px 18px 16px;
+    columns: 2;
+    column-gap: 22px;
+  }
+  .toc-mobile li { margin: 0 0 8px; break-inside: avoid; }
+  .toc-mobile a {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
     color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .toc-mobile a:hover { color: var(--accent); }
+
+  /* ---------- two-column grid (rail + content) ---------- */
+  .layout {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad) 0;
+  }
+
+  /* ---------- desktop rail ---------- */
+  .rail { display: none; }
+
+  main {
+    max-width: var(--content-max);
+  }
+
+  /* ---------- sections ---------- */
+  section {
+    padding: 40px 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  section:first-of-type { border-top: none; padding-top: 30px; }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 18px;
+    scroll-margin-top: 24px;
+  }
+
+  h2.kicker { line-height: 1.2; }
+
+  .lede {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3vw, 1.72rem);
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 26px 0 8px;
+  }
+
+  p { margin: 0 0 16px; }
+  p.takeaway {
+    font-size: 1.06rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  strong { font-weight: 600; color: var(--ink); }
+
+  /* citation links */
+  a.src {
+    color: var(--ink-faint);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    font-style: italic;
+    transition: color 0.18s ease, text-decoration-color 0.18s ease;
+  }
+  a.src:hover, a.src:focus {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  /* lists */
+  ul.clean, ol.steps {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+  }
+  ul.clean li {
+    position: relative;
+    padding-left: 22px;
+    margin: 0 0 12px;
+  }
+  ul.clean li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+  ol.qlist {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: q;
+  }
+  ol.qlist li {
+    position: relative;
+    padding-left: 44px;
+    margin: 0 0 18px;
+  }
+  ol.qlist li::before {
+    counter-increment: q;
+    content: counter(q);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-wash);
+    border-radius: 50%;
+  }
+
+  /* tables */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 8px 0 20px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    font-size: 15.5px;
+  }
+  table.fit, table.rice { min-width: 600px; }
+  thead th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    padding: 14px 16px;
+    border-bottom: 1.5px solid var(--rule);
+    background: var(--panel-2);
+    vertical-align: bottom;
+  }
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { color: var(--ink); font-weight: 500; }
+  tbody td .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .rice-read {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .r-highest { background: var(--green-wash); color: var(--green); }
+  .r-high { background: var(--accent-wash); color: var(--accent-deep); }
+  .r-medhigh { background: var(--blue-wash); color: var(--blue); }
+  .r-medium { background: var(--panel-2); color: var(--ink-faint); }
+  .r-watch { background: var(--amber-wash); color: var(--amber); }
+
+  /* persona / hypothesis cards */
+  .cards { display: grid; gap: 16px; margin: 6px 0 18px; }
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--panel);
+    padding: 20px 22px;
+  }
+  .card h3 { margin-top: 0; margin-bottom: 6px; }
+  .card .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .card .job {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* callout */
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-wash);
+    padding: 16px 20px;
+    border-radius: 0 10px 10px 0;
+    margin: 4px 0 18px;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+  .note strong { color: var(--accent-deep); }
+
+  /* plan timeline */
+  .plan { display: grid; gap: 0; margin: 6px 0 6px; }
+  .phase {
+    position: relative;
+    padding: 0 0 26px 30px;
+    border-left: 2px solid var(--rule);
+    margin-left: 6px;
+  }
+  .phase:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .phase::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--panel);
+    border: 2.5px solid var(--accent);
+  }
+  .phase .days {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .phase h3 { margin: 0 0 8px; }
+  .phase p { margin-bottom: 0; font-size: 16px; }
+
+  /* diagram figure */
+  figure.diagram {
+    margin: 8px 0 14px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--panel);
+    padding: 22px 18px 16px;
+  }
+  figure.diagram svg { display: block; width: 100%; height: auto; }
+  figure.diagram figcaption {
+    font-size: 14px;
+    color: var(--ink-faint);
+    margin-top: 12px;
+    line-height: 1.45;
+  }
+  .svg-label { font-family: var(--font-display); font-weight: 500; fill: var(--ink); }
+  .svg-label-strong { font-family: var(--font-display); font-weight: 600; fill: var(--ink); }
+  .svg-sub { font-family: var(--font-mono); fill: var(--ink-faint); }
+
+  /* metric mini-grid under tree */
+  .guard-grid { display: grid; gap: 14px; margin: 14px 0 0; }
+  .guard {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 18px;
+    background: var(--panel);
+  }
+  .guard .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .guard.g-rail .lbl { color: var(--blue); }
+  .guard.g-anti .lbl { color: var(--amber); }
+  .guard p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+  /* fit intro */
+  .fit-intro {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 30px;
+    padding-bottom: 56px;
+    margin-top: 12px;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .footer-tag {
+    color: var(--ink-faint);
+    font-size: 15px;
+    margin: 0 0 16px;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-family: var(--font-mono);
     font-size: 13px;
   }
-  .toc-mobile .toc-list a[aria-current="true"] {
-    color: var(--accent);
-    border-color: var(--accent);
+  .contact a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .contact a:hover, .contact a:focus { color: var(--accent); border-color: var(--accent); }
+
+  /* reveal animation (visible by default; only hidden when JS opts in) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal section { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js-reveal section.in { opacity: 1; transform: none; }
   }
 
-  /* Desktop: two-column layout with a sticky left rail */
-  @media (min-width: 960px) {
+  /* ============ DESKTOP ============ */
+  @media (min-width: 940px) {
     .toc-mobile { display: none; }
+
+    .band-inner {
+      padding-left: calc(var(--pad) + var(--rail-w) + var(--rail-gap));
+    }
+
     .layout {
       display: grid;
-      grid-template-columns: 200px minmax(0, var(--maxw));
-      gap: 40px;
-      max-width: calc(var(--maxw) + 240px);
-      margin: 0 auto;
-      padding: 0 24px;
+      grid-template-columns: var(--rail-w) minmax(0, 1fr);
+      column-gap: var(--rail-gap);
       align-items: start;
     }
-    .layout > main.wrap {
-      max-width: none;
-      margin: 0;
-      padding: 0;
-    }
-    /* align masthead + footer to the grid width so the name, rule, and rail share one left edge */
-    header.masthead > .wrap, footer > .wrap { max-width: calc(var(--maxw) + 240px); padding-left: calc(24px + 240px); }
-    aside.toc-rail {
+
+    .rail {
       display: block;
       position: sticky;
-      top: 2rem;
-      padding-top: 8px;
+      top: 32px;
+      align-self: start;
     }
-    aside.toc-rail nav { max-height: calc(100vh - 4rem); overflow-y: auto; }
+    .rail .rail-head {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      font-weight: 600;
+      margin: 0 0 14px;
+      padding-left: 14px;
+    }
+    .rail ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid var(--rule);
+    }
+    .rail li { margin: 0; }
+    .rail a {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.3;
+      color: var(--ink-faint);
+      text-decoration: none;
+      padding: 7px 0 7px 14px;
+      margin-left: -1px;
+      border-left: 2px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .rail a:hover { color: var(--ink-soft); }
+    .rail a[aria-current="true"] {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    main { margin: 0; max-width: none; }
+    section:first-of-type { padding-top: 8px; }
   }
 
+  @media (min-width: 1180px) {
+    main { max-width: var(--content-max); }
+  }
+
+  /* ============ MOBILE diagram scroll ============ */
   @media (max-width: 640px) {
-    body { font-size: 16.5px; }
-    header.masthead { padding: 44px 0 30px; }
-    section { padding: 36px 0; }
-    .kicker { font-size: 15px; }
-    .stat-row { grid-template-columns: 1fr; }
-    .inout { grid-template-columns: 1fr; }
-    .wrap { padding: 0 18px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; animation: none !important; }
+    body { font-size: 17px; }
+    figure.diagram { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    figure.diagram svg { min-width: 560px; }
+    .toc-mobile ol { columns: 1; }
+    header.masthead { padding-top: 42px; }
   }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-<a href="#main-content" class="skip-link">Skip to content</a>
-
+<!-- ===================== MASTHEAD ===================== -->
 <header class="masthead">
-  <div class="wrap">
-    <p class="name">Mayuresh More</p>
-    <h1 class="frame">How I would solve the platform problem for the Product Lead, Platform role at Astra</h1>
+  <div class="band-inner">
+    <p class="eyebrow">Product pitch &middot; Astra</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="role-line">How I would solve the platform problem for the Product Lead, Platform role at Astra.</p>
     <p class="prepared">Prepared June 2026</p>
 
     <details class="toc-mobile">
       <summary>Contents</summary>
-      <ul class="toc-list">
-        <li><a href="#thesis">The bet</a></li>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
         <li><a href="#problem">The problem</a></li>
         <li><a href="#users">Who it is for</a></li>
-        <li><a href="#rice">Why this problem</a></li>
+        <li><a href="#priority">Why this problem</a></li>
         <li><a href="#approach">Approach</a></li>
-        <li><a href="#mvp">What I would ship first</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
         <li><a href="#metrics">Metrics</a></li>
-        <li><a href="#impact">Business impact</a></li>
         <li><a href="#plan">30 / 60 / 90</a></li>
         <li><a href="#risks">Risks</a></li>
         <li><a href="#questions">Questions</a></li>
         <li><a href="#fit">Why me</a></li>
-      </ul>
+      </ol>
     </details>
   </div>
 </header>
 
+<!-- ===================== LAYOUT ===================== -->
 <div class="layout">
+  <!-- desktop sticky rail -->
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30 / 60 / 90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
 
-  <aside class="toc-rail">
-    <nav aria-label="On this page">
-      <p class="toc-head">On this page</p>
-      <ul class="toc-list">
-        <li><a href="#thesis">The bet</a></li>
-        <li><a href="#problem">The problem</a></li>
-        <li><a href="#users">Who it is for</a></li>
-        <li><a href="#rice">Why this problem</a></li>
-        <li><a href="#approach">Approach</a></li>
-        <li><a href="#mvp">What I would ship first</a></li>
-        <li><a href="#metrics">Metrics</a></li>
-        <li><a href="#impact">Business impact</a></li>
-        <li><a href="#plan">30 / 60 / 90</a></li>
-        <li><a href="#risks">Risks</a></li>
-        <li><a href="#questions">Questions</a></li>
-        <li><a href="#fit">Why me</a></li>
+  <main id="main-content">
+
+    <!-- ============ THE BET ============ -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="lede">Astra already moves money across many networks well. The next phase of growth comes from the layer customers build on, not from adding more networks.</p>
+      <p>That layer is four things: the API contract, the configuration-and-rules layer (the dials customers turn to control how money moves), reliable event notifications, and a sandbox that behaves like production. Make those four excellent and Astra earns real lock-in, because switching away from a platform you have programmed your business logic into is painful.</p>
+    </section>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">The hard part is not moving the money. It is making the platform easy and safe to build on.</p>
+      <p>Astra sells one API that moves money across several payment networks: Visa Direct and Mastercard Move for pushing money to a card, RTP and FedNow for instant bank transfers, ACH for slower bank transfers, and stablecoins. The company runs at roughly $2B in annualized payment volume and positions itself as the "Payments Cloud," one programmable layer instead of a stack of separate point solutions <a class="src" href="https://astrafi.com/blog/astra-surpasses-1-billion-in-lifetime-payment-volume-and-expands-investor-support/" target="_blank" rel="noopener">(Astra blog, 2024)</a>.</p>
+
+      <h3>Who hurts</h3>
+      <ul class="clean">
+        <li><strong>The developer integrating Astra</strong> loses days when errors are vague, when the sandbox does not match production, or when event notifications fail silently. The role names this directly: someone who has felt the consequences of a bad developer experience at 2am.</li>
+        <li><strong>The customer's product</strong> breaks when an instant transfer cannot be recalled and something goes wrong downstream. Instant networks are irrevocable, so a sent FedNow or RTP payment cannot be clawed back like ACH <a class="src" href="https://www.pymnts.com/fraud-prevention/2025/instant-payments-shift-fraud-liability-into-real-time/" target="_blank" rel="noopener">(PYMNTS, 2025)</a>.</li>
+        <li><strong>Astra's own solutions team</strong> pays the tax. Every vague error, every missing event, every undocumented edge case becomes a support escalation instead of a self-served answer.</li>
       </ul>
-    </nav>
-  </aside>
 
-<main class="wrap" id="main-content">
+      <p>Root cause: a multi-network platform is genuinely complex, and that complexity leaks to the customer unless the product deliberately absorbs it. Today customers cope by reading source code, filing tickets, and building workarounds. Those do not scale and they make the platform feel fragile.</p>
 
-  <!-- THESIS -->
-  <section id="thesis" aria-labelledby="k-thesis">
-    <p class="kicker" id="k-thesis">The bet</p>
-    <h2 class="lede">Astra wins the multi-rail money-movement market by making its API the cheapest one to build on and the most painful one to leave.</h2>
-    <p>I would treat developer experience as the moat, not a nice-to-have. I would turn Astra's "Routines" event model and rail-routing intelligence into a configurable, observable control plane that customers program against.</p>
-    <p>Lock-in comes from reliability and ergonomics that competitors cannot copy in a quarter, not from features they can.</p>
-  </section>
+      <div class="note">
+        <strong>What it costs the business.</strong> Slow onboarding loses deals (best-in-class payment APIs get a developer to a first successful test transaction in under ten minutes, and poor documentation eats 40% of integration time). Vague errors generate roughly three times more support tickets. Fragility caps how much volume a customer will route through Astra. <a class="src" href="https://usedots.com/blog/api-first-payments-stack-developer-experience-velocity/" target="_blank" rel="noopener">(Dots, 2026)</a></div>
+    </section>
 
-  <!-- PROBLEM -->
-  <section id="problem" aria-labelledby="k-problem">
-    <p class="kicker" id="k-problem">The problem</p>
-    <p class="takeaway"><strong>Astra already moves money across many rails well.</strong> The gap is the layer on top, where developers configure, observe, and trust that money movement. That layer is what makes Astra "the Payments Cloud" instead of a gateway.</p>
-    <p>Astra routes across Visa Direct, Mastercard Move, RTP, FedNow, ACH, and stablecoins, and reports a $2B annualized volume run rate as of late 2024 (<a class="src" href="https://astrafi.com/blog/astra-surpasses-1-billion-in-lifetime-payment-volume-and-expands-investor-support/" target="_blank" rel="noopener">Astra blog</a>). The routing works. The platform problem is everything a builder touches around that routing.</p>
+    <!-- ============ WHO IT IS FOR ============ -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="takeaway">This is a business-to-business platform, so the daily user and the buyer are not the same. I would design for three.</p>
 
-    <h3>Who hurts, and why</h3>
-    <ul class="clean">
-      <li><strong>Who hurts:</strong> the developer at a vertical SaaS, fintech, or marketplace customer (Blend, Webull, SpotOn are named customers) who integrates Astra and then has to run it in production.</li>
-      <li><strong>What the pain is:</strong> instant rails are irrevocable. A sent FedNow or RTP payment cannot be clawed back the way ACH can (<a class="src" href="https://www.pymnts.com/fraud-prevention/2025/instant-payments-shift-fraud-liability-into-real-time/" target="_blank" rel="noopener">PYMNTS, 2025</a>). When a webhook silently fails or an error code is vague at 2am on a Saturday, the developer cannot tell whether money moved. That is the emotional core the role names directly.</li>
-      <li><strong>Root cause:</strong> the control plane is thin. Customers can call the API, but the levers to configure routing, set retry and fallback rules, replay missed events, and see degradation are not yet a product they self-serve.</li>
-      <li><strong>Workarounds today:</strong> customers build their own reconciliation, their own webhook retry queues, their own routing fallback logic, and they escalate to Astra's solutions team when they get stuck.</li>
-      <li><strong>Why the workarounds fail, and what it costs:</strong> every workaround is a reason to consider a competitor and a tax on Astra's small solutions team. Vague errors generate roughly 3x more support tickets, and poor docs consume about 40% of developer integration time (<a class="src" href="https://usedots.com/blog/api-first-payments-stack-developer-experience-velocity/" target="_blank" rel="noopener">usedots.com, 2026</a>). That cost lands on a sub-30-person company.</li>
-    </ul>
-
-    <div class="panel accent">
-      <p style="margin-bottom:14px;"><strong>The timing pressure is real.</strong> FedNow processed $853.4B in 2025, a 2,134% value increase year over year (<a class="src" href="https://www.frbservices.org/resources/financial-services/fednow/volume-value-stats" target="_blank" rel="noopener">Federal Reserve, 2026</a>). US real-time payment volume is projected at 8 billion transactions in 2026 (<a class="src" href="https://www.pymnts.com/real-time-payments/2026/real-time-payments-reach-a-turning-point-in-north-america/" target="_blank" rel="noopener">PYMNTS, 2026</a>).</p>
-      <p style="margin-bottom:0;">Agentic payments are live, not speculative: Stripe and Tempo shipped the Machine Payments Protocol on March 18, 2026, and Coinbase's x402 processed 150M+ machine-to-machine transactions in its first nine months (<a class="src" href="https://www.crossmint.com/learn/agentic-payments-protocols-compared" target="_blank" rel="noopener">Crossmint, 2026</a>). The control plane Astra builds now is the same layer that will hold agentic spending controls later.</p>
-    </div>
-
-    <h3>Control plane vs data plane</h3>
-    <p class="lead-in">This is the architecture pattern the role calls out. The <strong>data plane</strong> is the actual transaction execution. The <strong>control plane</strong> is everything a customer uses to shape behavior: routing rules, retry and fallback policies, rate limits, webhook configuration, and the observability to see all of it. My focus is the control plane as a product.</p>
-
-    <div class="legend" aria-hidden="true">
-      <span><i class="lg-ctrl"></i> Control plane (this role's focus)</span>
-      <span><i class="lg-data"></i> Data plane (executes money movement)</span>
-    </div>
-
-    <figure class="diagram">
-      <svg viewBox="0 0 720 470" role="img" aria-label="Control plane versus data plane at Astra. The control plane holds four customer-facing surfaces: config surfaces for routing rules and rate limits, a rules engine with triggers, conditions and actions, webhook and event configuration for delivery, retry and replay, and observability and SLA showing status, latency and errors. Config and rules feed the data plane's rail router across FedNow, RTP, ACH, card and stablecoin. The router runs transaction execution, which then feeds the webhook config and the observability surfaces. The platform PM owns the control plane and the contracts between the two planes.">
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#7c8398"></path>
-          </marker>
-        </defs>
-        <!-- Control plane group -->
-        <rect x="8" y="8" width="704" height="222" rx="14" fill="#eef2ff" stroke="#2f54eb" stroke-width="1.5" stroke-dasharray="5 4"></rect>
-        <text x="28" y="34" class="d-sub" font-size="13" font-weight="600" fill="#1d3bb0" letter-spacing="0.05em">CONTROL PLANE: THIS ROLE'S FOCUS</text>
-
-        <!-- 4 control nodes -->
-        <g>
-          <rect x="28" y="52" width="156" height="158" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="106" y="118" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">Config surfaces</text>
-          <text x="106" y="140" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">routing rules,</text>
-          <text x="106" y="156" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">rate limits</text>
-        </g>
-        <g>
-          <rect x="196" y="52" width="156" height="158" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="274" y="110" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">Rules engine</text>
-          <text x="274" y="132" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">triggers,</text>
-          <text x="274" y="148" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">conditions,</text>
-          <text x="274" y="164" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">actions</text>
-        </g>
-        <g>
-          <rect x="364" y="52" width="156" height="158" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="442" y="110" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">Webhook +</text>
-          <text x="442" y="128" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">event config</text>
-          <text x="442" y="150" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">delivery, retry,</text>
-          <text x="442" y="166" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">replay</text>
-        </g>
-        <g>
-          <rect x="532" y="52" width="156" height="158" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="610" y="110" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">Observability</text>
-          <text x="610" y="128" text-anchor="middle" class="d-title" font-size="14" fill="#1e2f72">+ SLA</text>
-          <text x="610" y="150" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">status, latency,</text>
-          <text x="610" y="166" text-anchor="middle" class="d-sub" font-size="11.5" fill="#3a4a86">errors</text>
-        </g>
-
-        <!-- Data plane group -->
-        <rect x="8" y="300" width="704" height="160" rx="14" fill="#e7f6ec" stroke="#1f7a4d" stroke-width="1.5" stroke-dasharray="5 4"></rect>
-        <text x="28" y="326" class="d-sub" font-size="13" font-weight="600" fill="#155a37" letter-spacing="0.05em">DATA PLANE: EXECUTES MONEY MOVEMENT</text>
-
-        <g>
-          <rect x="28" y="344" width="324" height="98" rx="10" fill="#cdeed8" stroke="#1f7a4d" stroke-width="1.5"></rect>
-          <text x="190" y="382" text-anchor="middle" class="d-title" font-size="14" fill="#14532d">Rail router</text>
-          <text x="190" y="404" text-anchor="middle" class="d-sub" font-size="11.5" fill="#256e47">FedNow, RTP, ACH, card, stablecoin</text>
-        </g>
-        <g>
-          <rect x="364" y="344" width="324" height="98" rx="10" fill="#cdeed8" stroke="#1f7a4d" stroke-width="1.5"></rect>
-          <text x="526" y="398" text-anchor="middle" class="d-title" font-size="14" fill="#14532d">Transaction execution</text>
-        </g>
-
-        <!-- arrows: config & rules -> router -->
-        <path d="M106,210 L106,260 L160,260 L160,342" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow)"></path>
-        <path d="M274,210 L274,260 L210,260 L210,342" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow)"></path>
-        <!-- router -> exec -->
-        <path d="M352,393 L362,393" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow)"></path>
-        <!-- exec -> webhooks -->
-        <path d="M526,344 L526,276 L442,276 L442,212" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow)"></path>
-        <!-- exec -> obs -->
-        <path d="M610,344 L610,212" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow)"></path>
-      </svg>
-      <figcaption>The platform PM owns the control plane and the contracts between the two planes</figcaption>
-    </figure>
-  </section>
-
-  <!-- USERS / JTBD -->
-  <section id="users" aria-labelledby="k-users">
-    <p class="kicker" id="k-users">Who it is for</p>
-    <p class="takeaway">Two distinct people buy and use this platform, plus a gatekeeper who can veto. The demo has to speak to all three. <strong>JTBD</strong> means the job a customer hires the product to do, stated as their goal, not a feature.</p>
-    <div class="table-scroll">
-      <table class="jtbd">
-        <thead>
-          <tr>
-            <th style="width:24%">Persona</th>
-            <th style="width:42%">The job they hire Astra for</th>
-            <th style="width:34%">What success looks like to them</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Integrating developer</strong><br><span style="color:var(--ink-faint);font-size:0.85rem;">primary user</span></td>
-            <td>"When I add money movement to my product, help me ship a reliable integration fast, so I am not the one paged at 2am when a payment status is unclear."</td>
-            <td>First test transaction in minutes. Errors tell them what to fix. Webhooks they can trust and replay.</td>
-          </tr>
-          <tr>
-            <td><strong>Platform / product lead</strong><br><span style="color:var(--ink-faint);font-size:0.85rem;">technical buyer</span></td>
-            <td>"When I pick payment infrastructure, help me move across many rails with one contract, so I do not stitch together gateways and bank relationships myself."</td>
-            <td>Multi-rail coverage, configurable routing, an SLA they can show their own customers.</td>
-          </tr>
-          <tr>
-            <td><strong>Risk &amp; compliance owner</strong><br><span style="color:var(--ink-faint);font-size:0.85rem;">gatekeeper</span></td>
-            <td>"When my company moves money programmatically, keep us inside policy, so we are auditable and not exposed on irrevocable rails."</td>
-            <td>Controls, visibility, scoped permissions, a clean audit trail.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="margin-top:18px;">The developer is the daily user and the source of switching cost. The platform lead signs. The risk owner can veto. The control plane has to serve all three: the developer programs it, the platform lead governs it, the risk owner audits it.</p>
-  </section>
-
-  <!-- RICE -->
-  <section id="rice" aria-labelledby="k-rice">
-    <p class="kicker" id="k-rice">Why this problem</p>
-    <p class="takeaway">I would sequence platform bets by what removes the most builder pain per unit of effort. The foundations that everything else depends on rank first.</p>
-    <p class="lead-in"><strong>RICE</strong> scores each bet on Reach, Impact, Confidence, and Effort. Score is Reach x Impact x Confidence divided by Effort. These are my starting estimates to align the team and refine with Astra's real usage and support data, not final numbers.</p>
-
-    <div class="ctrl-row">
-      <span class="ctrl-label">Order by</span>
-      <div class="seg" role="group" aria-label="Sort the RICE table">
-        <button type="button" data-sort="rank" aria-pressed="true">RICE rank</button>
-        <button type="button" data-sort="reach" aria-pressed="false">Reach</button>
-        <button type="button" data-sort="effort" aria-pressed="false">Effort</button>
+      <div class="cards">
+        <div class="card">
+          <span class="tag">Persona 1 &middot; primary user</span>
+          <h3>The integrating developer</h3>
+          <p class="job">"When I wire my product to Astra, I want a working test transaction fast and to trust that the sandbox matches production, so I can ship without surprises at launch."</p>
+          <p>Functional job: integrate quickly. Emotional job: not get paged at 2am. This persona decides, day to day, whether Astra feels solid.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Persona 2 &middot; buyer / decision-maker</span>
+          <h3>The platform or payments lead at the customer</h3>
+          <p class="job">"When I pick payment infrastructure, I want one layer that handles many networks, fraud, and compliance so I do not stitch together five vendors or take on bank-charter risk."</p>
+          <p>This persona signs the contract. After the 2024 collapse of a banking-as-a-service provider, enterprises want infrastructure that sits above the bank rather than acting as the bank <a class="src" href="https://www.bakertilly.com/insights/3-strategies-for-fintech-companies-for-regulatory-environment" target="_blank" rel="noopener">(Baker Tilly, 2025)</a>.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Persona 3 &middot; extensibility user</span>
+          <h3>The sophisticated builder programming complex money flows</h3>
+          <p class="job">"When my payout logic has real rules (try the instant network first, fall back to ACH, block this category, cap this amount), I want to express that in Astra's configuration instead of writing custom code."</p>
+          <p>This persona is the one the lock-in thesis rests on. The more of their business rules live inside Astra, the harder it is to leave.</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="table-scroll">
-      <table id="rice-table">
-        <thead>
-          <tr>
-            <th style="width:42%">Platform bet</th>
-            <th class="num">Reach</th>
-            <th class="num">Impact</th>
-            <th class="num">Conf.</th>
-            <th class="num">Effort</th>
-            <th class="num">Score</th>
-            <th class="num">Rank</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr data-rank="1" data-reach="10" data-effort="2" data-score="13.5">
-            <td><strong>Error taxonomy + idempotency</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">clear errors, idempotency keys so a retried request never double-pays</span></td>
-            <td class="num">10</td><td class="num">3</td><td class="num">0.9</td><td class="num">2</td><td class="num">13.5</td>
-            <td class="num"><span class="rank-badge">1</span></td>
-          </tr>
-          <tr data-rank="2" data-reach="9" data-effort="3" data-score="8.1">
-            <td><strong>Webhook delivery guarantees + replay</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">at-least-once delivery, signed payloads, dead-letter queue, replay</span></td>
-            <td class="num">9</td><td class="num">3</td><td class="num">0.9</td><td class="num">3</td><td class="num">8.1</td>
-            <td class="num"><span class="rank-badge">2</span></td>
-          </tr>
-          <tr data-rank="3" data-reach="8" data-effort="3" data-score="4.5">
-            <td><strong>Sandbox fidelity + time-to-first-transaction</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">production-parity test env, instant sandbox access</span></td>
-            <td class="num">8</td><td class="num">2</td><td class="num">0.85</td><td class="num">3</td><td class="num">4.5</td>
-            <td class="num"><span class="rank-badge">3</span></td>
-          </tr>
-          <tr data-rank="4" data-reach="8" data-effort="4" data-score="3.2">
-            <td><strong>Observability + SLA product</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">status, p95/p99 latency, queue depth, error-class breakdown</span></td>
-            <td class="num">8</td><td class="num">2</td><td class="num">0.8</td><td class="num">4</td><td class="num">3.2</td>
-            <td class="num"><span class="rank-badge">4</span></td>
-          </tr>
-          <tr data-rank="5" data-reach="7" data-effort="3" data-score="3.7">
-            <td><strong>Versioning + deprecation policy</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">account-level version pinning, sunset headers, 6 to 18 month windows</span></td>
-            <td class="num">7</td><td class="num">2</td><td class="num">0.8</td><td class="num">3</td><td class="num">3.7</td>
-            <td class="num"><span class="rank-badge">5</span></td>
-          </tr>
-          <tr data-rank="6" data-reach="6" data-effort="6" data-score="1.8">
-            <td><strong>Control-plane rules engine</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">triggers, conditions, actions for routing and fallback</span></td>
-            <td class="num">6</td><td class="num">3</td><td class="num">0.6</td><td class="num">6</td><td class="num">1.8</td>
-            <td class="num"><span class="rank-badge low">6</span></td>
-          </tr>
-          <tr data-rank="7" data-reach="4" data-effort="6" data-score="0.8">
-            <td><strong>Agentic-payment authorization primitives</strong><br><span style="color:var(--ink-faint);font-size:0.84rem;">scoped, time-bound, category-bound spend</span></td>
-            <td class="num">4</td><td class="num">3</td><td class="num">0.4</td><td class="num">6</td><td class="num">0.8</td>
-            <td class="num"><span class="rank-badge low">7</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- ============ WHY THIS PROBLEM (RICE) ============ -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="takeaway">The platform mandate is broad. The PM signal is choosing what to fund first. I use RICE.</p>
+      <p>RICE scores each option on Reach (how many customers it touches), Impact (how much it moves the outcome), Confidence (how sure I am), and Effort (people times months, in the denominator so expensive work is penalized). Impact uses fixed tiers; confidence uses 50, 80, or 100 percent. The numbers below are my judgment to show reasoning, not Astra's internal data. I would re-score them with real usage in week one.</p>
 
-    <h3>How to read the ranking</h3>
-    <ul class="clean">
-      <li><strong>Error taxonomy and idempotency rank first</strong> because they touch every customer, every transaction, and they directly cut support load. Idempotency is table stakes for payment APIs, popularized by Stripe (<a class="src" href="https://hookdeck.com/blog/webhooks-at-scale" target="_blank" rel="noopener">Hookdeck</a>). Low effort, high reach.</li>
-      <li><strong>Webhooks and sandbox rank next</strong> because they are where reliability is felt and where time-to-first-transaction is won or lost. The gold standard is a successful test payout in under 10 minutes (<a class="src" href="https://usedots.com/blog/api-first-payments-stack-developer-experience-velocity/" target="_blank" rel="noopener">usedots.com</a>).</li>
-      <li><strong>The rules engine and agentic primitives rank lower for now</strong>, not because they are unimportant, but because confidence is lower and effort is high. They depend on the foundations above being solid first. The rules engine is also the seed of the agentic authorization layer, so I would design the foundations to extend toward it.</li>
-    </ul>
-
-    <p class="lead-in" style="margin-top:24px;">The same bets on an impact-versus-effort read. High-impact, low-effort bets get funded first; high-impact, high-effort bets are sequenced later.</p>
-    <figure class="diagram">
-      <svg viewBox="0 0 720 540" role="img" aria-label="Platform bets plotted by impact and effort. The horizontal axis runs from low effort on the left to high effort on the right. The vertical axis runs from low impact at the bottom to high impact at the top. Top-left quadrant, do first: error taxonomy plus idempotency at low effort and high impact, and webhook delivery plus replay slightly higher effort and high impact. Sandbox plus time-to-first-transaction and versioning plus deprecation sit mid-effort and medium-high impact. Observability plus SLA sits higher effort and medium-high impact. Top-right quadrant, big bets to sequence later: the rules engine and agentic auth primitives, both high effort and high impact.">
-        <defs>
-          <marker id="ax" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#9aa0ad"></path>
-          </marker>
-        </defs>
-        <!-- plot area -->
-        <rect x="70" y="40" width="600" height="420" fill="#fdfcf8" stroke="#e2ddd2" stroke-width="1"></rect>
-        <!-- quadrant fills -->
-        <rect x="70" y="40" width="300" height="210" fill="#e7f6ec" opacity="0.55"></rect>
-        <rect x="370" y="40" width="300" height="210" fill="#e8edff" opacity="0.6"></rect>
-        <rect x="70" y="250" width="300" height="210" fill="#f3f1ea" opacity="0.5"></rect>
-        <rect x="370" y="250" width="300" height="210" fill="#fbeede" opacity="0.45"></rect>
-        <!-- mid lines -->
-        <line x1="370" y1="40" x2="370" y2="460" stroke="#d8d2c6" stroke-width="1" stroke-dasharray="4 4"></line>
-        <line x1="70" y1="250" x2="670" y2="250" stroke="#d8d2c6" stroke-width="1" stroke-dasharray="4 4"></line>
-        <!-- quadrant labels -->
-        <text x="84" y="60" class="d-sub" font-size="11" font-weight="600" fill="#1f7a4d" letter-spacing="0.04em">DO FIRST</text>
-        <text x="656" y="60" text-anchor="end" class="d-sub" font-size="11" font-weight="600" fill="#1d3bb0" letter-spacing="0.04em">BIG BETS: SEQUENCE LATER</text>
-        <text x="84" y="450" class="d-sub" font-size="11" font-weight="600" fill="#9aa0ad" letter-spacing="0.04em">FILL-INS</text>
-        <text x="656" y="450" text-anchor="end" class="d-sub" font-size="11" font-weight="600" fill="#a86a2a" letter-spacing="0.04em">RECONSIDER</text>
-        <!-- axes -->
-        <line x1="70" y1="478" x2="670" y2="478" stroke="#9aa0ad" stroke-width="1.4" marker-end="url(#ax)"></line>
-        <text x="70" y="502" class="d-sub" font-size="11.5" fill="#6b7180">Low effort</text>
-        <text x="670" y="502" text-anchor="end" class="d-sub" font-size="11.5" fill="#6b7180">High effort</text>
-        <line x1="52" y1="460" x2="52" y2="40" stroke="#9aa0ad" stroke-width="1.4" marker-end="url(#ax)"></line>
-        <text x="42" y="455" class="d-sub" font-size="11.5" fill="#6b7180" transform="rotate(-90 42 455)">Low impact</text>
-        <text x="42" y="100" class="d-sub" font-size="11.5" fill="#6b7180" transform="rotate(-90 42 100)" text-anchor="end">High impact</text>
-
-        <!-- plotted points: x = 70 + ex*600, y = 460 - im*420 -->
-        <!-- Error taxonomy [0.2,0.85] -->
-        <g>
-          <circle cx="190" cy="103" r="8" fill="#1f7a4d" stroke="#fff" stroke-width="2"></circle>
-          <text x="204" y="100" class="d-sub" font-size="11.5" font-weight="600" fill="#14532d">Error taxonomy + idempotency</text>
-        </g>
-        <!-- Webhook [0.35,0.85] -->
-        <g>
-          <circle cx="280" cy="103" r="8" fill="#1f7a4d" stroke="#fff" stroke-width="2"></circle>
-          <text x="294" y="120" class="d-sub" font-size="11.5" font-weight="600" fill="#14532d">Webhook delivery + replay</text>
-        </g>
-        <!-- Sandbox [0.4,0.65] -->
-        <g>
-          <circle cx="310" cy="187" r="8" fill="#1f7a4d" stroke="#fff" stroke-width="2"></circle>
-          <text x="324" y="184" class="d-sub" font-size="11.5" fill="#256e47">Sandbox + TTFT</text>
-        </g>
-        <!-- Versioning [0.45,0.6] -->
-        <g>
-          <circle cx="340" cy="208" r="8" fill="#1f7a4d" stroke="#fff" stroke-width="2"></circle>
-          <text x="324" y="232" class="d-sub" font-size="11.5" fill="#256e47" text-anchor="end">Versioning + deprecation</text>
-        </g>
-        <!-- Observability [0.6,0.65] -->
-        <g>
-          <circle cx="430" cy="187" r="8" fill="#2f54eb" stroke="#fff" stroke-width="2"></circle>
-          <text x="444" y="184" class="d-sub" font-size="11.5" fill="#1d3bb0">Observability + SLA</text>
-        </g>
-        <!-- Rules engine [0.8,0.85] -->
-        <g>
-          <circle cx="550" cy="103" r="8" fill="#2f54eb" stroke="#fff" stroke-width="2"></circle>
-          <text x="538" y="100" class="d-sub" font-size="11.5" font-weight="600" fill="#1d3bb0" text-anchor="end">Rules engine</text>
-        </g>
-        <!-- Agentic [0.85,0.8] -->
-        <g>
-          <circle cx="580" cy="124" r="8" fill="#2f54eb" stroke="#fff" stroke-width="2"></circle>
-          <text x="568" y="142" class="d-sub" font-size="11.5" font-weight="600" fill="#1d3bb0" text-anchor="end">Agentic auth primitives</text>
-        </g>
-      </svg>
-      <figcaption>Platform bets: impact vs effort</figcaption>
-    </figure>
-  </section>
-
-  <!-- APPROACH -->
-  <section id="approach" aria-labelledby="k-approach">
-    <p class="kicker" id="k-approach">Approach</p>
-    <p class="takeaway">Fix the foundations everyone stands on, then make the platform observable, then make it programmable. Three directions exist, and the order matters more than the choice.</p>
-    <ol class="steps">
-      <li><strong>Foundations first (reliability and contracts).</strong> Error taxonomy, idempotency, webhook guarantees, versioning. These are the floor. If they are weak, no amount of programmability matters because customers will not trust the platform with irrevocable money.</li>
-      <li><strong>Observability second (trust through visibility).</strong> A status and SLA product, latency and queue-depth metrics, error-class breakdowns. This is what lets a customer build a reliable production system and what they show their own customers.</li>
-      <li><strong>Programmability third (the rules engine and agentic primitives).</strong> Triggers, conditions, and actions that customers compose without custom engineering. This is the long-term differentiator and the seed of agentic spending controls.</li>
-    </ol>
-    <p style="margin-top:22px;"><strong>How I would decide between competing directions when they conflict:</strong> I would optimize for the contract that is hardest to reverse. Versioning and error taxonomy are decisions you live with for years, so I would over-invest there early. Configuration surfaces can iterate, so I would ship them thinner and learn.</p>
-  </section>
-
-  <!-- MVP -->
-  <section id="mvp" aria-labelledby="k-mvp">
-    <p class="kicker" id="k-mvp">What I would ship first</p>
-    <p class="takeaway">I would ship the error taxonomy plus idempotency as the first slice, because it is the smallest change that tests the biggest assumption: that developer ergonomics drive retention.</p>
-
-    <div class="inout">
-      <div class="col ship">
-        <h4>Ship in the first slice</h4>
-        <ul class="clean" style="margin-bottom:0;">
-          <li>A documented error taxonomy: every error returns an HTTP status, a machine-readable code, a human message, the specific field at fault, and retry guidance.</li>
-          <li>Idempotency keys on every money-moving endpoint, so a retried request after a timeout never double-pays.</li>
-        </ul>
+      <div class="table-wrap">
+        <table class="rice">
+          <thead>
+            <tr>
+              <th scope="col">Platform bet</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Conf.</th>
+              <th scope="col">Effort</th>
+              <th scope="col">RICE read</th>
+              <th scope="col">Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Reliable event notifications plus replay</td>
+              <td>Every customer in production</td>
+              <td><span class="num">3</span></td>
+              <td><span class="num">80%</span></td>
+              <td><span class="num">6 pm</span></td>
+              <td><span class="rice-read r-highest">Highest</span></td>
+              <td>Silent event failures are the 2am problem. Fixes break for every customer.</td>
+            </tr>
+            <tr>
+              <td>Error taxonomy plus sandbox parity</td>
+              <td>Every new integration</td>
+              <td><span class="num">2</span></td>
+              <td><span class="num">80%</span></td>
+              <td><span class="num">5 pm</span></td>
+              <td><span class="rice-read r-high">High</span></td>
+              <td>Cuts onboarding time and support tickets. Drives trial-to-paid conversion.</td>
+            </tr>
+            <tr>
+              <td>Configuration-and-rules layer (try-this-then-that logic)</td>
+              <td>The sophisticated builders</td>
+              <td><span class="num">3</span></td>
+              <td><span class="num">50%</span></td>
+              <td><span class="num">12 pm</span></td>
+              <td><span class="rice-read r-medhigh">Medium-high</span></td>
+              <td>This is the lock-in. Lower confidence and higher effort, so it is staged, not first.</td>
+            </tr>
+            <tr>
+              <td>API versioning plus safe deprecation</td>
+              <td>Every customer over time</td>
+              <td><span class="num">1</span></td>
+              <td><span class="num">80%</span></td>
+              <td><span class="num">4 pm</span></td>
+              <td><span class="rice-read r-medium">Medium</span></td>
+              <td>Prevents future pain. Not yet on fire, so it sequences after reliability.</td>
+            </tr>
+            <tr>
+              <td>Agentic-payment controls</td>
+              <td>A growing subset</td>
+              <td><span class="num">3</span></td>
+              <td><span class="num">50%</span></td>
+              <td><span class="num">10+ pm</span></td>
+              <td><span class="rice-read r-watch">Watch</span></td>
+              <td>Huge but uncertain timing. Build the foundation, not the full product, now.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col later">
-        <h4>Deliberately left out for now</h4>
-        <ul class="clean" style="margin-bottom:0;">
-          <li>The rules engine, the full observability product, and agentic primitives. Those come after the foundation proves the thesis.</li>
-          <li>A UI. I would ship API-first, since the developer is the primary user.</li>
-        </ul>
+
+      <p><strong>Event notifications</strong> are the messages Astra sends a customer's system when something happens (a transfer settled, a payout failed). They are the nervous system of any integration. If they fail quietly, the customer's product is wrong and nobody knows until money is misrouted. That is why they rank first.</p>
+      <p>The <strong>configuration-and-rules layer</strong> (often called a control plane: the surfaces where a customer configures behavior, separate from the part that executes the transaction) scores high on impact but lower on confidence and higher on effort. So it is the strategic prize, sequenced after the reliability foundation that makes it trustworthy.</p>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would treat three directions as bets to test, not a fixed plan.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="tag">Hypothesis A</span>
+          <h3>Reliability first wins the most trust per dollar</h3>
+          <p>Make event delivery dependable: retry failed messages with growing gaps between attempts, hold ones that keep failing in a holding queue instead of dropping them, let customers replay past events, and sign every message so customers can verify it is really from Astra. These are documented industry standards for events at scale <a class="src" href="https://hookdeck.com/blog/webhooks-at-scale" target="_blank" rel="noopener">(Hookdeck)</a>. Validate by measuring delivery success and how often the solutions team is paged.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Hypothesis B</span>
+          <h3>Onboarding speed is the cheapest growth lever</h3>
+          <p>Get a developer to a successful test transaction in under ten minutes. That means a sandbox that faithfully reproduces failure cases (a failed ACH, a network falling back, a fraud block) and an error format that says exactly what went wrong and what to do next. Validate by measuring time-to-first-transaction and ticket volume on the same errors.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Hypothesis C</span>
+          <h3>Programmability creates durable lock-in</h3>
+          <p>Let customers express payout rules as configuration (conditions, actions, fallbacks) instead of custom code. Validate first with a few sophisticated customers in a structured discovery process, because building the wrong abstraction here is expensive and hard to reverse.</p>
+        </div>
       </div>
-    </div>
 
-    <p style="margin-top:22px;"><strong>Why this first, in RICE terms:</strong> highest reach (every customer, every call), high impact (cuts the support tax and the 2am uncertainty), high confidence (proven practice across payment APIs), low effort (no new data plane work). It is the fastest credible win on a small team.</p>
-    <p><strong>The assumption it tests:</strong> if better errors and idempotency measurably cut support tickets and lift the share of customers who reach a second rail, that is direct evidence that ergonomics drive lock-in. That result would justify funding the rest of the roadmap.</p>
-  </section>
+      <p><strong>How I would decide between them.</strong> A and B are cheap, high-confidence, and compound (a reliable, fast platform is the precondition for everything else), so they go first. C is the prize but needs evidence before heavy investment, so it follows.</p>
+    </section>
 
-  <!-- METRICS -->
-  <section id="metrics" aria-labelledby="k-metrics">
-    <p class="kicker" id="k-metrics">How I would measure success</p>
-    <p class="takeaway">The North Star is <strong>multi-rail adoption depth</strong>: the share of customers using two or more rails in production. A customer using more of Astra's rails through one contract is a customer who cannot easily leave. Everything else is a leading indicator or a guardrail.</p>
-    <p class="lead-in">This ties directly to the lock-in thesis and to revenue, since deeper integration means more volume across the Payments Cloud.</p>
+    <!-- ============ MVP ============ -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+      <p class="takeaway">The smallest test of the biggest assumption: that event-notification reliability is the top driver of customer trust and routed volume.</p>
+      <p>So the first thing I would ship is a dependable, observable event-delivery product with replay:</p>
+      <ul class="clean">
+        <li>Automatic retries with growing gaps between attempts, plus a holding queue for messages that keep failing so nothing is silently lost.</li>
+        <li>A dashboard where customers see delivery success, delays, and failures by type, so they can debug their own integration instead of opening a ticket.</li>
+        <li>Replay, so a customer who missed events during an outage can recover without calling support.</li>
+        <li>Signed messages so customers can verify authenticity.</li>
+      </ul>
+      <p><strong>Why this first, in RICE terms.</strong> It touches every customer in production (high reach), directly attacks the 2am failure (impact 3), I am confident it matters (80 percent), and it is a contained build (about 6 person-months). It scores higher than the configuration-and-rules layer, which is more valuable long-term but less certain and far more expensive.</p>
+      <p><strong>What it deliberately leaves out:</strong> the full programmable rules engine, agentic-payment controls, and a versioning overhaul. Those are real and on the roadmap, just not the first proof. Shipping reliability first also earns the credibility to ask customers to put their business logic into the configuration layer later.</p>
+    </section>
 
-    <div class="legend" aria-hidden="true">
-      <span><i class="lg-star"></i> North Star</span>
-      <span><i class="lg-lead"></i> Leading indicators (feed it)</span>
-      <span><i class="lg-guard"></i> Guardrails (protect against gaming it)</span>
-    </div>
+    <!-- ============ METRICS ============ -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">North Star: routed volume on a healthy integration. Payment volume from customers whose event delivery, error rate, and uptime are inside agreed targets.</p>
+      <p>It passes the three tests. It rises only when customers genuinely win (their integration works and they trust it with more money), it leads revenue (volume grows before contract expansion), and the team can influence it directly through reliability and developer-experience work.</p>
 
-    <figure class="diagram">
-      <svg viewBox="0 0 720 470" role="img" aria-label="Astra platform metrics tree. The North Star is the share of customers on two or more rails in production. Three leading indicators feed it: time-to-first-transaction with a target under ten minutes in sandbox, webhook delivery success with a target of 99.9 percent or higher plus p95 latency, and control-plane adoption measured as customers using rules versus the raw API. Three guardrails and anti-metrics protect it: support tickets per customer, which should fall not rise, deprecation without breakage meaning zero customer-reported outages on migration, and config error rate, since configurability must not raise failed transactions.">
-        <defs>
-          <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#7c8398"></path>
-          </marker>
-        </defs>
-        <!-- Leading row -->
-        <g>
-          <rect x="14" y="14" width="220" height="80" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="124" y="42" text-anchor="middle" class="d-title" font-size="13" fill="#1e2f72">Time-to-first-transaction</text>
-          <text x="124" y="64" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">target under 10 min</text>
-          <text x="124" y="79" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">in sandbox</text>
-        </g>
-        <g>
-          <rect x="250" y="14" width="220" height="80" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="360" y="42" text-anchor="middle" class="d-title" font-size="13" fill="#1e2f72">Webhook delivery success</text>
-          <text x="360" y="64" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">target 99.9%+,</text>
-          <text x="360" y="79" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">p95 latency</text>
-        </g>
-        <g>
-          <rect x="486" y="14" width="220" height="80" rx="10" fill="#dbe4ff" stroke="#2f54eb" stroke-width="1.5"></rect>
-          <text x="596" y="42" text-anchor="middle" class="d-title" font-size="13" fill="#1e2f72">Control-plane adoption</text>
-          <text x="596" y="64" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">customers using rules</text>
-          <text x="596" y="79" text-anchor="middle" class="d-sub" font-size="11" fill="#3a4a86">vs raw API</text>
-        </g>
+      <figure class="diagram">
+        <svg viewBox="0 0 760 470" role="img" aria-label="Metrics tree. Four leading inputs the team controls (time to first transaction under ten minutes, event delivery success at or above 99.9 percent, support tickets per thousand API calls falling, and customers using the configuration-and-rules layer) feed the North Star, routed volume on healthy integrations, which in turn leads two lagging outcomes: net volume expansion per customer and customer retention with multi-network adoption.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#9aa2b3"></path>
+            </marker>
+          </defs>
 
-        <!-- arrows leading -> NS -->
-        <path d="M124,94 L124,150 L330,150 L330,188" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
-        <path d="M360,94 L360,188" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
-        <path d="M596,94 L596,150 L390,150 L390,188" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
+          <!-- group labels -->
+          <text x="30" y="28" class="svg-sub" font-size="12" letter-spacing="1.5">LEADING INPUTS THE TEAM CONTROLS</text>
 
-        <!-- North Star -->
-        <rect x="190" y="190" width="340" height="86" rx="12" fill="#fbf2cf" stroke="#9a6a06" stroke-width="2"></rect>
-        <text x="360" y="222" text-anchor="middle" class="d-title" font-size="15" font-weight="700" fill="#6b4906">★ North Star</text>
-        <text x="360" y="248" text-anchor="middle" class="d-sub" font-size="12" fill="#7a5408">Share of customers on 2+ rails</text>
-        <text x="360" y="265" text-anchor="middle" class="d-sub" font-size="12" fill="#7a5408">in production</text>
+          <!-- leading input boxes (4) -->
+          <g aria-hidden="true">
+            <rect x="30" y="40" width="160" height="58" rx="9" fill="#e2eaf3" stroke="#2b5f9e" stroke-width="1.5"></rect>
+            <rect x="206" y="40" width="160" height="58" rx="9" fill="#e2eaf3" stroke="#2b5f9e" stroke-width="1.5"></rect>
+            <rect x="382" y="40" width="160" height="58" rx="9" fill="#e2eaf3" stroke="#2b5f9e" stroke-width="1.5"></rect>
+            <rect x="558" y="40" width="172" height="58" rx="9" fill="#e2eaf3" stroke="#2b5f9e" stroke-width="1.5"></rect>
+          </g>
+          <text x="110" y="64" text-anchor="middle" class="svg-label" font-size="12.5">Time to first</text>
+          <text x="110" y="80" text-anchor="middle" class="svg-label" font-size="12.5">transaction</text>
+          <text x="110" y="93" text-anchor="middle" class="svg-sub" font-size="11">under 10 min</text>
 
-        <!-- arrows NS -> guardrails -->
-        <path d="M300,276 L300,330 L124,330 L124,372" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
-        <path d="M360,276 L360,372" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
-        <path d="M420,276 L420,330 L596,330 L596,372" fill="none" stroke="#7c8398" stroke-width="1.6" marker-end="url(#arrow2)"></path>
+          <text x="286" y="64" text-anchor="middle" class="svg-label" font-size="12.5">Event delivery</text>
+          <text x="286" y="80" text-anchor="middle" class="svg-label" font-size="12.5">success</text>
+          <text x="286" y="93" text-anchor="middle" class="svg-sub" font-size="11">at or above 99.9%</text>
 
-        <!-- Guardrails -->
-        <g>
-          <rect x="14" y="374" width="220" height="82" rx="10" fill="#fbe2e2" stroke="#b22e2e" stroke-width="1.5"></rect>
-          <text x="124" y="402" text-anchor="middle" class="d-title" font-size="13" fill="#7f1d1d">Support tickets / customer</text>
-          <text x="124" y="424" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">watch it fall,</text>
-          <text x="124" y="439" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">not rise</text>
-        </g>
-        <g>
-          <rect x="250" y="374" width="220" height="82" rx="10" fill="#fbe2e2" stroke="#b22e2e" stroke-width="1.5"></rect>
-          <text x="360" y="402" text-anchor="middle" class="d-title" font-size="13" fill="#7f1d1d">Deprecation w/o breakage</text>
-          <text x="360" y="424" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">zero customer-reported</text>
-          <text x="360" y="439" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">outages on migration</text>
-        </g>
-        <g>
-          <rect x="486" y="374" width="220" height="82" rx="10" fill="#fbe2e2" stroke="#b22e2e" stroke-width="1.5"></rect>
-          <text x="596" y="402" text-anchor="middle" class="d-title" font-size="13" fill="#7f1d1d">Config error rate</text>
-          <text x="596" y="424" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">configurability must not</text>
-          <text x="596" y="439" text-anchor="middle" class="d-sub" font-size="11" fill="#9a3636">raise failed transactions</text>
-        </g>
-      </svg>
-      <figcaption>The guardrails matter as much as the North Star</figcaption>
-    </figure>
-    <p style="margin-top:6px;">A rules engine that adds configurability but raises the failed-transaction rate is a loss, not a win. The point of the control plane is power without new operational risk.</p>
-  </section>
+          <text x="462" y="64" text-anchor="middle" class="svg-label" font-size="12.5">Tickets per 1,000</text>
+          <text x="462" y="80" text-anchor="middle" class="svg-label" font-size="12.5">API calls</text>
+          <text x="462" y="93" text-anchor="middle" class="svg-sub" font-size="11">falling</text>
 
-  <!-- BUSINESS IMPACT -->
-  <section id="impact" aria-labelledby="k-impact">
-    <p class="kicker" id="k-impact">Business impact</p>
-    <p class="takeaway">The platform work compounds the volume engine Astra already has. Faster time-to-first-transaction, deeper rail adoption, and lower support load each move the same volume number through a different mechanism.</p>
+          <text x="644" y="64" text-anchor="middle" class="svg-label" font-size="12.5">Customers using</text>
+          <text x="644" y="80" text-anchor="middle" class="svg-label" font-size="12.5">the rules layer</text>
+          <text x="644" y="93" text-anchor="middle" class="svg-sub" font-size="11">adoption rising</text>
 
-    <div class="stat-row">
-      <div class="stat">
-        <div class="v">$2B</div>
-        <div class="k">annualized volume run rate, late 2024 (<a class="src" href="https://astrafi.com/blog/astra-surpasses-1-billion-in-lifetime-payment-volume-and-expands-investor-support/" target="_blank" rel="noopener">Astra blog</a>)</div>
+          <!-- connectors leading -> NS -->
+          <g aria-hidden="true" fill="none" stroke="#9aa2b3" stroke-width="1.6">
+            <path d="M110,98 C110,150 360,150 380,212" marker-end="url(#arrow)"></path>
+            <path d="M286,98 C286,150 370,160 380,212" marker-end="url(#arrow)"></path>
+            <path d="M462,98 C462,150 400,160 392,212" marker-end="url(#arrow)"></path>
+            <path d="M644,98 C644,150 420,150 400,212" marker-end="url(#arrow)"></path>
+          </g>
+
+          <!-- North Star -->
+          <rect x="230" y="214" width="300" height="70" rx="12" fill="#dcefe2" stroke="#2f7d4f" stroke-width="2"></rect>
+          <text x="380" y="242" text-anchor="middle" class="svg-sub" font-size="11" fill="#2f7d4f" letter-spacing="1.5">NORTH STAR</text>
+          <text x="380" y="262" text-anchor="middle" class="svg-label-strong" font-size="14.5">Routed volume on</text>
+          <text x="380" y="279" text-anchor="middle" class="svg-label-strong" font-size="14.5">healthy integrations</text>
+
+          <!-- connectors NS -> lagging -->
+          <g aria-hidden="true" fill="none" stroke="#9aa2b3" stroke-width="1.6">
+            <path d="M330,284 C330,330 250,330 232,360" marker-end="url(#arrow)"></path>
+            <path d="M430,284 C430,330 510,330 528,360" marker-end="url(#arrow)"></path>
+          </g>
+
+          <!-- lagging label -->
+          <text x="148" y="350" class="svg-sub" font-size="12" letter-spacing="1.5">LAGGING OUTCOMES</text>
+
+          <!-- lagging boxes (2) -->
+          <rect x="130" y="362" width="200" height="58" rx="9" fill="#f6edd9" stroke="#b3791b" stroke-width="1.5"></rect>
+          <rect x="430" y="362" width="210" height="58" rx="9" fill="#f6edd9" stroke="#b3791b" stroke-width="1.5"></rect>
+          <text x="230" y="386" text-anchor="middle" class="svg-label" font-size="12.5">Net volume expansion</text>
+          <text x="230" y="402" text-anchor="middle" class="svg-label" font-size="12.5">per customer</text>
+          <text x="535" y="386" text-anchor="middle" class="svg-label" font-size="12.5">Retention and</text>
+          <text x="535" y="402" text-anchor="middle" class="svg-label" font-size="12.5">multi-network adoption</text>
+        </svg>
+        <figcaption>How leading developer-experience and reliability inputs feed the North Star, which in turn leads the lagging business outcomes.</figcaption>
+      </figure>
+
+      <h3>Guardrail and anti-metric</h3>
+      <div class="guard-grid">
+        <div class="guard g-rail">
+          <span class="lbl">Guardrail &middot; tickets per 1,000 API calls</span>
+          <p>If routed volume rises but tickets rise too, the platform is fragile and we are taxing the solutions team. Volume on a healthy integration is the goal, not raw volume.</p>
+        </div>
+        <div class="guard g-anti">
+          <span class="lbl">Anti-metric &middot; count of configuration options shipped</span>
+          <p>More dials is not the win. The win is customers safely running real logic on a small set of well-designed dials. Over-configurability creates operational and compliance surface Astra cannot manage.</p>
+        </div>
       </div>
-      <div class="stat">
-        <div class="v">$10M</div>
-        <div class="k">raised from Nyca Partners, May 2026, to scale the Payments Cloud (<a class="src" href="https://astrafi.com/blog/astra-raises-10m-from-nyca-partners/" target="_blank" rel="noopener">Astra blog</a>)</div>
+    </section>
+
+    <!-- ============ 30/60/90 ============ -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <div class="plan">
+        <div class="phase">
+          <span class="days">Days 0 to 30</span>
+          <h3>Listen and find the real constraints</h3>
+          <p>Read the API contract, docs, and event model end to end, and integrate against the sandbox myself to feel the 2am problem firsthand. Sit with the solutions team and pull the top recurring escalations: those are the platform gaps, ranked by pain. Interview three to five sophisticated customers about where they build workarounds. Pull the baseline numbers: time-to-first-transaction, event delivery success, ticket volume by type.</p>
+        </div>
+        <div class="phase">
+          <span class="days">Days 30 to 60</span>
+          <h3>A quick win and a sharpened problem</h3>
+          <p>Ship one cheap, visible reliability or error-clarity fix that removes a top escalation. Replace the highest-volume vague error with a precise one (status code, machine-readable code, human message, the specific field, and retry guidance). Use the evidence to confirm or revise the RICE ranking and align engineering and go-to-market on the sequence.</p>
+        </div>
+        <div class="phase">
+          <span class="days">Days 60 to 90</span>
+          <h3>Ship and validate the first bet</h3>
+          <p>Ship the event-delivery product with replay and the customer-facing dashboard to a first set of customers. Set the metric baseline and targets. Publish the platform roadmap: reliability now, error-and-sandbox quality next, the configuration-and-rules layer after that, with the agentic-payment foundation sequenced behind real customer demand.</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <p class="lead-in">Where platform work moves those numbers:</p>
-    <ul class="clean">
-      <li><strong>Faster time-to-first-transaction lifts trial-to-paid conversion.</strong> Every day shaved off integration is volume that starts flowing sooner.</li>
-      <li><strong>Multi-rail adoption depth grows volume per customer.</strong> A customer on three rails moves more money through Astra than a customer on one, and is far harder to replace.</li>
-      <li><strong>Lower support load protects margin.</strong> On a sub-30-person profitable company, deflecting tickets from the solutions team is direct operating leverage. The market signal supports this: 43% of fully API-first organizations generate more than 25% of revenue from APIs, versus 16% for others (<a class="src" href="https://usedots.com/blog/api-first-payments-stack-developer-experience-velocity/" target="_blank" rel="noopener">usedots.com, 2026</a>).</li>
-    </ul>
-  </section>
+    <!-- ============ RISKS ============ -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">Risks in the proposed work, and how I would test each early.</p>
+      <ul class="clean">
+        <li><strong>The top-pain ranking may be wrong.</strong> I am ranking event reliability first from outside evidence. If the real bottleneck is sandbox fidelity or onboarding gating, the sequence changes. Validate in the first two weeks with support data and customer interviews before committing the build.</li>
+        <li><strong>The configuration-and-rules layer could over-generalize.</strong> Too flexible an abstraction becomes complex to operate and a compliance liability; too narrow and customers keep writing custom code. Validate with a small set of real customer rule-sets before designing the model, and ship the narrowest version that covers them.</li>
+        <li><strong>Programmability widens the compliance surface.</strong> Every dial a customer can turn is behavior Astra must monitor and defend, which matters more on irrevocable instant networks. Validate the controls and observability with risk and compliance partners before exposing any new lever.</li>
+        <li><strong>Agentic-payment timing is uncertain.</strong> The protocols are real and recent: Stripe and Tempo shipped a machine-payments standard in March 2026, and Coinbase's x402 standard processed over 150M machine-to-machine transactions worth about $50M in nine months <a class="src" href="https://www.crossmint.com/learn/agentic-payments-protocols-compared" target="_blank" rel="noopener">(Crossmint, 2026)</a> <a class="src" href="https://www.fenwick.com/insights/publications/is-2026-the-year-of-agentic-payments" target="_blank" rel="noopener">(Fenwick, 2026)</a>. The risk is over-investing before demand is proven. Validate by building the foundation (scoped, bounded authorization) inside the configuration layer rather than a standalone product, and watch demand.</li>
+        <li><strong>Versioning debt compounds quietly.</strong> If Astra adds networks and features without a clear backward-compatibility and deprecation policy, a future breaking change hurts every customer. Validate the current policy early and tighten it before it becomes a forced migration.</li>
+      </ul>
+    </section>
 
-  <!-- 30/60/90 -->
-  <section id="plan" aria-labelledby="k-plan">
-    <p class="kicker" id="k-plan">30 / 60 / 90 day plan</p>
-    <p class="takeaway">Listen and find the real constraints first, ship one credible win, then propose the roadmap with evidence behind it.</p>
-    <p class="lead-in">Calibrated for a principal IC at a small, profitable company working alongside the first Director of Product and the founders.</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:26%">Window</th><th>What I would do</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>0 to 30</strong><br><span style="color:var(--accent);font-size:0.85rem;">listen</span></td>
-            <td>Read every support escalation and solutions-team workaround from the last quarter to find where customers actually break. Interview the most sophisticated customers about platform gaps. Sit with the data plane to learn the routing and Routines model from the inside. Map the current API contract: errors, versioning, webhook behavior. Define the metric baselines that do not exist yet.</td>
-          </tr>
-          <tr>
-            <td><strong>30 to 60</strong><br><span style="color:var(--accent);font-size:0.85rem;">a quick win plus evidence</span></td>
-            <td>Ship the error taxonomy and idempotency slice. Sharpen the platform problem with the evidence I gathered, ranked by support load and switching risk. Align the founders and the Director of Product on the North Star and guardrails. Write the API contract philosophy: versioning, backwards-compatibility, deprecation.</td>
-          </tr>
-          <tr>
-            <td><strong>60 to 90</strong><br><span style="color:var(--accent);font-size:0.85rem;">validate and propose</span></td>
-            <td>Ship webhook delivery guarantees with replay. Measure the first slice against the support-ticket and multi-rail baselines. Publish the platform roadmap, sequenced by RICE, with the rules engine and agentic primitives positioned as the next horizon. Stand up the first version of an observability and SLA view.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <!-- ============ QUESTIONS ============ -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">What I would ask the team first.</p>
+      <ol class="qlist">
+        <li>What are the top five support escalations from the last quarter, and how many trace to events, errors, or sandbox gaps? This re-ranks the whole plan.</li>
+        <li>What is the current event delivery success rate and time-to-first-transaction? I need the baseline before I set targets.</li>
+        <li>Which customers route across multiple networks versus just one, and what stopped the single-network ones from expanding?</li>
+        <li>How is the existing "Routines" event model used today, and what do customers ask of it that it cannot yet do? That tells me how far the configuration layer already reaches.</li>
+        <li>What is the current API versioning and deprecation policy, and have we ever had to force a breaking change on customers?</li>
+      </ol>
+    </section>
 
-  <!-- RISKS -->
-  <section id="risks" aria-labelledby="k-risks">
-    <p class="kicker" id="k-risks">Risks and what I would validate first</p>
-    <p class="takeaway">The biggest risks are in the proposed work, the data behind it, and the scope. I would test the riskiest assumptions in week one.</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th style="width:50%">Risk or open assumption (about the work)</th><th>How I would validate it first</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>The error taxonomy and idempotency win assumes support load is concentrated where I think it is.</td>
-            <td>Pull the actual support and escalation data in week one and confirm the top failure modes before committing scope.</td>
-          </tr>
-          <tr>
-            <td>Multi-rail adoption depth may not be the right North Star if most volume concentrates on one or two rails by design.</td>
-            <td>Check the real distribution of rail usage per customer against revenue before locking the metric.</td>
-          </tr>
-          <tr>
-            <td>The rules engine could add configurability that raises failed-transaction or compliance risk on irrevocable rails.</td>
-            <td>Prototype a narrow rules slice with one customer and watch the config-error guardrail before scaling it.</td>
-          </tr>
-          <tr>
-            <td>Agentic-payment primitives may be early relative to Astra's customer demand, even though the protocols are live.</td>
-            <td>Test demand with the most sophisticated customers and the leadership team before funding it ahead of foundations.</td>
-          </tr>
-          <tr>
-            <td>Versioning and deprecation policy is hard to reverse once customers depend on it.</td>
-            <td>Pressure-test the account-level version-pinning model against Astra's current contract before publishing it.</td>
-          </tr>
-          <tr>
-            <td>FedNow send-side coverage varies by bank, which affects what routing rules customers can rely on.</td>
-            <td>Confirm Astra's actual send and receive coverage before exposing routing configurability that assumes full reach.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <!-- ============ WHY ME ============ -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="fit-intro">I am a product manager with six-plus years building and scaling software in technology, finance, and AI. I hold a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering. Most of my work has been at the platform and integration layer in financial environments, owning products from discovery to launch and getting cross-functional teams to ship. That is the work this role is about: API contracts, reliability, and giving sophisticated customers safe levers, in a domain where mistakes move real money.</p>
 
-  <!-- QUESTIONS -->
-  <section id="questions" aria-labelledby="k-questions">
-    <p class="kicker" id="k-questions">Questions I would ask the team</p>
-    <p class="takeaway">Sharp questions whose answers would change my plan.</p>
-    <ol class="steps">
-      <li>What does the current "Routines" event model guarantee today on delivery, ordering, and replay, and where does it break under load?</li>
-      <li>Where do customers most often build workarounds, and which of those are the solutions team tired of supporting?</li>
-      <li>What is the real distribution of rail usage per customer, and does revenue concentrate on push-to-card, RTP, FedNow, or stablecoin?</li>
-      <li>What is Astra's current API versioning posture, and are there customers pinned to behavior we cannot break?</li>
-      <li>How profitable is each rail, and does that change which routing defaults and fallbacks the control plane should encourage?</li>
-      <li>How do the founders weigh foundational reliability work against net-new customer-facing features over the next two quarters?</li>
-      <li>What is the appetite and timeline for agentic payment use cases relative to demand we can already see?</li>
-    </ol>
-  </section>
+      <div class="table-wrap">
+        <table class="fit">
+          <thead>
+            <tr>
+              <th scope="col">What the role needs</th>
+              <th scope="col">What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Own a developer-facing platform across configuration, reliability, and observability</td>
+              <td>At Lentra, I built and scaled a digital lending platform from first version to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td>
+            </tr>
+            <tr>
+              <td>Design API integrations and event-driven flows</td>
+              <td>I delivered API integrations with credit bureaus (CIBIL, Equifax, Experian) and partners, automating credit decisioning and KYC, which improved decision accuracy 10% and cut manual review 35%.</td>
+            </tr>
+            <tr>
+              <td>Reduce operational risk on systems where failures are costly</td>
+              <td>At Nomura (via Capco), I led operational risk transformation for Global Markets, cutting risk events 20% and losses 15% with remediation roadmaps and preventive controls.</td>
+            </tr>
+            <tr>
+              <td>Translate sophisticated customer needs into platform requirements</td>
+              <td>At Nomura, I owned a finance budgeting product from discovery to launch, ran research with 15+ stakeholders, scoped the first version, and drove a 30% reduction in spend.</td>
+            </tr>
+            <tr>
+              <td>Ship reliable data and reporting infrastructure</td>
+              <td>I drove a firm-wide market-data sourcing program onto a direct Tradeweb connection, saving $700K a year with better data quality across multiple fixed-income applications.</td>
+            </tr>
+            <tr>
+              <td>Make build-versus-buy and architecture calls on new, ambiguous tech</td>
+              <td>At UW, I evaluated 5+ retrieval platforms and 4 architectures for a policy AI agent, and owned the data pipeline for 9,000+ documents across 8 agencies with quality gates.</td>
+            </tr>
+            <tr>
+              <td>Apply AI judgment to a forward-looking platform bet</td>
+              <td>I work with retrieval systems, governance, and LLMs, and I led a bank-wide AI assistant rollout to 15,000+ users with compliance and governance built in.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <!-- WHY ME -->
-  <section id="fit" aria-labelledby="k-fit">
-    <p class="kicker" id="k-fit">Why me</p>
-    <p>I am a product manager with 6+ years building and shipping products across technology, finance, and AI, with a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering.</p>
-    <p>I started as a developer building reporting pipelines in institutional finance, then moved into product, which means I can write a spec that engineering ships from and reason about systems-level trade-offs rather than hand-waving them. My work has sat squarely in financial infrastructure and API integration, which is the substance of this role.</p>
-    <div class="table-scroll">
-      <table class="fit">
-        <thead>
-          <tr><th style="width:42%">What the role needs</th><th>What I have done</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Own a developer-facing platform roadmap across config, extensibility, and observability</td>
-            <td>At Nomura, I owned discovery-to-launch of a finance budgeting application, prioritized the analytics layer, and drove adoption across cost-center owners, delivering a 30% reduction in spend.</td>
-          </tr>
-          <tr>
-            <td>Design and ship API integrations and developer contracts</td>
-            <td>At Lentra, I delivered API integrations with credit bureaus (CIBIL, Equifax, Experian), improving loan decision accuracy by 10%, cutting manual review by 35%, and increasing straight-through processing.</td>
-          </tr>
-          <tr>
-            <td>Build the platform from MVP and scale it</td>
-            <td>At Lentra, I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td>
-          </tr>
-          <tr>
-            <td>Write specs grounded in how real customers build</td>
-            <td>At Lentra, I translated customer interviews and on-site usability tests into 25+ product flows and specs across web and Android, and ran A/B tests that improved the loan approval flow and reduced drop-off.</td>
-          </tr>
-          <tr>
-            <td>Hold the bar on reliability and observability customers depend on</td>
-            <td>At Lentra, I shipped a real-time reporting dashboard for senior management, cutting manual report compilation by 40+ hours a week and surfacing funnel bottlenecks across all branches.</td>
-          </tr>
-          <tr>
-            <td>Drive platform adoption with governance and compliance built in</td>
-            <td>At Nomura, I led the rollout of an internal AI assistant to 15,000+ users with compliance and governance features in a phased bank-wide strategy, reaching 100% policy compliance.</td>
-          </tr>
-          <tr>
-            <td>Reason about systems and infrastructure cost and architecture</td>
-            <td>At UW, I evaluated 5+ retrieval platforms and 4 retrieval architectures on accuracy, latency, ingestion cost, and query cost, and owned the data ingestion pipeline for 9,000+ documents across 8 agencies.</td>
-          </tr>
-          <tr>
-            <td>Deliver measurable infrastructure savings and operational rigor</td>
-            <td>At Nomura, I drove a firm-wide market data sourcing program connecting to Tradeweb, delivering $700K in annual savings, and led operational risk transformation that cut events by 20% and losses by 15%.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-</main>
-
+  </main>
 </div>
 
+<!-- ===================== FOOTER ===================== -->
 <footer>
-  <div class="wrap">
+  <div class="band-inner">
     <p class="footer-name">Mayuresh More</p>
-    <div class="contacts">
+    <p class="footer-tag">Product manager. Platform, integrations, and reliability in financial environments.</p>
+    <div class="contact">
       <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
       <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
       <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
@@ -1116,73 +1027,53 @@
 </footer>
 
 <script>
-  // Progressive enhancement: sort the RICE table. Content is fully readable without JS.
-  (function () {
-    var table = document.getElementById('rice-table');
-    if (!table) return;
-    var tbody = table.querySelector('tbody');
-    var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
-    var buttons = document.querySelectorAll('.seg [data-sort]');
+(function () {
+  "use strict";
+  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function sortBy(key) {
-      var dir = key === 'effort' ? 1 : -1; // effort ascending (low first); others descending
-      var sorted = rows.slice().sort(function (a, b) {
-        var av = parseFloat(a.getAttribute('data-' + (key === 'rank' ? 'rank' : key)));
-        var bv = parseFloat(b.getAttribute('data-' + (key === 'rank' ? 'rank' : key)));
-        if (key === 'rank') return av - bv; // rank 1 first
-        return (av - bv) * dir;
-      });
-      sorted.forEach(function (r) { tbody.appendChild(r); });
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        buttons.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
-        btn.setAttribute('aria-pressed', 'true');
-        sortBy(btn.getAttribute('data-sort'));
-      });
-    });
-  })();
-
-  // Progressive enhancement: scroll-spy for the desktop "On this page" rail.
-  // Content and links work fully without JS; this only moves the active highlight.
-  (function () {
-    var rail = document.querySelector('aside.toc-rail');
-    if (!rail || !('IntersectionObserver' in window)) return;
-    var links = Array.prototype.slice.call(rail.querySelectorAll('.toc-list a'));
-    if (!links.length) return;
-
-    var linkById = {};
-    var sections = [];
-    links.forEach(function (a) {
-      var id = a.getAttribute('href').slice(1);
-      var sec = document.getElementById(id);
-      if (sec) { linkById[id] = a; sections.push(sec); }
-    });
-
-    var visible = {};
-    function setCurrent(id) {
-      links.forEach(function (a) {
-        if (a.getAttribute('href') === '#' + id) { a.setAttribute('aria-current', 'true'); }
-        else { a.removeAttribute('aria-current'); }
-      });
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
+  // ---- reveal-on-scroll (enhancement only; content visible by default) ----
+  if (!prefersReduced && "IntersectionObserver" in window) {
+    document.body.classList.add("js-reveal");
+    var sections = document.querySelectorAll("main section");
+    var revObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        visible[e.target.id] = e.isIntersecting;
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          revObs.unobserve(e.target);
+        }
       });
-      // pick the topmost section currently intersecting
-      var current = null;
-      for (var i = 0; i < sections.length; i++) {
-        if (visible[sections[i].id]) { current = sections[i].id; break; }
-      }
-      if (current) setCurrent(current);
-    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+    sections.forEach(function (s) { revObs.observe(s); });
+  }
 
-    sections.forEach(function (s) { observer.observe(s); });
-  })();
+  // ---- scroll-spy for the left rail ----
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  if (railLinks.length && "IntersectionObserver" in window) {
+    var map = {};
+    railLinks.forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      map[id] = a;
+    });
+    var visible = {};
+    function setCurrent() {
+      var best = null, bestTop = Infinity;
+      Object.keys(visible).forEach(function (id) {
+        if (visible[id] != null && visible[id] < bestTop) { bestTop = visible[id]; best = id; }
+      });
+      railLinks.forEach(function (a) { a.removeAttribute("aria-current"); });
+      if (best && map[best]) { map[best].setAttribute("aria-current", "true"); }
+    }
+    var spyObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var id = e.target.getAttribute("id");
+        if (e.isIntersecting) { visible[id] = e.boundingClientRect.top; }
+        else { delete visible[id]; }
+      });
+      setCurrent();
+    }, { rootMargin: "-20% 0px -70% 0px", threshold: 0 });
+    document.querySelectorAll("main section[id]").forEach(function (s) { spyObs.observe(s); });
+  }
+})();
 </script>
-
 </body>
 </html>
