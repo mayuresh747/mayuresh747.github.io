@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayuresh More: Senior Product Manager, AI at Instacart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f2;
+    --surface:#ffffff;
+    --panel:#f3efe7;
+    --ink:#221f1a;
+    --ink-soft:#4a463d;
+    --ink-faint:#8a8478;
+    --line:#e2dccf;
+    --line-strong:#d2cabb;
+    --accent:#3a7d44;        /* fresh green */
+    --accent-deep:#2c6135;
+    --accent-soft:#e6f0e3;
+    --amber:#b07d23;
+    --amber-soft:#f6eed9;
+    --red:#a8432f;
+    --red-soft:#f4e2dd;
+    --blue:#2f5d8a;
+    --blue-soft:#e2ecf4;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1080px;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:2rem;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(58,125,68,0.05), transparent 38%),
+      radial-gradient(circle at 88% 4%, rgba(176,125,35,0.045), transparent 34%);
+    background-attachment:fixed;
+  }
+
+  /* ---- skip link ---- */
+  .skip-link{
+    position:absolute;left:8px;top:-48px;
+    background:var(--accent);color:#fff;
+    padding:.55rem 1rem;border-radius:6px;
+    font-family:var(--mono);font-size:.8rem;
+    z-index:200;transition:top .15s ease;
+    text-decoration:none;
+  }
+  .skip-link:focus{top:8px;}
+
+  a{color:inherit;}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:3px;}
+
+  /* ---- citation links ---- */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line-strong);
+    transition:color .15s ease, text-decoration-color .15s ease;
+  }
+  a.src:hover, a.src:focus{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+
+  /* ---- layout wrap ---- */
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+  }
+
+  /* masthead + footer align to content column (past the rail) on desktop */
+  .aligned{ }
+
+  /* ---- masthead ---- */
+  header.masthead{
+    padding-top:clamp(2.4rem,6vw,4.2rem);
+    padding-bottom:1.6rem;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 1.1rem;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2rem,5vw,2.9rem);
+    line-height:1.04;
+    letter-spacing:-0.01em;
+    margin:0 0 .85rem;
+    color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--body);
+    font-size:clamp(1.04rem,2.4vw,1.28rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:44ch;
+    margin:0 0 1.1rem;
+    font-weight:500;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  /* ---- mobile contents disclosure ---- */
+  .toc-mobile{
+    margin:1.6rem 0 .4rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--surface);
+  }
+  .toc-mobile summary{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:.85rem 1rem;
+    cursor:pointer;
+    list-style:none;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none;}
+  .toc-mobile summary::after{content:"+";color:var(--accent);font-size:1rem;}
+  .toc-mobile[open] summary::after{content:"\2212";}
+  .toc-mobile ol{
+    list-style:none;margin:0;padding:0 1rem 1rem;
+    columns:2;column-gap:1.2rem;
+  }
+  .toc-mobile li{margin:.34rem 0;break-inside:avoid;}
+  .toc-mobile a{
+    font-family:var(--mono);
+    font-size:.78rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  .toc-mobile a:hover{color:var(--accent);}
+
+  /* ---- two-column grid (desktop) ---- */
+  .layout{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    display:block;
+  }
+
+  nav.rail{ display:none; }
+
+  /* ---- main content ---- */
+  main{
+    padding-bottom:2rem;
+  }
+
+  section{
+    padding:2.4rem 0 .6rem;
+    border-top:1px solid var(--line);
+  }
+  section:first-of-type{border-top:none;padding-top:1.4rem;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:1rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 1rem;
+    line-height:1.2;
+  }
+  h2.kicker{ }
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.3rem,3vw,1.72rem);
+    line-height:1.28;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0 0 1.2rem;
+    max-width:34ch;
+  }
+
+  p{margin:0 0 1.1rem;max-width:68ch;}
+  section p{color:var(--ink-soft);}
+  section p strong{color:var(--ink);font-weight:600;}
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-0.005em;
+    color:var(--ink);
+    margin:1.6rem 0 .5rem;
+  }
+
+  ul.clean{ list-style:none;padding:0;margin:0 0 1.1rem;max-width:68ch; }
+  ul.clean li{
+    position:relative;
+    padding-left:1.4rem;
+    margin:0 0 .8rem;
+    color:var(--ink-soft);
+  }
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:0;top:.62em;
+    width:7px;height:7px;border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+  ul.clean li strong{color:var(--ink);font-weight:600;}
+
+  ol.qlist{
+    margin:0;padding:0;list-style:none;counter-reset:q;max-width:68ch;
+  }
+  ol.qlist li{
+    counter-increment:q;
+    position:relative;
+    padding-left:2.6rem;
+    margin:0 0 1rem;
+    color:var(--ink-soft);
+  }
+  ol.qlist li::before{
+    content:counter(q);
+    position:absolute;left:0;top:0;
+    width:1.8rem;height:1.8rem;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:.82rem;font-weight:600;
+    color:var(--accent-deep);
+    background:var(--accent-soft);
+    border:1px solid var(--line-strong);
+    border-radius:50%;
+  }
+
+  /* ---- stat strip ---- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    margin:0 0 1.6rem;
+  }
+  .stat{
+    background:var(--surface);
+    padding:1.1rem 1.1rem 1.2rem;
+  }
+  .stat .num{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.4rem,3.4vw,1.9rem);
+    letter-spacing:-0.02em;
+    color:var(--accent-deep);
+    line-height:1;
+    margin-bottom:.4rem;
+  }
+  .stat .lab{
+    font-size:.86rem;
+    line-height:1.34;
+    color:var(--ink-soft);
+  }
+  @media (max-width:600px){
+    .stats{ grid-template-columns:1fr; }
+  }
+
+  /* ---- tables ---- */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin:0 0 1.4rem;
+    background:var(--surface);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.92rem;
+    min-width:560px;
+  }
+  thead th{
+    text-align:left;
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    font-weight:600;
+    padding:.85rem 1rem;
+    background:var(--panel);
+    border-bottom:1px solid var(--line-strong);
+    vertical-align:bottom;
+  }
+  tbody td{
+    padding:.85rem 1rem;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-soft);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td strong{color:var(--ink);font-weight:600;}
+  tbody tr:nth-child(even) td{background:rgba(243,239,231,0.4);}
+  td .read-build{
+    display:inline-block;
+    font-family:var(--mono);font-size:.66rem;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent-deep);background:var(--accent-soft);
+    border:1px solid var(--line-strong);
+    padding:.18rem .5rem;border-radius:5px;white-space:nowrap;
+  }
+
+  /* ---- callout / note ---- */
+  .note{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:1rem 1.2rem;
+    margin:0 0 1.4rem;
+    max-width:68ch;
+  }
+  .note p{margin:0;color:var(--ink-soft);font-size:.96rem;}
+  .note p strong{color:var(--ink);}
+
+  .glossary{
+    font-size:.92rem;
+    color:var(--ink-faint);
+    font-style:italic;
+    max-width:64ch;
+    margin:-0.3rem 0 1.2rem;
+  }
+
+  /* ---- diagrams ---- */
+  figure.diagram{
+    margin:0 0 1.6rem;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.5rem 1.4rem 1.2rem;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:1.1rem;
+  }
+  .diagram-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  figure.diagram svg{
+    display:block;
+    width:100%;
+    height:auto;
+    font-family:var(--display);
+  }
+  @media (max-width:640px){
+    figure.diagram .diagram-scroll svg{ min-width:540px; }
+  }
+  .diag-legend{
+    display:flex;flex-wrap:wrap;gap:.6rem 1.3rem;
+    margin-top:1rem;font-size:.8rem;color:var(--ink-soft);
+  }
+  .diag-legend span{display:inline-flex;align-items:center;gap:.4rem;}
+  .diag-legend i{
+    width:11px;height:11px;border-radius:3px;display:inline-block;flex:none;
+  }
+
+  /* ---- footer ---- */
+  footer.site-foot{
+    border-top:1px solid var(--line);
+    margin-top:2.4rem;
+    padding:2.4rem 0 3.2rem;
+  }
+  .foot-name{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin:0 0 .5rem;
+  }
+  .foot-tag{
+    font-size:.96rem;color:var(--ink-soft);max-width:54ch;margin:0 0 1.3rem;
+  }
+  .contact{
+    display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;
+    font-family:var(--mono);font-size:.8rem;
+  }
+  .contact a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:1px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contact a:hover, .contact a:focus{color:var(--accent);border-color:var(--accent);}
+
+  /* ---- reveal (visible by default, animates only when JS adds class) ---- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+
+  /* ============ DESKTOP: rail layout ============ */
+  @media (min-width:920px){
+    .masthead-inner, .foot-inner{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+      padding-right:var(--wrap-pad);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:2rem;
+      align-self:start;
+    }
+    nav.rail .rail-head{
+      font-family:var(--mono);
+      font-size:.66rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 .9rem;
+      padding-left:.9rem;
+    }
+    nav.rail ol{
+      list-style:none;margin:0;padding:0;
+      border-left:1px solid var(--line-strong);
+    }
+    nav.rail li{margin:0;}
+    nav.rail a{
+      display:block;
+      font-family:var(--mono);
+      font-size:.76rem;
+      line-height:1.3;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:.34rem 0 .34rem .9rem;
+      margin-left:-1px;
+      border-left:2px solid transparent;
+      transition:color .15s ease,border-color .15s ease;
+    }
+    nav.rail a:hover{color:var(--ink-soft);}
+    nav.rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-left-color:var(--accent);
+      font-weight:600;
+    }
+    .toc-mobile{display:none;}
+    section{padding:2.8rem 0 .6rem;}
+    main{max-width:720px;}
+  }
+
+  @media (min-width:920px) and (max-width:1080px){
+    :root{ --rail-gap:36px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <p class="eyebrow">Product pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="role-line">How I would solve the margin-recovery problem for the Senior Product Manager, AI role at Instacart.</p>
+    <p class="prepared">Prepared June 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#users">Who it is for</a></li>
+        <li><a href="#priority">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#business">Business impact</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ===================== THE BET ===================== -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="lede reveal">Instacart wins this market by shipping one trusted agent at a time, each tied to a dollar a retailer can see in its own P&amp;L.</p>
+      <p class="reveal">Grocery runs on a 1.7% net margin, the lowest since 2019 <a class="src" href="https://www.grocerydive.com/news/grocery-industry-profit-margins-fall-to-pre-pandemic-levels-fmi/720517/" target="_blank" rel="noopener">(FMI 2024, via Grocery Dive)</a>. Most of the leak is operational: shelves go empty, fresh food spoils, and orders get mis-picked. I would start with fresh shrink, because that is where a competitor has already proven a 20 to 25% reduction and where Instacart's shopper data plus shelf vision can beat them.</p>
+      <p class="reveal"><strong>The product is not the model. The product is trust.</strong> A retailer hands ordering decisions to an agent only when it can watch the agent, override it, and read the ROI.</p>
+    </section>
+
+    <!-- ===================== PROBLEM ===================== -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="reveal">A retailer loses margin in three places at once, and each one is large relative to that 1.7% net margin.</p>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="num">$129.5B</div>
+          <div class="lab">North American grocery out-of-stock per year <a class="src" href="https://foodinstitute.com/focus/why-inventory-distortion-costs-retailers-trillions/" target="_blank" rel="noopener">(Food Institute on IHL data)</a></div>
+        </div>
+        <div class="stat">
+          <div class="num">$112B</div>
+          <div class="lab">U.S. retail shrink, 1.6% of sales, with perishables driving nearly two-thirds of grocery shrink <a class="src" href="https://nrf.com/research/national-retail-security-survey-2023" target="_blank" rel="noopener">(NRF 2023)</a></div>
+        </div>
+        <div class="stat">
+          <div class="num">$196.4B</div>
+          <div class="lab">In-store inefficiencies cost U.S. retailers in 2025, up from 4.5% to 5.5% of gross sales <a class="src" href="https://www.prnewswire.com/news-releases/in-store-inefficiencies-cost-retail-196-billion-annually-driven-by-misordered-tech-deployments-strategies-302783959.html" target="_blank" rel="noopener">(PR Newswire, 2025)</a></div>
+        </div>
+      </div>
+
+      <h3>Out-of-stock</h3>
+      <p class="reveal">On-shelf availability runs 92 to 95% against a 98%+ target, and drops during the exact promotion windows when trade spend is highest <a class="src" href="https://www.grocerydive.com/news/instacart-new-store-tools-out-of-stocks/743663/" target="_blank" rel="noopener">(ECR / FMI, via Grocery Dive)</a>. The root cause is bad data, not lazy planners: up to 60% of inventory records are inaccurate, which creates "phantom inventory" where the system thinks a shelf is full and never reorders.</p>
+
+      <h3>Shrink and waste</h3>
+      <p class="reveal">Roughly 30% of grocery food goes unsold each year, and perishable departments drive nearly two-thirds of grocery shrink <a class="src" href="https://nrf.com/research/national-retail-security-survey-2023" target="_blank" rel="noopener">(NRF 2023)</a>. At a 1.7% net margin, every 0.1% of sales recovered from shrink drops straight to the bottom line.</p>
+
+      <h3>Fulfillment and picking</h3>
+      <p class="reveal">Instacart's own orders show that on average at least one item is replaced, and about 5% of customers report dissatisfaction with substitutions <a class="src" href="https://www.fool.com/earnings/call-transcripts/2026/02/12/instacart-cart-q4-2025-earnings-call-transcript/" target="_blank" rel="noopener">(Instacart Q4 2025 earnings call)</a>. That is a retention and margin risk Instacart can see in a way no traditional warehouse system can.</p>
+
+      <h3>Why today's workarounds fail</h3>
+      <p class="reveal">Planners log into dashboards, eyeball spreadsheets, and walk aisles. Incumbent supply-chain software (Blue Yonder, RELEX) forecasts from the retailer's own order and POS history. Both inherit the 60% inaccurate-records problem, because they cannot see the real shelf. <strong>The status quo is the true competitor, and it has zero switching cost.</strong> Any agent has to be clearly better than a planner with a spreadsheet, not marginally better.</p>
+    </section>
+
+    <!-- ===================== USERS / JTBD ===================== -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="reveal">This is a B2B product. The person who uses it daily is not the person who signs the contract, and the agent has to speak to both.</p>
+      <p class="glossary">JTBD is short for "job to be done," the underlying goal a buyer is hiring the product to accomplish.</p>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Persona</th>
+              <th>The job they hire the agent to do</th>
+              <th>What kills the deal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fresh / department manager</strong><br>daily user. Decides order quantities and markdowns per SKU</td>
+              <td>"When I order fresh, help me not run out and not throw out, without me babysitting a dashboard."</td>
+              <td>An agent that over-orders once on a big SKU and wastes a pallet. Trust is gone.</td>
+            </tr>
+            <tr>
+              <td><strong>Store ops / supply-chain director</strong><br>champion. Owns availability and shrink across a region</td>
+              <td>"Show me availability up and shrink down, with an audit trail I can defend to my VP."</td>
+              <td>No proof of causation. They cannot tell their boss the agent did it.</td>
+            </tr>
+            <tr>
+              <td><strong>Procurement / IT / security</strong><br>gatekeeper. Approves spend, integrations, data sharing</td>
+              <td>"Prove this is safe, integrates with my WMS and POS, and will not become shadow IT."</td>
+              <td>A heavy integration with no API path and unclear data governance.</td>
+            </tr>
+            <tr>
+              <td><strong>VP of merchandising / CFO sponsor</strong><br>economic buyer. Approves the budget and the ROI case</td>
+              <td>"Give me a per-store dollar return I can put in the plan."</td>
+              <td>A pilot result that does not survive scrutiny or scale.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="reveal">The agent has to satisfy the daily user (low effort, never embarrassing), the champion (visible margin recovery), the gatekeeper (safe and integrable), and the buyer (a defensible ROI number). A demo that wins only the data scientist loses the deal.</p>
+    </section>
+
+    <!-- ===================== PRIORITIZATION ===================== -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="reveal">The team is small (2 PMs, 7 engineers) and cannot build out-of-stock, shrink, and fulfillment agents at once. So the first question is which problem to fund first.</p>
+      <p class="glossary">RICE scores each option on Reach, Impact, Confidence, and Effort, then ranks by (Reach x Impact x Confidence) / Effort.</p>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate first bet</th>
+              <th>Reach</th>
+              <th>Impact</th>
+              <th>Confidence</th>
+              <th>Effort</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fresh shrink agent</strong></td>
+              <td>Every grocery banner has fresh departments</td>
+              <td>High. Fresh drives ~two-thirds of shrink; 0.1% of sales recovered hits net margin directly</td>
+              <td>High. A competitor already proved 20 to 25% shrink cuts</td>
+              <td>Medium. Needs POS, waste logs, shelf signal, bounded to fresh</td>
+              <td><span class="read-build">Build first</span></td>
+            </tr>
+            <tr>
+              <td>Out-of-stock / replenishment agent</td>
+              <td>Whole store, very high reach</td>
+              <td>High lost-sales recovery</td>
+              <td>Medium. Phantom inventory and autonomous ordering raise the trust bar fastest</td>
+              <td>High. Touches whole-store data and write-access to ordering</td>
+              <td>Second</td>
+            </tr>
+            <tr>
+              <td>Fulfillment / substitution agent</td>
+              <td>Instacart-fulfilled orders</td>
+              <td>Medium margin, high CX value</td>
+              <td>High. Instacart owns this data already</td>
+              <td>Medium</td>
+              <td>Parallel CX win</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note reveal">
+        <p><strong>Why fresh shrink first.</strong> The value is least in doubt. Afresh reported 20 to 25% shrink reduction, 3% sales uplift, 7% higher inventory turns, and 70% year-over-year revenue growth in 2025, with a nationwide Albertsons rollout completed in October 2025 across 12,500+ departments <a class="src" href="https://www.prnewswire.com/news-releases/afresh-raises-34m-to-scale-ai-across-the-grocery-industry--driving-fresher-food-stronger-margins-and-less-waste-302747794.html" target="_blank" rel="noopener">(Afresh, via PR Newswire, April 2026)</a>. A proven market de-risks Confidence, the effort is bounded because fresh is one part of the store, and it is exactly where Instacart's data moat changes the answer: Afresh forecasts from a retailer's own history, while Instacart adds real-time shelf state from Store View computer vision and a live demand signal from 340M+ orders.</p>
+      </div>
+    </section>
+
+    <!-- ===================== APPROACH ===================== -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="reveal">I would treat three directions as bets to validate, not a fixed plan, and decide between them with pilots.</p>
+
+      <figure class="diagram reveal">
+        <figcaption>Three approach hypotheses for the first agent</figcaption>
+        <div class="diagram-scroll">
+          <svg viewBox="0 0 760 430" role="img" aria-label="Three product directions for the fresh-margin agent, from advisory to autonomous, each feeding a pilot decision rule that either promotes the agent to v1 or holds it advisory to fix data.">
+            <defs>
+              <marker id="arrA" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,1 L8,4.5 L0,8 z" fill="#8a8478"></path>
+              </marker>
+            </defs>
+            <!-- H1 -->
+            <g>
+              <rect x="20" y="24" width="216" height="78" rx="11" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.5"></rect>
+              <text x="38" y="50" font-size="13" font-weight="700" fill="#1e3a5f">H1 Advisory agent</text>
+              <text x="38" y="70" font-size="11.5" fill="#2f5d8a">recommends order qty and</text>
+              <text x="38" y="86" font-size="11.5" fill="#2f5d8a">markdown timing, human approves</text>
+            </g>
+            <!-- H2 -->
+            <g>
+              <rect x="20" y="142" width="216" height="78" rx="11" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.5"></rect>
+              <text x="38" y="168" font-size="13" font-weight="700" fill="#1e3a5f">H2 Bounded autonomy</text>
+              <text x="38" y="188" font-size="11.5" fill="#2f5d8a">auto-acts below a dollar threshold,</text>
+              <text x="38" y="204" font-size="11.5" fill="#2f5d8a">human signs off above</text>
+            </g>
+            <!-- H3 -->
+            <g>
+              <rect x="20" y="260" width="216" height="86" rx="11" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.5"></rect>
+              <text x="38" y="286" font-size="13" font-weight="700" fill="#1e3a5f">H3 Data-moat signal</text>
+              <text x="38" y="306" font-size="11.5" fill="#2f5d8a">fuse Store View shelf state +</text>
+              <text x="38" y="322" font-size="11.5" fill="#2f5d8a">order demand signal into</text>
+              <text x="38" y="338" font-size="11.5" fill="#2f5d8a">the forecast</text>
+            </g>
+
+            <!-- decision diamond -->
+            <g>
+              <polygon points="470,185 560,250 470,315 380,250" fill="#f6eed9" stroke="#b07d23" stroke-width="1.5"></polygon>
+              <text x="470" y="232" font-size="11.5" font-weight="600" fill="#713f12" text-anchor="middle">Pilot decision rule</text>
+              <text x="470" y="250" font-size="10.5" fill="#713f12" text-anchor="middle">does added autonomy or</text>
+              <text x="470" y="265" font-size="10.5" fill="#713f12" text-anchor="middle">signal beat the simpler</text>
+              <text x="470" y="280" font-size="10.5" fill="#713f12" text-anchor="middle">version on net recovery?</text>
+            </g>
+
+            <!-- connectors to decision -->
+            <path d="M236,63 C320,63 320,238 378,247" fill="none" stroke="#8a8478" stroke-width="1.4" marker-end="url(#arrA)" aria-hidden="true"></path>
+            <path d="M236,181 C310,181 320,243 378,250" fill="none" stroke="#8a8478" stroke-width="1.4" marker-end="url(#arrA)" aria-hidden="true"></path>
+            <path d="M236,303 C320,303 320,262 378,253" fill="none" stroke="#8a8478" stroke-width="1.4" marker-end="url(#arrA)" aria-hidden="true"></path>
+
+            <!-- ship -->
+            <g>
+              <rect x="600" y="92" width="142" height="58" rx="11" fill="#e6f0e3" stroke="#3a7d44" stroke-width="1.5"></rect>
+              <text x="671" y="118" font-size="13" font-weight="700" fill="#14532d" text-anchor="middle">Promote to v1</text>
+              <text x="671" y="136" font-size="10.5" fill="#2c6135" text-anchor="middle">trust holds</text>
+            </g>
+            <!-- hold -->
+            <g>
+              <rect x="600" y="350" width="142" height="58" rx="11" fill="#f3efe7" stroke="#8a8478" stroke-width="1.5"></rect>
+              <text x="671" y="376" font-size="13" font-weight="700" fill="#4a463d" text-anchor="middle">Stay advisory</text>
+              <text x="671" y="394" font-size="10.5" fill="#8a8478" text-anchor="middle">fix the data</text>
+            </g>
+
+            <!-- decision out -->
+            <path d="M540,225 C580,200 580,160 598,140" fill="none" stroke="#3a7d44" stroke-width="1.6" marker-end="url(#arrA)" aria-hidden="true"></path>
+            <text x="556" y="178" font-size="10.5" font-weight="600" fill="#2c6135">yes</text>
+            <path d="M510,300 C570,330 580,350 598,366" fill="none" stroke="#8a8478" stroke-width="1.6" marker-end="url(#arrA)" aria-hidden="true"></path>
+            <text x="556" y="338" font-size="10.5" font-weight="600" fill="#8a8478">no</text>
+          </svg>
+        </div>
+        <div class="diag-legend">
+          <span><i style="background:#cfe0ee"></i>Hypothesis</span>
+          <span><i style="background:#f1e3c2"></i>Decision</span>
+          <span><i style="background:#d2e7cd"></i>Outcome</span>
+        </div>
+      </figure>
+
+      <ul class="clean reveal">
+        <li><strong>H1, advisory first.</strong> The agent recommends order quantities and markdown timing; a department manager approves. Lowest trust barrier, fastest to ship, and it generates the override data that trains autonomy. This is also the pattern Instacart has already shipped through the Advantage Solutions partnership <a class="src" href="https://www.prnewswire.com/news-releases/instacart-and-advantage-solutions-partner-to-give-cpgs-real-time-shelf-visibility-at-scale-302568522.html" target="_blank" rel="noopener">(PR Newswire, Sept 2025)</a>. I would start here.</li>
+        <li><strong>H2, bounded autonomy.</strong> Once advisory accuracy is proven, let the agent auto-act below a configurable dollar threshold and escalate above it. This is where the labor savings and the bigger ROI sit, but it raises the trust bar, so it is earned, not assumed.</li>
+        <li><strong>H3, the data-moat differentiator.</strong> Fuse Store View shelf state and the order-demand signal into the forecast. This is the bet that separates Instacart from Afresh and Blue Yonder. I would A/B the moat-enriched forecast against a history-only baseline inside the pilot to prove the lift is real and worth the integration cost.</li>
+      </ul>
+      <p class="reveal">The decision rule is the same across all three: a more autonomous or more data-rich version only graduates if it beats the simpler version on net shrink recovered, after subtracting the cost of its errors.</p>
+    </section>
+
+    <!-- ===================== MVP ===================== -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+      <p class="reveal">The MVP is the smallest test of the biggest assumption: that Instacart's shelf-and-demand data produces forecasts good enough that a fresh manager trusts and acts on them.</p>
+
+      <h3>v0: an advisory fresh-ordering agent for two to three departments in one regional pilot retailer</h3>
+      <ul class="clean reveal">
+        <li><strong>One scope.</strong> Produce, plus one or two other fresh departments. Daily SKU-level order-quantity recommendations and markdown-timing flags.</li>
+        <li><strong>Human-in-the-loop by default.</strong> Every recommendation is approved or overridden by the department manager. Every override is logged with a reason code.</li>
+        <li><strong>An ROI panel from day one.</strong> Shrink dollars, waste pounds, and availability tracked against a pre-pilot baseline and a control set of stores.</li>
+        <li><strong>A data-readiness gate before any model work.</strong> A minimum data contract (POS scan rates, waste and markdown logs, delivery schedules, Store View shelf state) at an agreed latency, with a graceful-degradation rule for when feeds are late or dirty.</li>
+      </ul>
+
+      <p class="reveal"><strong>What it deliberately leaves out:</strong> whole-store replenishment, autonomous ordering, multi-retailer rollout, the fulfillment agent, and international deployment. All real, all later. v0 exists to prove the dollar and earn the trust.</p>
+    </section>
+
+    <!-- ===================== METRICS ===================== -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="reveal">The North Star is the metric that proves the product moved the retailer's P&amp;L, because that is what renews a contract and unlocks the next one.</p>
+
+      <div class="note reveal">
+        <p><strong>North Star: net margin dollars recovered per store per period</strong>, attributable to the agent and provable against a control group. A North Star alone can be gamed (you can cut shrink by under-ordering and just create out-of-stocks), so it sits in a tree of input metrics that show how the value is created and guardrails that catch the agent harming something else.</p>
+      </div>
+
+      <figure class="diagram reveal">
+        <figcaption>Metrics tree for the fresh-margin agent</figcaption>
+        <div class="diagram-scroll">
+          <svg viewBox="0 0 760 400" role="img" aria-label="A North Star of net margin dollars recovered per store, broken into four input metrics that drive it (shrink reduction, on-shelf availability, recommendation accept rate, forecast accuracy) and four guardrail metrics that protect against gaming (out-of-stock rate, agent error cost, override-with-reason rate, model uptime).">
+            <defs>
+              <marker id="arrB" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,1 L8,4.5 L0,8 z" fill="#8a8478"></path>
+              </marker>
+            </defs>
+            <!-- North Star -->
+            <rect x="280" y="18" width="200" height="64" rx="12" fill="#f6eed9" stroke="#d97706" stroke-width="2"></rect>
+            <text x="380" y="42" font-size="13" font-weight="700" fill="#713f12" text-anchor="middle">North Star</text>
+            <text x="380" y="60" font-size="11" fill="#8a5a12" text-anchor="middle">Net margin dollars recovered</text>
+            <text x="380" y="74" font-size="11" fill="#8a5a12" text-anchor="middle">per store vs. control</text>
+
+            <!-- input header -->
+            <text x="30" y="128" font-size="10" font-weight="700" letter-spacing="0.1em" fill="#2f5d8a">INPUTS (drive it)</text>
+            <!-- inputs -->
+            <g font-size="11" fill="#1e3a5f">
+              <rect x="24" y="138" width="158" height="56" rx="9" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.3"></rect>
+              <text x="38" y="161" font-weight="700">Shrink reduction %</text>
+              <text x="38" y="178">fresh waste vs. baseline</text>
+
+              <rect x="200" y="138" width="158" height="56" rx="9" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.3"></rect>
+              <text x="214" y="161" font-weight="700">On-shelf availability</text>
+              <text x="214" y="178">percentage-point lift</text>
+
+              <rect x="24" y="206" width="158" height="56" rx="9" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.3"></rect>
+              <text x="38" y="229" font-weight="700">Accept rate</text>
+              <text x="38" y="246">did the manager act</text>
+
+              <rect x="200" y="206" width="158" height="56" rx="9" fill="#e2ecf4" stroke="#2f5d8a" stroke-width="1.3"></rect>
+              <text x="214" y="229" font-weight="700">Forecast accuracy</text>
+              <text x="214" y="246">moat vs. history-only</text>
+            </g>
+
+            <!-- guardrail header -->
+            <text x="406" y="128" font-size="10" font-weight="700" letter-spacing="0.1em" fill="#a8432f">GUARDRAILS (protect it)</text>
+            <!-- guardrails -->
+            <g font-size="11" fill="#7f1d1d">
+              <rect x="400" y="138" width="158" height="56" rx="9" fill="#f4e2dd" stroke="#a8432f" stroke-width="1.3"></rect>
+              <text x="414" y="161" font-weight="700">Out-of-stock rate</text>
+              <text x="414" y="178">must not rise as shrink falls</text>
+
+              <rect x="576" y="138" width="160" height="56" rx="9" fill="#f4e2dd" stroke="#a8432f" stroke-width="1.3"></rect>
+              <text x="590" y="161" font-weight="700">Agent error cost</text>
+              <text x="590" y="178">dollar value of bad calls</text>
+
+              <rect x="400" y="206" width="158" height="56" rx="9" fill="#f4e2dd" stroke="#a8432f" stroke-width="1.3"></rect>
+              <text x="414" y="229" font-weight="700">Override-with-reason</text>
+              <text x="414" y="246">trust + data-quality signal</text>
+
+              <rect x="576" y="206" width="160" height="56" rx="9" fill="#f4e2dd" stroke="#a8432f" stroke-width="1.3"></rect>
+              <text x="590" y="229" font-weight="700">Model uptime</text>
+              <text x="590" y="246">one misfire is contract-ending</text>
+            </g>
+
+            <!-- connectors NS to inputs (solid) -->
+            <path d="M300,82 C200,100 130,118 103,136" fill="none" stroke="#8a8478" stroke-width="1.3" marker-end="url(#arrB)" aria-hidden="true"></path>
+            <path d="M330,82 C300,105 285,118 279,136" fill="none" stroke="#8a8478" stroke-width="1.3" marker-end="url(#arrB)" aria-hidden="true"></path>
+            <!-- connectors NS to guardrails (dashed) -->
+            <path d="M430,82 C460,105 472,118 478,136" fill="none" stroke="#a8432f" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrB)" aria-hidden="true"></path>
+            <path d="M460,82 C570,100 630,118 655,136" fill="none" stroke="#a8432f" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrB)" aria-hidden="true"></path>
+
+            <text x="380" y="300" font-size="10.5" fill="#8a8478" text-anchor="middle" font-style="italic">Solid lines drive the North Star. Dashed lines protect it.</text>
+          </svg>
+        </div>
+        <div class="diag-legend">
+          <span><i style="background:#f1e3c2"></i>North Star</span>
+          <span><i style="background:#cfe0ee"></i>Input metric</span>
+          <span><i style="background:#eccfc7"></i>Guardrail</span>
+        </div>
+      </figure>
+
+      <h3>Eval framework for the AI itself</h3>
+      <p class="reveal">A recommendation is "right" when it reduces shrink without creating an out-of-stock. The two failure modes have different costs: a false positive (over-order) becomes waste; a false negative (under-order) becomes a missed sale and an empty shelf. I would set the agent's confidence threshold from those asymmetric costs, not from raw accuracy, and hold a golden set of historical days to test changes before they ship. The bar to act autonomously is not "accurate enough," it is "the expected dollar value of acting beats the expected dollar cost of being wrong."</p>
+    </section>
+
+    <!-- ===================== BUSINESS ===================== -->
+    <section id="business" aria-labelledby="business-h">
+      <h2 class="kicker" id="business-h">Business impact</h2>
+      <p class="reveal">This work sits inside Instacart's enterprise pivot, where the growth thesis is recurring B2B revenue that is not tied to the per-order take rate. The numbers below are anchored to Instacart's reported figures.</p>
+
+      <ul class="clean reveal">
+        <li><strong>It feeds the highest-growth, highest-margin line.</strong> Instacart reported Q1 2026 revenue of $1.019B, up 14% year over year, with advertising and other revenue growing 16% to $286M, its fastest growth in that segment since Q3 2023 <a class="src" href="https://investors.instacart.com/news-releases/news-release-details/instacart-announces-first-quarter-2026-financial-results" target="_blank" rel="noopener">(Instacart Q1 2026 results)</a>. Enterprise AI is positioned as the next leg of that line: recurring SaaS and platform fees retailers cannot build themselves.</li>
+        <li><strong>The moat is already deployed.</strong> Store View shelf vision is live (Good Food Holdings), Agentic Analytics is in pilot with Kroger and Sprouts, and the Advantage Solutions human-in-the-loop loop is scaling to full rollout in 2026 <a class="src" href="https://www.instacart.com/company/pressreleases/instacart-announces-new-enterprise-ai-solutions-to-democratize-ai-for-grocers-of-all-sizes" target="_blank" rel="noopener">(Instacart enterprise AI launch, Nov 2025)</a>. The fresh agent would sit on infrastructure that already exists, which shortens time to first revenue.</li>
+        <li><strong>The expansion path is global.</strong> The Instaleap acquisition added nearly 100 grocery retailers across nearly 30 countries <a class="src" href="https://investors.instacart.com/news-releases/news-release-details/instacart-acquires-instaleap-accelerate-global-expansion-its" target="_blank" rel="noopener">(Instacart acquires Instaleap, April 2026)</a>, which is the land-and-expand surface once the first agent proves its ROI domestically.</li>
+      </ul>
+      <p class="reveal">The revenue hypothesis I would own: pilot-to-contract conversion is the leading indicator, and a defensible per-store margin-recovery dollar is what converts a pilot into a multi-year, multi-department, multi-region contract.</p>
+    </section>
+
+    <!-- ===================== 30/60/90 ===================== -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <p class="reveal">Data readiness and a clean baseline come before any model tuning, because in enterprise the first quarter of a pilot is won or lost on data integration, not model accuracy.</p>
+
+      <figure class="diagram reveal">
+        <figcaption>First 90 days, Senior PM, AI</figcaption>
+        <div class="diagram-scroll">
+          <svg viewBox="0 0 760 320" role="img" aria-label="A 30-60-90 day plan: days 0 to 30 listen and ground; days 30 to 60 sharpen and align on the pilot design and ROI model; days 60 to 90 ship and measure a live v0 advisory agent with a provable baseline.">
+            <!-- timeline spine -->
+            <line x1="40" y1="44" x2="720" y2="44" stroke="#d2cabb" stroke-width="2"></line>
+            <circle cx="126" cy="44" r="6" fill="#3a7d44"></circle>
+            <circle cx="380" cy="44" r="6" fill="#3a7d44"></circle>
+            <circle cx="634" cy="44" r="6" fill="#3a7d44"></circle>
+
+            <!-- col 1 -->
+            <text x="40" y="26" font-size="12" font-weight="700" font-family="'JetBrains Mono',monospace" fill="#2c6135">0 TO 30 DAYS</text>
+            <text x="40" y="68" font-size="13" font-weight="700" fill="#221f1a">Listen and ground</text>
+            <g font-size="11" fill="#4a463d">
+              <text x="40" y="92">Interview the 2 PMs and 7 engineers; map</text>
+              <text x="40" y="107">what Store View, Agentic Analytics, and</text>
+              <text x="40" y="122">the Advantage loop already do</text>
+              <text x="40" y="146">Sit with a fresh manager and a store-ops</text>
+              <text x="40" y="161">director to hear the real workflow</text>
+              <text x="40" y="185">Query the shopper and shelf data myself</text>
+              <text x="40" y="200">to judge quality and the phantom gap</text>
+              <text x="40" y="224">Confirm which of OOS, shrink, or</text>
+              <text x="40" y="239">fulfillment is the funded first bet</text>
+            </g>
+
+            <!-- col 2 -->
+            <text x="294" y="26" font-size="12" font-weight="700" font-family="'JetBrains Mono',monospace" fill="#2c6135">30 TO 60 DAYS</text>
+            <text x="294" y="68" font-size="13" font-weight="700" fill="#221f1a">Sharpen and align</text>
+            <g font-size="11" fill="#4a463d">
+              <text x="294" y="92">Write the problem statement, the data-</text>
+              <text x="294" y="107">readiness contract, and the pilot design</text>
+              <text x="294" y="122">(control group, window, threshold)</text>
+              <text x="294" y="146">Build the unit-economics and ROI model</text>
+              <text x="294" y="161">with finance and enterprise sales</text>
+              <text x="294" y="185">Align security, IT, and procurement on</text>
+              <text x="294" y="200">the integration and data-sharing path</text>
+              <text x="294" y="215">early</text>
+            </g>
+
+            <!-- col 3 -->
+            <text x="548" y="26" font-size="12" font-weight="700" font-family="'JetBrains Mono',monospace" fill="#2c6135">60 TO 90 DAYS</text>
+            <text x="548" y="68" font-size="13" font-weight="700" fill="#221f1a">Ship and measure</text>
+            <g font-size="11" fill="#4a463d">
+              <text x="548" y="92">Stand up v0 advisory agent in two to</text>
+              <text x="548" y="107">three fresh departments at one pilot</text>
+              <text x="548" y="122">retailer</text>
+              <text x="548" y="146">Set the pre-pilot baseline and control</text>
+              <text x="548" y="161">set so causation is provable, not</text>
+              <text x="548" y="176">correlational</text>
+              <text x="548" y="200">Instrument the override log and the ROI</text>
+              <text x="548" y="215">panel, then propose the v1 roadmap</text>
+              <text x="548" y="230">from real results</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ===================== RISKS ===================== -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="reveal">These are risks in the proposed work, and what I would test in week one.</p>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Risk in the work</th>
+              <th>Why it matters</th>
+              <th>What I would validate first</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dirty data breaks the agent</strong></td>
+              <td>Up to 60% of inventory records are inaccurate, and a forecast on phantom inventory is wrong before any model runs</td>
+              <td>Pull the pilot retailer's POS, waste, and Store View feeds in week one and measure the real gap before promising any model lift</td>
+            </tr>
+            <tr>
+              <td><strong>The data moat may not beat history-only forecasting</strong></td>
+              <td>The whole "why Instacart vs. Afresh" case rests on shelf plus demand signal adding lift</td>
+              <td>A/B the moat-enriched forecast against a history-only baseline inside the pilot; if it does not win, the differentiation story changes</td>
+            </tr>
+            <tr>
+              <td><strong>One large misfire ends the contract</strong></td>
+              <td>A replenishment agent that over-orders a pallet destroys trust faster than slow accuracy gains build it</td>
+              <td>Ship advisory-first with human override and a hard dollar threshold before any autonomy; treat agent error cost as a first-class metric</td>
+            </tr>
+            <tr>
+              <td><strong>ROI claim does not survive procurement</strong></td>
+              <td>A pilot showing 12% shrink reduction can stall if procurement demands a 30% guarantee</td>
+              <td>Tie any SLA to data-quality inputs, show variance by department and store, and structure the contract to protect both sides</td>
+            </tr>
+            <tr>
+              <td><strong>Integration becomes shadow IT</strong></td>
+              <td>Retailers run heterogeneous WMS, POS, ERP, and EDI stacks with no real-time API layer</td>
+              <td>Define a minimum data contract and an API-first path with EDI fallback, agreed with the retailer's IT and security before build</td>
+            </tr>
+            <tr>
+              <td><strong>Scope sprawl across three problems</strong></td>
+              <td>A team of 9 cannot ship OOS, shrink, and fulfillment agents at once</td>
+              <td>Hold the line on one funded first bet; sequence the rest behind a proven proof point</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== QUESTIONS ===================== -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="reveal">The answers below would sharpen the first 90 days. These are what I would ask the team early.</p>
+      <ol class="qlist reveal">
+        <li>Which of the three problems (out-of-stock, shrink, or fulfillment) is the funded first bet, and is that already decided or open?</li>
+        <li>What is the commercial model: per-store SaaS fee, per-retailer subscription, outcome-based pricing on margin recovered, or bundled into Storefront Pro? This sets the unit-economics model I would own.</li>
+        <li>With Kroger and Sprouts as pioneer retailers, are there paying contracts and signed data-sharing agreements, or pilots? That changes how greenfield the first 90 days really are.</li>
+        <li>How should this agent interact with Carrot Ads revenue, given that out-of-stock shelf data is also valuable to CPG advertisers? There may be a second revenue stream from the same signal.</li>
+        <li>Post-Instaleap, is international deployment expected for the first product, or is the mandate to prove the model domestically first? The integration complexity is very different.</li>
+        <li>What is the human-in-the-loop bar leadership is comfortable with for autonomous ordering, and what is the appetite for the trust and governance investment that requires?</li>
+      </ol>
+    </section>
+
+    <!-- ===================== WHY ME ===================== -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="reveal">I am a product manager with 6+ years building data and AI products in finance and technology, finishing a Master of Science in Information Management at the University of Washington, on top of an MBA in Finance and a Bachelor of Engineering in Computer Engineering. The through-line of my work is the exact shape of this role: take messy enterprise data, turn it into a decision a business will trust, and prove the dollar it saves.</p>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>What the role needs</th>
+              <th>What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ship AI/ML products to enterprise users with measurable financial outcomes</td>
+              <td>I led discovery-to-launch of a finance budgeting product at Nomura that delivered a 30% reduction in spend, and rolled out an internal AI assistant to 15,000+ users with compliance and governance built in</td>
+            </tr>
+            <tr>
+              <td>Own ROI and unit-economics models; present business cases to executives</td>
+              <td>I drove a market-data sourcing program connecting directly to Tradeweb in place of Refinitiv distribution, and we delivered $700K in annual savings with better data quality across Fixed Income</td>
+            </tr>
+            <tr>
+              <td>0-to-1 product from concept through scale</td>
+              <td>At Lentra I built a digital lending platform from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations</td>
+            </tr>
+            <tr>
+              <td>Eval frameworks, model reliability, human-in-the-loop, AI governance</td>
+              <td>At UW I assessed 4 retrieval architectures on accuracy, groundedness, hallucination, latency, and cost, and set quality gates over a 9,000+ document ingestion pipeline across 8 agencies</td>
+            </tr>
+            <tr>
+              <td>Build-vs-buy and AI platform judgment</td>
+              <td>I evaluated 5+ retrieval platforms (Pinecone, Vertex AI, Azure AI, Bedrock, Vectara) on capability, architecture, and ingestion and query cost</td>
+            </tr>
+            <tr>
+              <td>Hands-on data proficiency (SQL or equivalent)</td>
+              <td>I query and analyze data in SQL and Python, and built 25+ automated reporting pipelines earlier in my career</td>
+            </tr>
+            <tr>
+              <td>Operational and risk transformation tied to financial metrics</td>
+              <td>I led operational risk transformation for Global Markets, reducing events by 20% and losses by 15% across FI/FX, tech, audit, and risk teams</td>
+            </tr>
+            <tr>
+              <td>Translate dirty enterprise data into trustworthy decisions</td>
+              <td>At Lentra I delivered credit-bureau API integrations (CIBIL, Equifax, Experian) that improved decision accuracy by 10% and cut manual review by 35%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="reveal">The pattern across Nomura, Lentra, and my current research is the one this seat needs: enterprise data that cannot be trusted at face value, an AI product that has to earn its way into a real decision, and a dollar number that has to hold up to a CFO. That is the margin-recovery problem at Instacart.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-tag">Senior Product Manager, AI. One trusted agent at a time, each tied to a dollar a retailer can see in its own P&amp;L.</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+
+<script>
+  (function(){
+    document.documentElement.classList.add('js');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- reveal on scroll (enhancement; content visible by default without .js or with reduced motion) ----
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // ---- scroll-spy for rail nav ----
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    if (links.length && 'IntersectionObserver' in window) {
+      var map = {};
+      links.forEach(function(a){
+        var id = a.getAttribute('href').slice(1);
+        map[id] = a;
+      });
+      var sections = links.map(function(a){
+        return document.getElementById(a.getAttribute('href').slice(1));
+      }).filter(Boolean);
+
+      var current = null;
+      function setCurrent(id){
+        if (current === id) return;
+        current = id;
+        links.forEach(function(a){
+          if (a.getAttribute('href') === '#' + id){ a.setAttribute('aria-current','true'); }
+          else { a.removeAttribute('aria-current'); }
+        });
+      }
+
+      var spy = new IntersectionObserver(function(entries){
+        // pick the entry nearest the top that is intersecting
+        var visible = entries.filter(function(e){ return e.isIntersecting; });
+        if (visible.length){
+          visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+          setCurrent(visible[0].target.id);
+        }
+      }, { rootMargin: '-12% 0px -70% 0px', threshold: 0 });
+
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
