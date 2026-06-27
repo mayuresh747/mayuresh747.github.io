@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I would solve the EBT fraud and chip-migration problem for the Product Manager II, Technical role at FIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f5f0;
+    --paper-raised:#fffdf9;
+    --ink:#1f2421;
+    --ink-soft:#3d4540;
+    --ink-faint:#7b827b;
+    --rule:#e2ddd2;
+    --rule-soft:#ece8de;
+    --accent:#1f5e4f;        /* deep evergreen */
+    --accent-bright:#2f7d68;
+    --accent-wash:#e7efe9;
+    --warn:#b5562a;
+    --warn-wash:#f6e7df;
+    --gold:#9a7a1f;
+    --gold-wash:#f4eed8;
+
+    --font-head:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+    --wrap:60rem;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:1.5rem;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--rule-soft) 0.5px, transparent 0.5px);
+    background-size:22px 22px;
+  }
+
+  /* ---------- skip link ---------- */
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--accent);color:#fff;
+    padding:.6rem 1rem;border-radius:0 0 6px 0;
+    font-family:var(--font-mono);font-size:.8rem;z-index:1000;
+    text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2.5px solid var(--accent-bright);
+    outline-offset:2px;border-radius:3px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead-wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:3.2rem var(--wrap-pad) 0;
+  }
+  .masthead{
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:1.4rem;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin:0 0 .9rem;
+  }
+  h1.name{
+    font-family:var(--font-head);
+    font-weight:700;
+    font-size:clamp(1.7rem,4.6vw,2.5rem);
+    line-height:1.04;letter-spacing:-.018em;
+    margin:0;color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--font-head);
+    font-weight:500;
+    font-size:clamp(1rem,2.1vw,1.18rem);
+    line-height:1.3;
+    color:var(--ink-soft);
+    margin:.85rem 0 0;max-width:46ch;
+  }
+  .prepared{
+    font-family:var(--font-mono);
+    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);margin:1rem 0 0;
+  }
+
+  /* ---------- mobile contents ---------- */
+  .toc-mobile{
+    max-width:var(--wrap);
+    margin:1.4rem auto 0;
+    padding:0 var(--wrap-pad);
+  }
+  details.toc-disclosure{
+    border:1px solid var(--rule);
+    background:var(--paper-raised);
+    border-radius:10px;
+    padding:.2rem .9rem;
+  }
+  details.toc-disclosure summary{
+    font-family:var(--font-mono);
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+    cursor:pointer;padding:.7rem 0;list-style:none;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  details.toc-disclosure summary::-webkit-details-marker{display:none;}
+  details.toc-disclosure summary::after{content:"+";font-size:1.1rem;color:var(--ink-faint);}
+  details.toc-disclosure[open] summary::after{content:"\2212";}
+  details.toc-disclosure ol{
+    list-style:none;margin:0 0 .7rem;padding:.4rem 0 0;
+    border-top:1px solid var(--rule-soft);
+    columns:2;column-gap:1.2rem;
+  }
+  details.toc-disclosure li{margin:.32rem 0;break-inside:avoid;}
+  details.toc-disclosure a{
+    font-family:var(--font-head);font-size:.9rem;font-weight:500;
+    text-decoration:none;color:var(--ink-soft);
+  }
+
+  /* ---------- layout grid ---------- */
+  .layout{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,1fr);
+    column-gap:var(--rail-gap);
+    align-items:start;
+  }
+
+  /* ---------- left rail ---------- */
+  .rail{
+    position:sticky;top:2rem;
+    align-self:start;
+    padding-top:2.6rem;
+  }
+  .rail-head{
+    font-family:var(--font-mono);
+    font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;
+    margin:0 0 .9rem;padding-bottom:.5rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .rail nav ol{list-style:none;margin:0;padding:0;}
+  .rail nav li{margin:.08rem 0;}
+  .rail nav a{
+    display:block;
+    font-family:var(--font-head);
+    font-size:.86rem;font-weight:500;line-height:1.25;
+    color:var(--ink-faint);
+    text-decoration:none;
+    padding:.34rem .2rem .34rem .7rem;
+    border-left:2px solid transparent;
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .rail nav a:hover{color:var(--ink-soft);}
+  .rail nav a[aria-current="true"]{
+    color:var(--accent);font-weight:600;
+    border-left-color:var(--accent);
+  }
+
+  /* ---------- content column ---------- */
+  main{
+    min-width:0;
+    padding-top:2.6rem;padding-bottom:2rem;
+  }
+  section{
+    padding:2.4rem 0;
+    border-bottom:1px solid var(--rule-soft);
+  }
+  section:first-of-type{padding-top:1.4rem;}
+  section:last-of-type{border-bottom:none;}
+
+  .kicker{
+    font-family:var(--font-mono);
+    font-size:1rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 1rem;line-height:1.2;
+    scroll-margin-top:1.5rem;
+  }
+  h3{
+    font-family:var(--font-head);
+    font-weight:600;font-size:1.06rem;letter-spacing:-.005em;
+    color:var(--ink);margin:1.7rem 0 .6rem;
+  }
+  .lede{
+    font-family:var(--font-head);
+    font-weight:500;
+    font-size:clamp(1.15rem,2.4vw,1.42rem);
+    line-height:1.34;letter-spacing:-.012em;
+    color:var(--ink);margin:0 0 1.1rem;max-width:34ch;
+  }
+  .takeaway{
+    font-size:1.04rem;
+    color:var(--ink);
+    margin:0 0 1.1rem;
+    font-weight:500;
+  }
+  .takeaway::before{
+    content:"";display:inline-block;
+    width:1.6rem;height:2px;vertical-align:middle;
+    background:var(--accent);margin-right:.7rem;margin-bottom:.22em;
+  }
+  p{margin:0 0 1rem;max-width:64ch;}
+  p.tight{margin-bottom:.5rem;}
+  strong{font-weight:600;color:var(--ink);}
+
+  ul.clean,ol.clean{margin:0 0 1rem;padding-left:0;list-style:none;max-width:64ch;}
+  ul.clean li,ol.clean li{position:relative;padding-left:1.5rem;margin:.55rem 0;}
+  ul.clean li::before{
+    content:"";position:absolute;left:.15rem;top:.62em;
+    width:6px;height:6px;border-radius:50%;background:var(--accent);
+  }
+  ol.numbered{counter-reset:n;margin:0 0 1rem;padding-left:0;list-style:none;max-width:64ch;}
+  ol.numbered li{counter-increment:n;position:relative;padding-left:2.1rem;margin:.7rem 0;}
+  ol.numbered li::before{
+    content:counter(n);position:absolute;left:0;top:.05em;
+    font-family:var(--font-mono);font-size:.72rem;font-weight:600;
+    color:var(--accent);
+    width:1.45rem;height:1.45rem;border:1px solid var(--accent);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ---------- source links ---------- */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:.5px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--rule);
+    transition:color .15s ease,text-decoration-color .15s ease;
+  }
+  a.src:hover,a.src:focus-visible{
+    color:var(--accent);
+    text-decoration-color:var(--accent-bright);
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    margin:1.1rem 0 1.2rem;
+    border:1px solid var(--rule);
+    border-radius:10px;
+    background:var(--paper-raised);
+  }
+  table{
+    border-collapse:collapse;width:100%;
+    font-size:.92rem;line-height:1.45;
+    min-width:520px;
+  }
+  thead th{
+    font-family:var(--font-mono);
+    font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    font-weight:600;text-align:left;color:var(--accent);
+    background:var(--accent-wash);
+    padding:.7rem .9rem;border-bottom:1px solid var(--rule);
+    vertical-align:bottom;
+  }
+  tbody td{
+    padding:.72rem .9rem;
+    border-bottom:1px solid var(--rule-soft);
+    vertical-align:top;color:var(--ink-soft);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{color:var(--ink);font-weight:500;}
+  .table-note{font-size:.82rem;color:var(--ink-faint);margin:.2rem 0 0;font-style:italic;}
+
+  /* badges for RICE read */
+  .b{
+    font-family:var(--font-mono);font-size:.64rem;font-weight:600;
+    letter-spacing:.03em;padding:.12rem .4rem;border-radius:4px;white-space:nowrap;
+  }
+  .b-hi{background:var(--accent-wash);color:var(--accent);}
+  .b-mid{background:var(--gold-wash);color:var(--gold);}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--paper-raised);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:1.1rem 1.2rem;margin:1.2rem 0;
+    font-size:.96rem;
+  }
+  .callout p:last-child{margin-bottom:0;}
+  .callout .co-label{
+    font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;display:block;margin-bottom:.4rem;
+  }
+
+  /* ---------- glossary chips ---------- */
+  .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem;margin:1.1rem 0;}
+  .gl{
+    background:var(--paper-raised);border:1px solid var(--rule);border-radius:9px;
+    padding:.7rem .85rem;font-size:.86rem;line-height:1.4;
+  }
+  .gl b{font-family:var(--font-head);color:var(--accent);display:block;font-size:.9rem;margin-bottom:.15rem;}
+
+  /* ---------- figures / diagrams ---------- */
+  figure.diagram{
+    margin:1.3rem 0 1.4rem;
+    background:var(--paper-raised);
+    border:1px solid var(--rule);
+    border-radius:12px;
+    padding:1.1rem;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  figcaption{
+    font-size:.82rem;color:var(--ink-faint);
+    margin-top:.7rem;font-style:italic;line-height:1.45;
+  }
+  .svg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  .diagram-text-head{font-family:var(--font-head);font-weight:600;}
+  .diagram-text-mono{font-family:var(--font-mono);font-weight:600;}
+
+  /* quadrant legend */
+  .quad-legend{
+    list-style:none;margin:.9rem 0 0;padding:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.35rem .9rem;
+  }
+  .quad-legend li{display:flex;align-items:baseline;gap:.55rem;font-size:.85rem;color:var(--ink-soft);}
+  .quad-legend .num{
+    flex:0 0 auto;
+    font-family:var(--font-mono);font-size:.66rem;font-weight:600;color:#fff;
+    background:var(--accent);width:1.3rem;height:1.3rem;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;line-height:1;
+  }
+  .quad-legend .num.alt{background:var(--gold);}
+
+  /* ---------- footer ---------- */
+  .footer-wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:2.2rem var(--wrap-pad) 3.4rem;
+  }
+  footer{
+    border-top:1.5px solid var(--ink);
+    padding-top:1.4rem;
+  }
+  .foot-name{font-family:var(--font-head);font-weight:600;font-size:1rem;color:var(--ink);margin:0 0 .3rem;}
+  .foot-tag{font-size:.92rem;color:var(--ink-soft);margin:0 0 1rem;max-width:54ch;}
+  .foot-links{
+    display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;
+    font-family:var(--font-mono);font-size:.8rem;letter-spacing:.02em;
+  }
+  .foot-links a{color:var(--ink-faint);text-decoration:none;}
+  .foot-links a:hover{color:var(--accent);}
+
+  /* ---------- reveal (progressive enhancement, safe default visible) ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (min-width:961px){
+    .toc-mobile{display:none;}
+    /* align masthead + footer to the CONTENT column (indented past the rail) */
+    .masthead-wrap,.footer-wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+  }
+  @media (max-width:960px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    .rail{display:none;}
+    main{padding-top:0;}
+    .masthead-wrap{padding-top:2.4rem;}
+  }
+  @media (max-width:600px){
+    body{font-size:17px;}
+    figure.diagram svg{min-width:540px;}
+    figure.quad-fig svg{min-width:520px;}
+    .glossary{grid-template-columns:1fr;}
+    details.toc-disclosure ol{columns:1;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead-wrap">
+  <div class="masthead reveal">
+    <p class="eyebrow">Product pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="role-line">How I would solve the EBT fraud and chip-migration problem for the Product Manager II, Technical role at FIS.</p>
+    <p class="prepared">Prepared June 2026</p>
+  </div>
+</header>
+
+<!-- ================= MOBILE CONTENTS ================= -->
+<div class="toc-mobile">
+  <details class="toc-disclosure">
+    <summary>Contents</summary>
+    <ol>
+      <li><a href="#the-bet">The bet</a></li>
+      <li><a href="#the-problem">The problem</a></li>
+      <li><a href="#who-its-for">Who it is for</a></li>
+      <li><a href="#why-this-problem">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#ship-first">What I would ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#why-me">Why me</a></li>
+    </ol>
+  </details>
+</div>
+
+<!-- ================= LAYOUT ================= -->
+<div class="layout">
+
+  <!-- LEFT RAIL -->
+  <aside class="rail">
+    <p class="rail-head">On this page</p>
+    <nav aria-label="On this page">
+      <ol>
+        <li><a href="#the-bet">The bet</a></li>
+        <li><a href="#the-problem">The problem</a></li>
+        <li><a href="#who-its-for">Who it is for</a></li>
+        <li><a href="#why-this-problem">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#ship-first">What I would ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#why-me">Why me</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main id="main-content">
+
+    <!-- ===== THE BET ===== -->
+    <section id="the-bet" aria-labelledby="the-bet-h" class="reveal">
+      <h2 class="kicker" id="the-bet-h">The bet</h2>
+      <p class="lede">Get FIS's state clients off skimmable magnetic-stripe EBT cards and onto chip plus layered fraud controls, fast and repeatably.</p>
+      <p>California, with FIS as the processor, cut reported benefit theft 83% <a class="src" href="https://www.gov.ca.gov/2026/01/16/california-reduces-theft-of-food-and-cash-benefits-by-83-with-state-of-the-art-technology/" target="_blank" rel="noopener">(California Governor, Jan 2026)</a>. FIS is the only processor USDA FNS has approved to broadly deploy chip EBT cards <a class="src" href="https://www.wypr.org/wypr-news/2025-10-23/maryland-begins-transition-to-tap-and-go-ebt-cards-to-better-combat-benefit-theft" target="_blank" rel="noopener">(WYPR, Oct 2025)</a>. I would turn that proof and that approval into a repeatable onboarding playbook that wins new state contracts and renews the ones FIS already holds.</p>
+      <div class="glossary" role="list" aria-label="Plain-language definitions">
+        <div class="gl" role="listitem"><b>EBT</b>Electronic Benefit Transfer. The card that carries food and cash benefits like SNAP, TANF, and WIC.</div>
+        <div class="gl" role="listitem"><b>Magnetic stripe</b>The old brown band on the back of a card. Easy to copy.</div>
+        <div class="gl" role="listitem"><b>Chip</b>The small metal square that is far harder to clone.</div>
+        <div class="gl" role="listitem"><b>Skimming</b>When a thief hides a reader on a checkout terminal to steal card data.</div>
+      </div>
+    </section>
+
+    <!-- ===== THE PROBLEM ===== -->
+    <section id="the-problem" aria-labelledby="the-problem-h" class="reveal">
+      <h2 class="kicker" id="the-problem-h">The problem</h2>
+      <p class="takeaway">Benefit theft is at crisis scale, victims now have no recourse, and the proven fix is a product job, not a policy job.</p>
+
+      <h3>Who hurts</h3>
+      <p>Two groups. SNAP and cash-benefit recipients lose money they need for food. State agencies, which are FIS's actual clients, take the political heat from legislators and constituents.</p>
+
+      <h3>What it costs</h3>
+      <p>Propel estimates about $349 million in SNAP benefits stolen in the first half of 2025, and roughly $600 million across all of 2025 <a class="src" href="https://www.nextgov.com/digital-government/2025/12/agriculture-focuses-snap-fraud-while-experts-worry-ebt-theft-will-go-unabated/410280/" target="_blank" rel="noopener">(Nextgov, Dec 2025)</a>. 43% of theft in 2025 happened out of state, up from 35% in 2024 <a class="src" href="https://www.propel.app/insights/real-time-transaction-blocking/" target="_blank" rel="noopener">(Propel)</a>.</p>
+
+      <h3>Why it keeps happening</h3>
+      <p>EBT cards still run on 1970s-era magnetic-stripe rails. Thieves install skimmers on checkout terminals, clone the cards, and drain the balance <a class="src" href="https://www.gao.gov/blog/stolen-snap-benefits-cost-beneficiaries-millions" target="_blank" rel="noopener">(GAO)</a>.</p>
+
+      <h3>Why the old workaround fails</h3>
+      <p>Until recently, states could replace stolen benefits with federal funds. That authority expired December 20, 2024. Benefits stolen on or after December 21, 2024 are no longer eligible for federal replacement <a class="src" href="https://www.gao.gov/products/gao-25-107964" target="_blank" rel="noopener">(GAO-25-107964, May 2025)</a>. The safety net is gone, so the only remaining lever is preventing theft through the product.</p>
+
+      <div class="callout">
+        <span class="co-label">The cost to the business</span>
+        <p>State EBT contracts are multi-year and awarded by competitive bid. Losing one forecloses revenue for 5 to 10 years, and the states most exposed to theft headlines are the ones most ready to switch processors. FIS won Maryland (up to $38.4M, about 943,000 recipients) and Massachusetts in 2024 and 2025 through exactly this kind of competition <a class="src" href="https://marylandmatters.org/2025/10/23/board-oks-tap-and-go-ebt-cards-for-recipients-of-state-cash-food-benefits/" target="_blank" rel="noopener">(Maryland Matters, Oct 2025)</a> <a class="src" href="https://www.mass.gov/news/dta-transitions-to-new-third-party-ebt-vendor" target="_blank" rel="noopener">(Mass.gov, Apr 2025)</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===== WHO IT IS FOR ===== -->
+    <section id="who-its-for" aria-labelledby="who-its-for-h" class="reveal">
+      <h2 class="kicker" id="who-its-for-h">Who it is for</h2>
+      <p class="takeaway">This is a product sold to government, where the daily user and the buyer are different people, so the demo has to speak to both.</p>
+      <p>I would design for three roles. The job-to-be-done is the job each role is hiring the product to do, stated as a situation, a motivation, and an outcome.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Role</th><th scope="col">Who</th><th scope="col">The job they hire the product to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cardholder (daily user)</td><td>A SNAP, TANF, or WIC recipient</td><td>When I get my benefits, I want them safe and locked unless I am spending, so I can feed my family without losing the money to a thief.</td></tr>
+            <tr><td>State program owner (the buyer)</td><td>A state DHS or DSS director and program staff</td><td>When theft makes headlines and federal replacement is gone, I want a fix I can show legislators and roll out fast, so I can protect recipients and keep my agency out of crisis.</td></tr>
+            <tr><td>State IT and procurement (gatekeeper)</td><td>State technology and contracts staff</td><td>When I evaluate a processor, I want proof the system is secure, FNS-approved, and deliverable on time, so I can defend the award and pass an audit.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The emotional and social jobs drive the buying decision here. The state owner is not buying chip cards. They are buying the ability to stand in front of a legislature and say the problem is handled. That shapes every demo and every status report.</p>
+    </section>
+
+    <!-- ===== WHY THIS PROBLEM ===== -->
+    <section id="why-this-problem" aria-labelledby="why-this-problem-h" class="reveal">
+      <h2 class="kicker" id="why-this-problem-h">Why this problem</h2>
+      <p class="takeaway">I scored the candidate bets with RICE. Chip migration plus layered controls win because they have proven impact and a confidence level no other bet has.</p>
+      <p>RICE ranks work by Reach times Impact times Confidence, divided by Effort. Reach is how many cardholders or states it touches. Impact is how much it moves theft and contract outcomes. Confidence is how sure I am, based on evidence. Effort is rough people-months. These are relative scores, not exact numbers.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Bet</th><th scope="col">Reach</th><th scope="col">Impact</th><th scope="col">Confidence</th><th scope="col">Effort</th><th scope="col">Read</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Repeatable chip-migration onboarding playbook</td><td>High</td><td>High (3)</td><td>High</td><td>High</td><td><span class="b b-hi">Highest</span> Proven outcome, and FIS is the only approved chip processor.</td></tr>
+            <tr><td>Layered fraud controls default-on (out-of-state block, card lock, forced PIN reset)</td><td>High</td><td>High (2 to 3)</td><td>High</td><td>Low to medium</td><td><span class="b b-hi">Very high</span> Cheap relative to impact, ships before chip cards reach every wallet.</td></tr>
+            <tr><td>Real-time transaction blocking at authorization (RTTB)</td><td>High</td><td>High (2)</td><td>Medium</td><td>High</td><td><span class="b b-mid">Later</span> Strong but needs validation; sequence it after the proven controls.</td></tr>
+            <tr><td>Retailer terminal-readiness coordination</td><td>High</td><td>Medium to high (2)</td><td>High</td><td>Medium</td><td><span class="b b-hi">Dependency</span> High as a dependency of chip, not a standalone bet.</td></tr>
+            <tr><td>Cost-estimate and margin discipline for bids</td><td>Medium</td><td>High for business (2)</td><td>High</td><td>Low</td><td><span class="b b-hi">Strong</span> Pays off on win and retain; runs alongside the playbook.</td></tr>
+            <tr><td>Renewal readiness for contract retention</td><td>Medium</td><td>High for business (2)</td><td>Medium</td><td>Low</td><td><span class="b b-hi">Cheap win</span> Important and cheap; protects existing revenue.</td></tr>
+            <tr><td>Online SNAP support</td><td>Medium</td><td>Medium (1)</td><td>Medium</td><td>Medium</td><td><span class="b b-mid">Defer</span> Real but not the crisis; sequence later.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="diagram quad-fig" aria-labelledby="quad-cap">
+        <div class="svg-scroll">
+          <svg viewBox="0 0 720 460" role="img" aria-label="Impact versus effort scatter chart. Layered controls, cost-estimate discipline, and renewal readiness sit top-left as do-first quick wins with high impact and low effort. The chip-migration playbook and real-time blocking sit top-right as big bets with high impact and high effort. Retailer terminal readiness and online SNAP support sit in the middle.">
+            <!-- axes frame -->
+            <rect x="70" y="30" width="600" height="360" fill="none" stroke="var(--rule)" stroke-width="1"/>
+            <!-- quadrant divider lines -->
+            <line x1="370" y1="30" x2="370" y2="390" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4 4" aria-hidden="true"/>
+            <line x1="70" y1="210" x2="670" y2="210" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4 4" aria-hidden="true"/>
+            <!-- quadrant tints -->
+            <rect x="70" y="30" width="300" height="180" fill="var(--accent-wash)" opacity="0.5"/>
+            <!-- quadrant corner labels -->
+            <text x="84" y="50" class="diagram-text-mono" font-size="12" fill="var(--accent)" letter-spacing="0.5">DO FIRST</text>
+            <text x="656" y="50" class="diagram-text-mono" font-size="12" fill="var(--ink-faint)" text-anchor="end" letter-spacing="0.5">BIG BETS</text>
+            <text x="84" y="380" class="diagram-text-mono" font-size="12" fill="var(--ink-faint)" letter-spacing="0.5">DEPRIORITIZE</text>
+            <text x="656" y="380" class="diagram-text-mono" font-size="12" fill="var(--ink-faint)" text-anchor="end" letter-spacing="0.5">AVOID</text>
+            <!-- axis labels -->
+            <text x="370" y="430" class="diagram-text-head" font-size="13" fill="var(--ink-soft)" text-anchor="middle">Effort, low to high</text>
+            <text x="30" y="210" class="diagram-text-head" font-size="13" fill="var(--ink-soft)" text-anchor="middle" transform="rotate(-90 30 210)">Impact, low to high</text>
+
+            <!-- plotted points: x maps effort 0..1 -> 70..670 ; y maps impact 0..1 -> 390..30 -->
+            <!-- 1 Layered controls 0.25,0.82 -->
+            <g><circle cx="220" cy="95" r="14" fill="var(--accent)"/><text x="220" y="100" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">1</text></g>
+            <!-- 2 Cost-estimate discipline 0.20,0.70 -->
+            <g><circle cx="190" cy="138" r="14" fill="var(--accent)"/><text x="190" y="143" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">2</text></g>
+            <!-- 3 Renewal readiness 0.22,0.62 -->
+            <g><circle cx="202" cy="167" r="14" fill="var(--accent)"/><text x="202" y="172" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">3</text></g>
+            <!-- 4 Chip-migration playbook 0.72,0.90 -->
+            <g><circle cx="502" cy="66" r="14" fill="var(--accent)"/><text x="502" y="71" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">4</text></g>
+            <!-- 5 Retailer terminal readiness 0.55,0.66 -->
+            <g><circle cx="400" cy="152" r="14" fill="var(--gold)"/><text x="400" y="157" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">5</text></g>
+            <!-- 6 RTTB 0.78,0.72 -->
+            <g><circle cx="538" cy="131" r="14" fill="var(--gold)"/><text x="538" y="136" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">6</text></g>
+            <!-- 7 Online SNAP support 0.55,0.45 -->
+            <g><circle cx="400" cy="227" r="14" fill="var(--gold)"/><text x="400" y="232" class="diagram-text-mono" font-size="12" fill="#fff" text-anchor="middle">7</text></g>
+          </svg>
+        </div>
+        <ol class="quad-legend">
+          <li><span class="num">1</span> Layered controls default-on</li>
+          <li><span class="num">2</span> Cost-estimate discipline</li>
+          <li><span class="num">3</span> Renewal readiness</li>
+          <li><span class="num">4</span> Chip-migration playbook</li>
+          <li><span class="num alt">5</span> Retailer terminal readiness</li>
+          <li><span class="num alt">6</span> Real-time blocking (RTTB)</li>
+          <li><span class="num alt">7</span> Online SNAP support</li>
+        </ol>
+        <figcaption id="quad-cap">RICE read, impact versus effort. Top-left is the priority corner: high impact, low to moderate effort.</figcaption>
+      </figure>
+
+      <p>Chip migration carries the only proven 83% result and FIS's exclusive approval, so it has the highest confidence in the whole portfolio. Layered controls are the cheap, fast complement that protects cardholders before every chip card reaches a wallet. One dependency note: retailer terminal readiness is not competing with chip migration, it gates it, so it stays in scope regardless of its own score.</p>
+    </section>
+
+    <!-- ===== APPROACH ===== -->
+    <section id="approach" aria-labelledby="approach-h" class="reveal">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would treat chip migration as a repeatable product, not a one-off project per state, and decide between directions with a pilot.</p>
+      <p>Three directions I would explore, and how I would choose.</p>
+      <ol class="numbered">
+        <li><strong>Bespoke per-state migration.</strong> Treat each state as a custom build. Familiar, but slow and expensive, and it does not scale across the deployment wave coming in 2026 to 2028.</li>
+        <li><strong>Standard playbook with state-specific configuration.</strong> One repeatable onboarding sequence (card issuance, cardholder communication, retailer terminal testing, parallel run, go-live) with a thin configuration layer for each state's rules. My lead hypothesis. It reuses the California and Massachusetts learnings and shortens every later onboarding.</li>
+        <li><strong>Controls-first, chip-second.</strong> Ship the layered fraud controls default-on everywhere immediately, then migrate chip behind them. Lowers theft fastest while the longer chip rollout proceeds.</li>
+      </ol>
+      <p>Directions 2 and 3 are not exclusive. I would run controls-first as the immediate move and stand up the playbook in parallel, then prove the playbook on the next live onboarding before generalizing it. The deciding evidence is the next state cutover: did the playbook cut onboarding time and incidents against the Massachusetts baseline.</p>
+
+      <p class="tight">Here is the layered model I would make the default, with the chip migration sitting behind it as the structural fix.</p>
+      <figure class="diagram" aria-labelledby="flow-cap">
+        <div class="svg-scroll">
+          <svg viewBox="0 0 660 470" role="img" aria-label="Decision flow for a cardholder transaction. First check: is the card locked, if yes block. Next: is it out of state and not allowed, if yes block. Next: is the real-time risk score high, if yes block or step up, otherwise approve. The chip card migration sits behind these controls and removes the clonable magnetic stripe.">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-faint)"/>
+              </marker>
+            </defs>
+            <!-- start -->
+            <rect x="225" y="20" width="210" height="46" rx="10" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.2"/>
+            <text x="330" y="48" class="diagram-text-head" font-size="14" fill="var(--accent)" text-anchor="middle">Cardholder transaction</text>
+
+            <!-- decision 1 -->
+            <polygon points="330,90 430,128 330,166 230,128" fill="var(--paper)" stroke="var(--ink-soft)" stroke-width="1.2"/>
+            <text x="330" y="133" class="diagram-text-head" font-size="13" fill="var(--ink)" text-anchor="middle">Card locked?</text>
+            <!-- block 1 -->
+            <rect x="500" y="105" width="130" height="44" rx="10" fill="var(--warn-wash)" stroke="var(--warn)" stroke-width="1.2"/>
+            <text x="565" y="132" class="diagram-text-head" font-size="13" fill="var(--warn)" text-anchor="middle">Block</text>
+
+            <!-- decision 2 -->
+            <polygon points="330,190 445,232 330,274 215,232" fill="var(--paper)" stroke="var(--ink-soft)" stroke-width="1.2"/>
+            <text x="330" y="229" class="diagram-text-head" font-size="13" fill="var(--ink)" text-anchor="middle">Out of state</text>
+            <text x="330" y="246" class="diagram-text-head" font-size="13" fill="var(--ink)" text-anchor="middle">and not allowed?</text>
+            <!-- block 2 -->
+            <rect x="500" y="210" width="130" height="44" rx="10" fill="var(--warn-wash)" stroke="var(--warn)" stroke-width="1.2"/>
+            <text x="565" y="237" class="diagram-text-head" font-size="13" fill="var(--warn)" text-anchor="middle">Block</text>
+
+            <!-- decision 3 -->
+            <polygon points="330,298 445,340 330,382 215,340" fill="var(--paper)" stroke="var(--ink-soft)" stroke-width="1.2"/>
+            <text x="330" y="337" class="diagram-text-head" font-size="13" fill="var(--ink)" text-anchor="middle">Real-time risk</text>
+            <text x="330" y="354" class="diagram-text-head" font-size="13" fill="var(--ink)" text-anchor="middle">score high?</text>
+            <!-- step-up -->
+            <rect x="495" y="318" width="140" height="44" rx="10" fill="var(--warn-wash)" stroke="var(--warn)" stroke-width="1.2"/>
+            <text x="565" y="345" class="diagram-text-head" font-size="12.5" fill="var(--warn)" text-anchor="middle">Block or step-up</text>
+
+            <!-- approve -->
+            <rect x="250" y="408" width="160" height="46" rx="10" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.2"/>
+            <text x="330" y="436" class="diagram-text-head" font-size="14" fill="var(--accent)" text-anchor="middle">Approve</text>
+
+            <!-- connectors -->
+            <line x1="330" y1="66" x2="330" y2="88" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <line x1="330" y1="166" x2="330" y2="188" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <line x1="330" y1="274" x2="330" y2="296" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <line x1="330" y1="382" x2="330" y2="406" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <!-- yes branches to blocks -->
+            <line x1="430" y1="128" x2="498" y2="128" stroke="var(--warn)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <line x1="445" y1="232" x2="498" y2="232" stroke="var(--warn)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <line x1="445" y1="340" x2="493" y2="340" stroke="var(--warn)" stroke-width="1.4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <!-- yes / no labels -->
+            <text x="462" y="120" class="diagram-text-mono" font-size="10" fill="var(--warn)" text-anchor="middle">YES</text>
+            <text x="472" y="224" class="diagram-text-mono" font-size="10" fill="var(--warn)" text-anchor="middle">YES</text>
+            <text x="472" y="332" class="diagram-text-mono" font-size="10" fill="var(--warn)" text-anchor="middle">YES</text>
+            <text x="344" y="182" class="diagram-text-mono" font-size="10" fill="var(--ink-faint)">NO</text>
+            <text x="344" y="290" class="diagram-text-mono" font-size="10" fill="var(--ink-faint)">NO</text>
+            <text x="344" y="400" class="diagram-text-mono" font-size="10" fill="var(--ink-faint)">NO</text>
+
+            <!-- chip migration behind -->
+            <rect x="20" y="190" width="150" height="84" rx="10" fill="var(--gold-wash)" stroke="var(--gold)" stroke-width="1.2"/>
+            <text x="95" y="222" class="diagram-text-head" font-size="13" fill="var(--gold)" text-anchor="middle">Chip card</text>
+            <text x="95" y="240" class="diagram-text-head" font-size="13" fill="var(--gold)" text-anchor="middle">migration</text>
+            <text x="95" y="258" class="diagram-text-mono" font-size="9.5" fill="var(--gold)" text-anchor="middle">STRUCTURAL FIX</text>
+            <path d="M170,210 C200,150 240,90 270,52" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arrow)" aria-hidden="true"/>
+            <text x="150" y="160" class="diagram-text-mono" font-size="9.5" fill="var(--gold)">removes clonable stripe</text>
+          </svg>
+        </div>
+        <figcaption id="flow-cap">A transaction passes through layered fraud controls. The chip migration behind them removes the clonable magnetic stripe entirely.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ===== SHIP FIRST ===== -->
+    <section id="ship-first" aria-labelledby="ship-first-h" class="reveal">
+      <h2 class="kicker" id="ship-first-h">What I would ship first</h2>
+      <p class="takeaway">Turn the existing fraud controls on by default for one state. It is cheap, fast, and proves the impact before the longer chip rollout.</p>
+      <p>The biggest assumption is that default-on layered controls cut theft sharply without breaking legitimate spending. California's forced PIN resets alone cut theft about 80% among affected accounts <a class="src" href="https://www.gov.ca.gov/2026/01/16/california-reduces-theft-of-food-and-cash-benefits-by-83-with-state-of-the-art-technology/" target="_blank" rel="noopener">(California Governor, Jan 2026)</a>, and adoption of card-locking jumped 500% once states promoted it in-app <a class="src" href="https://www.propel.app/snap/propel-ebt-security-features/" target="_blank" rel="noopener">(Propel)</a>. South Carolina already auto-placed cards in a high-risk-block status <a class="src" href="https://dss.sc.gov/assistance-programs/snap/snapebt-fraud/" target="_blank" rel="noopener">(SC DSS)</a>. The mechanism is proven; the open question is the default-on configuration and its false-decline rate.</p>
+      <div class="callout">
+        <span class="co-label">The MVP</span>
+        <p>With one willing state client, switch out-of-state blocking and forced PIN reset to opt-out (on by default), surface card lock prominently in the ebtEDGE app, and measure theft and false declines for 60 days against that state's own baseline.</p>
+      </div>
+      <h3>Why first, in RICE terms</h3>
+      <p>Highest reach (every cardholder in the state), high impact (proven), high confidence, and low effort because the controls already exist in ebtEDGE <a class="src" href="https://www.fisglobal.com/ebtedgemobile" target="_blank" rel="noopener">(FIS ebtEDGE)</a>.</p>
+      <h3>What it deliberately leaves out</h3>
+      <p>The full chip card reissue, retailer terminal upgrades, and real-time blocking. Those are the next layers. The MVP buys protection now and produces the evidence that de-risks the bigger spend.</p>
+    </section>
+
+    <!-- ===== METRICS ===== -->
+    <section id="metrics" aria-labelledby="metrics-h" class="reveal">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">The North Star is the share of FIS-served cardholders protected by chip plus layered controls, with guardrails that stop us from blocking the people we are trying to help.</p>
+      <p><strong>North Star:</strong> percent of FIS-served EBT cardholders covered by chip cards and default-on layered controls. It passes the three tests. Value: if it rises, theft falls and recipients keep their benefits. Leading: it moves before contract renewals and before the next theft headline. Actionable: the team directly drives it through onboarding and feature defaults.</p>
+
+      <figure class="diagram" aria-labelledby="tree-cap">
+        <div class="svg-scroll">
+          <svg viewBox="0 0 720 420" role="img" aria-label="Metrics tree. Four leading indicators feed the North Star: controls default-on adoption rate, chip cards issued versus total, retailer terminals chip-ready, and onboarding on-time and incident-free rate. The North Star predicts two lagging outcomes, reported theft reduction and state client satisfaction, which both drive the competitive win and retain rate.">
+            <defs>
+              <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-faint)"/>
+              </marker>
+            </defs>
+            <!-- leading row -->
+            <g font-size="11.5">
+              <rect x="14" y="24" width="150" height="58" rx="9" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.1"/>
+              <text x="89" y="48" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">Controls default-on</text>
+              <text x="89" y="64" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">adoption rate</text>
+
+              <rect x="184" y="24" width="150" height="58" rx="9" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.1"/>
+              <text x="259" y="48" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">Chip cards issued</text>
+              <text x="259" y="64" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">vs total</text>
+
+              <rect x="386" y="24" width="150" height="58" rx="9" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.1"/>
+              <text x="461" y="48" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">Retailer terminals</text>
+              <text x="461" y="64" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">chip-ready</text>
+
+              <rect x="556" y="24" width="150" height="58" rx="9" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.1"/>
+              <text x="631" y="48" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">Onboarding on-time</text>
+              <text x="631" y="64" class="diagram-text-head" fill="var(--accent)" text-anchor="middle">and incident-free</text>
+            </g>
+            <!-- north star -->
+            <rect x="150" y="150" width="420" height="64" rx="11" fill="var(--gold-wash)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="360" y="178" class="diagram-text-head" font-size="13.5" fill="var(--gold)" text-anchor="middle" font-weight="700">North Star</text>
+            <text x="360" y="197" class="diagram-text-head" font-size="11.5" fill="#7a5e14" text-anchor="middle">% of FIS cardholders protected by chip + layered controls</text>
+
+            <!-- lagging row -->
+            <g font-size="11.5">
+              <rect x="110" y="280" width="190" height="50" rx="9" fill="#e9f3ec" stroke="#3f8f63" stroke-width="1.1"/>
+              <text x="205" y="300" class="diagram-text-head" fill="#2c5f43" text-anchor="middle">Reported theft</text>
+              <text x="205" y="316" class="diagram-text-head" fill="#2c5f43" text-anchor="middle">reduction</text>
+
+              <rect x="420" y="280" width="190" height="50" rx="9" fill="#e9f3ec" stroke="#3f8f63" stroke-width="1.1"/>
+              <text x="515" y="300" class="diagram-text-head" fill="#2c5f43" text-anchor="middle">State client</text>
+              <text x="515" y="316" class="diagram-text-head" fill="#2c5f43" text-anchor="middle">satisfaction</text>
+            </g>
+            <!-- business outcome -->
+            <rect x="255" y="362" width="210" height="48" rx="9" fill="var(--ink)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="360" y="391" class="diagram-text-head" font-size="12.5" fill="#fff" text-anchor="middle">Win and retain rate</text>
+
+            <!-- arrows leading -> NS -->
+            <line x1="89" y1="82" x2="240" y2="148" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <line x1="259" y1="82" x2="320" y2="148" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <line x1="461" y1="82" x2="400" y2="148" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <line x1="631" y1="82" x2="480" y2="148" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <!-- arrows NS -> lagging -->
+            <line x1="300" y1="214" x2="225" y2="278" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <line x1="420" y1="214" x2="495" y2="278" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <!-- arrows lagging -> business -->
+            <line x1="230" y1="330" x2="320" y2="360" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+            <line x1="490" y1="330" x2="400" y2="360" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#arrow2)" aria-hidden="true"/>
+          </svg>
+        </div>
+        <figcaption id="tree-cap">Leading indicators feed the North Star, which predicts the lagging business outcomes of contract wins and renewals.</figcaption>
+      </figure>
+
+      <h3>Supporting measures</h3>
+      <p>Theft reduction on the served base, state client satisfaction, onboarding on-time and incident-free rate, enhancement delivery against commitment, competitive win and retain rate, and cost-estimate and margin accuracy on bids.</p>
+      <div class="callout">
+        <span class="co-label">Guardrails and anti-metrics</span>
+        <p class="tight">Do not let false declines on legitimate transactions rise. A control that blocks a hungry family at the register fails the mission even if the theft number looks good.</p>
+        <p class="tight">Do not let onboarding incidents rise as we speed up.</p>
+        <p>Do not chase raw card-lock toggles as a vanity number. What matters is theft prevented per protected account.</p>
+      </div>
+    </section>
+
+    <!-- ===== 30/60/90 ===== -->
+    <section id="plan" aria-labelledby="plan-h" class="reveal">
+      <h2 class="kicker" id="plan-h">30/60/90</h2>
+      <p class="takeaway">Listen and find the real constraints first, ship the cheap proven win next, then prove the playbook and propose the roadmap.</p>
+      <figure class="diagram" aria-labelledby="time-cap">
+        <div class="svg-scroll">
+          <svg viewBox="0 0 720 330" role="img" aria-label="Three-phase first ninety days. Days 0 to 30 listen: meet state clients and internal teams, read California and Massachusetts post-mortems, map current fraud controls, and find the real constraints. Days 30 to 60 quick win: stand up the default-on controls MVP, set the baseline, draft the playbook, and tighten the cost model. Days 60 to 90 validate and propose: read MVP results, run the playbook on the next onboarding, bring renewal packs, and propose the sequenced roadmap.">
+            <!-- timeline base -->
+            <line x1="40" y1="46" x2="680" y2="46" stroke="var(--rule)" stroke-width="2" aria-hidden="true"/>
+            <circle cx="140" cy="46" r="6" fill="var(--accent)"/>
+            <circle cx="360" cy="46" r="6" fill="var(--accent)"/>
+            <circle cx="580" cy="46" r="6" fill="var(--gold)"/>
+
+            <!-- phase headers -->
+            <text x="40" y="30" class="diagram-text-mono" font-size="11" fill="var(--accent)" letter-spacing="0.5">DAYS 0 TO 30</text>
+            <text x="40" y="78" class="diagram-text-head" font-size="14" fill="var(--ink)" font-weight="600">Listen</text>
+            <text x="260" y="30" class="diagram-text-mono" font-size="11" fill="var(--accent)" letter-spacing="0.5">DAYS 30 TO 60</text>
+            <text x="260" y="78" class="diagram-text-head" font-size="14" fill="var(--ink)" font-weight="600">Quick win</text>
+            <text x="480" y="30" class="diagram-text-mono" font-size="11" fill="var(--gold)" letter-spacing="0.5">DAYS 60 TO 90</text>
+            <text x="480" y="78" class="diagram-text-head" font-size="14" fill="var(--ink)" font-weight="600">Validate and propose</text>
+
+            <!-- dividers -->
+            <line x1="232" y1="98" x2="232" y2="318" stroke="var(--rule-soft)" stroke-width="1" aria-hidden="true"/>
+            <line x1="452" y1="98" x2="452" y2="318" stroke="var(--rule-soft)" stroke-width="1" aria-hidden="true"/>
+
+            <!-- phase 1 items -->
+            <g font-size="11.5" fill="var(--ink-soft)" class="diagram-text-head">
+              <text x="40" y="120">Meet 3 to 4 state clients and the</text>
+              <text x="40" y="136">bid, onboarding, fraud, and eng teams</text>
+              <text x="40" y="166">Read CA and MA post-mortems</text>
+              <text x="40" y="196">Map current fraud controls and</text>
+              <text x="40" y="212">their default settings</text>
+              <text x="40" y="242">Find the real onboarding and</text>
+              <text x="40" y="258">FNS-approval constraints</text>
+            </g>
+            <!-- phase 2 items -->
+            <g font-size="11.5" fill="var(--ink-soft)" class="diagram-text-head">
+              <text x="260" y="120">Stand up the default-on controls</text>
+              <text x="260" y="136">MVP with one willing state</text>
+              <text x="260" y="166">Set theft and false-decline baseline</text>
+              <text x="260" y="196">Draft the standard chip-migration</text>
+              <text x="260" y="212">onboarding playbook</text>
+              <text x="260" y="242">Tighten the cost-estimate model</text>
+              <text x="260" y="258">for active bids</text>
+            </g>
+            <!-- phase 3 items -->
+            <g font-size="11.5" fill="var(--ink-soft)" class="diagram-text-head">
+              <text x="480" y="120">Read MVP results against baseline</text>
+              <text x="480" y="150">Run the playbook on the next live</text>
+              <text x="480" y="166">onboarding vs the MA cutover</text>
+              <text x="480" y="196">Bring renewal-readiness packs to</text>
+              <text x="480" y="212">states nearing re-bid</text>
+              <text x="480" y="242">Propose the sequenced roadmap:</text>
+              <text x="480" y="258">controls, chip, retailer, then RTTB</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption id="time-cap">A three-phase ramp from listening, to a quick win, to validating the first bet and proposing the roadmap.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ===== RISKS ===== -->
+    <section id="risks" aria-labelledby="risks-h" class="reveal">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">The real risks are in retailer readiness, false declines, federal-timeline uncertainty, and the limits of a default-on policy. Each has a week-one test.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Risk in the work</th><th scope="col">Why it matters</th><th scope="col">What I would validate first</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Retailer terminals are not chip-ready</td><td>California showed only about 17% of retailers ready as of May 2025; chip benefit lags terminal upgrades <a class="src" href="https://www.gov.ca.gov/2026/01/16/california-reduces-theft-of-food-and-cash-benefits-by-83-with-state-of-the-art-technology/" target="_blank" rel="noopener">(CA Governor, Jan 2026)</a></td><td>Pull terminal-readiness data for a target state and size the gap before promising a chip timeline</td></tr>
+            <tr><td>Default-on controls cause false declines</td><td>Blocking legitimate spending harms recipients and the client relationship</td><td>Run the 60-day MVP and watch the false-decline rate as closely as the theft rate</td></tr>
+            <tr><td>Federal rulemaking and deadlines are uncertain</td><td>No national chip deadline exists; FNS rulemaking capacity is reduced <a class="src" href="https://www.nextgov.com/digital-government/2025/12/agriculture-focuses-snap-fraud-while-experts-worry-ebt-theft-will-go-unabated/410280/" target="_blank" rel="noopener">(Nextgov, Dec 2025)</a></td><td>Treat state-level urgency, not a federal mandate, as the driver; confirm each state's own timeline and budget</td></tr>
+            <tr><td>Out-of-state blocking breaks real cross-state use</td><td>Recipients legitimately travel and move; 43% of theft is out-of-state, but not all out-of-state use is theft</td><td>Design opt-out and easy self-service unblock; test the recipient flow before defaulting it on</td></tr>
+            <tr><td>Cost estimates miss on a 10-year contract</td><td>A bad margin estimate locks in for the contract life</td><td>Pressure-test the cost model against Maryland-scale numbers (about 943,000 recipients) with the bid and finance teams</td></tr>
+            <tr><td>Onboarding incidents during cutover</td><td>A botched cutover damages the client and the brand</td><td>Build parallel-run and rollback steps into the playbook; rehearse against the Massachusetts overnight-cutover pattern</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== QUESTIONS ===== -->
+    <section id="questions" aria-labelledby="questions-h" class="reveal">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">The answers to these would change my sequencing.</p>
+      <ol class="numbered">
+        <li>Which states are closest to a re-bid or renewal decision in the next 18 months, and which are most exposed to theft headlines today?</li>
+        <li>What is the current false-decline rate on out-of-state blocking, and have any states pushed back on it?</li>
+        <li>Where are the bottlenecks in the Massachusetts and California onboardings that I should design out of the playbook?</li>
+        <li>What does the FNS chip-approval process require of FIS per state, and what is the real lead time?</li>
+        <li>How is cost estimation done today for bids, and where have past estimates missed on margin?</li>
+        <li>For real-time transaction blocking, what data and partners would we need, and is there an existing pilot to learn from?</li>
+      </ol>
+    </section>
+
+    <!-- ===== WHY ME ===== -->
+    <section id="why-me" aria-labelledby="why-me-h" class="reveal">
+      <h2 class="kicker" id="why-me-h">Why me</h2>
+      <p>I am a product manager with 6 years of work in financial services, payments, and regulated environments, and I am finishing a Master of Science in Information Management at the University of Washington (expected June 2026). I also hold an MBA in Finance and a Bachelor of Engineering in Computer Engineering. I have built payments products from MVP to scale, run cost-estimation and savings programs, and owned risk and controls work inside a global bank. That is the same shape of work this role asks for: client requirements to specs, fraud and controls, onboarding, and cost discipline.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Product management in payments or regulated industries</td><td>I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations</td></tr>
+            <tr><td>Fraud, risk, and controls in payment systems</td><td>I led operational risk transformation for Global Markets at Nomura, cutting risk events 20% and losses 15% through remediation roadmaps, incident analysis, and preventive controls</td></tr>
+            <tr><td>Translate complex requirements into clear specs</td><td>I turned customer interviews and on-site usability tests into 25+ product flows and specs across web and Android, and ran pilot rollouts and A/B tests on the loan flow</td></tr>
+            <tr><td>Client-facing work with external and senior stakeholders</td><td>I ran discovery-to-launch on a finance budgeting application at Nomura with 15+ stakeholders, and cut spend 30% across cost-center owners</td></tr>
+            <tr><td>Cost estimation and margin discipline</td><td>I drove a firm-wide market-data sourcing program to Tradeweb that delivered $700K in annual savings with better data quality</td></tr>
+            <tr><td>Onboarding and lifecycle management</td><td>I delivered credit-bureau API integrations (CIBIL, Equifax, Experian) that improved loan-decision accuracy 10% and cut manual review 35%</td></tr>
+            <tr><td>Governance and compliance in a regulated rollout</td><td>I rolled out an internal AI assistant to 15,000+ users with compliance and governance built into a phased bank-wide adoption strategy</td></tr>
+            <tr><td>Data-driven decisions</td><td>I shipped a real-time reporting dashboard for senior management that cut manual report compilation by 40+ hours per week and surfaced funnel bottlenecks</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div class="footer-wrap">
+  <footer class="reveal">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-tag">Product Manager, payments and regulated systems. Open to talk about the EBT chip-migration and fraud work at FIS.</p>
+    <div class="foot-links">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </footer>
+</div>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+
+<script>
+  (function(){
+    document.documentElement.classList.add('js');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal-on-scroll (enhancement only; default state stays visible without animation)
+    var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      revealEls.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      revealEls.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the left rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('.rail nav a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length) {
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) current = e.target.id;
+        });
+        if (current) {
+          links.forEach(function(a){ a.removeAttribute('aria-current'); });
+          if (map[current]) map[current].setAttribute('aria-current', 'true');
+        }
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
