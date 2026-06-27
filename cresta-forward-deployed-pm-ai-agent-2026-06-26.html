@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More for Forward Deployed Product Manager, AI Agent at Cresta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f5f0;
+    --surface:#ffffff;
+    --ink:#1b2230;
+    --ink-soft:#3a4453;
+    --ink-faint:#7c8694;
+    --line:#e2ded4;
+    --line-strong:#cfc9bb;
+    --accent:#1f6f5c;       /* deep teal/green, Cresta-adjacent, calm */
+    --accent-soft:#e6f0ec;
+    --accent-ink:#15543f;
+    --gold:#a9711f;
+    --star-bg:#fbf3da;
+    --star-line:#d8b25e;
+    --danger:#9c3b34;
+    --danger-bg:#f6e6e3;
+    --blue:#2c5d86;
+    --blue-bg:#e6eef5;
+    --font-display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --wrap:1180px;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --pad:24px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* subtle paper texture */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(31,111,92,0.05), transparent 42%),
+      radial-gradient(circle at 88% 78%, rgba(44,93,134,0.045), transparent 46%);
+  }
+
+  .skip-link{
+    position:absolute;
+    left:-9999px;
+    top:0;
+    background:var(--accent);
+    color:#fff;
+    padding:12px 18px;
+    z-index:1000;
+    border-radius:0 0 8px 0;
+    font-family:var(--font-mono);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-ink);}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  /* ---------- shared wrap ---------- */
+  .wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding-left:var(--pad);
+    padding-right:var(--pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* masthead + footer align to the CONTENT column (indented past the rail on desktop) */
+  .aligned{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding-left:var(--pad);
+    padding-right:var(--pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding-top:54px;
+    padding-bottom:26px;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    margin:0 0 14px;
+    font-weight:600;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2rem,5vw,2.9rem);
+    line-height:1.04;
+    letter-spacing:-0.018em;
+    margin:0 0 16px;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(1.05rem,2.2vw,1.32rem);
+    line-height:1.34;
+    color:var(--ink-soft);
+    max-width:40ch;
+    margin:0 0 16px;
+  }
+  .prepared{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  .rule{
+    border:0;
+    border-top:1px solid var(--line-strong);
+    margin:0;
+  }
+
+  /* ---------- two-column layout ---------- */
+  .layout{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 var(--pad);
+    display:block;
+    position:relative;
+    z-index:1;
+  }
+
+  /* mobile contents disclosure */
+  .toc-mobile{
+    margin:26px 0 8px;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    background:var(--surface);
+    overflow:hidden;
+  }
+  .toc-mobile summary{
+    cursor:pointer;
+    padding:13px 16px;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    font-weight:600;
+    list-style:none;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none;}
+  .toc-mobile summary::after{content:" +";float:right;color:var(--ink-faint);}
+  .toc-mobile[open] summary::after{content:" –";}
+  .toc-mobile ol{
+    margin:0;
+    padding:4px 16px 14px;
+    list-style:none;
+    counter-reset:toc;
+  }
+  .toc-mobile li{margin:2px 0;counter-increment:toc;}
+  .toc-mobile a{
+    display:block;
+    padding:6px 0;
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .toc-mobile a::before{
+    content:counter(toc,decimal-leading-zero) " ";
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    margin-right:8px;
+  }
+  .toc-rail{display:none;}
+
+  /* ---------- content ---------- */
+  main{
+    position:relative;
+    z-index:1;
+  }
+  section{
+    padding:42px 0 8px;
+    scroll-margin-top:24px;
+  }
+  section + section{border-top:1px solid var(--line);}
+  .kicker{
+    font-family:var(--font-display);
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  .kicker .num{
+    font-family:var(--font-mono);
+    color:var(--ink-faint);
+    font-weight:600;
+    font-size:13px;
+    margin-right:10px;
+    letter-spacing:0.05em;
+  }
+  .lede{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(1.25rem,2.6vw,1.62rem);
+    line-height:1.3;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0 0 22px;
+    max-width:30ch;
+  }
+  h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-0.005em;
+    color:var(--ink);
+    margin:26px 0 6px;
+  }
+  p{margin:0 0 16px;max-width:68ch;}
+  .content{max-width:760px;}
+
+  strong{font-weight:600;color:var(--ink);}
+
+  ul.clean{
+    list-style:none;
+    padding:0;
+    margin:0 0 16px;
+    max-width:68ch;
+  }
+  ul.clean li{
+    position:relative;
+    padding-left:24px;
+    margin:0 0 12px;
+  }
+  ul.clean li::before{
+    content:"";
+    position:absolute;
+    left:2px;
+    top:0.66em;
+    width:7px;
+    height:7px;
+    background:var(--accent);
+    border-radius:50%;
+  }
+
+  /* citation links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line-strong);
+    transition:color .15s ease, text-decoration-color .15s ease;
+  }
+  a.src:hover, a.src:focus{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+
+  /* stat strip */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    margin:6px 0 26px;
+    border:1px solid var(--line-strong);
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--surface);
+  }
+  .stat{
+    padding:20px 22px;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:0;}
+  .stat .big{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.85rem;
+    line-height:1;
+    letter-spacing:-0.02em;
+    color:var(--accent-ink);
+    display:block;
+    margin-bottom:8px;
+  }
+  .stat .cap{
+    font-size:14.5px;
+    line-height:1.4;
+    color:var(--ink-soft);
+  }
+
+  /* tables */
+  .tablewrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:8px 0 22px;
+    border:1px solid var(--line-strong);
+    border-radius:12px;
+    background:var(--surface);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:540px;
+    font-size:15.5px;
+  }
+  thead th{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:12.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    text-align:left;
+    color:var(--ink-faint);
+    padding:13px 16px;
+    border-bottom:1.5px solid var(--line-strong);
+    background:#faf8f3;
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    line-height:1.45;
+    color:var(--ink-soft);
+  }
+  tbody tr:last-child td{border-bottom:0;}
+  tbody td:first-child{color:var(--ink);font-weight:500;}
+  .rscore{font-family:var(--font-mono);font-size:13.5px;}
+  .tag{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.04em;
+    padding:2px 7px;
+    border-radius:5px;
+    text-transform:uppercase;
+    font-weight:600;
+    vertical-align:middle;
+  }
+  .tag.hi{background:var(--accent-soft);color:var(--accent-ink);}
+  .tag.med{background:#f1ecdf;color:var(--gold);}
+  .tag.lo{background:#eceef1;color:var(--ink-faint);}
+
+  /* callout card */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    border-left:3px solid var(--accent);
+    border-radius:10px;
+    padding:18px 22px;
+    margin:8px 0 22px;
+    max-width:760px;
+  }
+  .card p:last-child{margin-bottom:0;}
+  .card .label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    font-weight:600;
+    margin-bottom:8px;
+    display:block;
+  }
+
+  /* bet blocks */
+  .bet{
+    margin:0 0 20px;
+    padding:0 0 0 22px;
+    border-left:2px solid var(--line-strong);
+    max-width:740px;
+  }
+  .bet h3{margin-top:0;}
+  .bet h3 .bn{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--accent);
+    letter-spacing:0.06em;
+    margin-right:8px;
+  }
+
+  /* persona grid */
+  .personas{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:8px 0 18px;
+    max-width:780px;
+  }
+  .persona{
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    padding:17px 19px;
+  }
+  .persona h3{
+    margin:0 0 4px;
+    font-size:1rem;
+  }
+  .persona .role{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .persona p{font-size:15.5px;line-height:1.45;margin:0;color:var(--ink-soft);}
+
+  /* diagram */
+  figure.diagram{
+    margin:14px 0 22px;
+    border:1px solid var(--line-strong);
+    border-radius:12px;
+    background:var(--surface);
+    padding:22px;
+    max-width:820px;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  figure.diagram figcaption{
+    font-size:13.5px;
+    color:var(--ink-faint);
+    margin-top:12px;
+    line-height:1.4;
+    font-style:italic;
+  }
+  @media (max-width:640px){
+    figure.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:18px;}
+    figure.diagram svg{min-width:560px;}
+    figure.diagram figcaption{min-width:0;}
+  }
+
+  /* timeline */
+  .timeline{
+    margin:8px 0 18px;
+    max-width:780px;
+  }
+  .phase{
+    position:relative;
+    padding:0 0 26px 30px;
+    border-left:2px solid var(--line-strong);
+  }
+  .phase:last-child{border-left-color:transparent;padding-bottom:4px;}
+  .phase::before{
+    content:"";
+    position:absolute;
+    left:-7px;
+    top:3px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--accent);
+    border:3px solid var(--bg);
+  }
+  .phase .when{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    font-weight:600;
+  }
+  .phase h3{margin:2px 0 8px;}
+  .phase ul.clean{margin-bottom:0;}
+  .phase ul.clean li{margin-bottom:7px;font-size:16px;}
+
+  /* questions */
+  ol.q{
+    counter-reset:q;
+    list-style:none;
+    padding:0;
+    margin:8px 0 16px;
+    max-width:740px;
+  }
+  ol.q li{
+    counter-increment:q;
+    position:relative;
+    padding:0 0 16px 42px;
+    margin:0;
+  }
+  ol.q li::before{
+    content:counter(q);
+    position:absolute;
+    left:0;
+    top:-2px;
+    width:28px;
+    height:28px;
+    background:var(--accent-soft);
+    color:var(--accent-ink);
+    border-radius:7px;
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* fit table emphasis */
+  .fit-intro{max-width:68ch;}
+  .creds{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-faint);
+    margin:0 0 20px;
+    line-height:1.6;
+    letter-spacing:0.01em;
+  }
+
+  /* through-line */
+  .throughline{
+    background:var(--accent-soft);
+    border-radius:12px;
+    padding:22px 24px;
+    margin:20px 0 8px;
+    max-width:760px;
+  }
+  .throughline p{margin:0;color:var(--accent-ink);font-size:17px;}
+
+  /* footer */
+  footer{
+    margin-top:8px;
+    padding:34px 0 56px;
+    border-top:1px solid var(--line-strong);
+    position:relative;
+    z-index:1;
+  }
+  .foot-name{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin:0 0 4px;
+  }
+  .foot-role{
+    font-size:15px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  .contacts{
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:0.01em;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 16px;
+    margin:0;
+    list-style:none;
+    padding:0;
+  }
+  .contacts a{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:1px;
+  }
+  .contacts a:hover, .contacts a:focus{color:var(--accent);border-color:var(--accent);}
+  .contacts .sep{color:var(--line-strong);}
+
+  /* reveal: visible by default, animate only as enhancement */
+  .reveal{opacity:1;}
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+  @media print{
+    .reveal{opacity:1 !important;transform:none !important;}
+  }
+
+  /* ===================== DESKTOP ===================== */
+  @media (min-width:920px){
+    .toc-mobile{display:none;}
+    .layout{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    /* indent masthead + footer to content column */
+    .masthead, footer > .aligned{
+      padding-left:calc(var(--pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .toc-rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .toc-rail .toc-head{
+      font-family:var(--font-mono);
+      font-size:11px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:var(--ink-faint);
+      font-weight:600;
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .toc-rail ol{
+      list-style:none;
+      counter-reset:rail;
+      margin:0;
+      padding:0;
+    }
+    .toc-rail li{counter-increment:rail;margin:0;}
+    .toc-rail a{
+      display:flex;
+      gap:9px;
+      align-items:baseline;
+      padding:6px 0 6px 12px;
+      border-left:2px solid transparent;
+      color:var(--ink-faint);
+      text-decoration:none;
+      font-family:var(--font-display);
+      font-size:13.5px;
+      line-height:1.3;
+      font-weight:500;
+      transition:color .15s ease, border-color .15s ease;
+    }
+    .toc-rail a::before{
+      content:counter(rail,decimal-leading-zero);
+      font-family:var(--font-mono);
+      font-size:10px;
+      color:var(--line-strong);
+      flex:none;
+    }
+    .toc-rail a:hover{color:var(--ink-soft);}
+    .toc-rail a[aria-current="true"]{
+      color:var(--accent-ink);
+      border-left-color:var(--accent);
+      font-weight:600;
+    }
+    .toc-rail a[aria-current="true"]::before{color:var(--accent);}
+  }
+
+  @media (max-width:600px){
+    body{font-size:17px;}
+    .stats{grid-template-columns:1fr;}
+    .stat{border-right:0;border-bottom:1px solid var(--line);}
+    .stat:last-child{border-bottom:0;}
+    .personas{grid-template-columns:1fr;}
+    section{padding:34px 0 6px;}
+    .masthead{padding-top:38px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead aligned">
+  <p class="eyebrow">A proposal for Cresta</p>
+  <h1>Mayuresh More</h1>
+  <p class="frame">How I would solve the deployment problem for the Forward Deployed Product Manager, AI Agent role at Cresta.</p>
+  <p class="prepared">Prepared June 2026</p>
+</header>
+
+<hr class="rule" />
+
+<div class="layout">
+
+  <nav class="toc-rail" aria-label="On this page">
+    <p class="toc-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#business">Business impact</a></li>
+      <li><a href="#flywheel">Repeatability</a></li>
+      <li><a href="#plan">30 / 60 / 90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#users">Who it is for</a></li>
+        <li><a href="#priority">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#flywheel">Repeatability</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+
+    <!-- ================= THE BET ================= -->
+    <section id="bet" class="reveal">
+      <h2 class="kicker"><span class="num">01</span>The bet</h2>
+      <p class="lede">Enterprise agentic AI does not fail because the models are weak. It fails at deployment.</p>
+      <div class="content">
+        <p>Integration, trust, and use-case scoping are where pilots stall. Only <strong>27% of CX teams</strong> that piloted agentic AI reached production <a class="src" href="https://www.digitalapplied.com/blog/customer-service-ai-agent-statistics-2026-data" target="_blank" rel="noopener">(2026 CX AI agent statistics)</a>.</p>
+        <p>My bet for this role: I would own the deployment lifecycle per account so agents reach production fast and prove ROI, then turn every deployment into a reusable playbook and platform feedback so the next one is faster. Repeatability is the moat. One-off custom work is the trap.</p>
+      </div>
+    </section>
+
+    <!-- ================= THE PROBLEM ================= -->
+    <section id="problem" class="reveal">
+      <h2 class="kicker"><span class="num">02</span>The problem</h2>
+      <div class="content">
+        <p>Cresta is at roughly $100M ARR and growing faster than ever <a class="src" href="https://www.prnewswire.com/news-releases/cresta-names-sequoias-doug-leone-as-board-chair-carl-eschenbach-rejoins-board-as-growth-accelerates-302758109.html" target="_blank" rel="noopener">(Cresta, 2026)</a>. At that stage the constraint is not the product. Cresta shipped four to five major products in 2025 alone. The constraint is deployment velocity: turning pilots into live production agents, and live agents into expansion revenue. The forward deployed PM closes that gap, account by account.</p>
+      </div>
+
+      <div class="stats" role="group" aria-label="Key figures on the deployment gap">
+        <div class="stat">
+          <span class="big">64% &rarr; 27%</span>
+          <span class="cap">ran an agentic AI pilot, but only this many put a channel into full production.</span>
+        </div>
+        <div class="stat">
+          <span class="big">25%</span>
+          <span class="cap">of business leaders trust AI agents in autonomous customer interactions.</span>
+        </div>
+        <div class="stat">
+          <span class="big">8 to 10</span>
+          <span class="cap">systems a Fortune 500 agent touches, most without real-time APIs.</span>
+        </div>
+      </div>
+
+      <h3>Reading the problem in plain terms</h3>
+      <ul class="clean">
+        <li><strong>Who hurts.</strong> The customer's CX leader who bought an outcome and is waiting on it, and Cresta, which carries the cost of a stalled deployment. The end customer who reaches an agent that cannot resolve their issue hurts too.</li>
+        <li><strong>What the failure looks like.</strong> Pilots stall in the gap between a demo and a production system. In 2026, 64% of enterprise CX teams ran a pilot but only 27% put at least one channel into full production <a class="src" href="https://www.digitalapplied.com/blog/customer-service-ai-agent-statistics-2026-data" target="_blank" rel="noopener">(2026 CX AI agent statistics)</a>.</li>
+        <li><strong>Root cause.</strong> Cresta's CEO Ping Wu put it directly: Fortune 500 agents touch 8 to 10 systems that lack real-time APIs. The hard part is integration, PII handling, data residency, call transfers, latency across regions, and multi-language support, not the model <a class="src" href="https://sequoiacap.com/podcast/why-ai-will-create-abundance-and-transform-customer-experience-cresta-ceo-ping-wu/" target="_blank" rel="noopener">(Ping Wu, Sequoia podcast)</a>.</li>
+        <li><strong>The trust wall.</strong> Only 25% of business leaders trust AI agents in autonomous interactions <a class="src" href="https://www.prnewswire.com/news-releases/cresta-launches-automated-ai-agent-testing-so-businesses-can-deploy-ai-agents-with-confidence-302569738.html" target="_blank" rel="noopener">(Cresta, Sept 2025)</a>. Hallucination complaints are only 0.34% of AI-handled tickets, yet 71% of CX leaders rank them a top-three governance risk because each public failure is costly <a class="src" href="https://www.digitalapplied.com/blog/customer-service-ai-agent-statistics-2026-data" target="_blank" rel="noopener">(2026 CX AI agent statistics)</a>. A skeptical VP will not sign off on go-live without evidence the agent is safe.</li>
+        <li><strong>What it costs.</strong> A human-handled contact runs $5 to $12. An enterprise running 12 million contacts a year and targeting 20% containment is looking at $12M to $28.8M in annual cost reduction. A deployment that slips 60 days loses roughly $2M to $5M in annualized ROI (estimate, derived from the brief's contact economics).</li>
+      </ul>
+
+      <div class="card">
+        <span class="label">This is a race</span>
+        <p>Sierra raised $950M at a $15.8B valuation <a class="src" href="https://techcrunch.com/2026/05/04/sierra-raises-950m-as-the-race-to-own-enterprise-ai-gets-serious/" target="_blank" rel="noopener">(TechCrunch, May 2026)</a> and is at roughly $200M ARR <a class="src" href="https://sacra.com/c/sierra/" target="_blank" rel="noopener">(Sacra, 2026)</a>. Decagon raised $250M at a $4.5B valuation <a class="src" href="https://sacra.com/c/decagon/" target="_blank" rel="noopener">(Sacra, 2026)</a>. Salesforce Agentforce attacks from the CRM side. At $100M ARR, Cresta does not defend its position with more demos. It defends it by getting agents into production faster than anyone else and proving ROI that renews and expands. That is the forward deployed PM's job.</p>
+      </div>
+    </section>
+
+    <!-- ================= USERS ================= -->
+    <section id="users" class="reveal">
+      <h2 class="kicker"><span class="num">03</span>Who it is for</h2>
+      <div class="content">
+        <p>Job to be done means the outcome someone hires the product to achieve, not the feature they click. Four people sit around every deployment.</p>
+      </div>
+      <div class="personas">
+        <div class="persona">
+          <p class="role">Economic buyer</p>
+          <h3>The CX or contact-center leader</h3>
+          <p>"Cut my cost per contact and protect revenue without putting my brand at risk in front of customers." Measured on cost, CSAT, and not ending up in a headline. They will not go live until they trust the agent. Winning them is a trust problem before it is a technology problem.</p>
+        </div>
+        <div class="persona">
+          <p class="role">Gatekeeper</p>
+          <h3>IT and security</h3>
+          <p>"Let this system into our stack without creating a security, data-residency, or compliance exposure." They block on SIP and static-IP requirements, CRM authentication, and knowledge-base sync. The silent killer of timelines. Their concerns have to surface in week one, not week ten.</p>
+        </div>
+        <div class="persona">
+          <p class="role">End user</p>
+          <h3>The customer who contacts support</h3>
+          <p>"Resolve my issue now, and get me to a human the moment the agent cannot." The agent has to contain the routine and escalate the rest cleanly. Containment that frustrates customers is a false win.</p>
+        </div>
+        <div class="persona">
+          <p class="role">Internal partner</p>
+          <h3>The Forward Deployed Engineer</h3>
+          <p>The FDE owns integrations and technical build. I own the strategy layer: which use cases, what success looks like, how to run the workshops, how to iterate after launch, what to feed back to the platform. One pod, two roles.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRIORITIZATION ================= -->
+    <section id="priority" class="reveal">
+      <h2 class="kicker"><span class="num">04</span>Why this problem</h2>
+      <div class="content">
+        <p>RICE is a simple way to compare what to fund. Reach is how many it touches. Impact is how much it moves the goal. Confidence is how sure we are. Effort is the cost. Here is how I would read what a forward deployed PM could pour energy into at a new account, and why "get the first use case to production with proof" wins.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <caption class="sr-only" style="position:absolute;left:-9999px;">RICE read of forward deployed PM priorities</caption>
+          <thead>
+            <tr>
+              <th scope="col">What I could prioritize</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Conf.</th>
+              <th scope="col">Effort</th>
+              <th scope="col">Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ship one high-volume, low-risk use case to production fast</td>
+              <td><span class="tag hi">High</span></td>
+              <td><span class="tag hi">High</span></td>
+              <td><span class="tag hi">High</span></td>
+              <td><span class="tag med">Med</span></td>
+              <td><strong>Do this first.</strong> Highest score. Books real containment, proves the model to a skeptical buyer, unlocks expansion.</td>
+            </tr>
+            <tr>
+              <td>Scope a broad multi-use-case roadmap up front</td>
+              <td><span class="tag hi">High</span></td>
+              <td><span class="tag hi">High</span></td>
+              <td><span class="tag lo">Low</span></td>
+              <td><span class="tag lo">High</span></td>
+              <td>Tempting and wrong. Low confidence until one case is live. Plan it, do not build it yet.</td>
+            </tr>
+            <tr>
+              <td>Build a bespoke custom capability for this one account</td>
+              <td><span class="tag lo">Low</span></td>
+              <td><span class="tag med">Med</span></td>
+              <td><span class="tag med">Med</span></td>
+              <td><span class="tag lo">High</span></td>
+              <td>Only if it unblocks go-live. Otherwise it is the one-off trap that does not scale.</td>
+            </tr>
+            <tr>
+              <td>Deep optimization before any go-live</td>
+              <td><span class="tag lo">Low</span></td>
+              <td><span class="tag lo">Low</span></td>
+              <td><span class="tag med">Med</span></td>
+              <td><span class="tag lo">High</span></td>
+              <td>Premature. You cannot optimize an agent that is not in front of real traffic.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content">
+        <p>The winning move is the smallest deployment that proves real ROI and earns trust, because that is what converts a pilot into production and a production agent into expansion. Cresta's own tooling points the same way: Automation Discovery scores conversations by volume, complexity, and resolution rate and projects ROI, so the highest-value, lowest-risk first use case is identifiable from data, not opinion <a class="src" href="https://www.prnewswire.com/news-releases/cresta-automation-discovery-provides-a-blueprint-for-where-and-how-to-deploy-ai-agents-302629614.html" target="_blank" rel="noopener">(Cresta, Dec 2025)</a>.</p>
+      </div>
+    </section>
+
+    <!-- ================= APPROACH ================= -->
+    <section id="approach" class="reveal">
+      <h2 class="kicker"><span class="num">05</span>Approach</h2>
+      <div class="content">
+        <p>I would not invent a new product. I would run Cresta's deployment lifecycle well and repeatably, using the assets Cresta already ships.</p>
+      </div>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 880 200" role="img" aria-label="Deployment lifecycle: five stages run left to right. Scope use-case fit with Automation Discovery, then Build flows, escalation and guardrails with the FDE, then Test with simulated visitors and an eval suite, then Launch go-live and hypercare in the Agent Operations Center, then Optimize by tuning, A/B testing and expanding scope. Optimize feeds back into a playbook and platform loop, which makes the next account faster to scope.">
+          <defs>
+            <marker id="arrA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L9,4.5 L0,9 Z" fill="#1f6f5c"></path>
+            </marker>
+            <marker id="arrLoop" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L9,4.5 L0,9 Z" fill="#a9711f"></path>
+            </marker>
+          </defs>
+          <!-- stage boxes -->
+          <g font-family="'Space Grotesk',sans-serif">
+            <!-- Scope -->
+            <rect x="6" y="40" width="158" height="64" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="85" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#15543f">Scope</text>
+            <text x="85" y="82" text-anchor="middle" font-size="11" fill="#3a4453">use-case fit</text>
+            <text x="85" y="96" text-anchor="middle" font-size="10" fill="#7c8694">Automation Discovery</text>
+            <!-- Build -->
+            <rect x="186" y="40" width="158" height="64" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="265" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#15543f">Build</text>
+            <text x="265" y="82" text-anchor="middle" font-size="11" fill="#3a4453">flows, escalation,</text>
+            <text x="265" y="96" text-anchor="middle" font-size="11" fill="#3a4453">guardrails (with FDE)</text>
+            <!-- Test -->
+            <rect x="366" y="40" width="148" height="64" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="440" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#15543f">Test</text>
+            <text x="440" y="82" text-anchor="middle" font-size="11" fill="#3a4453">simulated visitors,</text>
+            <text x="440" y="96" text-anchor="middle" font-size="11" fill="#3a4453">eval suite</text>
+            <!-- Launch -->
+            <rect x="536" y="40" width="158" height="64" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="615" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#15543f">Launch</text>
+            <text x="615" y="82" text-anchor="middle" font-size="11" fill="#3a4453">go-live + hypercare</text>
+            <text x="615" y="96" text-anchor="middle" font-size="10" fill="#7c8694">Agent Ops Center</text>
+            <!-- Optimize -->
+            <rect x="716" y="40" width="158" height="64" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="795" y="64" text-anchor="middle" font-size="14" font-weight="700" fill="#15543f">Optimize</text>
+            <text x="795" y="82" text-anchor="middle" font-size="11" fill="#3a4453">tune, A/B,</text>
+            <text x="795" y="96" text-anchor="middle" font-size="11" fill="#3a4453">expand scope</text>
+          </g>
+          <!-- arrows between stages -->
+          <g stroke="#1f6f5c" stroke-width="2" fill="none" aria-hidden="true">
+            <line x1="166" y1="72" x2="182" y2="72" marker-end="url(#arrA)"></line>
+            <line x1="346" y1="72" x2="362" y2="72" marker-end="url(#arrA)"></line>
+            <line x1="516" y1="72" x2="532" y2="72" marker-end="url(#arrA)"></line>
+            <line x1="696" y1="72" x2="712" y2="72" marker-end="url(#arrA)"></line>
+          </g>
+          <!-- feedback loop -->
+          <g aria-hidden="true">
+            <rect x="300" y="150" width="280" height="38" rx="9" fill="#fbf3da" stroke="#a9711f" stroke-width="1.5"></rect>
+            <text x="440" y="174" text-anchor="middle" font-size="12" font-weight="600" fill="#a9711f" font-family="'Space Grotesk',sans-serif">Feed back: playbook + platform</text>
+            <path d="M795 104 L795 169 L584 169" stroke="#a9711f" stroke-width="2" fill="none" marker-end="url(#arrLoop)"></path>
+            <path d="M296 169 L85 169 L85 108" stroke="#a9711f" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#arrLoop)"></path>
+            <text x="190" y="142" text-anchor="middle" font-size="10.5" fill="#a9711f" font-family="'JetBrains Mono',monospace">next account is faster</text>
+          </g>
+        </svg>
+        <figcaption>The deployment lifecycle. Each account runs scope to optimize, then feeds a playbook and platform loop that makes the next one faster.</figcaption>
+      </figure>
+
+      <div class="content">
+        <p>Within that lifecycle, three real bets shape each deployment. I would frame them as hypotheses and decide with data, not preference.</p>
+      </div>
+
+      <div class="bet">
+        <h3><span class="bn">BET 1</span>Scoping: pick the first use case from data, not the wish list</h3>
+        <p>Customers arrive with either a vague mandate ("automate the contact center") or an over-narrow one ("just billing FAQs"). I would run Automation Discovery on real transcripts and choose the first use case on volume, resolution rate, and risk. Decide by the data: high volume, clean resolution path, low compliance exposure goes first.</p>
+      </div>
+      <div class="bet">
+        <h3><span class="bn">BET 2</span>Trust: treat the eval and test suite as the product surface</h3>
+        <p>Containment is only a win if there are no safety failures. Cresta's Automated AI Agent Testing runs simulated visitors from de-identified historical calls, runs 15x more tests than human methods, and delivers 35% faster release cycles <a class="src" href="https://www.prnewswire.com/news-releases/cresta-launches-automated-ai-agent-testing-so-businesses-can-deploy-ai-agents-with-confidence-302569738.html" target="_blank" rel="noopener">(Cresta, Sept 2025)</a>. I would define the test scenarios and eval bar with the customer before build, so go-live is a data conversation, not a leap of faith. This converts a 25%-trust buyer into a signed go-live.</p>
+      </div>
+      <div class="bet">
+        <h3><span class="bn">BET 3</span>Integration risk: surface IT and security blockers in week one</h3>
+        <p>SIP and static IP, CRM authentication, API timeouts, and knowledge-base sync are the real timeline killers <a class="src" href="https://www.retellai.com/blog/voice-ai-integrations-crm-telephony-stack" target="_blank" rel="noopener">(Retell AI, 2026)</a>. I do not write the integration code; the FDE does. I run the stakeholder alignment that gets IT and security to "yes" early, and translate their constraints into requirements the FDE can build against. Map the stack against Cresta's deepest native integrations before kickoff, so we sequence around blockers instead of hitting them.</p>
+      </div>
+    </section>
+
+    <!-- ================= MVP ================= -->
+    <section id="mvp" class="reveal">
+      <h2 class="kicker"><span class="num">06</span>What I'd ship first</h2>
+      <div class="content">
+        <p>For any new account, the smallest test of the biggest assumption is one production use case that proves real ROI under a real trust bar. The biggest assumption is always: this customer's traffic can be safely contained at a rate that pays for itself.</p>
+      </div>
+
+      <h3>The first deployment, concretely</h3>
+      <ul class="clean">
+        <li>One high-volume, low-risk intent (for example order status or a billing FAQ), chosen from Automation Discovery data.</li>
+        <li>A defined containment target and an explicit safety bar agreed with the buyer before build.</li>
+        <li>An eval suite of simulated visitors the agent must pass before go-live.</li>
+        <li>Clean human escalation wired through the Agent Operations Center, which gives real-time visibility into AI and human conversations <a class="src" href="https://www.prnewswire.com/news-releases/cresta-launches-agent-operations-center-to-manage-the-human-ai-hybrid-workforce-for-the-customer-experience-302636142.html" target="_blank" rel="noopener">(Cresta, Dec 2025)</a>.</li>
+        <li>Hypercare in the first weeks, watching the live dashboards and tuning fast.</li>
+      </ul>
+
+      <div class="card">
+        <span class="label">Why this first</span>
+        <p>It is the highest Reach times Impact times Confidence over Effort: a single, scoped, data-chosen use case is buildable in weeks, it produces a real containment number a CX leader can take to their board, and it earns the trust that unlocks the next use case. Containment typically starts modest at launch and climbs as the deployment matures and the agent is tuned. The first win is the foothold for that whole arc.</p>
+      </div>
+
+      <div class="content">
+        <p><strong>What it deliberately leaves out.</strong> No multi-use-case rollout, no bespoke custom capability unless it unblocks go-live, no deep optimization before live traffic exists. Those come after the first use case proves the model. Scoping them in early is the over-promise that kills first deployments.</p>
+      </div>
+    </section>
+
+    <!-- ================= METRICS ================= -->
+    <section id="metrics" class="reveal">
+      <h2 class="kicker"><span class="num">07</span>Metrics</h2>
+      <div class="content">
+        <p>The North Star is the metric that tells you the agent created value the customer will pay to keep. For a forward deployed PM that is <strong>net containment value per account</strong>: contacts safely resolved by the agent, valued in cost saved or revenue captured, net of any trust failures. It ties directly to renewal and expansion, which is what Cresta is funding this seat to drive.</p>
+      </div>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 820 320" role="img" aria-label="Metrics tree. The North Star is net containment value per account. It breaks into four drivers: time-to-value in days from kickoff to first live interaction, containment rate as the percent resolved without human transfer, ROI delivered as cost saved plus revenue captured, and expansion into new use cases and channels. Under containment rate sit three guardrail anti-metrics: CSAT of AI-handled chats, hallucination and safety failure rate, and clean escalation rate.">
+          <defs>
+            <marker id="arrM" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#9aa3b0"></path>
+            </marker>
+          </defs>
+          <g aria-hidden="true" stroke="#9aa3b0" stroke-width="1.6" fill="none">
+            <!-- north star to drivers -->
+            <path d="M410 64 C 410 86, 130 78, 130 104" marker-end="url(#arrM)"></path>
+            <path d="M410 64 C 410 86, 318 80, 318 104" marker-end="url(#arrM)"></path>
+            <path d="M410 64 C 410 86, 504 80, 504 104" marker-end="url(#arrM)"></path>
+            <path d="M410 64 C 410 86, 692 78, 692 104" marker-end="url(#arrM)"></path>
+            <!-- containment to guardrails -->
+            <path d="M318 150 C 318 178, 150 188, 150 214" marker-end="url(#arrM)"></path>
+            <path d="M318 150 C 318 180, 410 188, 410 214" marker-end="url(#arrM)"></path>
+            <path d="M318 150 C 318 178, 670 188, 670 214" marker-end="url(#arrM)"></path>
+          </g>
+          <g font-family="'Space Grotesk',sans-serif">
+            <!-- north star -->
+            <rect x="276" y="18" width="268" height="48" rx="10" fill="#fbf3da" stroke="#ca8a04" stroke-width="1.8"></rect>
+            <text x="410" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">North Star</text>
+            <text x="410" y="57" text-anchor="middle" font-size="12" fill="#713f12">Net containment value per account</text>
+
+            <!-- drivers -->
+            <g>
+              <rect x="44" y="106" width="172" height="46" rx="9" fill="#e6eef5" stroke="#2c5d86" stroke-width="1.5"></rect>
+              <text x="130" y="126" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">Time-to-value</text>
+              <text x="130" y="142" text-anchor="middle" font-size="10" fill="#3a4453">kickoff to first live</text>
+            </g>
+            <g>
+              <rect x="234" y="106" width="168" height="46" rx="9" fill="#e6eef5" stroke="#2c5d86" stroke-width="1.5"></rect>
+              <text x="318" y="126" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">Containment rate</text>
+              <text x="318" y="142" text-anchor="middle" font-size="10" fill="#3a4453">% without human transfer</text>
+            </g>
+            <g>
+              <rect x="420" y="106" width="168" height="46" rx="9" fill="#e6eef5" stroke="#2c5d86" stroke-width="1.5"></rect>
+              <text x="504" y="126" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">ROI delivered</text>
+              <text x="504" y="142" text-anchor="middle" font-size="10" fill="#3a4453">cost saved + revenue</text>
+            </g>
+            <g>
+              <rect x="606" y="106" width="170" height="46" rx="9" fill="#e6eef5" stroke="#2c5d86" stroke-width="1.5"></rect>
+              <text x="691" y="126" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">Expansion</text>
+              <text x="691" y="142" text-anchor="middle" font-size="10" fill="#3a4453">new cases + channels</text>
+            </g>
+
+            <!-- guardrails -->
+            <g>
+              <rect x="60" y="216" width="180" height="46" rx="9" fill="#f6e6e3" stroke="#dc2626" stroke-width="1.4"></rect>
+              <text x="150" y="236" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7f1d1d">CSAT of AI chats</text>
+              <text x="150" y="252" text-anchor="middle" font-size="10" fill="#9c3b34">must not drop</text>
+            </g>
+            <g>
+              <rect x="318" y="216" width="184" height="46" rx="9" fill="#f6e6e3" stroke="#dc2626" stroke-width="1.4"></rect>
+              <text x="410" y="236" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7f1d1d">Hallucination / safety</text>
+              <text x="410" y="252" text-anchor="middle" font-size="10" fill="#9c3b34">below agreed bar</text>
+            </g>
+            <g>
+              <rect x="580" y="216" width="180" height="46" rx="9" fill="#f6e6e3" stroke="#dc2626" stroke-width="1.4"></rect>
+              <text x="670" y="236" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7f1d1d">Clean escalation</text>
+              <text x="670" y="252" text-anchor="middle" font-size="10" fill="#9c3b34">stays high</text>
+            </g>
+            <!-- legend row -->
+            <text x="44" y="298" font-size="10.5" font-family="'JetBrains Mono',monospace" fill="#7c8694">Gold = North Star &nbsp;&nbsp; Blue = drivers &nbsp;&nbsp; Red = guardrails (anti-metrics)</text>
+          </g>
+        </svg>
+        <figcaption>One North Star, four drivers, three guardrails. A containment number that comes with falling CSAT is a loss, not a win.</figcaption>
+      </figure>
+
+      <div class="content">
+        <p><strong>Guardrails and anti-metrics.</strong> Containment is gamed if you push it at the cost of the customer. So I would hold three lines: CSAT of AI-handled conversations must not drop, the hallucination and safety-failure rate must stay below the bar agreed with the buyer, and the clean-escalation rate (handoffs that reach a human without the customer repeating themselves) must stay high.</p>
+      </div>
+    </section>
+
+    <!-- ================= BUSINESS ================= -->
+    <section id="business" class="reveal">
+      <h2 class="kicker"><span class="num">08</span>Business impact</h2>
+      <div class="content">
+        <p>These are hypotheses tied to the numbers in the brief. At roughly $100M ARR <a class="src" href="https://www.prnewswire.com/news-releases/cresta-names-sequoias-doug-leone-as-board-chair-carl-eschenbach-rejoins-board-as-growth-accelerates-302758109.html" target="_blank" rel="noopener">(Cresta, 2026)</a>, ARR growth is gated by deployment throughput and net revenue retention, not by lead volume. The forward deployed PM moves three of those levers directly.</p>
+      </div>
+      <ul class="clean">
+        <li><strong>Faster time-to-value pulls revenue forward and protects it.</strong> Every week saved on a deployment is captured containment value instead of stalled pilot. On the brief's contact economics, a 60-day acceleration on a large account is worth roughly $2M to $5M in annualized ROI to the customer, which is exactly the proof that drives renewal.</li>
+        <li><strong>Post-launch optimization is the expansion engine.</strong> Containment typically starts modest at launch and climbs as the deployment matures and the agent is tuned. Cresta's Snap Finance customer reached a 5.5x improvement in containment, the kind of step-change that comes from iterative post-launch work, not the initial build <a class="src" href="https://cresta.com/customers/snap-finance" target="_blank" rel="noopener">(Cresta / Snap Finance)</a>.</li>
+        <li><strong>Proven ROI is the renewal and reference story.</strong> Cox saw a 20% to 30% revenue-per-chat increase in residential sales and 10% to 20% for retention <a class="src" href="https://cresta.com/customers/cox" target="_blank" rel="noopener">(Cresta / Cox)</a>. Achieve reached 3x ROI and a 75% reduction in after-call work <a class="src" href="https://cresta.com/customer-stories" target="_blank" rel="noopener">(Cresta / Achieve)</a>. Outcomes like these are what a forward deployed PM is accountable for producing and documenting, and what defend Cresta against Sierra and Decagon at the renewal table.</li>
+      </ul>
+    </section>
+
+    <!-- ================= FLYWHEEL ================= -->
+    <section id="flywheel" class="reveal">
+      <h2 class="kicker"><span class="num">09</span>Repeatability</h2>
+      <div class="content">
+        <p>The strategic point of this role is that bespoke one-off services do not scale. Every deployment has to make the next one cheaper. That is the difference between a services cost center and a forward deployed team that compounds.</p>
+      </div>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 820 200" role="img" aria-label="Repeatability flywheel. Deploy an account leads to capturing field learnings. Field learnings split two ways: into a codified playbook, and into platform feedback for tools and evals. Both make the next deployment faster, which loops back to deploying the next account.">
+          <defs>
+            <marker id="arrF" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0 L9,4.5 L0,9 Z" fill="#1f6f5c"></path>
+            </marker>
+          </defs>
+          <g font-family="'Space Grotesk',sans-serif">
+            <rect x="8" y="78" width="132" height="50" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="74" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#15543f">Deploy an</text>
+            <text x="74" y="116" text-anchor="middle" font-size="12.5" font-weight="700" fill="#15543f">account</text>
+
+            <rect x="186" y="78" width="132" height="50" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="252" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#15543f">Capture field</text>
+            <text x="252" y="116" text-anchor="middle" font-size="12" font-weight="600" fill="#15543f">learnings</text>
+
+            <rect x="364" y="20" width="148" height="50" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="438" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#15543f">Codify into</text>
+            <text x="438" y="58" text-anchor="middle" font-size="12" font-weight="600" fill="#15543f">playbook</text>
+
+            <rect x="364" y="136" width="148" height="50" rx="9" fill="#e6f0ec" stroke="#1f6f5c" stroke-width="1.5"></rect>
+            <text x="438" y="158" text-anchor="middle" font-size="12" font-weight="600" fill="#15543f">Feed platform</text>
+            <text x="438" y="174" text-anchor="middle" font-size="11" fill="#3a4453">(tools, evals)</text>
+
+            <rect x="560" y="78" width="148" height="50" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"></rect>
+            <text x="634" y="100" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Next deployment</text>
+            <text x="634" y="116" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">is faster</text>
+          </g>
+          <g aria-hidden="true" stroke="#1f6f5c" stroke-width="2" fill="none">
+            <line x1="142" y1="103" x2="182" y2="103" marker-end="url(#arrF)"></line>
+            <path d="M318 95 L350 60 L360 50" marker-end="url(#arrF)"></path>
+            <path d="M318 112 L350 150 L360 156" marker-end="url(#arrF)"></path>
+            <path d="M512 45 L548 80 L558 92" marker-end="url(#arrF)"></path>
+            <path d="M512 161 L548 126 L558 114" marker-end="url(#arrF)"></path>
+            <path d="M634 128 C 634 175, 74 178, 74 132" marker-end="url(#arrF)"></path>
+          </g>
+        </svg>
+        <figcaption>Every account leaves a reusable asset behind. That is what turns a services cost into a compounding advantage.</figcaption>
+      </figure>
+
+      <div class="content">
+        <p>Cresta is already productizing this loop. Automation Discovery, Automated AI Agent Testing, and the Agent Operations Center are the company's attempt to turn the deployment playbook into product. A forward deployed PM is both a heavy user of those tools and a contributor who sharpens them with field learnings. I would treat "what reusable asset did this deployment leave behind" as a deliverable on every account, not an afterthought.</p>
+      </div>
+    </section>
+
+    <!-- ================= 30 60 90 ================= -->
+    <section id="plan" class="reveal">
+      <h2 class="kicker"><span class="num">10</span>30 / 60 / 90</h2>
+      <div class="timeline">
+        <div class="phase">
+          <span class="when">Days 0 to 30</span>
+          <h3>Listen and learn the machine</h3>
+          <ul class="clean">
+            <li>Shadow live deployments and read the existing playbooks, Automation Discovery outputs, and Agent Operations Center dashboards. Learn how Cresta actually deploys today.</li>
+            <li>Sit with FDEs to understand where builds and integrations get stuck, and which CCaaS and CRM integrations are deepest.</li>
+            <li>Map the metrics each account is judged on and where the current playbook is thin.</li>
+            <li>Get hands-on with the AI Agent build and testing tools so I can build and test, not just coordinate.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="when">Days 30 to 60</span>
+          <h3>A quick win and a sharper process</h3>
+          <ul class="clean">
+            <li>Take ownership of one live or near-launch account. Drive the first use case to go-live or to a measurable optimization step.</li>
+            <li>Run a scoping workshop end to end: pull conversation data, prioritize use cases, set the success criteria and safety bar with the customer.</li>
+            <li>Surface integration and security blockers early and translate them into requirements for the FDE.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="when">Days 60 to 90</span>
+          <h3>Ship, measure, and codify</h3>
+          <ul class="clean">
+            <li>Get a use case to production with a baseline containment and ROI number, and a clean escalation path.</li>
+            <li>Set the metric baseline and the guardrails for that account, and start the optimization loop.</li>
+            <li>Write up what was reusable: one playbook improvement and one piece of platform feedback. Make the next deployment faster.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RISKS ================= -->
+    <section id="risks" class="reveal">
+      <h2 class="kicker"><span class="num">11</span>Risks</h2>
+      <div class="content">
+        <p>These are open assumptions about the work, and what I would test in week one.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Risk</th>
+              <th scope="col">What I would validate first</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Use-case fit. The first case might be lower-volume or higher-risk than the data suggests.</td>
+              <td>Run Automation Discovery and read transcripts before committing to a target, and pressure-test the resolution path with the customer's own examples.</td>
+            </tr>
+            <tr>
+              <td>Trust and eval. The customer's safety bar might be stricter than the default eval suite.</td>
+              <td>Agree the exact eval scenarios and the pass bar with the CX leader and compliance before build, so go-live is not a surprise.</td>
+            </tr>
+            <tr>
+              <td>Integration. A SIP, CRM-auth, or data-residency constraint could block go-live late.</td>
+              <td>Run an IT and security review in the first two weeks and map the stack against Cresta's deepest native integrations.</td>
+            </tr>
+            <tr>
+              <td>Containment versus CSAT. Pushing containment could hurt customer satisfaction.</td>
+              <td>Instrument CSAT and clean-escalation from day one and treat a CSAT drop as a stop condition.</td>
+            </tr>
+            <tr>
+              <td>Repeatability. A deployment might solve this account but leave nothing reusable.</td>
+              <td>Define the playbook artifact and the platform-feedback item as deliverables at kickoff, not at the end.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= QUESTIONS ================= -->
+    <section id="questions" class="reveal">
+      <h2 class="kicker"><span class="num">12</span>Questions</h2>
+      <ol class="q">
+        <li>What is the current target customer-to-FDPM ratio, and how many use cases does a pod typically take to production in a quarter? This sets what "fast" realistically means.</li>
+        <li>How much of the book is greenfield autonomous AI Agent deployments versus expanding existing Agent Assist customers into autonomous? The skill mix and the trust conversation differ a lot between the two.</li>
+        <li>Which CCaaS and CRM integrations are deepest and most production-proven today? That tells me where deployments are low-risk and where they need extra runway.</li>
+        <li>Where is the current deployment playbook thinnest, and what one reusable asset would help the team most right now?</li>
+        <li>When a customer on Salesforce CRM is being pulled toward Agentforce mid-deployment, how does the team handle that competitive pressure today?</li>
+      </ol>
+    </section>
+
+    <!-- ================= WHY ME ================= -->
+    <section id="fit" class="reveal">
+      <h2 class="kicker"><span class="num">13</span>Why me</h2>
+      <div class="content fit-intro">
+        <p>I am a product manager and builder with six-plus years across technology, finance, and AI. I have spent those years doing exactly what this role rewards: owning enterprise deployments end to end, getting AI products past skeptical stakeholders into production, and being accountable for the ROI number at the end. This is a customer-facing deployment seat, and customer-facing enterprise delivery has been my work, not a side of it.</p>
+        <p class="creds">M.S. Information Management, University of Washington (expected June 2026) &nbsp;&middot;&nbsp; MBA Finance, Sydenham Institute of Management Studies &nbsp;&middot;&nbsp; B.E. Computer Engineering</p>
+        <p>The fit is direct on the parts that matter most for a forward deployed PM: I have run discovery-to-launch with senior stakeholders, shipped an AI assistant to 15,000-plus users under compliance and governance, and currently build and evaluate retrieval agents where hallucination and groundedness are the bar I am tuning against. That is the trust-and-eval surface this role lives on.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">What the role needs</th>
+              <th scope="col">What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Own the deployment lifecycle end to end</td>
+              <td>Owned discovery-to-launch of a finance budgeting application at Nomura: ran research with 15+ stakeholders, set MVP scope, drove adoption across cost-center owners, delivered a 30% reduction in spend.</td>
+            </tr>
+            <tr>
+              <td>Deploy AI products at enterprise scale, with trust and governance</td>
+              <td>Led the bank-wide rollout of an internal AI assistant to 15,000+ users with compliance and governance features in a phased adoption strategy.</td>
+            </tr>
+            <tr>
+              <td>Build and evaluate agents; own eval and groundedness</td>
+              <td>Built the POC of a policy conflict-detection chat agent for the City of Seattle; assessed 4 retrieval architectures on accuracy, groundedness, hallucination, latency, and cost; owned ingestion and quality gates for 9,000+ documents across 8 agencies.</td>
+            </tr>
+            <tr>
+              <td>Scale from MVP to production volume</td>
+              <td>Built and scaled a digital lending platform from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td>
+            </tr>
+            <tr>
+              <td>Deliver measurable ROI a buyer will renew on</td>
+              <td>Drove a market-data sourcing program to Tradeweb that delivered $700K in annual savings; cut operational-risk events by 20% and losses by 15%.</td>
+            </tr>
+            <tr>
+              <td>Run integrations and unblock cross-functional delivery</td>
+              <td>Delivered API integrations with credit bureaus and partners, improving loan-decision accuracy by 10% and cutting manual review by 35%, working across tech, audit, risk, and partner teams.</td>
+            </tr>
+            <tr>
+              <td>Build hands-on, not just coordinate</td>
+              <td>Shipped product flows, A/B tests, dashboards, and data pipelines directly (SQL, Python, Azure AI Studio), from BNY Mellon engineering through current agent work.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="throughline">
+        <p>The through-line: I take a customer's ambiguous problem, scope it from data, build and test the thing, get it past compliance and into production, and carry the ROI number. That is the forward deployed loop. I would run it at Cresta, and I would leave a better playbook behind on every account.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="aligned">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-role">Forward Deployed Product Manager, AI Agent &middot; Cresta</p>
+    <ul class="contacts">
+      <li><a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a></li>
+      <li class="sep" aria-hidden="true">/</li>
+      <li><a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a></li>
+      <li class="sep" aria-hidden="true">/</li>
+      <li><a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement only. All content is visible without JS.
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal-on-scroll (enhancement). If reduced motion, reveal immediately.
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var revObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); revObs.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ revObs.observe(el); });
+
+      // Safety net for static / no-scroll renders (headless screenshot, print, export):
+      // if nothing has scrolled after a short delay, force everything visible.
+      // Real users still get the scroll animation; this only reveals what is still hidden.
+      var scrolled = false;
+      window.addEventListener('scroll', function(){ scrolled = true; }, { passive: true, once: true });
+      window.setTimeout(function(){
+        if (!scrolled) {
+          reveals.forEach(function(el){ el.classList.add('in'); });
+        }
+      }, 1500);
+    }
+
+    // Scroll-spy for the desktop rail.
+    var railLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-rail a'));
+    if (railLinks.length && 'IntersectionObserver' in window) {
+      var map = {};
+      railLinks.forEach(function(a){
+        var id = a.getAttribute('href').slice(1);
+        map[id] = a;
+      });
+      var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+      var current = null;
+      function setCurrent(id){
+        if (current === id) return;
+        current = id;
+        railLinks.forEach(function(a){ a.removeAttribute('aria-current'); });
+        if (map[id]) map[id].setAttribute('aria-current','true');
+      }
+      var spy = new IntersectionObserver(function(entries){
+        // pick the entry nearest the top that is intersecting
+        var visible = entries.filter(function(e){ return e.isIntersecting; });
+        if (visible.length){
+          visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+          setCurrent(visible[0].target.id);
+        }
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
