@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: Selling Partner Trust pitch for Senior PM Tech at Amazon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfaf7;
+    --paper-2:#f4f1ea;
+    --ink:#1c1a17;
+    --ink-soft:#3c3a35;
+    --ink-mute:#6b6760;
+    --ink-faint:#9a948a;
+    --line:#e4dfd4;
+    --line-2:#d6d0c3;
+    --accent:#b8541a;      /* burnt amber, Amazon-adjacent warm */
+    --accent-deep:#8f3f12;
+    --accent-soft:#f3e6dc;
+    --good:#3f6b4f;
+    --card:#ffffff;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --wrap:760px;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --pad:24px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* faint paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(184,84,26,.035), transparent 42%),
+      radial-gradient(circle at 86% 88%, rgba(63,107,79,.03), transparent 46%);
+  }
+
+  a{color:var(--accent-deep)}
+
+  /* skip link */
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:200;
+    background:var(--ink);color:var(--paper);
+    padding:10px 16px;border-radius:0 0 6px 0;
+    font-family:var(--mono);font-size:13px;text-decoration:none;
+  }
+  .skip-link:focus{left:0}
+
+  /* ---------- shared wrap that aligns masthead + footer with content column ---------- */
+  .wrap{
+    max-width:calc(var(--wrap) + var(--rail-w) + var(--rail-gap) + var(--pad)*2);
+    margin:0 auto;
+    padding:0 var(--pad);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding-top:54px;
+    padding-bottom:30px;
+  }
+  .masthead .inner{max-width:var(--wrap)}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(30px,4.6vw,42px);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    margin:0 0 16px;
+    color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.4vw,20px);
+    line-height:1.3;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+    max-width:58ch;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  /* ---------- contents disclosure (mobile) ---------- */
+  .toc-mobile{
+    margin:18px 0 4px;
+    border:1px solid var(--line-2);
+    border-radius:8px;
+    background:var(--card);
+    max-width:var(--wrap);
+  }
+  .toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:12px 16px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none}
+  .toc-mobile summary::after{content:"+";font-size:18px;color:var(--accent)}
+  .toc-mobile[open] summary::after{content:"\2013"}
+  .toc-mobile ol{
+    margin:0;padding:4px 16px 14px;
+    list-style:none;
+    counter-reset:toc;
+  }
+  .toc-mobile li{margin:0}
+  .toc-mobile a{
+    display:block;padding:7px 0;
+    font-family:var(--mono);font-size:13.5px;
+    color:var(--ink-soft);text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  .toc-mobile li:last-child a{border-bottom:none}
+  .toc-mobile a:hover,.toc-mobile a:focus{color:var(--accent)}
+
+  /* ---------- layout grid ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,var(--wrap));
+    gap:var(--rail-gap);
+    align-items:start;
+    justify-content:center;
+  }
+
+  /* ---------- desktop rail ---------- */
+  .rail{
+    position:sticky;
+    top:32px;
+    align-self:start;
+    font-family:var(--mono);
+  }
+  .rail h2{
+    font-size:11.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin:0 0 14px;
+    padding-left:14px;
+  }
+  .rail nav ol{list-style:none;margin:0;padding:0}
+  .rail nav a{
+    display:block;
+    font-size:13px;
+    line-height:1.3;
+    padding:6px 0 6px 14px;
+    margin:1px 0;
+    color:var(--ink-mute);
+    text-decoration:none;
+    border-left:2px solid var(--line);
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .rail nav a:hover,.rail nav a:focus{color:var(--accent);border-left-color:var(--line-2)}
+  .rail nav a[aria-current="true"]{
+    color:var(--accent-deep);
+    border-left-color:var(--accent);
+    font-weight:500;
+  }
+
+  /* ---------- content column ---------- */
+  .content{min-width:0}
+  section{
+    padding:46px 0;
+    border-top:1px solid var(--line);
+  }
+  section:first-child{border-top:none;padding-top:8px}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+    line-height:1.2;
+  }
+  h2.kicker{font-family:var(--mono)}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(21px,2.9vw,27px);
+    line-height:1.28;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 20px;
+  }
+
+  p{margin:0 0 16px;max-width:64ch}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:var(--ink)}
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:26px 0 8px;
+  }
+
+  ul.clean{margin:0 0 16px;padding:0;list-style:none}
+  ul.clean li{
+    position:relative;
+    padding:6px 0 6px 22px;
+    max-width:64ch;
+  }
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:16px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent-soft);
+    border:1.5px solid var(--accent);
+  }
+
+  /* ---------- source citation links ---------- */
+  a.src{
+    display:inline-block;
+    padding:3px 0;
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:.5px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line-2);
+    transition:color .15s ease,text-decoration-color .15s ease;
+    font-style:italic;
+  }
+  a.src:hover,a.src:focus{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:8px 0 4px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--card);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+    line-height:1.45;
+    min-width:520px;
+  }
+  thead th{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    color:var(--ink-mute);
+    font-weight:600;
+    text-align:left;
+    padding:13px 16px;
+    background:var(--paper-2);
+    border-bottom:1px solid var(--line-2);
+    vertical-align:bottom;
+  }
+  tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    color:var(--ink-soft);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody td:first-child{color:var(--ink)}
+  .num-col{font-family:var(--mono);font-weight:600;color:var(--accent)!important;white-space:nowrap}
+  td strong{color:var(--ink)}
+  .rice-high{color:var(--accent-deep);font-weight:600}
+  .pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.04em;
+    padding:2px 8px;
+    border-radius:20px;
+    background:var(--accent-soft);
+    color:var(--accent-deep);
+    white-space:nowrap;
+  }
+
+  /* ---------- callout / north star ---------- */
+  .callout{
+    background:var(--card);
+    border:1px solid var(--line-2);
+    border-left:3px solid var(--accent);
+    border-radius:10px;
+    padding:20px 22px;
+    margin:8px 0 20px;
+  }
+  .callout .label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 8px;
+  }
+  .callout p{margin:0;font-size:18px}
+
+  /* ---------- diagrams ---------- */
+  figure.diagram{
+    margin:14px 0 6px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 20px 16px;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:12px;
+  }
+  .svg-scroll{overflow:visible}
+  figure.diagram svg{display:block;width:100%;height:auto}
+  .d-node{fill:var(--card);stroke:var(--line-2);stroke-width:1.4}
+  .d-node-accent{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+  .d-node-ns{fill:#fdf4ee;stroke:var(--accent);stroke-width:1.6}
+  .d-diamond{fill:var(--paper-2);stroke:var(--ink-mute);stroke-width:1.4}
+  .d-text{font-family:var(--display);font-size:12.5px;fill:var(--ink);font-weight:500}
+  .d-text-sm{font-family:var(--display);font-size:11px;fill:var(--ink-soft)}
+  .d-text-strong{font-family:var(--display);font-size:12.5px;fill:var(--accent-deep);font-weight:600}
+  .d-edge{stroke:var(--line-2);stroke-width:1.5;fill:none}
+  .d-edge-accent{stroke:var(--accent);stroke-width:1.8;fill:none}
+
+  @media (max-width:600px){
+    figure.diagram .svg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    figure.diagram .svg-scroll svg{min-width:520px}
+    .scroll-hint{display:block}
+  }
+  .scroll-hint{
+    display:none;
+    font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);
+    letter-spacing:.05em;text-transform:uppercase;margin-top:8px;
+  }
+
+  /* ---------- fit intro ---------- */
+  .fit-intro{
+    font-family:var(--body);
+    font-size:18px;
+    max-width:64ch;
+  }
+
+  /* ---------- questions list ---------- */
+  ol.q-list{
+    margin:0;padding:0;list-style:none;counter-reset:q;
+  }
+  ol.q-list li{
+    counter-increment:q;
+    position:relative;
+    padding:10px 0 10px 40px;
+    border-bottom:1px solid var(--line);
+    max-width:64ch;
+    color:var(--ink-soft);
+  }
+  ol.q-list li:last-child{border-bottom:none}
+  ol.q-list li::before{
+    content:counter(q);
+    position:absolute;left:0;top:11px;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+    color:var(--accent);
+    width:26px;height:26px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--accent-soft);border-radius:50%;
+    background:var(--accent-soft);
+  }
+
+  /* ---------- 30/60/90 ---------- */
+  .phase{
+    margin:0 0 14px;
+    padding:18px 20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .phase h3{margin:0 0 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .phase .days{
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    letter-spacing:.05em;color:var(--paper);
+    background:var(--accent);padding:3px 9px;border-radius:5px;
+  }
+  .phase p{margin:0;font-size:16px}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line-2);
+    margin-top:18px;
+    padding:36px 0 56px;
+  }
+  footer .inner{max-width:var(--wrap)}
+  footer .name{
+    font-family:var(--display);font-weight:600;font-size:17px;
+    color:var(--ink);margin:0 0 4px;
+  }
+  footer .tag{font-size:15px;color:var(--ink-mute);margin:0 0 18px;max-width:54ch}
+  .contact{
+    display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contact a{
+    color:var(--ink-mute);text-decoration:none;
+    border-bottom:1px solid var(--line-2);padding-bottom:2px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contact a:hover,.contact a:focus{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- reveal (visible by default; JS only adds motion) ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .js-on .reveal{opacity:0;transform:translateY(14px)}
+    .js-on .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (min-width:921px){
+    .toc-mobile{display:none}
+    /* align masthead + footer left edge with the body content column (offset past the rail) */
+    .masthead .inner,
+    footer .inner{margin-left:calc(var(--rail-w) + var(--rail-gap))}
+  }
+  @media (max-width:920px){
+    .layout{grid-template-columns:1fr}
+    .rail{display:none}
+    .wrap{max-width:var(--wrap)}
+    body{font-size:17px}
+  }
+  @media (max-width:480px){
+    :root{--pad:18px}
+    body{font-size:16px}
+    section{padding:38px 0}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead wrap">
+  <div class="inner">
+    <p class="eyebrow">Product pitch</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the Selling Partner Trust problem for the Senior Product Manager Tech role at Amazon, Worldwide Selling Partner Services.</p>
+    <p class="prepared">Prepared June 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I would ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="layout">
+
+    <!-- sticky left rail -->
+    <aside class="rail" aria-hidden="false">
+      <h2>On this page</h2>
+      <nav aria-label="On this page">
+        <ol>
+          <li><a href="#bet">The bet</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#who">Who it is for</a></li>
+          <li><a href="#why">Why this problem</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#mvp">What I would ship first</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#plan">30 / 60 / 90</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#questions">Questions</a></li>
+          <li><a href="#fit">Why me</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="content" id="main-content">
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">Turn account health from after-the-fact punishment into clear, before-the-fact guidance, starting with the sellers who need it most.</p>
+        <p>Account health is still a guessing game for most sellers, and Amazon's own VP said so. My bet: I would raise the share of sellers who stay in the Healthy band and cut wrongful enforcement by stopping a violation before a listing goes live. The fastest move is a real-time compliance pre-check, measured against the team's own enforcement metrics, SSRI and HVLE False Positives.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p>Selling Partner Trust has to do two things that pull against each other: make sellers feel safe enough to grow, and enforce policy hard enough that bad actors cannot win. The friction built to stop bad actors also lands on legitimate sellers. That tension is the product.</p>
+
+        <h3>Who hurts</h3>
+        <p>The legitimate seller, especially the mid-sized one. 35% of Amazon sellers experienced an account suspension in 2024, and mid-sized businesses ($100K to $1M revenue) reported the highest rates <a class="src" href="https://myamazonguy.com/news/amazon-seller-suspension/" target="_blank" rel="noopener">(MyAmazonGuy, citing SmartScout Voice of the Amazon Seller, 2025; survey-based estimate, not an Amazon figure)</a>.</p>
+
+        <h3>Why it happens</h3>
+        <p>The Account Health Rating is a 0 to 1,000 score, and sellers drop into "At Risk" below 200 <a class="src" href="https://sellerengine.com/amazon-account-health-rating-guide-sellerengine/" target="_blank" rel="noopener">(SellerEngine AHR Guide, 2025)</a>. The rules tightened in 2025: smaller mistakes now cause larger drops, and proactive systems flag listings within hours. A common seller belief, that removing a listing fixes a violation, is wrong; sellers must file a formal Plan of Action. Sellers are scored on rules they do not fully understand, then asked to appeal in a process with no standardized timeline <a class="src" href="https://amazonsellerslawyer.com/blog/amazon-news-updates/amazon-seller-account-suspension-causes-2025-2026/" target="_blank" rel="noopener">(Amazon Sellers Lawyer, 2025 to 2026)</a>.</p>
+
+        <h3>The cost</h3>
+        <p>A wrongful suspension freezes a seller's income while they wait. At the org level the team already tracks the cost as a board metric, HVLE False Positives, which means the over-enforcement problem is named and owned, not theoretical <a class="src" href="https://careers.greatersatx.com/companies/amazon-3-60ad394d-c673-4474-9694-344b0cae748f/jobs/76175879-senior-program-manager-selling-partner-trust-selling-partner-trust" target="_blank" rel="noopener">(SPT role description)</a>.</p>
+
+        <h3>Three problems underneath, ranked</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th style="width:34px">#</th><th>Problem</th><th>Evidence</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num-col">1</td>
+                <td>Account health reads like a guessing game. Sellers cannot tell why a score moved or what to do next.</td>
+                <td>VP framing: "Account Health should feel like guidance, not a guessing game" <a class="src" href="https://zonhack.com/amazon-accelerate-2025-part-06-claire-odonnell-on-account-health/" target="_blank" rel="noopener">(ZonHack, Amazon Accelerate 2025)</a></td>
+              </tr>
+              <tr>
+                <td class="num-col">2</td>
+                <td>Enforcement false positives. Legitimate activity (review spikes, shared infrastructure, marketing) gets read as a violation before a human looks.</td>
+                <td>HVLE False Positives is a tracked SPT metric <a class="src" href="https://careers.greatersatx.com/companies/amazon-3-60ad394d-c673-4474-9694-344b0cae748f/jobs/76175879-senior-program-manager-selling-partner-trust-selling-partner-trust" target="_blank" rel="noopener">(SPT role description)</a>; 35% suspension rate in 2024 <a class="src" href="https://myamazonguy.com/news/amazon-seller-suspension/" target="_blank" rel="noopener">(MyAmazonGuy / SmartScout, 2025)</a></td>
+              </tr>
+              <tr>
+                <td class="num-col">3</td>
+                <td>Regulatory compliance keeps cascading: GPSR, INFORM Act, EPR. Each is country-specific, and most sellers do not have a compliance team.</td>
+                <td>GPSR live since Dec 13, 2024 with no grace period <a class="src" href="https://go.amazonsellerservices.com/gpsr20241-en" target="_blank" rel="noopener">(Amazon GPSR guide)</a>; INFORM Act fines up to $53,088 per violation <a class="src" href="https://www.wiley.law/alert-Amidst-Scrutiny-of-E-Commerce-Platforms-FTC-Brings-First-INFORM-Consumers-Act-Case" target="_blank" rel="noopener">(Wiley Law)</a>; EPR deadlines cascading through 2026 <a class="src" href="https://avask.com/blog/amazon-epr-pay%E2%80%91on%E2%80%91behalf-uk-spain-france/" target="_blank" rel="noopener">(AVASK)</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p>This is a two-sided product. The daily user is the seller. The decision-maker who funds and judges the work is the SPT leadership chain (the VP of Selling Partner Trust, and SPS and Customer Trust under SVP Amit Agarwal, who reports to Worldwide Amazon Stores CEO Doug Herrington) <a class="src" href="https://www.aboutamazon.com/news/company-news/dharmesh-mehta-selling-partner-services-amit-agarwal" target="_blank" rel="noopener">(Amazon, Feb 2026)</a>.</p>
+        <p>Jobs-to-be-done is a plain way to state what each user is trying to get done, not which feature they want. The format: when [situation], I want to [motivation], so I can [outcome].</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th style="width:30%">Persona</th><th>The job they hire the product to do</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>The long-tail seller</strong><br><span style="font-size:13.5px;color:var(--ink-mute)">one-person reseller, no compliance staff; part of about 500,000 active U.S. sellers <a class="src" href="https://www.marketplacepulse.com/articles/top-16-of-sellers-drive-50-of-amazons-3p-gmv" target="_blank" rel="noopener">(Marketplace Pulse, Feb 2026)</a></span></td>
+                <td>When I list a product or get a warning, I want to know in plain language what is wrong and the exact next step, so I can stay sellable without hiring a consultant.</td>
+              </tr>
+              <tr>
+                <td><strong>The high-value seller</strong><br><span style="font-size:13.5px;color:var(--ink-mute)">the ~7,760 sellers, 1.6% of the active base, who drive 50% of third-party GMV <a class="src" href="https://www.marketplacepulse.com/articles/top-16-of-sellers-drive-50-of-amazons-3p-gmv" target="_blank" rel="noopener">(Marketplace Pulse, Feb 2026)</a></span></td>
+                <td>When I operate at scale across countries, I want to catch compliance gaps in bulk and trust that legitimate activity will not trip enforcement, so I can grow without a suspension wiping out a quarter.</td>
+              </tr>
+              <tr>
+                <td><strong>The buyer: SPT leadership</strong></td>
+                <td>When I invest engineering effort, I want work that moves SSRI and HVLE False Positives and ladders to seller trust, so I can defend the spend in a six-pager to other VPs.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The functional job is "stay compliant and sellable." The emotional job matters more for adoption: sellers want to feel safe, not surveilled. A compliance tool a seller does not trust enough to use fails no matter how good the model behind it is.</p>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p>RICE is a simple way to compare options on one scale: (Reach times Impact times Confidence) divided by Effort. The numbers are directional; the point is to score every option the same way.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Option</th><th>Reach</th><th>Impact</th><th>Conf.</th><th>Effort</th><th>RICE</th><th style="min-width:200px">Read</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Real-time compliance pre-check</strong><br><span style="font-size:13px;color:var(--ink-mute)">stop a violation before listing goes live</span></td>
+                <td>High</td><td>3</td><td>80%</td><td>Med</td>
+                <td class="rice-high">Highest</td>
+                <td>Prevents the score drop and the false positive at the source</td>
+              </tr>
+              <tr>
+                <td><strong>AHR explainability</strong><br><span style="font-size:13px;color:var(--ink-mute)">show why a score moved, what to do next</span></td>
+                <td>High</td><td>2</td><td>80%</td><td>Med</td>
+                <td>High</td>
+                <td>Fixes the guessing game but does not stop the violation</td>
+              </tr>
+              <tr>
+                <td><strong>Unified compliance hub</strong><br><span style="font-size:13px;color:var(--ink-mute)">GPSR, EPR, INFORM in one place</span></td>
+                <td>Med</td><td>2</td><td>50%</td><td>High</td>
+                <td>Medium</td>
+                <td>High value, but country-specific builds make effort and confidence worse</td>
+              </tr>
+              <tr>
+                <td><strong>Faster appeals workflow</strong><br><span style="font-size:13px;color:var(--ink-mute)">reinstatement after a suspension</span></td>
+                <td>Med</td><td>2</td><td>80%</td><td>Med</td>
+                <td>Medium</td>
+                <td>Treats the symptom after the harm is done</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Prevention beats cure.</strong> Explainability tells a seller why they were hurt; a pre-check stops the harm. A real-time pre-check is the only option that can move both board metrics at once: it lifts SSRI indirectly (fewer legitimate sellers caught means fewer reinstatements) and attacks HVLE False Positives directly (fewer wrongful enforcements).</p>
+        <p>This direction also matches where Amazon is already heading. The Seller Assistant shown at Accelerate 2025 recognizes policy risk in real time and validates certificates within minutes <a class="src" href="https://zonhack.com/amazon-accelerate-2025-part-06-claire-odonnell-on-account-health/" target="_blank" rel="noopener">(ZonHack, Accelerate 2025)</a>. It reached 230,000 monthly users with a recommendation acceptance rate above 90% in 2025, so sellers act on real-time guidance when it is good <a class="src" href="https://www.aboutamazon.com/news/small-business/amazon-2025-small-business-empowerment-report" target="_blank" rel="noopener">(Amazon 2025 Small Business Empowerment Report)</a>.</p>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p>I would not commit to a build before testing the biggest assumption. Three directions, weighed against one decision test.</p>
+
+        <figure class="diagram">
+          <div class="svg-scroll">
+            <svg viewBox="0 0 720 430" role="img" aria-label="Decision flow. A goal of fewer wrongful enforcements and more sellers in the Healthy band branches into three directions: a pre-check at the point of listing, explain the score after the fact, and a bulk compliance hub. All three feed a decision test asking which moves the metrics fastest for the widest cohort at lowest effort, which leads to starting with the pre-check for one cohort and one regulation, then expanding." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L7,3 L0,6 Z" fill="#d6d0c3"></path>
+                </marker>
+                <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L7,3 L0,6 Z" fill="#b8541a"></path>
+                </marker>
+              </defs>
+
+              <!-- goal -->
+              <rect class="d-node-accent" x="220" y="14" width="280" height="50" rx="9"></rect>
+              <text class="d-text-strong" x="360" y="35" text-anchor="middle">Goal: fewer wrongful enforcements,</text>
+              <text class="d-text-strong" x="360" y="51" text-anchor="middle">more sellers in the Healthy band</text>
+
+              <!-- edges goal -> 3 directions -->
+              <path class="d-edge" d="M280,64 C200,90 150,100 130,120" marker-end="url(#ar1)" aria-hidden="true"></path>
+              <path class="d-edge" d="M360,64 L360,120" marker-end="url(#ar1)" aria-hidden="true"></path>
+              <path class="d-edge" d="M440,64 C540,90 575,100 595,120" marker-end="url(#ar1)" aria-hidden="true"></path>
+
+              <!-- direction 1 -->
+              <rect class="d-node" x="14" y="124" width="220" height="74" rx="9"></rect>
+              <text class="d-text" x="124" y="146" text-anchor="middle" font-weight="600">Direction 1</text>
+              <text class="d-text-sm" x="124" y="164" text-anchor="middle">Pre-check at point of listing</text>
+              <text class="d-text-sm" x="124" y="180" text-anchor="middle">Catch the gap before submission</text>
+
+              <!-- direction 2 -->
+              <rect class="d-node" x="250" y="124" width="220" height="74" rx="9"></rect>
+              <text class="d-text" x="360" y="146" text-anchor="middle" font-weight="600">Direction 2</text>
+              <text class="d-text-sm" x="360" y="164" text-anchor="middle">Explain the score after</text>
+              <text class="d-text-sm" x="360" y="180" text-anchor="middle">Plain-language AHR and next step</text>
+
+              <!-- direction 3 -->
+              <rect class="d-node" x="486" y="124" width="220" height="74" rx="9"></rect>
+              <text class="d-text" x="596" y="146" text-anchor="middle" font-weight="600">Direction 3</text>
+              <text class="d-text-sm" x="596" y="164" text-anchor="middle">Bulk compliance hub</text>
+              <text class="d-text-sm" x="596" y="180" text-anchor="middle">One place: GPSR, EPR, INFORM</text>
+
+              <!-- edges to decision -->
+              <path class="d-edge" d="M124,198 C124,230 220,240 300,262" marker-end="url(#ar1)" aria-hidden="true"></path>
+              <path class="d-edge" d="M360,198 L360,256" marker-end="url(#ar1)" aria-hidden="true"></path>
+              <path class="d-edge" d="M596,198 C596,230 500,240 420,262" marker-end="url(#ar1)" aria-hidden="true"></path>
+
+              <!-- decision diamond -->
+              <polygon class="d-diamond" points="360,256 506,318 360,380 214,318"></polygon>
+              <text class="d-text" x="360" y="306" text-anchor="middle" font-weight="600">Decision test</text>
+              <text class="d-text-sm" x="360" y="322" text-anchor="middle">Which moves the metrics fastest,</text>
+              <text class="d-text-sm" x="360" y="337" text-anchor="middle">widest cohort, lowest effort?</text>
+
+              <!-- decision -> outcome -->
+              <path class="d-edge-accent" d="M360,380 L360,398" marker-end="url(#ar2)" aria-hidden="true"></path>
+              <rect class="d-node-accent" x="170" y="400" width="380" height="26" rx="7"></rect>
+              <text class="d-text-strong" x="360" y="417" text-anchor="middle">Start with Direction 1 for one cohort and one regulation, then expand</text>
+            </svg>
+          </div>
+          <p class="scroll-hint">Scroll diagram sideways &rarr;</p>
+          <figcaption>How I would choose between the three directions</figcaption>
+        </figure>
+
+        <p>How I would decide: a two-week discovery against the team's data. I would pull the top reasons sellers enter At Risk and the top false-positive categories, then check which direction touches the largest share of those events. My hypothesis is that a narrow set of rule types drives most preventable enforcement, which makes a pre-check the highest-leverage place to start. If the data says most harm comes from post-listing behavioral signals (review velocity, shared infrastructure) rather than listing content, I would pivot the first slice toward explainability and an earlier human-in-the-loop check instead. The data decides, not the thesis.</p>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I would ship first</h2>
+        <p><strong>The smallest test of the biggest assumption.</strong> A real-time compliance pre-check for one seller cohort and one regulation. When a seller in the EU saves a non-food listing, the pre-check flags missing GPSR fields (EU Responsible Person, batch or serial number, local-language safety warnings) before the listing publishes, explains each gap in plain words, and offers the fix inline.</p>
+        <p>I would start with GPSR because the cost of getting it wrong is immediate and one-directional: GPSR has been enforced since December 13, 2024 with no grace period, and non-compliant listings are delisted <a class="src" href="https://go.amazonsellerservices.com/gpsr20241-en" target="_blank" rel="noopener">(Amazon GPSR guide)</a> <a class="src" href="https://fluxy.one/post/gpsr-compliance-guide-eu-product-safety" target="_blank" rel="noopener">(fluxy.one)</a>. That makes the before-and-after easy to measure: a blocked-at-publish gap is a delisting prevented.</p>
+
+        <div class="callout">
+          <p class="label">The assumption this tests</p>
+          <p>Sellers will fix a flagged gap at the moment of listing if the guidance is clear and inline. The Seller Assistant acceptance rate above 90% suggests they will <a class="src" href="https://www.aboutamazon.com/news/small-business/amazon-2025-small-business-empowerment-report" target="_blank" rel="noopener">(Amazon 2025 Small Business Empowerment Report)</a>, but that is for recommendations, not a hard gate, so I would test it directly.</p>
+        </div>
+
+        <h3>What the MVP deliberately leaves out</h3>
+        <ul class="clean">
+          <li>Behavioral false positives (review spikes, shared infrastructure).</li>
+          <li>The other regulations (EPR, INFORM).</li>
+          <li>Bulk tooling for high-value sellers, and the appeals workflow.</li>
+        </ul>
+        <p>Those are the next slices, not the first. Holding scope to one cohort and one regulation is what makes the RICE effort low enough to ship and measure inside a quarter.</p>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+
+        <div class="callout">
+          <p class="label">North Star</p>
+          <p>The share of active sellers in the Healthy AHR band who got there <strong>without an enforcement event.</strong> It rises only when sellers are genuinely compliant, it moves before revenue, and the team can influence it.</p>
+        </div>
+
+        <figure class="diagram">
+          <div class="svg-scroll">
+            <svg viewBox="0 0 720 380" role="img" aria-label="Metrics tree. The North Star, percent of active sellers in the Healthy band reached without an enforcement event, splits into two board metrics: SSRI, the reinstatement rate for legitimate sellers, and HVLE False Positives, wrongful high-value enforcements. SSRI feeds the pre-check fix rate, which feeds time-to-resolution for a flagged gap. HVLE False Positives feeds pre-check coverage, which feeds compliance rate per regulated category and country." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L7,3 L0,6 Z" fill="#d6d0c3"></path>
+                </marker>
+              </defs>
+
+              <!-- north star -->
+              <rect class="d-node-ns" x="170" y="12" width="380" height="54" rx="10"></rect>
+              <text class="d-text-strong" x="360" y="34" text-anchor="middle" font-size="13">North Star</text>
+              <text class="d-text-sm" x="360" y="51" text-anchor="middle">% in Healthy band, reached without an enforcement event</text>
+
+              <!-- edges to L1 -->
+              <path class="d-edge" d="M300,66 C230,92 200,100 190,116" marker-end="url(#ar3)" aria-hidden="true"></path>
+              <path class="d-edge" d="M420,66 C490,92 520,100 530,116" marker-end="url(#ar3)" aria-hidden="true"></path>
+
+              <!-- L1 left: SSRI -->
+              <rect class="d-node-accent" x="40" y="120" width="300" height="62" rx="9"></rect>
+              <text class="d-text" x="190" y="144" text-anchor="middle" font-weight="600">SSRI (board metric)</text>
+              <text class="d-text-sm" x="190" y="162" text-anchor="middle">reinstatement rate for</text>
+              <text class="d-text-sm" x="190" y="176" text-anchor="middle">legitimate sellers</text>
+
+              <!-- L1 right: HVLE FP -->
+              <rect class="d-node-accent" x="380" y="120" width="300" height="62" rx="9"></rect>
+              <text class="d-text" x="530" y="144" text-anchor="middle" font-weight="600">HVLE False Positives (board metric)</text>
+              <text class="d-text-sm" x="530" y="162" text-anchor="middle">wrongful high-value</text>
+              <text class="d-text-sm" x="530" y="176" text-anchor="middle">enforcements</text>
+
+              <!-- edges to early signals -->
+              <path class="d-edge" d="M190,182 L190,226" marker-end="url(#ar3)" aria-hidden="true"></path>
+              <path class="d-edge" d="M530,182 L530,226" marker-end="url(#ar3)" aria-hidden="true"></path>
+
+              <!-- early left: fix rate -->
+              <rect class="d-node" x="40" y="230" width="300" height="58" rx="9"></rect>
+              <text class="d-text" x="190" y="254" text-anchor="middle" font-weight="600">Pre-check fix rate</text>
+              <text class="d-text-sm" x="190" y="272" text-anchor="middle">% of flagged gaps fixed before publish</text>
+
+              <!-- early right: coverage -->
+              <rect class="d-node" x="380" y="230" width="300" height="58" rx="9"></rect>
+              <text class="d-text" x="530" y="254" text-anchor="middle" font-weight="600">Pre-check coverage</text>
+              <text class="d-text-sm" x="530" y="272" text-anchor="middle">% of preventable enforcements caught</text>
+
+              <!-- edges to leaf -->
+              <path class="d-edge" d="M190,288 L190,318" marker-end="url(#ar3)" aria-hidden="true"></path>
+              <path class="d-edge" d="M530,288 L530,318" marker-end="url(#ar3)" aria-hidden="true"></path>
+
+              <!-- leaf left -->
+              <rect class="d-node" x="40" y="322" width="300" height="44" rx="9"></rect>
+              <text class="d-text-sm" x="190" y="349" text-anchor="middle">Time-to-resolution for a flagged gap</text>
+
+              <!-- leaf right -->
+              <rect class="d-node" x="380" y="322" width="300" height="44" rx="9"></rect>
+              <text class="d-text-sm" x="530" y="349" text-anchor="middle">Compliance rate per category and country</text>
+            </svg>
+          </div>
+          <p class="scroll-hint">Scroll diagram sideways &rarr;</p>
+          <figcaption>How the daily signals feed up to the board goals and the North Star</figcaption>
+        </figure>
+
+        <h3>Guardrails and anti-metrics</h3>
+        <ul class="clean">
+          <li><strong>Do not chase raw flag volume.</strong> A pre-check that flags everything looks busy and trains sellers to ignore it. I would track flag precision (share of flags a seller agrees with) as a guardrail.</li>
+          <li><strong>Do not let enforcement accuracy fall</strong> while chasing fewer false positives. The two move against each other, so I would watch true-positive enforcement rate alongside HVLE False Positives.</li>
+          <li><strong>Do not optimize appeals speed alone.</strong> Fast appeals on a wrongful suspension still means the harm happened first.</li>
+        </ul>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+
+        <div class="phase">
+          <h3><span class="days">Days 0 to 30</span> Listen and find the real constraint</h3>
+          <p>Read the existing roadmap and the last few SPT six-pagers. Sit with Account Health Specialists and watch real seller cases. Interview sellers in both cohorts using past behavior, not hypotheticals: "walk me through the last time a listing got flagged." Pull the data on what drives sellers into At Risk and what drives false positives, and find which rule types are most preventable at the point of listing.</p>
+        </div>
+
+        <div class="phase">
+          <h3><span class="days">Days 30 to 60</span> A quick win and a sharpened problem</h3>
+          <p>Confirm or correct the pre-check hypothesis with month-one data. Ship a small, visible win, most likely AHR explainability copy that tells a seller why a specific score moved and the exact next step, since that needs little engineering and builds trust while the pre-check is scoped. Write the PRD for the GPSR pre-check MVP, align engineering on technical design, and get leadership buy-in in a six-pager that ties the work to SSRI and HVLE False Positives.</p>
+        </div>
+
+        <div class="phase">
+          <h3><span class="days">Days 60 to 90</span> Ship and validate the first bet</h3>
+          <p>Launch the GPSR pre-check to a limited EU seller group. Set the baseline for the North Star and the early metrics. Measure fix rate and precision against the plan's targets, with explicit kill criteria so the pilot can end if sellers ignore the flags. Use the result to propose the next slices (the next regulation, then the behavioral false-positive problem) on the same RICE scale.</p>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p>Open questions about the proposed work, and how I would test each in week one.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th style="width:48%">Risk in the work</th><th>How I would validate it first</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The biggest source of preventable harm may be behavioral signals, not listing content. A content pre-check would then move the metric less than hoped.</td>
+                <td>Pull the top false-positive categories in week one and check the content-versus-behavior split before committing the build.</td>
+              </tr>
+              <tr>
+                <td>A pre-check that gates publishing could add friction and slow legitimate sellers, the opposite of the goal.</td>
+                <td>Run the first version as a warning, not a hard block, and measure fix rate and drop-off before deciding whether to gate.</td>
+              </tr>
+              <tr>
+                <td>Country-specific regulation makes a worldwide build hard. GPSR logic does not transfer cleanly to EPR or INFORM.</td>
+                <td>Scope the MVP to one regulation and one region, and design the rule layer so adding a country is configuration, not a rebuild. Test that with engineering in the first design review.</td>
+              </tr>
+              <tr>
+                <td>Tightening one board metric can worsen the other. Cutting false positives can let real violations through.</td>
+                <td>Instrument both true-positive enforcement and false positives from day one, and treat enforcement accuracy as a guardrail the pre-check cannot breach.</td>
+              </tr>
+              <tr>
+                <td>Scope ambiguity: this role may own the AHR dashboard, the compliance tooling, the Seller Assistant, or a mix.</td>
+                <td>Confirm the exact product boundary with the hiring manager in week one and re-rank the RICE table against the real scope.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <p>What I would ask the team.</p>
+        <ol class="q-list">
+          <li>Which surface does this role actually own first: the AHR dashboard, the regulatory compliance tooling, the Seller Assistant, or a defined slice of all three?</li>
+          <li>Of current high-value-listing enforcements flagged as false positives, what share trace to listing content versus behavioral signals? That ratio changes where I would start.</li>
+          <li>Where is the line between this role's product work and the enforcement systems that decide what gets flagged? How much can a PM here influence the model's risk appetite?</li>
+          <li>Is the first build scoped worldwide from day one, or do we earn the right to expand region by region after one regulation proves out?</li>
+          <li>What does leadership consider a credible quarterly move on SSRI and HVLE False Positives, so I can set MVP targets against a real bar?</li>
+          <li>With the VP role in transition, how settled is the current roadmap, and how much latitude does this PM have to reshape near-term priorities?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I am a product manager with 6+ years building and shipping products in technology, finance, and AI, finishing a Master of Science in Information Management at the University of Washington (expected June 2026), with an MBA in Finance and a Bachelor of Engineering in Computer Engineering. My work has lived where regulation, data, and seller-style or branch-style user bases meet, which is the center of this role. The core tension here, protecting a platform without punishing the legitimate people on it, is a trade-off I have made before in regulated systems.</p>
+        <p>Two pieces map directly. At Lentra I built and scaled a digital lending platform from MVP to 25,000+ users across 3,000+ bank branches, the same shape as serving radically different seller cohorts at scale. There I shipped credit-bureau and KYC integrations (CIBIL, Equifax, Experian) that improved loan decision accuracy by 10% and cut manual review by 35%, which is exactly the verification-and-automation trade-off SPT runs between stopping bad actors and clearing legitimate users fast. At Capco, working at Nomura, I owned compliance and governance work inside a bank: I rolled out an internal AI assistant to 15,000+ users with governance built in, and I led operational risk transformation that cut risk events by 20% and losses by 15%, the same prevention-over-cure logic behind a real-time pre-check.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th style="width:42%">What the role needs</th><th>What I have done</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Scale tooling across very different user cohorts</td>
+                <td>Built and scaled a lending platform from MVP to 25,000+ users across 3,000+ branches at Lentra</td>
+              </tr>
+              <tr>
+                <td>Balance stopping bad actors against friction for legitimate users</td>
+                <td>Shipped credit-bureau and KYC integrations that lifted decision accuracy 10% and cut manual review 35% at Lentra</td>
+              </tr>
+              <tr>
+                <td>Compliance and governance tooling in a regulated domain</td>
+                <td>Rolled out a governed internal AI assistant to 15,000+ users; led operational risk transformation cutting events 20% and losses 15% at Nomura</td>
+              </tr>
+              <tr>
+                <td>Data-first prioritization and querying data to surface insight</td>
+                <td>Owned discovery-to-launch of a Finance Budgeting app at Nomura that cut spend 30%; built reporting that saved 40+ hours per week at Lentra</td>
+              </tr>
+              <tr>
+                <td>Own roadmap and deliver measurable business impact</td>
+                <td>Drove a market-data sourcing program to Tradeweb that delivered $700K in annual savings at Nomura</td>
+              </tr>
+              <tr>
+                <td>Build trustworthy AI on regulated text at scale</td>
+                <td>Building a policy-conflict-detection agent for the City of Seattle over 9,000+ documents across 8 regulatory bodies at UW, with quality gates for trustworthy retrieval</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="wrap">
+  <div class="inner">
+    <p class="name">Mayuresh More</p>
+    <p class="tag">Senior Product Manager Tech candidate, Selling Partner Trust. Happy to walk through any part of this in more detail.</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.body.classList.add('js-on');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // reveal on scroll (enhancement only; content visible if this never runs)
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if(reduce || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.06});
+    reveals.forEach(function(el){ ro.observe(el); });
+  }
+
+  // scroll-spy for the left rail
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail nav a'));
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+  if('IntersectionObserver' in window && sections.length){
+    var current = null;
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          if(current) current.removeAttribute('aria-current');
+          var a = map[e.target.id];
+          if(a){ a.setAttribute('aria-current','true'); current = a; }
+        }
+      });
+    }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
