@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More, credit-bureau furnishing for the Senior PM, Financial Platforms role at Affirm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --surface:#fffdf8;
+    --ink:#1c1b18;
+    --ink-soft:#3a3833;
+    --ink-mute:#6b675e;
+    --ink-faint:#8c887d;
+    --line:#e2ddd2;
+    --line-strong:#d2ccbd;
+    --accent:#9a3b1f;
+    --accent-soft:#c1572f;
+    --accent-wash:#f4e7df;
+    --good:#2f6b3f;
+    --bad:#9d2f24;
+    --blue:#2f5d8c;
+    --gold:#9a6f0e;
+    --maxw:1180px;
+    --rail:200px;
+    --gap:48px;
+    --wrap-pad:40px;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#16150f;
+      --surface:#1e1d16;
+      --ink:#f1ede2;
+      --ink-soft:#ddd8c9;
+      --ink-mute:#a8a394;
+      --ink-faint:#857f6f;
+      --line:#34322a;
+      --line-strong:#46443a;
+      --accent:#e08a5f;
+      --accent-soft:#eaa07a;
+      --accent-wash:#2d231b;
+      --good:#7bc08a;
+      --bad:#e08a78;
+      --blue:#7fa9d6;
+      --gold:#d8b25a;
+    }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent-wash);color:var(--ink);}
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:1000;
+    background:var(--accent);color:#fff;padding:10px 16px;border-radius:0 0 6px 0;
+    font-family:var(--mono);font-size:13px;text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);}
+
+  /* citation links */
+  .src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-color:var(--line-strong);
+    text-underline-offset:2px;
+    text-decoration-thickness:.5px;
+    font-style:normal;
+    display:inline-block;
+    padding:1px 0;
+    transition:color .15s ease;
+  }
+  .src:hover,.src:focus-visible{color:var(--accent);text-decoration-color:var(--accent);}
+
+  /* masthead */
+  header.masthead{padding-top:54px;padding-bottom:30px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 16px;font-weight:600;
+  }
+  h1{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(30px,4.6vw,46px);line-height:1.04;letter-spacing:-.018em;
+    margin:0;color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(16px,2.2vw,20px);line-height:1.36;color:var(--ink-soft);
+    margin:18px 0 0;max-width:46ch;
+  }
+  .prepared{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;
+    color:var(--ink-faint);margin:18px 0 0;
+  }
+
+  /* mobile contents disclosure */
+  .toc-mobile{margin:26px 0 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
+  .toc-mobile summary{
+    cursor:pointer;list-style:none;padding:14px 18px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;display:flex;align-items:center;justify-content:space-between;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none;}
+  .toc-mobile summary::after{content:"+";font-size:20px;line-height:1;color:var(--accent);transition:transform .2s ease;}
+  .toc-mobile[open] summary::after{transform:rotate(45deg);}
+  .toc-mobile ol{list-style:none;margin:0;padding:4px 18px 16px;columns:2;column-gap:24px;}
+  .toc-mobile li{margin:0 0 9px;break-inside:avoid;}
+  .toc-mobile a{font-family:var(--display);font-size:15px;color:var(--ink-soft);text-decoration:none;}
+  .toc-mobile a:hover{color:var(--accent);}
+
+  /* two-column body */
+  .layout{
+    max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);
+    display:grid;grid-template-columns:var(--rail) 1fr;gap:var(--gap);
+    align-items:start;
+  }
+  .rail{display:none;}
+  @media (min-width:920px){
+    .rail{display:block;position:sticky;top:32px;align-self:start;padding-top:46px;}
+    .rail .rail-head{
+      font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--ink-faint);margin:0 0 14px;font-weight:600;
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;font-family:var(--display);font-size:13.5px;line-height:1.3;
+      color:var(--ink-mute);text-decoration:none;padding:6px 0 6px 12px;
+      border-left:2px solid var(--line);transition:color .15s ease,border-color .15s ease;
+    }
+    .rail a:hover{color:var(--ink);}
+    .rail a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+    .toc-mobile{display:none;}
+    header.masthead .wrap,
+    footer.foot .wrap{padding-left:calc(var(--wrap-pad) + var(--rail) + var(--gap));}
+  }
+
+  /* sections */
+  main{padding-bottom:20px;}
+  section{padding:42px 0;border-bottom:1px solid var(--line);}
+  section:first-child{padding-top:44px;}
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0 0 18px;line-height:1.2;
+  }
+  .lede{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(21px,2.7vw,27px);line-height:1.28;letter-spacing:-.01em;
+    color:var(--ink);margin:0 0 22px;max-width:32ch;
+  }
+  p{margin:0 0 16px;max-width:66ch;}
+  p.takeaway{
+    font-family:var(--display);font-weight:500;font-size:19.5px;line-height:1.4;
+    color:var(--ink);margin:0 0 18px;max-width:62ch;
+  }
+  strong{color:var(--ink);font-weight:600;}
+  em{font-style:italic;color:var(--ink-soft);}
+  h3{
+    font-family:var(--display);font-weight:600;font-size:18px;line-height:1.3;
+    color:var(--ink);margin:26px 0 8px;letter-spacing:-.005em;
+  }
+
+  ul.bul{list-style:none;margin:0 0 16px;padding:0;max-width:66ch;}
+  ul.bul li{position:relative;padding-left:22px;margin:0 0 13px;}
+  ul.bul li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;background:var(--accent);border-radius:1px;transform:rotate(45deg);}
+
+  ol.qlist{margin:0;padding-left:0;list-style:none;counter-reset:q;max-width:66ch;}
+  ol.qlist li{position:relative;padding-left:42px;margin:0 0 14px;counter-increment:q;}
+  ol.qlist li::before{
+    content:counter(q);position:absolute;left:0;top:1px;
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);
+    width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:var(--surface);
+  }
+
+  .def{
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;padding:16px 20px;margin:6px 0 22px;max-width:66ch;
+  }
+  .def h3{margin:0 0 6px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .def p{margin:0;font-size:16.5px;color:var(--ink-soft);max-width:none;}
+
+  .note{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.02em;margin:2px 0 18px;}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px;}
+  thead th{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;text-align:left;
+    padding:13px 16px;border-bottom:1px solid var(--line-strong);background:var(--bg);
+    vertical-align:bottom;
+  }
+  tbody td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);line-height:1.5;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{color:var(--ink);font-family:var(--display);font-weight:500;font-size:15px;}
+  .read-strong{color:var(--accent);font-weight:600;font-family:var(--display);}
+  .read-mute{color:var(--ink-faint);font-family:var(--display);}
+  .read-mid{color:var(--ink-soft);font-family:var(--display);font-weight:500;}
+
+  /* figure / diagrams */
+  figure.diagram{margin:14px 0 18px;max-width:840px;}
+  figure.diagram figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-faint);margin-top:10px;text-align:left;}
+  .diag-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:22px 18px;}
+  .diag-scroll svg{display:block;width:100%;height:auto;}
+  .diag-scroll svg text{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif;}
+  .diag-scroll svg text.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;}
+  @media (max-width:640px){.diag-scroll svg{min-width:600px;}}
+  .legend{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--display);font-size:13.5px;color:var(--ink-mute);}
+  .legend li{display:flex;align-items:center;gap:8px;}
+  .legend .dot{width:13px;height:13px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.08);}
+
+  /* plan timeline */
+  .plan{display:grid;gap:16px;margin:0;}
+  @media (min-width:720px){.plan{grid-template-columns:repeat(3,1fr);}}
+  .phase{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 20px 22px;position:relative;overflow:hidden;}
+  .phase::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:.8;}
+  .phase .ph-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .phase h3{margin:8px 0 12px;font-size:17px;}
+  .phase ul{list-style:none;margin:0;padding:0;}
+  .phase li{position:relative;padding-left:18px;margin:0 0 9px;font-size:15px;color:var(--ink-soft);line-height:1.45;}
+  .phase li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-soft);}
+
+  .fit-intro{max-width:66ch;}
+
+  /* footer */
+  footer.foot{border-top:1px solid var(--line);padding:36px 0 56px;margin-top:8px;}
+  .foot-name{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 4px;}
+  .foot-tag{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0 0 18px;letter-spacing:.03em;}
+  .foot-links{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:13px;}
+  .foot-links a{color:var(--ink-mute);text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:color .15s ease;}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-links svg{width:15px;height:15px;flex:none;}
+
+  /* reveal: visible by default; animate only when JS opts in + motion allowed */
+  @media (prefers-reduced-motion:no-preference){
+    .js-reveal .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js-reveal .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:919px){
+    .layout{display:block;padding:0 var(--wrap-pad);}
+    header.masthead{padding-bottom:24px;}
+  }
+  @media (max-width:480px){
+    :root{--wrap-pad:22px;}
+    body{font-size:17px;}
+    section{padding:34px 0;}
+    h1{font-size:30px;}
+    .toc-mobile ol{columns:1;}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product pitch</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the credit-bureau furnishing problem for the Senior Product Manager, Financial Platforms role at Affirm.</p>
+    <p class="prepared">Prepared June 2026 &middot; Financial Platforms, Affirm</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#who">Who it is for</a></li>
+      <li><a href="#why">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- THE BET -->
+    <section id="bet" class="reveal" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="lede">Treat credit-bureau furnishing as a reconciliation problem, and cut its risk in the next two quarters.</p>
+      <p>Furnishing is Affirm's newest financial pipeline and its least governed, and that gap is now a live regulatory and audit risk. I would raise its coverage and drive exception volume and time-to-resolution down, the same measures the team already uses for settlement. It is the most bounded way to cut risk fast, and the reconcile-back pattern it produces extends to the broader settlement work and the future Affirm Bank reporting model.</p>
+      <div class="def">
+        <h3>What furnishing means</h3>
+        <p>Furnishing means sending loan data to the credit bureaus on a regular cycle, so a consumer's credit file reflects their Affirm loans accurately and on time.</p>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="reveal" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">Furnishing became a permanent obligation across every Affirm loan, and its last step quietly goes missing.</p>
+
+      <p>Affirm began furnishing all pay-over-time loans to Experian on April 1, 2025 <a class="src" href="https://www.paymentsdive.com/news/affirm-other-bnpl-players-ratchet-up-credit-bureau-reporting/743287/" target="_blank" rel="noopener">(Payments Dive)</a> and to TransUnion on May 1, 2025 <a class="src" href="https://newsroom.transunion.com/affirm-expands-credit-reporting-with-transunion-to-all-pay-over-time-products/" target="_blank" rel="noopener">(TransUnion)</a>. That turned furnishing into a permanent operational obligation across every loan, including Pay-in-4 loans that were never reported before. The volume is large and growing: 45.3M transactions in the quarter ended March 31, 2026, up 45% year over year, with full-year GMV guidance near $49B <a class="src" href="https://www.stocktitan.net/sec-filings/AFRM/8-k-affirm-holdings-inc-reports-material-event-9ba73cefcecb.html" target="_blank" rel="noopener">(Affirm Q3 FY2026 8-K)</a>.</p>
+
+      <h3>Who is hurt when a furnish is wrong</h3>
+      <ul class="bul">
+        <li><strong>The consumer.</strong> A late or inaccurate furnish lands on a real person's credit file. FICO Score 10 BNPL launched in fall 2025, the first major scoring model to fold BNPL loans into credit scores <a class="src" href="https://www.benzinga.com/Opinion/26/06/52922441/fico-just-put-bnpl-loans-into-credit-scores-who-sells-the-data-and-who-becomes-the-data" target="_blank" rel="noopener">(Benzinga)</a>. So a furnishing error is now a scoring error for one of 26.8M active consumers <a class="src" href="https://www.stocktitan.net/sec-filings/AFRM/8-k-affirm-holdings-inc-reports-material-event-9ba73cefcecb.html" target="_blank" rel="noopener">(8-K)</a>.</li>
+        <li><strong>Compliance and Legal.</strong> In May 2026 a group of US senators wrote to the three bureaus demanding to know which BNPL providers furnish data and how, and pressing for consistent reporting standards <a class="src" href="https://paymentweek.com/2026-5-11-senators-query-credit-bureaus-on-bnpl/" target="_blank" rel="noopener">(Payment Week)</a>. The regulatory ask is fundamentally an evidence ask: prove what you sent, when, and that it was correct.</li>
+        <li><strong>Accounting and the auditor.</strong> Affirm reported its first GAAP-profitable quarter at $102.9M net income <a class="src" href="https://www.stocktitan.net/sec-filings/AFRM/8-k-affirm-holdings-inc-reports-material-event-9ba73cefcecb.html" target="_blank" rel="noopener">(Affirm Q3 FY2026 8-K)</a>, with an $18.4B platform portfolio <a class="src" href="https://www.investing.com/news/company-news/affirm-q3-2026-slides-35-gmv-growth-gaap-profitability-achieved-93CH-4671013" target="_blank" rel="noopener">(Affirm Q3 FY2026 results)</a>. Profitability and scale raise the bar on data accuracy and audit-trail completeness across every pipeline that feeds the financials.</li>
+      </ul>
+
+      <h3>Where the current approach can fail</h3>
+      <p>Furnishing is a pipeline with five steps. Extract the point-in-time loan state, transform it to Metro 2 (the file format the bureaus require), transmit it, handle errors, and reconcile what the bureau actually accepted against what was sent. The last step is the one that quietly goes missing. If nobody matches the bureau's acknowledgment back to the source records, a rejected or dropped furnish sits invisible until a consumer disputes it or an auditor asks. That invisibility, not the transmission itself, is the risk.</p>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="who" class="reveal" aria-labelledby="who-h">
+      <h2 class="kicker" id="who-h">Who it is for</h2>
+      <p class="takeaway">This is an internal platform. A job to be done is what each user is hiring the furnishing pipeline to do, plus the consumer who is the indirect beneficiary.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">User</th>
+              <th scope="col">Job to be done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Furnishing operations analyst (Accounting / Compliance ops)</td>
+              <td>When the monthly cycle runs, I want to confirm every furnishable loan landed correctly and see any rejection the same day, so I can fix it before it harms a consumer or surfaces in an audit.</td>
+            </tr>
+            <tr>
+              <td>Compliance and Legal partner</td>
+              <td>When a regulator asks what we furnish and how accurately, I want a point-in-time, defensible answer with a full audit trail, so I respond with evidence, not estimates.</td>
+            </tr>
+            <tr>
+              <td>Consumer (indirect)</td>
+              <td>When I pay an Affirm loan, I want my credit file to reflect it correctly and on time, so my score is accurate.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The decision-maker who funds this work is the leadership of the Financial Platforms org and the executives it reports to. The pitch to them is risk reduction with a measurable baseline, not a feature.</p>
+    </section>
+
+    <!-- WHY THIS PROBLEM -->
+    <section id="why" class="reveal" aria-labelledby="why-h">
+      <h2 class="kicker" id="why-h">Why this problem</h2>
+      <p class="takeaway">RICE ranks work by Reach, Impact, and Confidence over Effort. Here is my read across the four big problems this org faces.</p>
+
+      <div class="def">
+        <h3>RICE in one line</h3>
+        <p>Score is Reach (how many records it touches) times Impact (how much it moves the outcome) times Confidence (how sure I am), divided by Effort (what it costs to build).</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Candidate problem</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort</th>
+              <th scope="col">My read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Furnishing reliability</td>
+              <td>Every furnished loan, ~45M txns/qtr</td>
+              <td>High</td>
+              <td>High: obligation is live, scope is bounded</td>
+              <td>Medium</td>
+              <td><span class="read-strong">Start here</span></td>
+            </tr>
+            <tr>
+              <td>Cross-channel settlement reconciliation</td>
+              <td>All GMV across 3 funding channels</td>
+              <td>High</td>
+              <td>High</td>
+              <td>High: very large scope</td>
+              <td><span class="read-mid">Core and ongoing, too broad to open with</span></td>
+            </tr>
+            <tr>
+              <td>Affirm Bank (ILC) dual-model reporting</td>
+              <td>Future, conditional on approval</td>
+              <td>High if approved</td>
+              <td>Low: approval timing unknown</td>
+              <td>Very high</td>
+              <td><span class="read-mute">Watch and design for, not yet actionable</span></td>
+            </tr>
+            <tr>
+              <td>GAAP reporting audit-trail completeness</td>
+              <td>All financials</td>
+              <td>High</td>
+              <td>Medium</td>
+              <td>High and diffuse</td>
+              <td><span class="read-mute">Advances as a byproduct of the two above</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">The ratings are my prioritization estimate, not Affirm figures.</p>
+
+      <p>Furnishing wins because it pairs high reach and impact with the highest confidence and the most bounded effort. The obligation already exists, the scrutiny is named and recent, and the scope is one pipeline with defined endpoints. Just as important, the capability it produces, a reconcile-back loop with owned exceptions, is reusable. The same pattern hardens the broader settlement reconciliation and carries into the bank-charter reporting model if the application is approved.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" class="reveal" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would not pre-commit to a build. I would instrument first, find where errors actually originate, then invest where the data points.</p>
+
+      <h3>1. Close the reconcile-back loop</h3>
+      <p>Ingest the bureau's acknowledgment and rejection files, match them against what was sent, and turn every unmatched or rejected record into a tracked exception with an owner and a deadline. Bet: most of the risk is invisible because nobody reconciles accepted against sent today.</p>
+
+      <h3>2. Validate before transmission with a data contract</h3>
+      <p>A data contract is an agreed, enforced specification of what one system promises another: the fields, the format, and the meaning. I would catch Metro 2 format and loan-state errors at the boundary between Loans Lifecycle (the source of loan events) and the furnishing pipeline, before they ever reach the bureau. Bet: a meaningful share of rejects are preventable upstream.</p>
+
+      <h3>3. Make furnishing observable</h3>
+      <p>One view of coverage, exception volume, and time-to-resolution for operations, Compliance, and leadership, with a point-in-time audit trail. Bet: this is the prerequisite for the other two and it doubles as the regulatory evidence Compliance needs.</p>
+
+      <p>How I would decide: instrument the pipeline (direction 3 is cheap and first), classify a sample of rejects by origin, and let the evidence say whether the leverage is the missing loop (direction 1) or upstream validation (direction 2). I would not build all three on faith.</p>
+
+      <figure class="diagram" aria-labelledby="pipe-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 640 580" role="img" aria-label="The credit-bureau furnishing pipeline. Loan events flow down through extracting the point-in-time loan state, transforming it to the Metro 2 bureau file format, transmitting it to the bureaus, and the bureau accepting or rejecting records. The reconcile-back step that matches accepted against sent is the gap I would close. Unmatched or rejected records flow into an exception queue with an owner and a deadline, which feeds fixes back to the loan source.">
+            <defs>
+              <marker id="pArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#8c887d"/>
+              </marker>
+              <marker id="pArrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+
+            <!-- feedback loop (drawn first, behind boxes) -->
+            <path d="M200 532 C 100 532, 48 505, 48 300 C 48 95, 100 49, 200 49" stroke="var(--accent)" stroke-width="1.4" fill="none" stroke-dasharray="5 5" marker-end="url(#pArrA)" aria-hidden="true"/>
+            <text class="mono" transform="rotate(-90 22 300)" x="22" y="300" text-anchor="middle" font-size="11" fill="var(--accent)">fix at source</text>
+
+            <!-- chain arrows -->
+            <line x1="330" y1="82" x2="330" y2="103" stroke="#8c887d" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <line x1="330" y1="156" x2="330" y2="177" stroke="#8c887d" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <line x1="330" y1="230" x2="330" y2="251" stroke="#8c887d" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <line x1="330" y1="304" x2="330" y2="325" stroke="#8c887d" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <line x1="330" y1="378" x2="330" y2="399" stroke="#8c887d" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <line x1="330" y1="470" x2="330" y2="501" stroke="var(--bad)" stroke-width="1.5" marker-end="url(#pArr)"/>
+            <text class="mono" x="346" y="490" text-anchor="start" font-size="11" fill="var(--bad)">unmatched or rejected</text>
+
+            <!-- node 1: loan events -->
+            <rect x="200" y="16" width="260" height="66" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="330" y="40" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Loan events</text>
+            <text x="330" y="58" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">origination, payment, deferral,</text>
+            <text x="330" y="73" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">charge-off, dispute</text>
+
+            <!-- node 2: extract -->
+            <rect x="200" y="104" width="260" height="52" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="330" y="128" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Extract point-in-time</text>
+            <text x="330" y="145" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">loan state</text>
+
+            <!-- node 3: transform -->
+            <rect x="200" y="178" width="260" height="52" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="330" y="202" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Transform to Metro 2</text>
+            <text x="330" y="219" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">bureau file format</text>
+
+            <!-- node 4: transmit -->
+            <rect x="200" y="252" width="260" height="52" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="330" y="276" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Transmit to bureau</text>
+            <text x="330" y="293" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">Experian, TransUnion</text>
+
+            <!-- node 5: bureau -->
+            <rect x="200" y="326" width="260" height="52" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="330" y="350" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Bureau accepts</text>
+            <text x="330" y="367" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">or rejects records</text>
+
+            <!-- node 6: reconcile (gap) -->
+            <rect x="200" y="400" width="260" height="70" rx="10" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="330" y="423" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">Reconcile-back</text>
+            <text x="330" y="441" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">match accepted vs sent</text>
+            <text x="330" y="458" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--accent)">the gap I would close</text>
+
+            <!-- node 7: exceptions (queue) -->
+            <rect x="200" y="502" width="260" height="60" rx="10" fill="var(--surface)" stroke="var(--bad)" stroke-width="1.6"/>
+            <text x="330" y="527" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--bad)">Exception queue</text>
+            <text x="330" y="545" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">owner + deadline</text>
+          </svg>
+        </div>
+        <figcaption id="pipe-fig-cap">The furnishing pipeline and the reconciliation gap I would attack first.</figcaption>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--surface);border-color:var(--blue)"></span>Pipeline step</li>
+          <li><span class="dot" style="background:var(--accent-wash);border-color:var(--accent)"></span>Reconcile-back, the gap</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--bad)"></span>Exception queue</li>
+        </ul>
+      </figure>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+      <p class="takeaway">The smallest test of the biggest assumption: one bureau, one product, one monthly cycle.</p>
+
+      <p>The biggest assumption is that furnishing leaks in ways nobody currently sees, and that the leak is measurable and ownable. The smallest test of that assumption: <strong>a furnishing reconciliation ledger and exception view for one bureau and one product line, over one monthly cycle.</strong> I would start with Experian, the first bureau Affirm onboarded, and Pay-in-4, a product that was previously unreported. Reconcile what was sent against what the bureau acknowledged or rejected, classify every exception by origin, and assign an owner and a deadline to each.</p>
+
+      <p>Why first, in RICE terms: it is the smallest build that produces the baseline metrics (furnishing coverage and exception volume), proves or kills the invisible-leak hypothesis, and generates the exact evidence Compliance needs for a regulatory inquiry. High confidence, low effort, immediate impact.</p>
+
+      <h3>What it deliberately leaves out</h3>
+      <p>Automated upstream remediation, the second bureau, the bank-charter reporting model, and multi-product rollout. Those come after the baseline tells me where the real leverage is.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">North Star: furnishing reconciliation coverage. The share of furnishable loan records each cycle confirmed accepted by the bureau and matched to the source-of-truth loan state, point-in-time correct.</p>
+
+      <figure class="diagram" aria-labelledby="metrics-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 880 392" role="img" aria-label="Furnishing metrics tree. The North Star is furnishing reconciliation coverage. Three leading inputs feed it: exception volume per cycle trending down, time-to-resolution for furnishing exceptions, and pre-transmission validation pass rate against the data contract. Two lagging outcomes follow it: consumer disputes tied to furnishing accuracy, and audit findings and regulatory response time. Two guardrails check it: excluded-record volume so coverage is not lifted by dropping hard records, and furnish-by-date adherence so accuracy is not traded for latency.">
+            <defs>
+              <marker id="mArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#8c887d"/>
+              </marker>
+              <marker id="mGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--gold)"/>
+              </marker>
+            </defs>
+
+            <!-- arrows: leading to north -->
+            <path d="M149 86 C 160 118, 320 132, 386 156" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <path d="M440 86 L440 156" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <path d="M731 86 C 720 118, 560 132, 494 156" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <!-- arrows: north to lagging -->
+            <path d="M388 232 C 350 262, 300 270, 272 298" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <path d="M492 232 C 530 262, 580 270, 608 298" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <!-- guardrail arrows -->
+            <line x1="258" y1="194" x2="307" y2="194" stroke="var(--gold)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#mGold)" aria-hidden="true"/>
+            <line x1="622" y1="194" x2="573" y2="194" stroke="var(--gold)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#mGold)" aria-hidden="true"/>
+            <text class="mono" x="283" y="186" text-anchor="middle" font-size="9.5" fill="var(--gold)">guardrail</text>
+            <text class="mono" x="597" y="186" text-anchor="middle" font-size="9.5" fill="var(--gold)">guardrail</text>
+
+            <!-- leading inputs -->
+            <rect x="14" y="14" width="270" height="72" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="30" y="36" font-size="12.5" font-weight="600" fill="var(--blue)">Leading input</text>
+            <text x="30" y="55" font-size="12.5" fill="var(--ink-soft)">Exception volume per cycle,</text>
+            <text x="30" y="72" font-size="12.5" fill="var(--ink-soft)">trend down</text>
+
+            <rect x="305" y="14" width="270" height="72" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="321" y="36" font-size="12.5" font-weight="600" fill="var(--blue)">Leading input</text>
+            <text x="321" y="55" font-size="12.5" fill="var(--ink-soft)">Time-to-resolution for</text>
+            <text x="321" y="72" font-size="12.5" fill="var(--ink-soft)">furnishing exceptions</text>
+
+            <rect x="596" y="14" width="270" height="72" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="612" y="36" font-size="12.5" font-weight="600" fill="var(--blue)">Leading input</text>
+            <text x="612" y="55" font-size="12.5" fill="var(--ink-soft)">Pre-transmission validation</text>
+            <text x="612" y="72" font-size="12.5" fill="var(--ink-soft)">pass rate (data contract)</text>
+
+            <!-- guardrails -->
+            <rect x="8" y="150" width="250" height="92" rx="9" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="24" y="172" font-size="12.5" font-weight="600" fill="var(--gold)">Guardrail</text>
+            <text x="24" y="191" font-size="12" fill="var(--ink-soft)">Excluded-record volume</text>
+            <text x="24" y="209" font-size="12" fill="var(--ink-soft)">do not lift coverage by</text>
+            <text x="24" y="227" font-size="12" fill="var(--ink-soft)">dropping hard records</text>
+
+            <rect x="622" y="150" width="250" height="92" rx="9" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="638" y="172" font-size="12.5" font-weight="600" fill="var(--gold)">Guardrail</text>
+            <text x="638" y="191" font-size="12" fill="var(--ink-soft)">Furnish-by-date adherence</text>
+            <text x="638" y="209" font-size="12" fill="var(--ink-soft)">do not trade accuracy</text>
+            <text x="638" y="227" font-size="12" fill="var(--ink-soft)">for latency</text>
+
+            <!-- north star -->
+            <rect x="310" y="158" width="260" height="72" rx="11" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="440" y="189" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">North Star</text>
+            <text x="440" y="210" text-anchor="middle" font-size="12.5" fill="var(--ink-soft)">Furnishing reconciliation coverage</text>
+
+            <!-- lagging outcomes -->
+            <rect x="120" y="300" width="300" height="72" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="136" y="322" font-size="12.5" font-weight="600" fill="var(--good)">Lagging outcome</text>
+            <text x="136" y="341" font-size="12.5" fill="var(--ink-soft)">Consumer disputes tied to</text>
+            <text x="136" y="358" font-size="12.5" fill="var(--ink-soft)">furnishing accuracy</text>
+
+            <rect x="460" y="300" width="300" height="72" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="476" y="322" font-size="12.5" font-weight="600" fill="var(--good)">Lagging outcome</text>
+            <text x="476" y="341" font-size="12.5" fill="var(--ink-soft)">Audit findings and</text>
+            <text x="476" y="358" font-size="12.5" fill="var(--ink-soft)">regulatory response time</text>
+          </svg>
+        </div>
+        <figcaption id="metrics-fig-cap">Leading inputs feed the North Star, lagging outcomes follow it, guardrails keep the coverage number honest.</figcaption>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--accent-wash);border-color:var(--accent)"></span>North Star</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--blue)"></span>Leading input</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--good)"></span>Lagging outcome</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--gold)"></span>Guardrail</li>
+        </ul>
+      </figure>
+
+      <p>The guardrails matter. Coverage is easy to fake by quietly excluding the records that are hard to furnish, so I would track excluded-record volume as an anti-metric. Exceptions are easy to suppress by loosening validation, so I would watch the downstream dispute rate. And accuracy must not be bought with lateness, so furnish-by-date adherence stays on the board.</p>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" class="reveal" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <div class="plan">
+        <div class="phase">
+          <span class="ph-num">Days 0 to 30</span>
+          <h3>Listen and map</h3>
+          <ul>
+            <li>Walk the furnishing pipeline end to end with Data Engineering and the current furnishing owner.</li>
+            <li>Pull the last three to six cycles of sent, acknowledged, and rejected records and measure what is reconciled versus not.</li>
+            <li>Sit with Compliance and Legal on what evidence the recent inquiry actually required.</li>
+            <li>Meet the Loans Lifecycle and Money Movement leads. Find the real constraint: upstream loan state, transformation, or the missing loop.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 30 to 60</span>
+          <h3>Quick win and baseline</h3>
+          <ul>
+            <li>Stand up the reconciliation ledger and exception view for one bureau and one product (the MVP).</li>
+            <li>Establish the first real coverage, exception-volume, and time-to-resolution numbers.</li>
+            <li>Agree the exception taxonomy, owners, and deadlines with the cross-functional partners.</li>
+            <li>Bring leadership the baseline and the gap.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 60 to 90</span>
+          <h3>Ship, set targets, propose roadmap</h3>
+          <ul>
+            <li>Close the reconcile-back loop for the first slice, assign owners and deadlines, and cut the first measurable exception backlog.</li>
+            <li>Set the metric baseline and a target.</li>
+            <li>Propose the roadmap: second bureau, second product, the upstream data contract, and how the same pattern extends to settlement reconciliation and the future bank-charter reporting model.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" class="reveal" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">These are open assumptions about the work, and the first thing I would test for each.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Open assumption in the work</th>
+              <th scope="col">What I would validate first</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The leak may already be small</td>
+              <td>Week one, pull sent-versus-acknowledged for recent cycles and measure the unmatched rate. If it is already tight, point the same reconciliation discipline at the larger settlement surface.</td>
+            </tr>
+            <tr>
+              <td>Errors may originate upstream, not in furnishing</td>
+              <td>A reject can come from a wrong loan state in Loans Lifecycle, not from the Metro 2 transformation. Before committing a build, classify a sample of rejects by origin.</td>
+            </tr>
+            <tr>
+              <td>Point-in-time data may be hard to reconstruct</td>
+              <td>Reconciliation needs the loan state as it was at furnish time. Confirm that point-in-time loan history is available and trustworthy at the cycle's granularity.</td>
+            </tr>
+            <tr>
+              <td>Ownership may be ambiguous</td>
+              <td>Furnishing spans Financial Platforms, Data Engineering, Compliance, and Legal. Confirm who owns furnishing accuracy today before designing the SLA.</td>
+            </tr>
+            <tr>
+              <td>A roadmap reorder is possible</td>
+              <td>A bank-charter decision could change priorities. Design the reconcile-back pattern to be model-agnostic so it survives the transition rather than being rebuilt for it.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" class="reveal" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">What I would ask the team in the first conversations.</p>
+      <ol class="qlist">
+        <li>Which slice does this role own first: Loans Lifecycle, Money Movement, or a cross-cutting reconciliation and data-contract problem?</li>
+        <li>What is today's furnishing exception rate and time-to-resolution, and who owns it now?</li>
+        <li>Is there already a reconcile-back step that ingests bureau acknowledgment files, or is furnishing fire-and-forget once transmitted?</li>
+        <li>How far along is the move to point-in-time loan history, and can we reconstruct furnish-time loan state today?</li>
+        <li>What is the expected timeline on the Affirm Bank charter decision, and how much should the platform pre-build for a dual model now versus later?</li>
+        <li>What evidence did Compliance and Legal need for the recent regulatory inquiry, and how long did it take to produce?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" class="reveal" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="takeaway fit-intro">I am a product manager with 6+ years across technology, finance, and AI. I hold a Master of Science in Information Management from the University of Washington, expected June 2026, an MBA in Finance, and a Bachelor of Engineering in Computer Engineering.</p>
+      <p class="fit-intro">I have integrated with credit bureau APIs in production on the decisioning side, run financial reporting and reconciliation pipelines inside banks, and led the work that drove operational-risk exception volumes down. Each of those maps directly to the furnishing, reconciliation, and data-quality problems this role owns.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">What the role needs</th>
+              <th scope="col">What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Credit-bureau data pipelines and integrations</td>
+              <td>At Lentra I delivered production API integrations with the credit bureaus (CIBIL, Equifax, Experian) for India's largest private bank, automating credit decisioning and KYC, improving loan-decision accuracy 10%, and cutting manual review 35%.</td>
+            </tr>
+            <tr>
+              <td>Reconciliation, exception reduction, time-to-resolution</td>
+              <td>At Nomura I led operational-risk transformation for Global Markets, reducing risk events 20% and losses 15% through remediation strategy, incident analysis, and preventive controls across FI/FX, technology, audit, and risk.</td>
+            </tr>
+            <tr>
+              <td>Financial reporting pipelines and data integrity</td>
+              <td>At BNY Mellon I built 25+ automated reporting pipelines in C#, Python, and SQL for fund accounting and asset-management systems feeding downstream reporting. At Nomura I moved firm-wide market-data sourcing onto Tradeweb, delivering $700K in annual savings with better data quality across Fixed Income applications.</td>
+            </tr>
+            <tr>
+              <td>Data contracts and quality gates at scale</td>
+              <td>At the University of Washington I own the ingestion pipeline and quality gates for 9,000+ policy documents across 8 agencies, setting standards for trustworthy retrieval at scale.</td>
+            </tr>
+            <tr>
+              <td>Platform ownership and roadmap</td>
+              <td>At Lentra I owned roadmap and prioritization scaling a digital lending platform from MVP to 25,000+ users across 3,000+ branches.</td>
+            </tr>
+            <tr>
+              <td>Communicating with senior, cross-functional stakeholders</td>
+              <td>I ran the operational-risk program across FI/FX, technology, audit, and risk, and led a bank-wide AI assistant rollout to 15,000+ users with governance controls and 100% policy compliance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-tag">Senior Product Manager pitch &middot; Financial Platforms, Affirm</p>
+    <div class="foot-links">
+      <a href="mailto:mayuresh33@live.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        mayuresh33@live.com
+      </a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg>
+        linkedin.com/in/mayureshmore
+      </a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/mayuresh747
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll (enhancement only; content visible without JS) */
+  if(!reduce && 'IntersectionObserver' in window){
+    document.body.classList.add('js-reveal');
+    var revs = document.querySelectorAll('.reveal');
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    revs.forEach(function(el){ ro.observe(el); });
+    /* belt-and-suspenders: never leave content hidden for no-scroll / capture / print tools */
+    var revealAll = function(){ revs.forEach(function(el){ el.classList.add('in'); ro.unobserve(el); }); };
+    setTimeout(revealAll, 700);
+    window.addEventListener('load', revealAll);
+  }
+
+  /* scroll-spy for the desktop rail */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  if(links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+    var current = null;
+    function setCurrent(id){
+      if(current === id) return;
+      current = id;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      if(map[id]) map[id].setAttribute('aria-current','true');
+    }
+    var spy = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; });
+      if(visible.length){
+        visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+        setCurrent(visible[0].target.id);
+      }
+    }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
