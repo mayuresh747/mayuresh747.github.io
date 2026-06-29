@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More, Finance RL environments for the Senior AI PM role at Scale AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --surface:#fffdf8;
+    --ink:#1c1b18;
+    --ink-soft:#3a3833;
+    --ink-mute:#6b675e;
+    --ink-faint:#8c887d;
+    --line:#e2ddd2;
+    --line-strong:#d2ccbd;
+    --accent:#9a3b1f;
+    --accent-soft:#c1572f;
+    --accent-wash:#f4e7df;
+    --good:#2f6b3f;
+    --bad:#9d2f24;
+    --blue:#2f5d8c;
+    --maxw:1180px;
+    --rail:200px;
+    --gap:48px;
+    --wrap-pad:40px;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#16150f;
+      --surface:#1e1d16;
+      --ink:#f1ede2;
+      --ink-soft:#ddd8c9;
+      --ink-mute:#a8a394;
+      --ink-faint:#857f6f;
+      --line:#34322a;
+      --line-strong:#46443a;
+      --accent:#e08a5f;
+      --accent-soft:#eaa07a;
+      --accent-wash:#2d231b;
+      --good:#7bc08a;
+      --bad:#e08a78;
+      --blue:#7fa9d6;
+    }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent-wash);color:var(--ink);}
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:1000;
+    background:var(--accent);color:#fff;padding:10px 16px;border-radius:0 0 6px 0;
+    font-family:var(--mono);font-size:13px;text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);}
+
+  /* citation links */
+  .src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-color:var(--line-strong);
+    text-underline-offset:2px;
+    text-decoration-thickness:.5px;
+    font-style:normal;
+    display:inline-block;
+    padding:1px 0;
+    transition:color .15s ease;
+  }
+  .src:hover,.src:focus-visible{color:var(--accent);text-decoration-color:var(--accent);}
+
+  /* masthead */
+  header.masthead{padding-top:54px;padding-bottom:30px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 16px;font-weight:600;
+  }
+  h1{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(30px,4.6vw,46px);line-height:1.04;letter-spacing:-.018em;
+    margin:0;color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(16px,2.2vw,20px);line-height:1.36;color:var(--ink-soft);
+    margin:18px 0 0;max-width:42ch;
+  }
+  .prepared{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;
+    color:var(--ink-faint);margin:18px 0 0;
+  }
+
+  /* mobile contents disclosure */
+  .toc-mobile{margin:26px 0 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
+  .toc-mobile summary{
+    cursor:pointer;list-style:none;padding:14px 18px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;display:flex;align-items:center;justify-content:space-between;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none;}
+  .toc-mobile summary::after{content:"+";font-size:20px;line-height:1;color:var(--accent);transition:transform .2s ease;}
+  .toc-mobile[open] summary::after{transform:rotate(45deg);}
+  .toc-mobile ol{list-style:none;margin:0;padding:4px 18px 16px;columns:2;column-gap:24px;}
+  .toc-mobile li{margin:0 0 9px;break-inside:avoid;}
+  .toc-mobile a{font-family:var(--display);font-size:15px;color:var(--ink-soft);text-decoration:none;}
+  .toc-mobile a:hover{color:var(--accent);}
+
+  /* two-column body */
+  .layout{
+    max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);
+    display:grid;grid-template-columns:var(--rail) 1fr;gap:var(--gap);
+    align-items:start;
+  }
+  .rail{display:none;}
+  @media (min-width:920px){
+    .rail{display:block;position:sticky;top:32px;align-self:start;padding-top:46px;}
+    .rail .rail-head{
+      font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--ink-faint);margin:0 0 14px;font-weight:600;
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;font-family:var(--display);font-size:13.5px;line-height:1.3;
+      color:var(--ink-mute);text-decoration:none;padding:6px 0 6px 12px;
+      border-left:2px solid var(--line);transition:color .15s ease,border-color .15s ease;
+    }
+    .rail a:hover{color:var(--ink);}
+    .rail a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+    .toc-mobile{display:none;}
+    header.masthead .wrap,
+    footer.foot .wrap{padding-left:calc(var(--wrap-pad) + var(--rail) + var(--gap));}
+  }
+
+  /* sections */
+  main{padding-bottom:20px;}
+  section{padding:42px 0;border-bottom:1px solid var(--line);}
+  section:first-child{padding-top:44px;}
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0 0 18px;line-height:1.2;
+  }
+  .lede{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(21px,2.7vw,27px);line-height:1.28;letter-spacing:-.01em;
+    color:var(--ink);margin:0 0 22px;max-width:30ch;
+  }
+  p{margin:0 0 16px;max-width:66ch;}
+  p.takeaway{
+    font-family:var(--display);font-weight:500;font-size:19.5px;line-height:1.4;
+    color:var(--ink);margin:0 0 18px;max-width:60ch;
+  }
+  strong{color:var(--ink);font-weight:600;}
+  em{font-style:italic;color:var(--ink-soft);}
+  h3{
+    font-family:var(--display);font-weight:600;font-size:18px;line-height:1.3;
+    color:var(--ink);margin:26px 0 8px;letter-spacing:-.005em;
+  }
+
+  ul.bul{list-style:none;margin:0 0 16px;padding:0;max-width:66ch;}
+  ul.bul li{position:relative;padding-left:22px;margin:0 0 11px;}
+  ul.bul li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;background:var(--accent);border-radius:1px;transform:rotate(45deg);}
+
+  ol.qlist{margin:0;padding-left:0;list-style:none;counter-reset:q;max-width:66ch;}
+  ol.qlist li{position:relative;padding-left:42px;margin:0 0 14px;counter-increment:q;}
+  ol.qlist li::before{
+    content:counter(q);position:absolute;left:0;top:1px;
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);
+    width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:var(--surface);
+  }
+
+  .def{
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;padding:16px 20px;margin:0 0 22px;max-width:66ch;
+  }
+  .def h3{margin:0 0 6px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .def p{margin:0;font-size:16.5px;color:var(--ink-soft);}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;min-width:540px;font-size:15.5px;}
+  thead th{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;text-align:left;
+    padding:13px 16px;border-bottom:1px solid var(--line-strong);background:var(--bg);
+    vertical-align:bottom;
+  }
+  tbody td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);line-height:1.5;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{color:var(--ink);font-family:var(--display);font-weight:500;font-size:15px;}
+  .read-strong{color:var(--accent);font-weight:600;font-family:var(--display);}
+  .read-mute{color:var(--ink-faint);font-family:var(--display);}
+  .read-mid{color:var(--ink-soft);font-family:var(--display);font-weight:500;}
+
+  /* figure / diagrams */
+  figure.diagram{margin:8px 0 18px;}
+  figure.diagram figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-faint);margin-top:10px;text-align:left;}
+  .diag-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:22px 18px;}
+  .diag-scroll svg{display:block;width:100%;height:auto;}
+  /* SVG <text> picks up font from CSS reliably across browsers */
+  .diag-scroll svg text{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif;}
+  .diag-scroll svg text.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;}
+  @media (max-width:640px){.diag-scroll svg{min-width:580px;}}
+  .legend{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--display);font-size:13.5px;color:var(--ink-mute);}
+  .legend li{display:flex;align-items:center;gap:8px;}
+  .legend .dot{width:13px;height:13px;border-radius:3px;flex:none;}
+
+  /* plan timeline */
+  .plan{display:grid;gap:16px;margin:0;}
+  @media (min-width:720px){.plan{grid-template-columns:repeat(3,1fr);}}
+  .phase{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 20px 22px;position:relative;overflow:hidden;}
+  .phase::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:.8;}
+  .phase .ph-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .phase h3{margin:8px 0 12px;font-size:17px;}
+  .phase ul{list-style:none;margin:0;padding:0;}
+  .phase li{position:relative;padding-left:18px;margin:0 0 9px;font-size:15px;color:var(--ink-soft);line-height:1.45;}
+  .phase li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-soft);}
+
+  .fit-intro{max-width:66ch;}
+
+  /* footer */
+  footer.foot{border-top:1px solid var(--line);padding:36px 0 56px;margin-top:8px;}
+  .foot-name{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 4px;}
+  .foot-tag{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0 0 18px;letter-spacing:.03em;}
+  .foot-links{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:13px;}
+  .foot-links a{color:var(--ink-mute);text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:color .15s ease;}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-links svg{width:15px;height:15px;flex:none;}
+
+  /* reveal: visible by default; animate only when JS opts in + motion allowed */
+  @media (prefers-reduced-motion:no-preference){
+    .js-reveal .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js-reveal .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:919px){
+    .layout{display:block;padding:0 var(--wrap-pad);}
+    header.masthead{padding-bottom:24px;}
+  }
+  @media (max-width:480px){
+    :root{--wrap-pad:22px;}
+    body{font-size:17px;}
+    section{padding:34px 0;}
+    h1{font-size:30px;}
+    .toc-mobile ol{columns:1;}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product pitch</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the finance RL environments problem for the Senior AI Product Manager role at Scale AI.</p>
+    <p class="prepared">Prepared June 2026 &middot; Agents Data and Reinforcement Learning Environments</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#who">Who it is for</a></li>
+      <li><a href="#why">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- THE BET -->
+    <section id="bet" class="reveal" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="lede">Make Scale the default place frontier labs go to train finance agents.</p>
+      <p>I would ship the first high-fidelity finance RL environment with verifiers that grade the auditable reasoning chain, not just the final number. Finance is unclaimed territory in the environments race, the buying demand is already funded, and the moat is exactly what makes the work hard: realistic data plus expert verification. That combination is a defensible vertical, not a one-off contract.</p>
+      <div class="def">
+        <h3>What an RL environment is</h3>
+        <p>A reinforcement learning environment is a software simulation of a real workflow where an AI agent practices a task, gets a verifiable reward signal for doing it correctly, and improves through repeated attempts. Scale describes these as simulated worlds where agents train on realistic tool-use workflows without the risk of production systems <a class="src" href="https://scale.com/blog/rl-environments" target="_blank" rel="noopener">(Scale, RL environments)</a>. My job in this role is to build those simulations for finance.</p>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="reveal" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">Three forces line up here, and they all point at the same opening.</p>
+
+      <h3>Finance agents fail at rates no bank would accept</h3>
+      <p>On the FinGAIA benchmark of 407 expert-validated tasks across securities, banking, insurance, and asset management, the best agent scored 48.9% overall accuracy against an 84.7% human expert baseline, a gap of 35.8 points <a class="src" href="https://arxiv.org/html/2507.17186v1" target="_blank" rel="noopener">(FinGAIA, arXiv)</a>. Portfolio fund allocation accuracy was 29.2% and fraud detection 22.8%. On BigFinanceBench of 928 expert-authored research questions, the best systems stay below 60% rubric score and below 45% final-answer accuracy <a class="src" href="https://arxiv.org/html/2606.03829" target="_blank" rel="noopener">(BigFinanceBench, arXiv)</a>. The failure modes are specific: hallucinated comparable transactions, terminology used wrongly, and reasoning that reaches a number with no auditable derivation.</p>
+
+      <h3>The training infrastructure to close that gap barely exists</h3>
+      <p>The capability race has moved to RL on verifiable tasks, and one lab discussed spending over $1 billion on RL environments within a single year <a class="src" href="https://techcrunch.com/2025/09/21/silicon-valley-bets-big-on-environments-to-train-ai-agents/" target="_blank" rel="noopener">(TechCrunch, 2025)</a>. Nearly half of Scale's new data-training projects in 2025 already involved RL environments, and training models in more realistic reinforcement learning environments is named as a 2026 priority <a class="src" href="https://scale.com/blog/rl-environments" target="_blank" rel="noopener">(Scale, RL environments)</a> <a class="src" href="https://scale.com/blog/scales-next-era-building-for-2026" target="_blank" rel="noopener">(Scale, 2026 strategy)</a>. Yet almost no production-grade finance environments exist, because finance success is non-binary. A model can be structurally right and assumption-wrong at the same time.</p>
+
+      <h3>The competitive moment makes finance strategically urgent</h3>
+      <p>After the $14.3B Meta investment for a 49% non-voting stake at a $29B valuation, Scale's largest customer pulled back and several labs began exploring alternatives <a class="src" href="https://sacra.com/c/scale-ai/" target="_blank" rel="noopener">(Sacra)</a>. Competitors are moving fast: one rival reached a $10B valuation with a $500M ARR run rate <a class="src" href="https://techcrunch.com/2025/10/27/mercor-quintuples-valuation-to-10b-with-350m-series-c/" target="_blank" rel="noopener">(TechCrunch, 2025)</a>, another surpassed Scale in 2024 revenue <a class="src" href="https://theaiinsider.tech/2025/07/03/surge-ai-prepares-1b-capital-raise-as-demand-for-premium-ai-training-data-surges/" target="_blank" rel="noopener">(The AI Insider, 2025)</a>. No competitor has announced a dedicated finance environments product. Finance is where Scale can win clean, new lab relationships that the Meta overhang does not touch.</p>
+
+      <p>The cost of not acting: the labs build finance environments in-house or a rival claims the vertical, and Scale loses the highest-value, hardest-to-replicate corner of the market it helped create.</p>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="who" class="reveal" aria-labelledby="who-h">
+      <h2 class="kicker" id="who-h">Who it is for</h2>
+      <p class="takeaway">A job to be done is the outcome a customer is really trying to achieve when they buy. Two customers matter here, and they are not the same.</p>
+
+      <h3>Primary buyer: the post-training research team at a frontier lab</h3>
+      <p>They sign six-to-seven-figure quarterly contracts for environments, and exclusive deals cost roughly 4 to 5 times more than non-exclusive ones <a class="src" href="https://epochai.substack.com/p/an-faq-on-reinforcement-learning" target="_blank" rel="noopener">(Epoch AI FAQ)</a>. Their job: <em>help me raise my model's finance-agent capability on benchmarks my own customers care about, without having to build and verify finance simulations in-house.</em> They do not want a vendor. They want a co-design partner who helps define how the training infrastructure should evolve <a class="src" href="https://www.datagravity.dev/p/rl-environments-for-agentic-ai-who" target="_blank" rel="noopener">(Data Gravity)</a>.</p>
+
+      <h3>Primary user inside the buyer: the research engineer who runs RL training loops</h3>
+      <p>Their job: <em>give me an environment with a clean difficulty gradient and a reward signal I can trust, so my model learns instead of reward-hacking.</em> They reward smooth difficulty, a minimum 2 to 3% pass rate so there is a learning signal, long-horizon multi-step tasks, and verifiers that resist gaming <a class="src" href="https://epochai.substack.com/p/an-faq-on-reinforcement-learning" target="_blank" rel="noopener">(Epoch AI FAQ)</a>.</p>
+
+      <h3>Downstream demand signal: enterprise finance teams deploying agents now</h3>
+      <p>One bank co-developed agents with a frontier lab for trade accounting, reconciliation, and client onboarding, reporting 30% faster onboarding <a class="src" href="https://mlq.ai/news/goldman-sachs-rolls-out-anthropics-claude-ai-to-automate-key-accounting-and-compliance-tasks/" target="_blank" rel="noopener">(MLQ.ai, 2026)</a>. Another runs 400-plus production AI use cases <a class="src" href="https://aibusinessweekly.net/p/ai-in-finance-statistics" target="_blank" rel="noopener">(AI Business Weekly, 2026)</a>. These deployments are the reason labs need better finance training data in the first place. They are not my direct buyer, but they are the proof that lab demand is real and durable.</p>
+
+      <figure class="diagram" aria-labelledby="who-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 880 230" role="img" aria-label="Scale builds finance RL environments and sells them to frontier lab post-training teams. The lab hands them to a research engineer who trains an agent and lifts the benchmark. The lab ships that capability to enterprise finance teams, whose deployment demand pulls the lab back for more.">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#8c887d"/>
+              </marker>
+              <marker id="arrd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+            <!-- Scale -->
+            <rect x="14" y="64" width="180" height="92" rx="10" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="104" y="96" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)">Scale</text>
+            <text x="104" y="116" text-anchor="middle" font-size="12" fill="var(--ink-soft)">Finance RL environments</text>
+            <text x="104" y="133" text-anchor="middle" font-size="11" fill="var(--ink-mute)">data as a product</text>
+            <!-- Lab -->
+            <rect x="262" y="64" width="180" height="92" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="352" y="96" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)">Frontier lab buyer</text>
+            <text x="352" y="116" text-anchor="middle" font-size="12" fill="var(--ink-soft)">post-training</text>
+            <text x="352" y="133" text-anchor="middle" font-size="12" fill="var(--ink-soft)">research team</text>
+            <!-- Engineer -->
+            <rect x="510" y="64" width="180" height="92" rx="10" fill="var(--surface)" stroke="var(--good)" stroke-width="1.5"/>
+            <text x="600" y="96" text-anchor="middle" font-size="15" font-weight="600" fill="var(--ink)">Research engineer</text>
+            <text x="600" y="116" text-anchor="middle" font-size="12" fill="var(--ink-soft)">runs the RL</text>
+            <text x="600" y="133" text-anchor="middle" font-size="12" fill="var(--ink-soft)">training loop</text>
+            <!-- Enterprise -->
+            <rect x="730" y="64" width="135" height="92" rx="10" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.5"/>
+            <text x="797" y="96" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">Enterprise</text>
+            <text x="797" y="115" text-anchor="middle" font-size="12" fill="var(--ink-soft)">finance teams</text>
+            <text x="797" y="133" text-anchor="middle" font-size="11" fill="var(--ink-mute)">deploy agents</text>
+            <!-- edges -->
+            <line x1="194" y1="100" x2="256" y2="100" stroke="#8c887d" stroke-width="1.4" marker-end="url(#arr)"/>
+            <line x1="442" y1="90" x2="504" y2="90" stroke="#8c887d" stroke-width="1.4" marker-end="url(#arr)"/>
+            <path d="M512 142 C474 184, 436 184, 444 144" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+            <line x1="690" y1="110" x2="724" y2="110" stroke="#8c887d" stroke-width="1.4" marker-end="url(#arr)"/>
+            <path d="M730 156 C560 224, 470 224, 444 158" stroke="var(--accent)" stroke-width="1.4" fill="none" stroke-dasharray="5 5" marker-end="url(#arrd)" aria-hidden="true"/>
+            <!-- edge labels -->
+            <text class="mono" x="225" y="91" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">sells</text>
+            <text class="mono" x="473" y="80" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">hands to</text>
+            <text class="mono" x="707" y="101" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">enables</text>
+            <text class="mono" x="478" y="178" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">trains, lifts benchmark</text>
+            <text class="mono" x="587" y="216" text-anchor="middle" font-size="10.5" fill="var(--accent)">deployment demand pulls</text>
+          </svg>
+        </div>
+        <figcaption id="who-fig-cap">How the finance RL environments serve buyer, user, and the downstream demand that funds them.</figcaption>
+      </figure>
+    </section>
+
+    <!-- WHY THIS PROBLEM -->
+    <section id="why" class="reveal" aria-labelledby="why-h">
+      <h2 class="kicker" id="why-h">Why this problem</h2>
+      <p class="takeaway">RICE ranks what to fund: Reach, Impact, and Confidence are good, Effort is the cost. Here is how the candidate finance workflows stack up as the first vertical to invest in.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Workflow to model first</th>
+              <th scope="col">Reach (lab demand)</th>
+              <th scope="col">Impact (capability lift)</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort</th>
+              <th scope="col">Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Investment memo / CIM build from a data room</td>
+              <td>High: maps to memos and data rooms named in the JD</td>
+              <td>High: long-horizon, multi-step, exactly what labs reward</td>
+              <td>Medium-high: benchmark gaps documented</td>
+              <td>High: needs realistic data rooms</td>
+              <td><span class="read-strong">Strong first bet</span></td>
+            </tr>
+            <tr>
+              <td>Three-statement / DCF financial model build</td>
+              <td>High: core IB and PE task</td>
+              <td>High: assumption judgment is the hardest reward to grade</td>
+              <td>Medium: verifier design is the real risk</td>
+              <td>High</td>
+              <td><span class="read-mid">Strong, harder verifier</span></td>
+            </tr>
+            <tr>
+              <td>FP&amp;A forecast and variance analysis</td>
+              <td>Medium</td>
+              <td>Medium-high</td>
+              <td>High: cleaner ground truth</td>
+              <td>Medium</td>
+              <td><span class="read-mid">Fast follow</span></td>
+            </tr>
+            <tr>
+              <td>Trade accounting / reconciliation</td>
+              <td>Medium: enterprise-pulled, narrower lab appeal</td>
+              <td>Medium</td>
+              <td>High</td>
+              <td>Medium</td>
+              <td><span class="read-mute">Later, enterprise-led</span></td>
+            </tr>
+            <tr>
+              <td>Comps / market-data extraction</td>
+              <td>High</td>
+              <td>Low-medium: models already strong at extraction</td>
+              <td>High</td>
+              <td>Low</td>
+              <td><span class="read-mute">Deprioritize, low ceiling</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>I would not start with comps extraction even though it is cheap and high-confidence, because models are already decent at extraction so the capability headroom is small. I would start where the benchmark gap is largest and the task is long-horizon, because that is what frontier-lab research engineers pay the 4-to-5x premium for. The investment memo build wins on impact and reach; the financial model build is the close second and carries the hardest, most defensible verifier problem. Concentrating on one deep workflow beats spreading thin across five shallow ones, because a competitor can copy breadth fast but cannot copy a verifier that encodes real banking judgment.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" class="reveal" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would treat the first quarter as a test of three bets, not a fixed plan.</p>
+
+      <h3>Hypothesis 1: the verifier is the product, not the simulation</h3>
+      <p>The hard part is not cloning the spreadsheet UI, it is the reward signal. Scale's own framing is that verifiers must check real, measurable changes in the system, not just whether an agent produced plausible text <a class="src" href="https://scale.com/blog/rl-environments" target="_blank" rel="noopener">(Scale, RL environments)</a>. For finance I would build layered verifiers that grade the derivation chain: source-tracing (did the agent pull the figure from the right document), calculation correctness, assumption defensibility (is the terminal growth rate justifiable for the industry), and hallucination checks for the FinGAIA failure modes. I would decide this is right if labs pay more for the same environment when the verifier depth increases.</p>
+
+      <h3>Hypothesis 2: synthetic plus seeded real data beats either alone</h3>
+      <p>Real memos and data rooms are protected by NDA and securities law, so I cannot just buy them. I would source a small spine of real, legally clearable artifacts to anchor realism, then generate synthetic data rooms that reproduce the ambiguity of real work: incomplete records, conflicting figures, judgment calls. I would decide between sourcing strategies by measuring which produces the harder, less reward-hackable tasks.</p>
+
+      <h3>Hypothesis 3: co-design with one lab beats building in a vacuum</h3>
+      <p>Labs want thought partners. I would anchor the first environment to one design-partner lab's actual capability gap rather than guess, so the difficulty gradient and task list match what they are training against. I would validate this by whether a partner commits engineering time to co-define the task spec.</p>
+
+      <p>How I would decide between directions: I would run small task batches against a current best model and keep the workflow where the pass rate sits in the learnable 2 to 3% to roughly 40% band, the gap is widest, and the verifier survives an internal reward-hacking attempt.</p>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+      <p class="takeaway">The smallest test of the biggest assumption: one workflow, one design-partner lab, verifier-first.</p>
+
+      <p><strong>The MVP:</strong> an investment-memo-build environment seeded from a single realistic, legally clearable data room. The agent works from raw documents toward a memo with a supporting model. Success is graded by a layered verifier across roughly 8 to 12 subtasks (source-tracing, comp selection, calculation, assumption defensibility, narrative consistency), not by a single final score. The biggest assumption it tests: that I can build a finance verifier labs trust enough to train on and renew.</p>
+
+      <p>Light RICE reasoning for why this first: highest impact (long-horizon, largest documented gap), high reach (memos and data rooms are explicitly in the JD), and it forces the hardest problem, verification, early, while effort stays bounded by limiting scope to one workflow and one data room.</p>
+
+      <h3>What it deliberately leaves out</h3>
+      <p>Breadth across IB, PE, public markets, and FP&amp;A; a full library of data rooms; trade accounting and reconciliation; and enterprise self-serve. Those come only after one verifier proves it produces measurable capability lift. Shipping breadth before a trusted verifier would be the expensive mistake.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">North Star: verified capability lift per environment, the improvement a design-partner model shows on the matching finance benchmark after training in the environment.</p>
+      <p>This ties directly to Scale's own claim that models trained in its RL environments show measurable benchmark gains <a class="src" href="https://scale.com/blog/rl-environments" target="_blank" rel="noopener">(Scale, RL environments)</a>, and to what makes a lab renew.</p>
+
+      <figure class="diagram" aria-labelledby="metrics-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 880 350" role="img" aria-label="Metrics tree. The North Star is verified capability lift per environment. Three leading inputs feed it: tasks with a usable difficulty gradient, verifier agreement with expert review, and design-partner engineering time committed. Two lagging outcomes follow it: contract renewal and exclusivity rate, and environments shipped to production. Three guardrails are watched: reward-hacking rate, expert verifier cost per task, and hallucinated-fact pass-through rate.">
+            <defs>
+              <marker id="m-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#8c887d"/>
+              </marker>
+              <marker id="m-warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--bad)"/>
+              </marker>
+            </defs>
+            <!-- leading row -->
+            <rect x="14" y="14" width="262" height="60" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="30" y="38" font-size="12.5" font-weight="600" fill="var(--ink)">Leading input</text>
+            <text x="30" y="57" font-size="12.5" fill="var(--ink-soft)">Usable difficulty gradient</text>
+            <rect x="308" y="14" width="262" height="60" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="324" y="38" font-size="12.5" font-weight="600" fill="var(--ink)">Leading input</text>
+            <text x="324" y="57" font-size="12.5" fill="var(--ink-soft)">Verifier agreement with experts</text>
+            <rect x="602" y="14" width="262" height="60" rx="9" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.4"/>
+            <text x="618" y="38" font-size="12.5" font-weight="600" fill="var(--ink)">Leading input</text>
+            <text x="618" y="57" font-size="12.5" fill="var(--ink-soft)">Design-partner eng time committed</text>
+            <!-- arrows leading to NS -->
+            <path d="M145 74 C160 112, 300 122, 360 150" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#m-up)"/>
+            <path d="M439 74 L439 148" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#m-up)"/>
+            <path d="M733 74 C720 112, 580 122, 518 150" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#m-up)"/>
+            <!-- north star -->
+            <rect x="278" y="152" width="322" height="66" rx="11" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="439" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">North Star</text>
+            <text x="439" y="200" text-anchor="middle" font-size="13" fill="var(--ink-soft)">Verified capability lift per environment</text>
+            <!-- arrows NS to lagging -->
+            <path d="M360 218 C320 250, 240 252, 200 268" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#m-up)"/>
+            <path d="M518 218 C560 250, 640 252, 680 268" stroke="#8c887d" stroke-width="1.4" fill="none" marker-end="url(#m-up)"/>
+            <!-- lagging -->
+            <rect x="36" y="270" width="290" height="60" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="52" y="294" font-size="12.5" font-weight="600" fill="var(--ink)">Lagging outcome</text>
+            <text x="52" y="313" font-size="12.5" fill="var(--ink-soft)">Renewal and exclusivity rate</text>
+            <rect x="554" y="270" width="290" height="60" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="570" y="294" font-size="12.5" font-weight="600" fill="var(--ink)">Lagging outcome</text>
+            <text x="570" y="313" font-size="12.5" fill="var(--ink-soft)">Environments shipped to production</text>
+            <!-- guardrail watch -->
+            <path d="M600 184 L696 184" stroke="var(--bad)" stroke-width="1.4" fill="none" stroke-dasharray="5 5" marker-end="url(#m-warn)" aria-hidden="true"/>
+            <text class="mono" x="648" y="175" text-anchor="middle" font-size="10.5" fill="var(--bad)">watch</text>
+            <rect x="704" y="150" width="160" height="74" rx="9" fill="none" stroke="var(--bad)" stroke-width="1.4" stroke-dasharray="3 3"/>
+            <text x="784" y="172" text-anchor="middle" font-size="12" font-weight="600" fill="var(--bad)">Guardrails</text>
+            <text x="784" y="190" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">reward-hacking rate,</text>
+            <text x="784" y="204" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">verifier cost per task,</text>
+            <text x="784" y="218" text-anchor="middle" font-size="10.5" fill="var(--ink-mute)">hallucination pass-through</text>
+          </svg>
+        </div>
+        <figcaption id="metrics-fig-cap">Leading inputs feed the North Star, lagging outcomes follow it, guardrails keep the gains honest.</figcaption>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--accent)"></span>North Star</li>
+          <li><span class="dot" style="background:var(--blue)"></span>Leading input</li>
+          <li><span class="dot" style="background:var(--good)"></span>Lagging outcome</li>
+          <li><span class="dot" style="background:var(--bad)"></span>Guardrail</li>
+        </ul>
+      </figure>
+
+      <p>The guardrails matter as much as the North Star. If reward-hacking rate climbs, the capability lift is fake. If verifier cost per task runs away (tasks already cost $200 to $2,000 each, with complex clones near $300,000, per <a class="src" href="https://epochai.substack.com/p/an-faq-on-reinforcement-learning" target="_blank" rel="noopener">Epoch AI</a>), the vertical stops being economic. If hallucinated facts pass the verifier, the environment trains the wrong behavior. I would refuse to count a benchmark gain that comes with a rising reward-hacking rate.</p>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" class="reveal" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <div class="plan">
+        <div class="phase">
+          <span class="ph-num">Days 0 to 30</span>
+          <h3>Listen and map the gap</h3>
+          <ul>
+            <li>Meet the lab research teams Scale already works with; learn which finance capabilities they train against and where agents break.</li>
+            <li>Audit whatever finance environment assets Scale has today.</li>
+            <li>Sit with internal finance experts and SEAL's evaluation practices, 450-plus evaluations across 50-plus models in 2025 <a class="src" href="https://scale.com/blog/2025-model-awards" target="_blank" rel="noopener">(Scale)</a>.</li>
+            <li>Map FinGAIA and BigFinanceBench failure modes to buildable workflows. Pick the design-partner lab.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 30 to 60</span>
+          <h3>A sharp first cut and alignment</h3>
+          <ul>
+            <li>Spec the investment-memo MVP with the design partner.</li>
+            <li>Stand up the layered verifier; run small task batches against a current best model to confirm the difficulty gradient and gap.</li>
+            <li>Pressure-test the verifier with an internal reward-hacking attempt.</li>
+            <li>Lock the data-sourcing approach (legally clearable spine plus synthetic generation). Align engineering, research, and any enterprise-sales overlap on scope.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 60 to 90</span>
+          <h3>Ship and baseline</h3>
+          <ul>
+            <li>Deliver the first environment to the design partner; set the capability-lift baseline and instrument the guardrails.</li>
+            <li>Bring back evidence: pass rates, verifier-versus-expert agreement, early benchmark movement.</li>
+            <li>Propose the 6-month finance roadmap (next two workflows, exclusivity strategy, data-sourcing partnership plan) grounded in what the first environment showed.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" class="reveal" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">Risks in the proposed work, ordered by how much they would change the plan.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Risk in the work</th>
+              <th scope="col">Why it matters</th>
+              <th scope="col">What I would validate first</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lab appetite for finance specifically is unproven</td>
+              <td>The $1B-plus RL spend covers all domains; the finance slice is unknown</td>
+              <td>In week one, confirm a design-partner lab will commit engineering time to a finance task spec before any build</td>
+            </tr>
+            <tr>
+              <td>The verifier can be reward-hacked</td>
+              <td>A gamed reward signal trains the wrong behavior and kills renewals</td>
+              <td>Run an internal reward-hacking attempt before shipping; track the guardrail every batch</td>
+            </tr>
+            <tr>
+              <td>Proprietary data is hard to source legally</td>
+              <td>Real memos and data rooms are NDA- and securities-protected</td>
+              <td>Prove the synthetic-plus-seeded approach produces hard, realistic tasks before scaling sourcing</td>
+            </tr>
+            <tr>
+              <td>Expert verification cost runs away</td>
+              <td>Finance expert time is expensive; the economics can break</td>
+              <td>Measure cost per verified task on the MVP and design verifier reuse before adding workflows</td>
+            </tr>
+            <tr>
+              <td>Difficulty gradient is wrong</td>
+              <td>Too easy or too hard yields no learning signal</td>
+              <td>Confirm pass rates land in the learnable band on small batches before full task generation</td>
+            </tr>
+            <tr>
+              <td>Internal overlap with enterprise sales</td>
+              <td>The same finance content could conflict with enterprise plans</td>
+              <td>Clarify the boundary with the enterprise team in the first 30 days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The pattern: spend week one buying down the two risks that can sink the whole vertical, lab appetite and a gameable verifier, before spending real engineering on breadth.</p>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" class="reveal" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">What I would ask the team in the first conversations.</p>
+      <ol class="qlist">
+        <li>Does Scale have a design-partner lab today that has signaled appetite for finance environments, or is winning that partner part of this role's first job?</li>
+        <li>What finance environment assets, if any, exist now, and am I extending them or starting from zero?</li>
+        <li>Are there existing data-sourcing partnerships with financial institutions, or do I build the legal and sourcing structure from scratch?</li>
+        <li>How should the finance environments roadmap coordinate with the enterprise team selling AI applications into financial services, so we reinforce rather than collide?</li>
+        <li>What is the appetite for exclusive lab deals in finance, given they pay 4 to 5x but lock the vertical to one buyer?</li>
+        <li>How does SEAL's evaluation work plug into verifier design, so environments and benchmarks share one quality bar?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" class="reveal" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="takeaway fit-intro">I am a product manager with six-plus years building in technology, finance, and AI, finishing a Master of Science in Information Management at the University of Washington in June 2026, on top of an MBA in Finance and a Bachelor of Engineering in Computer Engineering.</p>
+      <p class="fit-intro">The two things this role asks to be in one person, real finance-industry depth and AI product judgment, are the two things I have actually done. I built finance products inside a global bank and a major lender, and I now build retrieval AI agents where the hard part is grading whether an answer is trustworthy. That last part is the verifier problem this team lives on.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">What the role needs</th>
+              <th scope="col">What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3 to 6 years direct finance-industry experience</td>
+              <td>I owned a Finance Budgeting application at Nomura end to end, ran research with 15-plus stakeholders, and drove 30% spend reduction. I led operational risk transformation for Global Markets, cutting events 20% and losses 15% across FI/FX, tech, audit, and risk.</td>
+            </tr>
+            <tr>
+              <td>Translate finance workflows into specs others can build</td>
+              <td>I built a digital lending platform from MVP to 25,000-plus users across 3,000-plus branches, turning customer interviews and on-site tests into 25-plus product flows, with credit-bureau and KYC integrations that cut manual review 35%.</td>
+            </tr>
+            <tr>
+              <td>ML intuition and fluency on training and verification</td>
+              <td>As a graduate product research assistant I evaluated 5-plus RAG platforms and 4 retrieval architectures on accuracy, groundedness, and hallucination, and built quality gates over 9,000-plus policy documents so retrieval is trustworthy at scale.</td>
+            </tr>
+            <tr>
+              <td>Data-sourcing and data-as-a-product instinct</td>
+              <td>I drove a firm-wide market-data sourcing program connecting directly to Tradeweb, delivering $700K in annual savings with better data quality across Fixed Income systems.</td>
+            </tr>
+            <tr>
+              <td>Builder's mindset and ownership in ambiguity</td>
+              <td>I rolled out an internal AI assistant to 15,000-plus users with compliance and governance built in, and I am building a policy-conflict-detection agent that reconciles rules across 8 regulatory bodies from POC up.</td>
+            </tr>
+            <tr>
+              <td>AI-forward thinking about industry transformation</td>
+              <td>I have shipped AI into regulated finance and government settings where the bar is auditable, defensible output, which is exactly the reward signal finance agents need to learn.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-tag">Senior AI Product Manager pitch &middot; Finance Agents, Scale AI</p>
+    <div class="foot-links">
+      <a href="mailto:mayuresh33@live.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        mayuresh33@live.com
+      </a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg>
+        linkedin.com/in/mayureshmore
+      </a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/mayuresh747
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll (enhancement only; content visible without JS) */
+  if(!reduce && 'IntersectionObserver' in window){
+    document.body.classList.add('js-reveal');
+    var revs = document.querySelectorAll('.reveal');
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    revs.forEach(function(el){ ro.observe(el); });
+  }
+
+  /* scroll-spy for the desktop rail */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  if(links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+    var current = null;
+    function setCurrent(id){
+      if(current === id) return;
+      current = id;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      if(map[id]) map[id].setAttribute('aria-current','true');
+    }
+    var spy = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; });
+      if(visible.length){
+        visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+        setCurrent(visible[0].target.id);
+      }
+    }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
