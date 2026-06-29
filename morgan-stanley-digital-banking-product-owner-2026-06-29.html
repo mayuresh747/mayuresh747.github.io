@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More, idle-cash retention for the Digital Banking Product Owner role at Morgan Stanley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef1f5;
+    --surface:#ffffff;
+    --ink:#13171d;
+    --ink-soft:#333a44;
+    --ink-mute:#5b626d;
+    --ink-faint:#878d98;
+    --line:#dfe3ea;
+    --line-strong:#cbd1db;
+    --accent:#1c4d7e;
+    --accent-soft:#2f6fab;
+    --accent-wash:#e2ebf4;
+    --good:#2f6b46;
+    --bad:#a23323;
+    --steel:#48597a;
+    --gold:#946c0e;
+    --maxw:1180px;
+    --rail:200px;
+    --gap:48px;
+    --wrap-pad:40px;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#11151b;
+      --surface:#181d25;
+      --ink:#eef1f6;
+      --ink-soft:#d2d8e1;
+      --ink-mute:#9aa1ad;
+      --ink-faint:#767d8a;
+      --line:#29303a;
+      --line-strong:#3a424e;
+      --accent:#6ea7da;
+      --accent-soft:#8cbce9;
+      --accent-wash:#1a2634;
+      --good:#76c08b;
+      --bad:#e08a79;
+      --steel:#90a0c0;
+      --gold:#d6b25a;
+    }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent-wash);color:var(--ink);}
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:1000;
+    background:var(--accent);color:#fff;padding:10px 16px;border-radius:0 0 6px 0;
+    font-family:var(--mono);font-size:13px;text-decoration:none;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);}
+
+  /* citation links */
+  .src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-color:var(--line-strong);
+    text-underline-offset:2px;
+    text-decoration-thickness:.5px;
+    font-style:normal;
+    display:inline-block;
+    padding:1px 0;
+    transition:color .15s ease;
+  }
+  .src:hover,.src:focus-visible{color:var(--accent);text-decoration-color:var(--accent);}
+
+  /* masthead */
+  header.masthead{padding-top:54px;padding-bottom:30px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 16px;font-weight:600;
+  }
+  h1{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(30px,4.6vw,46px);line-height:1.04;letter-spacing:-.018em;
+    margin:0;color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(16px,2.2vw,20px);line-height:1.36;color:var(--ink-soft);
+    margin:18px 0 0;max-width:48ch;
+  }
+  .prepared{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;
+    color:var(--ink-faint);margin:18px 0 0;
+  }
+
+  /* mobile contents disclosure */
+  .toc-mobile{margin:26px 0 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
+  .toc-mobile summary{
+    cursor:pointer;list-style:none;padding:14px 18px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;display:flex;align-items:center;justify-content:space-between;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none;}
+  .toc-mobile summary::after{content:"+";font-size:20px;line-height:1;color:var(--accent);transition:transform .2s ease;}
+  .toc-mobile[open] summary::after{transform:rotate(45deg);}
+  .toc-mobile ol{list-style:none;margin:0;padding:4px 18px 16px;columns:2;column-gap:24px;}
+  .toc-mobile li{margin:0 0 9px;break-inside:avoid;}
+  .toc-mobile a{font-family:var(--display);font-size:15px;color:var(--ink-soft);text-decoration:none;}
+  .toc-mobile a:hover{color:var(--accent);}
+
+  /* two-column body */
+  .layout{
+    max-width:var(--maxw);margin:0 auto;padding:0 var(--wrap-pad);
+    display:grid;grid-template-columns:var(--rail) 1fr;gap:var(--gap);
+    align-items:start;
+  }
+  .rail{display:none;}
+  @media (min-width:920px){
+    .rail{display:block;position:sticky;top:32px;align-self:start;padding-top:46px;}
+    .rail .rail-head{
+      font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--ink-faint);margin:0 0 14px;font-weight:600;
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;font-family:var(--display);font-size:13.5px;line-height:1.3;
+      color:var(--ink-mute);text-decoration:none;padding:6px 0 6px 12px;
+      border-left:2px solid var(--line);transition:color .15s ease,border-color .15s ease;
+    }
+    .rail a:hover{color:var(--ink);}
+    .rail a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+    .toc-mobile{display:none;}
+    header.masthead .wrap,
+    footer.foot .wrap{padding-left:calc(var(--wrap-pad) + var(--rail) + var(--gap));}
+  }
+
+  /* sections */
+  main{padding-bottom:20px;}
+  section{padding:42px 0;border-bottom:1px solid var(--line);}
+  section:first-child{padding-top:44px;}
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0 0 18px;line-height:1.2;
+  }
+  .lede{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(21px,2.7vw,27px);line-height:1.28;letter-spacing:-.01em;
+    color:var(--ink);margin:0 0 22px;max-width:34ch;
+  }
+  p{margin:0 0 16px;max-width:66ch;}
+  p.takeaway{
+    font-family:var(--display);font-weight:500;font-size:19.5px;line-height:1.4;
+    color:var(--ink);margin:0 0 18px;max-width:62ch;
+  }
+  strong{color:var(--ink);font-weight:600;}
+  em{font-style:italic;color:var(--ink-soft);}
+  h3{
+    font-family:var(--display);font-weight:600;font-size:18px;line-height:1.3;
+    color:var(--ink);margin:26px 0 8px;letter-spacing:-.005em;
+  }
+
+  ul.bul{list-style:none;margin:0 0 16px;padding:0;max-width:66ch;}
+  ul.bul li{position:relative;padding-left:22px;margin:0 0 13px;}
+  ul.bul li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;background:var(--accent);border-radius:1px;transform:rotate(45deg);}
+
+  blockquote.jtbd{
+    margin:6px 0 20px;padding:14px 22px;max-width:62ch;
+    border-left:3px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;
+    font-family:var(--body);font-style:italic;font-size:18.5px;color:var(--ink-soft);line-height:1.5;
+  }
+
+  ol.qlist{margin:0;padding-left:0;list-style:none;counter-reset:q;max-width:66ch;}
+  ol.qlist li{position:relative;padding-left:42px;margin:0 0 14px;counter-increment:q;}
+  ol.qlist li::before{
+    content:counter(q);position:absolute;left:0;top:1px;
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);
+    width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:var(--surface);
+  }
+
+  .def{
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;padding:16px 20px;margin:6px 0 22px;max-width:66ch;
+  }
+  .def h3{margin:0 0 6px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .def p{margin:0;font-size:16.5px;color:var(--ink-soft);max-width:none;}
+
+  .note{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.02em;margin:2px 0 18px;}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px;}
+  thead th{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;text-align:left;
+    padding:13px 16px;border-bottom:1px solid var(--line-strong);background:var(--bg);
+    vertical-align:bottom;
+  }
+  tbody td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);line-height:1.5;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{color:var(--ink);font-family:var(--display);font-weight:500;font-size:15px;}
+  .read-strong{color:var(--accent);font-weight:600;font-family:var(--display);}
+  .read-mute{color:var(--ink-faint);font-family:var(--display);}
+  .read-mid{color:var(--ink-soft);font-family:var(--display);font-weight:500;}
+
+  /* figure / diagrams */
+  figure.diagram{margin:16px 0 18px;max-width:860px;}
+  figure.diagram figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-faint);margin-top:10px;text-align:left;}
+  .diag-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:22px 18px;}
+  .diag-scroll svg{display:block;width:100%;height:auto;}
+  .diag-scroll svg text{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif;}
+  .diag-scroll svg text.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;}
+  @media (max-width:640px){
+    .diag-scroll svg{min-width:560px;}
+    .diag-scroll.wide svg{min-width:780px;}
+  }
+  .legend{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--display);font-size:13.5px;color:var(--ink-mute);}
+  .legend li{display:flex;align-items:center;gap:8px;}
+  .legend .dot{width:13px;height:13px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.08);}
+
+  /* numbered quadrant legend */
+  ol.qlegend{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px;max-width:60ch;}
+  @media (min-width:560px){ol.qlegend{grid-template-columns:1fr 1fr;gap:9px 26px;}}
+  ol.qlegend li{display:flex;align-items:flex-start;gap:10px;font-family:var(--display);font-size:14px;color:var(--ink-soft);line-height:1.35;}
+  .qnum{
+    flex:none;width:22px;height:22px;border-radius:50%;background:var(--surface);
+    border:1.5px solid var(--steel);color:var(--steel);
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .qnum.bet{background:var(--accent);border-color:var(--accent);color:#fff;}
+  ol.qlegend .qread{color:var(--ink-faint);font-size:12.5px;font-family:var(--mono);}
+
+  /* approach directions */
+  .dir{margin:0 0 4px;}
+  .dir h3{display:flex;align-items:baseline;gap:10px;}
+  .dir h3 .n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600;}
+
+  /* plan timeline */
+  .plan{display:grid;gap:16px;margin:0;}
+  @media (min-width:720px){.plan{grid-template-columns:repeat(3,1fr);}}
+  .phase{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 20px 22px;position:relative;overflow:hidden;}
+  .phase::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:.85;}
+  .phase .ph-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .phase h3{margin:8px 0 12px;font-size:17px;}
+  .phase ul{list-style:none;margin:0;padding:0;}
+  .phase li{position:relative;padding-left:18px;margin:0 0 9px;font-size:15px;color:var(--ink-soft);line-height:1.45;}
+  .phase li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-soft);}
+
+  .fit-intro{max-width:66ch;}
+
+  /* footer */
+  footer.foot{border-top:1px solid var(--line);padding:36px 0 56px;margin-top:8px;}
+  .foot-name{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 4px;}
+  .foot-tag{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0 0 18px;letter-spacing:.03em;}
+  .foot-links{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:13px;}
+  .foot-links a{color:var(--ink-mute);text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:color .15s ease;}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-links svg{width:15px;height:15px;flex:none;}
+
+  /* reveal: visible by default; animate only when JS opts in + motion allowed */
+  @media (prefers-reduced-motion:no-preference){
+    .js-reveal .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js-reveal .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:919px){
+    .layout{display:block;padding:0 var(--wrap-pad);}
+    header.masthead{padding-bottom:24px;}
+  }
+  @media (max-width:480px){
+    :root{--wrap-pad:22px;}
+    body{font-size:17px;}
+    section{padding:34px 0;}
+    h1{font-size:30px;}
+    .toc-mobile ol{columns:1;}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product pitch</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the idle-cash retention problem for the Digital Banking Product Owner role at Morgan Stanley.</p>
+    <p class="prepared">Prepared June 2026 &middot; Digital Banking pitch</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#impact">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#who">Who it is for</a></li>
+      <li><a href="#why">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#impact">Business impact</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- THE BET -->
+    <section id="bet" class="reveal" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="lede">Keep idle client cash inside Morgan Stanley and E*TRADE, one tap at a time.</p>
+      <p>Uninvested cash that earns almost nothing is the easiest reason for a client to open an account somewhere else. My bet: I would own and ship an embedded AI cash assistant inside the E*TRADE and Morgan Stanley apps that spots a client's idle cash, shows them their real options in plain numbers, and moves it into one of the firm's own higher-yield products in one tap. The point is not to chase the highest rate on the market. It is to keep the deposit in-house instead of losing it to Fidelity or a neobank, which protects the deposit base, the interest income built on it, and the wider client relationship.</p>
+      <p>This is a squad-level product area, not a division strategy. I would own the requirements, the delivery, and the metrics for this one experience, working alongside the senior product managers who set the broader roadmap.</p>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="reveal" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">The firm already sells competitive savings products. A client with cash at a low rate is just never shown, at the right moment, that a better in-house option is one tap away.</p>
+
+      <div class="def">
+        <h3>Bank Deposit Program and sweep</h3>
+        <p>The Bank Deposit Program (BDP) automatically moves a client's uninvested brokerage cash into deposits at affiliated banks. That automatic move is called a "sweep." The headline yield on swept cash is low.</p>
+      </div>
+
+      <h3>What it costs the client, and the firm</h3>
+      <p>A consolidated class action alleges the firm paid 0.01% to 0.5% on swept cash while earning roughly $8 billion in 2023 by deploying those balances <a class="src" href="https://www.kurtalawfirm.com/blog/cash-sweep-lawsuits/" target="_blank" rel="noopener">(Kurta Law)</a>, and the SEC closed its own investigation in March 2025 without enforcement <a class="src" href="https://www.thewealthadvisor.com/article/sec-has-concluded-investigation-morgan-stanleys-cash-sweep-practices" target="_blank" rel="noopener">(The Wealth Advisor)</a>. Those rate figures are plaintiff allegations, not a confirmed current rate. The legal outcome matters less than this: the gap is visible to any client who comparison-shops. Fidelity's Cash Management Account sweeps cash into a government money market fund earning roughly 4.5% to 5.0% as of 2026, with up to $5 million in FDIC coverage across 20 partner banks <a class="src" href="https://wealthvieu.com/investing/fidelity/cash-management-account/" target="_blank" rel="noopener">(WealthVieu)</a>. Other brokerage and fintech competitors advertise comparable or higher yields on idle cash.</p>
+
+      <h3>The root cause</h3>
+      <p>The firm already sells good in-house alternatives. E*TRADE Premium Savings runs a 4.00% promotional rate for six months on a 3.50% base, with enhanced FDIC coverage up to $500K individual and $1M joint <a class="src" href="https://us.etrade.com/bank/premium-savings-account" target="_blank" rel="noopener">(Premium Savings)</a>, and E*TRADE CDs pay around 4.10% <a class="src" href="https://www.nerdwallet.com/banking/best/1-year-cd-rates" target="_blank" rel="noopener">(NerdWallet)</a>. The 3.50% base is from Bankrate's review and changes often <a class="src" href="https://www.bankrate.com/banking/reviews/morgan-stanley-private/" target="_blank" rel="noopener">(Bankrate)</a>. The problem is not the absence of a good product. It is that the client is never shown, at the right moment and in plain terms, that the better in-house option exists and takes one tap.</p>
+
+      <h3>The workaround today, and why it fails</h3>
+      <p>A motivated client reads a rate page, compares, and manually opens a savings account or buys a CD. Most never do. The friction is too high and the prompt never comes. So the cash either sits idle at a low rate or it leaves for a competitor. Either way the firm loses: idle cash at a low rate erodes trust, and cash that leaves erodes the $419 billion deposit base <a class="src" href="https://www.fool.com/earnings/call-transcripts/2026/04/15/morgan-stanley-ms-q1-2026-earnings-transcript/" target="_blank" rel="noopener">(Q1 2026 earnings call)</a>.</p>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="who" class="reveal" aria-labelledby="who-h">
+      <h2 class="kicker" id="who-h">Who it is for</h2>
+      <p class="takeaway">I would start with the self-directed E*TRADE client, because the population is large and the whole journey can be completed digitally without an advisor in the loop.</p>
+
+      <div class="def">
+        <h3>Job to be done</h3>
+        <p>A "job to be done" is the underlying goal a person is really trying to accomplish, not the feature they happen to use.</p>
+      </div>
+
+      <p>The self-directed segment holds $1.56 trillion in assets, up 21% year over year <a class="src" href="https://www.financial-planning.com/news/morgan-stanley-wealth-rides-118b-in-new-assets-to-revenue-record" target="_blank" rel="noopener">(Financial Planning, Q1 2026)</a>. Their job:</p>
+
+      <blockquote class="jtbd">When I notice cash building up in my account, I want to make it earn a fair return without a lot of research or risk, so I can feel I am not leaving money on the table.</blockquote>
+
+      <p>That job has three layers. The functional job: move idle cash to a better rate. The emotional job: stop feeling slightly ripped off. The social job: feel like a smart steward of my own money. The emotional layer is what sends a client to open a Fidelity account, and it is what an in-app nudge can address before they leave.</p>
+
+      <h3>Others in the frame</h3>
+      <ul class="bul">
+        <li><strong>The advisor-served Morgan Stanley client</strong>, reached later through the advisor's view rather than direct nudges, because that relationship has a human in the loop and different suitability rules.</li>
+        <li><strong>The internal decision-makers I would build with</strong>, not just for: compliance and legal (what we may show and say), fraud and risk (any movement of money), and treasury or finance (the interest-income tradeoff). In a regulated bank each of these partners can stop a feature, so they are part of the design from day one.</li>
+      </ul>
+    </section>
+
+    <!-- WHY THIS PROBLEM -->
+    <section id="why" class="reveal" aria-labelledby="why-h">
+      <h2 class="kicker" id="why-h">Why this problem</h2>
+      <p class="takeaway">I scored the things this team could fund with RICE. The cash assistant wins on wide reach, high impact, and only moderate effort.</p>
+
+      <div class="def">
+        <h3>RICE in one line</h3>
+        <p>Score is Reach times Impact times Confidence, divided by Effort, so expensive low-confidence work falls down the list. Reach and Effort are measured; Impact (0.25 to 3) and Confidence (50%, 80%, 100%) are judgment calls.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Initiative</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort</th>
+              <th scope="col">Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Embedded AI cash assistant (this bet)</td>
+              <td>High: any client holding idle cash</td>
+              <td>2: defends deposits and income directly</td>
+              <td>80%</td>
+              <td>Moderate: reuses existing savings and CD products</td>
+              <td><span class="read-strong">Top</span></td>
+            </tr>
+            <tr>
+              <td>Static "your cash options" comparison screen</td>
+              <td>High</td>
+              <td>1</td>
+              <td>80%</td>
+              <td>Low: no AI, mostly disclosure work</td>
+              <td><span class="read-mid">Quick win</span></td>
+            </tr>
+            <tr>
+              <td>MS and E*TRADE platform unification</td>
+              <td>Very high</td>
+              <td>3</td>
+              <td>50% per release</td>
+              <td>Very high: multi-year program</td>
+              <td><span class="read-mute">Foundation, not a first ship</span></td>
+            </tr>
+            <tr>
+              <td>Add cash-deposit capability</td>
+              <td>Medium</td>
+              <td>0.5</td>
+              <td>80%</td>
+              <td>High: needs partner and ops infrastructure</td>
+              <td><span class="read-mute">Later</span></td>
+            </tr>
+            <tr>
+              <td>Add live chat support</td>
+              <td>Medium</td>
+              <td>0.5</td>
+              <td>80%</td>
+              <td>Medium</td>
+              <td><span class="read-mute">Later</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">These are my prioritization estimates, not Morgan Stanley figures.</p>
+
+      <figure class="diagram" aria-labelledby="quad-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 600 470" role="img" aria-label="Effort versus impact map of the team's five options. The vertical axis is impact from low at the bottom to high at the top. The horizontal axis is effort from low on the left to high on the right. Top left is quick wins, top right is big bets, bottom left is lower priority, bottom right is expensive for the return. Point 1, the AI cash assistant and the chosen bet, sits high on impact at moderate effort. Point 2, the rate comparison screen, sits at low effort and good impact, a quick win. Point 3, platform unification, sits at the highest impact but the highest effort, a big bet. Point 4, cash deposit capability, sits at high effort and low impact. Point 5, live chat support, sits at moderate effort and low impact.">
+            <defs>
+              <marker id="axArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+              </marker>
+            </defs>
+
+            <!-- plot frame -->
+            <rect x="70" y="40" width="470" height="360" rx="4" fill="var(--bg)" stroke="var(--line-strong)" stroke-width="1"/>
+            <!-- quadrant dividers -->
+            <line x1="305" y1="40" x2="305" y2="400" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="4 5"/>
+            <line x1="70" y1="220" x2="540" y2="220" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="4 5"/>
+
+            <!-- quadrant corner labels -->
+            <text class="mono" x="80" y="58" text-anchor="start" font-size="11" fill="var(--ink-faint)">QUICK WINS</text>
+            <text class="mono" x="530" y="58" text-anchor="end" font-size="11" fill="var(--ink-faint)">BIG BETS</text>
+            <text class="mono" x="80" y="392" text-anchor="start" font-size="11" fill="var(--ink-faint)">LOWER PRIORITY</text>
+            <text class="mono" x="530" y="392" text-anchor="end" font-size="11" fill="var(--ink-faint)">EXPENSIVE FOR RETURN</text>
+
+            <!-- axes -->
+            <line x1="70" y1="425" x2="540" y2="425" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#axArr)" aria-hidden="true"/>
+            <text class="mono" x="305" y="452" text-anchor="middle" font-size="12" fill="var(--ink-mute)">Effort, low to high</text>
+            <line x1="52" y1="400" x2="52" y2="40" stroke="var(--ink-faint)" stroke-width="1.2" marker-end="url(#axArr)" aria-hidden="true"/>
+            <text class="mono" transform="rotate(-90 30 220)" x="30" y="220" text-anchor="middle" font-size="12" fill="var(--ink-mute)">Impact, low to high</text>
+
+            <!-- points -->
+            <!-- 3 platform unification -->
+            <circle cx="493" cy="94" r="15" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="493" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="var(--steel)">3</text>
+            <!-- 2 rate comparison screen -->
+            <circle cx="164" cy="184" r="15" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="164" y="189" text-anchor="middle" font-size="13" font-weight="600" fill="var(--steel)">2</text>
+            <!-- 4 cash deposit -->
+            <circle cx="437" cy="249" r="15" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="437" y="254" text-anchor="middle" font-size="13" font-weight="600" fill="var(--steel)">4</text>
+            <!-- 5 live chat -->
+            <circle cx="300" cy="256" r="15" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="300" y="261" text-anchor="middle" font-size="13" font-weight="600" fill="var(--steel)">5</text>
+            <!-- 1 AI cash assistant (the bet) -->
+            <circle cx="267" cy="105" r="18" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.6"/>
+            <text x="267" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text>
+          </svg>
+        </div>
+        <figcaption id="quad-fig-cap">Effort versus impact for the team's main options. Top-left is a quick win, top-right is a big bet, bottom-right is expensive for the return.</figcaption>
+        <ol class="qlegend">
+          <li><span class="qnum bet">1</span><span>AI cash assistant <span class="qread">the bet, top</span></span></li>
+          <li><span class="qnum">2</span><span>Rate comparison screen <span class="qread">quick win</span></span></li>
+          <li><span class="qnum">3</span><span>Platform unification <span class="qread">foundation, not a first ship</span></span></li>
+          <li><span class="qnum">4</span><span>Cash deposit capability <span class="qread">later</span></span></li>
+          <li><span class="qnum">5</span><span>Live chat support <span class="qread">later</span></span></li>
+        </ol>
+      </figure>
+
+      <p>The cash assistant leans on products that already exist (Premium Savings, CDs, Preferred Savings) rather than new infrastructure. Platform unification scores high on impact but is a multi-year program other work depends on, so I would build the assistant in a portable way and let unification absorb it over time, not wait for it. Raising the headline sweep rate is a treasury and pricing decision, not a product build, and it narrows the firm's own margin, so I leave it off the backlog and treat retention as the lever I can actually pull.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" class="reveal" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would not commit to one design before testing. I would run three directions as bets and start with the one that tests the core behavior at the lowest risk.</p>
+
+      <div class="dir">
+        <h3><span class="n">01</span> Proactive nudge</h3>
+        <p>Detect idle cash above a threshold and surface a single card: "You have $X earning roughly Y%. Move it to Premium Savings at 4.00% for six months." One comparison, one action. Fastest to build, highest behavioral risk (will clients act).</p>
+      </div>
+      <div class="dir">
+        <h3><span class="n">02</span> On-demand cash check</h3>
+        <p>A "review my cash" screen the client opens themselves, showing all their cash and the in-house options ranked by rate. Lower compliance risk because the client asked, but it reaches fewer people because they have to seek it out.</p>
+      </div>
+      <div class="dir">
+        <h3><span class="n">03</span> Conversational AI</h3>
+        <p>A natural-language assistant that answers "what should I do with my cash?" Highest emotional payoff and the strongest match to the embedded AI the role calls for, but the hardest to make compliant and the easiest to get wrong.</p>
+      </div>
+
+      <p>How I would decide: start with the version that tests the core behavior at the lowest risk, then layer on the harder directions only once the behavior and the compliance path are proven. That points to a proactive nudge built on a comparison screen the client can also open on demand, with conversational AI held back until the suggestion logic is trusted.</p>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+      <p class="takeaway">The smallest honest test of the biggest assumption: will a client move idle cash into an in-house product when shown a clear, compliant in-app prompt?</p>
+
+      <ul class="bul">
+        <li><strong>One platform:</strong> E*TRADE self-directed, where the move is fully digital and the population is large.</li>
+        <li><strong>One trigger:</strong> settled cash above a set threshold sitting in the low-yield sweep for more than N days.</li>
+        <li><strong>One action:</strong> a comparison card (current rate versus Premium Savings) with one-tap move, using disclosure language pre-cleared by compliance and legal.</li>
+        <li><strong>One cohort:</strong> a contained client group, instrumented end to end.</li>
+      </ul>
+
+      <h3>What it deliberately leaves out</h3>
+      <p>The conversational AI, the Morgan Stanley advisor-side view, multi-product optimization across CDs and Preferred Savings, and cross-platform parity. Those come only after the core move-rate is proven. By RICE logic this is first because it is the lowest-effort slice that still tests the highest-impact assumption, and it puts a real number on client appetite before anyone funds the larger build.</p>
+
+      <figure class="diagram" aria-labelledby="mvp-fig-cap">
+        <div class="diag-scroll">
+          <svg viewBox="0 0 680 700" role="img" aria-label="The MVP idle-cash nudge flow, including the unhappy paths. The flow starts by detecting settled cash above a threshold that has been idle in the low-yield sweep for N or more days. It then checks whether the client is eligible and the balance is verified. If no, the nudge is suppressed, the reason is logged, and no card is shown. If yes, the app shows a compliant comparison card of the current rate versus Premium Savings. The flow then checks whether the client acts. If the client moves the cash, there is a one-tap move with confirmation and disclosure. If the client declines, the app respects the choice and applies a cool-down before re-prompting. The move outcome, the decline outcome, and the suppression outcome all feed a final step that records the move and the dollars retained.">
+            <defs>
+              <marker id="fArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+              </marker>
+              <marker id="fArrBad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--bad)"/>
+              </marker>
+              <marker id="fArrGood" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--good)"/>
+              </marker>
+            </defs>
+
+            <!-- connectors (drawn first) -->
+            <line x1="340" y1="78" x2="340" y2="102" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#fArr)"/>
+            <!-- eligible no -> suppress -->
+            <line x1="255" y1="140" x2="208" y2="140" stroke="var(--bad)" stroke-width="1.5" marker-end="url(#fArrBad)"/>
+            <text class="mono" x="231" y="131" text-anchor="middle" font-size="11" fill="var(--bad)">no</text>
+            <!-- eligible yes -> card -->
+            <line x1="340" y1="178" x2="340" y2="208" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#fArr)"/>
+            <text class="mono" x="356" y="196" text-anchor="start" font-size="11" fill="var(--good)">yes</text>
+            <!-- card -> choice -->
+            <line x1="340" y1="284" x2="340" y2="312" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#fArr)"/>
+            <!-- choice moves -> confirm -->
+            <path d="M255 350 C 200 372, 190 400, 190 438" stroke="var(--good)" stroke-width="1.5" fill="none" marker-end="url(#fArrGood)"/>
+            <text class="mono" x="196" y="396" text-anchor="middle" font-size="11" fill="var(--good)">moves</text>
+            <!-- choice declines -> respect -->
+            <path d="M425 350 C 480 372, 490 400, 490 438" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#fArr)"/>
+            <text class="mono" x="486" y="396" text-anchor="middle" font-size="11" fill="var(--gold)">declines</text>
+            <!-- confirm -> measure -->
+            <path d="M190 512 C 190 556, 230 588, 290 600" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#fArr)"/>
+            <!-- respect -> measure -->
+            <path d="M490 512 C 490 556, 450 588, 390 600" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#fArr)"/>
+            <!-- suppress -> measure (long left route) -->
+            <path d="M114 172 C 114 560, 150 600, 208 620" stroke="var(--bad)" stroke-width="1.4" fill="none" stroke-dasharray="5 5" marker-end="url(#fArrBad)" aria-hidden="true"/>
+
+            <!-- detect -->
+            <rect x="205" y="16" width="270" height="62" rx="10" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.5"/>
+            <text x="340" y="42" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--ink)">Detect settled cash above threshold</text>
+            <text x="340" y="61" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">idle in low-yield sweep N+ days</text>
+
+            <!-- eligible diamond -->
+            <polygon points="340,104 425,140 340,176 255,140" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="340" y="137" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)">Eligible and</text>
+            <text x="340" y="153" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)">balance verified?</text>
+
+            <!-- suppress -->
+            <rect x="24" y="110" width="184" height="60" rx="10" fill="var(--surface)" stroke="var(--bad)" stroke-width="1.5"/>
+            <text x="116" y="135" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--bad)">Suppress nudge</text>
+            <text x="116" y="153" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">log reason, no card shown</text>
+
+            <!-- card -->
+            <rect x="205" y="210" width="270" height="74" rx="10" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="340" y="237" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">Show comparison card</text>
+            <text x="340" y="256" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">current rate vs Premium Savings</text>
+            <text x="340" y="273" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--accent)">pre-cleared disclosure</text>
+
+            <!-- choice diamond -->
+            <polygon points="340,312 425,350 340,388 255,350" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.6"/>
+            <text x="340" y="355" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)">Client acts?</text>
+
+            <!-- confirm -->
+            <rect x="70" y="438" width="240" height="74" rx="10" fill="var(--surface)" stroke="var(--good)" stroke-width="1.6"/>
+            <text x="190" y="465" text-anchor="middle" font-size="13" font-weight="700" fill="var(--good)">One-tap move</text>
+            <text x="190" y="483" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">confirmation</text>
+            <text x="190" y="500" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">+ disclosure</text>
+
+            <!-- respect -->
+            <rect x="370" y="438" width="240" height="74" rx="10" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.6"/>
+            <text x="490" y="465" text-anchor="middle" font-size="13" font-weight="700" fill="var(--gold)">Respect choice</text>
+            <text x="490" y="483" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">cool-down before</text>
+            <text x="490" y="500" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">re-prompt</text>
+
+            <!-- measure -->
+            <rect x="208" y="600" width="264" height="66" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.8"/>
+            <text x="340" y="627" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">Record move</text>
+            <text x="340" y="646" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">and dollars retained</text>
+          </svg>
+        </div>
+        <figcaption id="mvp-fig-cap">The MVP nudge flow, including the unhappy paths: suppress, decline, and move all feed the measurement step.</figcaption>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--accent-wash);border-color:var(--accent)"></span>Key surface</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--good)"></span>Move completed</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--gold)"></span>Declined</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--bad)"></span>Suppressed</li>
+        </ul>
+      </figure>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">North Star: dollars of idle cash activated into a higher-yield in-house product per quarter. The client genuinely wins, it moves before revenue does, and the team can influence it directly.</p>
+
+      <figure class="diagram" aria-labelledby="metrics-fig-cap">
+        <div class="diag-scroll wide">
+          <svg viewBox="0 0 940 470" role="img" aria-label="Metrics tree from leading indicators to the North Star to lagging outcomes, with guardrails. On the left, a leading funnel runs from nudge impressions to card click-through rate to move completion rate, and feeds the North Star. The North Star, in the center, is idle cash activated into in-house products in dollars per quarter. On the right, the North Star drives three lagging outcomes: deposit retention, net interest income contribution, and banking and lending household penetration which stands at 18% today. Across the bottom, three guardrails check the North Star: opt-out and complaint rate, net deposit outflow to competitors, and the share of AI suggestions passing suitability and accuracy review.">
+            <defs>
+              <marker id="mArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+              </marker>
+              <marker id="mGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--gold)"/>
+              </marker>
+            </defs>
+
+            <!-- leading funnel arrows -->
+            <line x1="125" y1="98" x2="125" y2="118" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#mArr)"/>
+            <line x1="125" y1="176" x2="125" y2="196" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#mArr)"/>
+            <path d="M230 225 C 300 220, 320 185, 358 168" stroke="var(--ink-faint)" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <!-- north to lagging -->
+            <path d="M580 150 C 640 120, 660 95, 708 80" stroke="var(--ink-faint)" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <line x1="580" y1="163" x2="708" y2="158" stroke="var(--ink-faint)" stroke-width="1.4" marker-end="url(#mArr)"/>
+            <path d="M580 178 C 640 210, 660 225, 708 240" stroke="var(--ink-faint)" stroke-width="1.4" fill="none" marker-end="url(#mArr)"/>
+            <!-- guardrail arrows up to north -->
+            <path d="M185 360 C 260 300, 330 250, 405 208" stroke="var(--gold)" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#mGold)" aria-hidden="true"/>
+            <line x1="470" y1="360" x2="470" y2="210" stroke="var(--gold)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#mGold)" aria-hidden="true"/>
+            <path d="M765 360 C 690 300, 615 250, 540 208" stroke="var(--gold)" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#mGold)" aria-hidden="true"/>
+
+            <!-- leading funnel -->
+            <rect x="20" y="40" width="210" height="58" rx="9" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.4"/>
+            <text x="35" y="64" font-size="11.5" font-weight="600" fill="var(--steel)">Leading</text>
+            <text x="35" y="84" font-size="12.5" fill="var(--ink-soft)">Nudge impressions</text>
+
+            <rect x="20" y="118" width="210" height="58" rx="9" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.4"/>
+            <text x="35" y="142" font-size="11.5" font-weight="600" fill="var(--steel)">Leading</text>
+            <text x="35" y="162" font-size="12.5" fill="var(--ink-soft)">Card click-through rate</text>
+
+            <rect x="20" y="196" width="210" height="58" rx="9" fill="var(--surface)" stroke="var(--steel)" stroke-width="1.4"/>
+            <text x="35" y="220" font-size="11.5" font-weight="600" fill="var(--steel)">Leading</text>
+            <text x="35" y="240" font-size="12.5" fill="var(--ink-soft)">Move completion rate</text>
+
+            <!-- north star -->
+            <rect x="360" y="118" width="220" height="90" rx="11" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="470" y="147" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--ink)">North Star</text>
+            <text x="470" y="170" text-anchor="middle" font-size="12" fill="var(--ink-soft)">Idle cash activated into</text>
+            <text x="470" y="186" text-anchor="middle" font-size="12" fill="var(--ink-soft)">in-house products</text>
+            <text x="470" y="202" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--accent)">$ per quarter</text>
+
+            <!-- lagging outcomes -->
+            <rect x="708" y="40" width="212" height="60" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="723" y="63" font-size="11.5" font-weight="600" fill="var(--good)">Lagging outcome</text>
+            <text x="723" y="83" font-size="12.5" fill="var(--ink-soft)">Deposit retention</text>
+
+            <rect x="708" y="128" width="212" height="60" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="723" y="151" font-size="11.5" font-weight="600" fill="var(--good)">Lagging outcome</text>
+            <text x="723" y="171" font-size="12.5" fill="var(--ink-soft)">Net interest income</text>
+
+            <rect x="708" y="216" width="212" height="70" rx="9" fill="var(--surface)" stroke="var(--good)" stroke-width="1.4"/>
+            <text x="723" y="239" font-size="11.5" font-weight="600" fill="var(--good)">Lagging outcome</text>
+            <text x="723" y="259" font-size="12.5" fill="var(--ink-soft)">Banking + lending household</text>
+            <text x="723" y="276" font-size="12.5" fill="var(--ink-soft)">penetration (18% today)</text>
+
+            <!-- guardrails -->
+            <rect x="60" y="360" width="250" height="84" rx="9" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="75" y="383" font-size="11.5" font-weight="600" fill="var(--gold)">Guardrail</text>
+            <text x="75" y="403" font-size="12.5" fill="var(--ink-soft)">Opt-out / complaint rate</text>
+            <text x="75" y="423" font-size="12" fill="var(--ink-faint)">do not optimize nudge volume</text>
+
+            <rect x="345" y="360" width="250" height="84" rx="9" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="360" y="383" font-size="11.5" font-weight="600" fill="var(--gold)">Guardrail</text>
+            <text x="360" y="403" font-size="12.5" fill="var(--ink-soft)">Net deposit outflow</text>
+            <text x="360" y="423" font-size="12" fill="var(--ink-faint)">cash leaving is the failure</text>
+
+            <rect x="630" y="360" width="270" height="84" rx="9" fill="var(--surface)" stroke="var(--gold)" stroke-width="1.4"/>
+            <text x="645" y="383" font-size="11.5" font-weight="600" fill="var(--gold)">Guardrail</text>
+            <text x="645" y="403" font-size="12.5" fill="var(--ink-soft)">AI suggestions passing</text>
+            <text x="645" y="423" font-size="12.5" fill="var(--ink-soft)">suitability + accuracy review</text>
+          </svg>
+        </div>
+        <figcaption id="metrics-fig-cap">Leading indicators feed the North Star, lagging outcomes follow it, guardrails keep the number honest.</figcaption>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--accent-wash);border-color:var(--accent)"></span>North Star</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--steel)"></span>Leading indicator</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--good)"></span>Lagging outcome</li>
+          <li><span class="dot" style="background:var(--surface);border-color:var(--gold)"></span>Guardrail</li>
+        </ul>
+      </figure>
+
+      <p>The guardrails matter so we do not win the headline number by causing harm. More prompts is not the goal: if opt-out or complaint rates climb, we are creating fatigue, not value. Cash moved out to a competitor is never success, so net deposit outflow is the failure this feature exists to prevent. Every AI-generated suggestion must clear a suitability and accuracy check before it ships, because a prompt that misstates a balance or rate destroys trust and creates regulatory exposure. And we track net interest income so we are moving cash that was at risk of leaving, not cash that was content where it sat.</p>
+    </section>
+
+    <!-- BUSINESS IMPACT -->
+    <section id="impact" class="reveal" aria-labelledby="impact-h">
+      <h2 class="kicker" id="impact-h">Business impact</h2>
+      <p class="takeaway">Deposits are the engine. Keeping at-risk cash in-house at a thinner margin beats losing it to Fidelity outright, and against a $419 billion base even a small retained share is material.</p>
+
+      <p>Period-end deposits stood at $419 billion and bank lending balances at $186 billion, with household lending penetration at 18%, up from 14% five years earlier <a class="src" href="https://www.fool.com/earnings/call-transcripts/2026/04/15/morgan-stanley-ms-q1-2026-earnings-transcript/" target="_blank" rel="noopener">(Q1 2026 earnings call)</a>. Every deposit that stays in-house keeps earning the firm net interest income and keeps the client in the relationship that drives the 18% household figure the business tracks for growth. The logic is straightforward: a client who banks where they invests is harder to poach and refers more assets.</p>
+
+      <p>That reframes the cash assistant in business terms. Moving a client from a near-zero sweep into a 3.50% to 4.00% in-house savings account narrows the firm's spread on that balance. But losing the balance to a competitor entirely loses the spread, the deposit, and the household. My hypothesis is that retaining at-risk cash at a thinner margin beats losing it outright, and the MVP exists to put a real number on that tradeoff before the firm commits to it at scale.</p>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" class="reveal" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <div class="plan">
+        <div class="phase">
+          <span class="ph-num">Days 0 to 30</span>
+          <h3>Listen and map the constraints</h3>
+          <ul>
+            <li>Meet the squads, the UX Design and Research team, and the compliance, legal, fraud, risk, and treasury partners.</li>
+            <li>Read the BDP, Premium Savings, and CD product docs and the current disclosure language.</li>
+            <li>Pull the data on idle-cash balances, current activation rates, and outflow to competitors.</li>
+            <li>Tear down the live E*TRADE and Morgan Stanley cash experiences, and learn from what the Generative AI team has already shipped, e.g. AI Debrief reaching about 98% advisor adoption <a class="src" href="https://reruption.com/en/knowledge/industry-cases/morgan-stanleys-ai-debrief-98-advisor-adoption-boost" target="_blank" rel="noopener">(adoption case)</a> and the firm opening its workplace wealth platform to external AI agents in June 2026 <a class="src" href="https://americanbazaaronline.com/2026/06/04/morgan-stanley-opens-workplace-wealth-platform-to-ai-agents-482164/" target="_blank" rel="noopener">(American Bazaar)</a>.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 30 to 60</span>
+          <h3>A quick win and a sharpened plan</h3>
+          <ul>
+            <li>Ship the low-risk quick win: an improved "your cash options" comparison screen, no AI, mostly disclosure work.</li>
+            <li>Write the MVP user stories and acceptance criteria with engineering and compliance.</li>
+            <li>Run usability tests on the nudge concept and set the deposit and activation baselines.</li>
+            <li>Align the senior PMs and partner teams on scope.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-num">Days 60 to 90</span>
+          <h3>Ship and validate the first bet</h3>
+          <ul>
+            <li>Release the MVP nudge to the contained cohort and instrument the funnel.</li>
+            <li>Read the move rate and net deposits retained.</li>
+            <li>Present the results to the product managers and leadership.</li>
+            <li>Propose the roadmap: CDs and Preferred Savings, then the advisor view, then conversational AI once the logic is trusted.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" class="reveal" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">These are open questions about the proposed work, in priority order, and the first thing I would test for each.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Open assumption in the work</th>
+              <th scope="col">What I would validate first</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Compliance and suitability is make-or-break</td>
+              <td>Week one, confirm exactly what we may show and say, what disclosure language is required, and the approval path. If compliance forbids any comparison, the whole approach changes.</td>
+            </tr>
+            <tr>
+              <td>Net interest income tradeoff</td>
+              <td>With treasury and finance, identify which idle-cash segments are genuinely at flight risk versus content where they are, so we move the at-risk dollars and not all of them.</td>
+            </tr>
+            <tr>
+              <td>AI accuracy and groundedness</td>
+              <td>Set accuracy and groundedness thresholds and require a human-reviewable suggestion log before any AI-generated text reaches a client.</td>
+            </tr>
+            <tr>
+              <td>Client behavior</td>
+              <td>Clients may ignore or distrust nudges. Test through usability sessions and the MVP cohort move-rate, not assumptions.</td>
+            </tr>
+            <tr>
+              <td>Platform fragmentation</td>
+              <td>Building E*TRADE-first risks rework on the Morgan Stanley side. Measure how far the two cash data models differ and design the trigger logic to be portable from the start.</td>
+            </tr>
+            <tr>
+              <td>Data and event availability</td>
+              <td>Real-time idle-cash detection needs the right feeds and event hooks. Confirm with engineering early that the trigger can fire when it should.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" class="reveal" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">What I would ask the team in the first conversations.</p>
+      <ol class="qlist">
+        <li>What does compliance currently allow in a client-facing rate comparison and in AI-generated financial suggestions, and what is the approval path?</li>
+        <li>How much idle cash sits in the low-yield sweep across E*TRADE self-directed versus advisor-managed accounts, and how much leaves to outside competitors each quarter?</li>
+        <li>What has the Generative AI team already built for client-facing experiences that I can reuse rather than rebuild?</li>
+        <li>What is treasury's view on the tradeoff: is keeping a deposit in-house at a thinner margin preferred to losing it entirely?</li>
+        <li>Where is the Morgan Stanley and E*TRADE unification roadmap today, and should I build cross-platform from day one or E*TRADE-first?</li>
+        <li>What are the current digital banking adoption and deposit-retention baselines I would be measured against?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" class="reveal" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="takeaway fit-intro">I am a product manager with six years across banking, capital markets, and AI. I hold an MBA in Finance, am finishing a Master of Science in Information Management at the University of Washington, and am a certified Scrum Product Owner.</p>
+      <p class="fit-intro">Most of my work has been inside financial institutions: I built a consumer lending platform used by 25,000 people, and I shipped AI and data products at a global bank. This role sits where I work best, at the meeting point of client-facing banking, embedded AI, and the compliance reality of shipping features that move money.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">What the role needs</th>
+              <th scope="col">What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3 to 5 years in wealth management, retail banking, or consumer fintech</td>
+              <td>Built the digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches; owned roadmap, prioritization, and partner integrations.</td>
+            </tr>
+            <tr>
+              <td>3+ years in technology product management and design</td>
+              <td>Spent 3+ years as a product manager at Capco on financial-services platforms, plus product work at Lentra and a current AI product build at the University of Washington.</td>
+            </tr>
+            <tr>
+              <td>Embedded AI in client products</td>
+              <td>Rolled out an internal AI assistant to 15,000+ users at a global bank with compliance and governance built in; now building a retrieval AI agent evaluated for groundedness and hallucination across 9,000+ policy documents.</td>
+            </tr>
+            <tr>
+              <td>Banking risk and control mechanisms</td>
+              <td>Led operational risk transformation for Global Markets: events down 20%, losses down 15%; shipped KYC and credit-decisioning controls into the lending platform.</td>
+            </tr>
+            <tr>
+              <td>Sharp focus on usability and design</td>
+              <td>Turned customer interviews and on-site usability tests into 25+ web and Android product flows; ran A/B tests that cut drop-off in the loan approval flow.</td>
+            </tr>
+            <tr>
+              <td>Analytical, data-driven decisions</td>
+              <td>Work in SQL, Python, Power BI, and Tableau; shipped a real-time reporting dashboard that cut manual reporting 40+ hours a week; built a Budget vs Actual analytics layer that cut spend 30%.</td>
+            </tr>
+            <tr>
+              <td>Product Owner and Agile delivery</td>
+              <td>Professional Scrum Product Owner (PSPO I); owned backlogs, specs, and acceptance criteria across squads.</td>
+            </tr>
+            <tr>
+              <td>Relationship building with internal and external partners</td>
+              <td>Ran a firm-wide market-data sourcing program connecting directly to Tradeweb, replacing Refinitiv distribution, for $700K in annual savings.</td>
+            </tr>
+            <tr>
+              <td>BA/BS required; MBA preferred</td>
+              <td>BE in Computer Engineering, MBA in Finance, and an MS in Information Management (expected June 2026).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-tag">Digital Banking Product Owner pitch &middot; Morgan Stanley &amp; E*TRADE</p>
+    <div class="foot-links">
+      <a href="mailto:mayuresh33@live.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        mayuresh33@live.com
+      </a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg>
+        linkedin.com/in/mayureshmore
+      </a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/mayuresh747
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll (enhancement only; content visible without JS) */
+  if(!reduce && 'IntersectionObserver' in window){
+    document.body.classList.add('js-reveal');
+    var revs = document.querySelectorAll('.reveal');
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    revs.forEach(function(el){ ro.observe(el); });
+    /* belt-and-suspenders: never leave content hidden for no-scroll / capture / print tools */
+    var revealAll = function(){ revs.forEach(function(el){ el.classList.add('in'); ro.unobserve(el); }); };
+    setTimeout(revealAll, 700);
+    window.addEventListener('load', revealAll);
+  }
+
+  /* scroll-spy for the desktop rail */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  if(links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+    var current = null;
+    function setCurrent(id){
+      if(current === id) return;
+      current = id;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      if(map[id]) map[id].setAttribute('aria-current','true');
+    }
+    var spy = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; });
+      if(visible.length){
+        visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+        setCurrent(visible[0].target.id);
+      }
+    }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
