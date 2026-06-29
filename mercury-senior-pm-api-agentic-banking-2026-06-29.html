@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More for Senior PM, API and Agentic Banking at Mercury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f7f5ef;
+    --paper-2: #fffefb;
+    --card: #fbfaf5;
+    --ink: #1c2522;
+    --ink-soft: #3a4742;
+    --ink-faint: #7d8a83;
+    --line: #e0ddd1;
+    --line-soft: #ebe8de;
+    --accent: #0f6b58;
+    --accent-deep: #0a4a3d;
+    --accent-soft: #e3efe9;
+    --amber: #b06a18;
+    --amber-soft: #f5ead6;
+    --display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --body: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --wrap: 1140px;
+    --rail-w: 200px;
+    --rail-gap: 56px;
+    --pad-x: 28px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(15,107,88,0.05), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(176,106,24,0.045), transparent 38%);
+    background-attachment: fixed;
+  }
+
+  /* ---------- skip link ---------- */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 1000;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 0 0 8px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  a { color: var(--accent); }
+
+  /* subtle source citation links */
+  .src {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(125,138,131,0.45);
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .src:hover, .src:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  :focus-visible {
+    outline: 2.5px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 64px var(--pad-x) 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1.name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5vw, 3.05rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  .role-line {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2.2vw, 1.32rem);
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    max-width: 40ch;
+  }
+  .prepared {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+
+  /* ---------- mobile contents ---------- */
+  details.toc-mobile {
+    max-width: var(--wrap);
+    margin: 8px auto 0;
+    padding: 0 var(--pad-x);
+    display: none;
+  }
+  details.toc-mobile > summary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  details.toc-mobile > summary::-webkit-details-marker { display: none; }
+  details.toc-mobile > summary::after {
+    content: "+";
+    font-family: var(--mono);
+    font-size: 16px;
+  }
+  details.toc-mobile[open] > summary::after { content: "\2212"; }
+  details.toc-mobile ol {
+    list-style: none;
+    margin: 0;
+    padding: 14px 0 8px;
+    columns: 2;
+    column-gap: 24px;
+  }
+  details.toc-mobile li { margin-bottom: 10px; break-inside: avoid; }
+  details.toc-mobile a {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  /* ---------- two-column grid ---------- */
+  .layout {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 28px var(--pad-x) 0;
+    display: grid;
+    grid-template-columns: var(--rail-w) 1fr;
+    column-gap: var(--rail-gap);
+    align-items: start;
+  }
+
+  /* ---------- left rail nav ---------- */
+  nav.rail {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+  }
+  nav.rail .rail-head {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  nav.rail ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: nav;
+  }
+  nav.rail li { margin: 0; }
+  nav.rail a {
+    counter-increment: nav;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 7px 0 7px 12px;
+    border-left: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+    line-height: 1.3;
+  }
+  nav.rail a::before {
+    content: counter(nav, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    opacity: 0.7;
+    font-weight: 500;
+  }
+  nav.rail a:hover { color: var(--ink); }
+  nav.rail a[aria-current="true"] {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  nav.rail a[aria-current="true"]::before { color: var(--accent); opacity: 1; }
+
+  /* ---------- content column ---------- */
+  main.content { min-width: 0; max-width: 720px; }
+
+  section { padding: 40px 0; border-top: 1px solid var(--line-soft); }
+  section:first-of-type { border-top: none; padding-top: 4px; }
+
+  .kicker {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  h2.kicker { line-height: 1.2; }
+
+  .lede {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.7vw, 1.72rem);
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+
+  p { margin: 0 0 18px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  .content h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.06rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 30px 0 12px;
+  }
+
+  ul.clean, ol.clean { margin: 0 0 18px; padding: 0; list-style: none; }
+  ul.clean li, ol.clean li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 14px;
+  }
+  ul.clean li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  ol.clean { counter-reset: ci; }
+  ol.clean li { counter-increment: ci; }
+  ol.clean li::before {
+    content: counter(ci);
+    position: absolute;
+    left: 0;
+    top: 0.18em;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    width: 18px;
+  }
+
+  /* ---------- callout / definitions ---------- */
+  .defs {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .defs dl { margin: 0; display: grid; gap: 12px; }
+  .defs dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+  .defs dd { margin: 4px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
+
+  /* ---------- JTBD quote ---------- */
+  .jtbd {
+    border-left: 3px solid var(--accent);
+    background: linear-gradient(90deg, var(--accent-soft), transparent 85%);
+    padding: 14px 20px;
+    margin: 10px 0 24px;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .role-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent-deep);
+    font-style: normal;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 4px 0 22px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    min-width: 540px;
+  }
+  .fit-table table { min-width: 460px; }
+  thead th {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1.5px solid var(--line);
+    background: var(--card);
+    vertical-align: bottom;
+  }
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { color: var(--ink); }
+  td .init { font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: center; white-space: nowrap; }
+  thead th.num { text-align: center; }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 4px 0 22px;
+  }
+  .stats .stat { background: var(--paper-2); padding: 18px 16px; }
+  .stats .stat .v {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--accent-deep);
+    line-height: 1;
+  }
+  .stats .stat .k {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-top: 7px;
+    line-height: 1.35;
+  }
+
+  /* ---------- diagram figures ---------- */
+  figure.diagram {
+    margin: 6px 0 14px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 20px 18px;
+  }
+  figure.diagram svg { width: 100%; height: auto; display: block; }
+  figure.diagram figcaption {
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    margin-top: 14px;
+    line-height: 1.45;
+    font-style: italic;
+  }
+  .node-rect { fill: var(--paper); stroke: var(--accent); stroke-width: 1.5; }
+  .node-rect.amber { fill: var(--amber-soft); stroke: var(--amber); }
+  .node-rect.dark { fill: var(--accent-deep); stroke: var(--accent-deep); }
+  .node-rect.deep { fill: var(--accent-soft); stroke: var(--accent); }
+  .diamond { fill: var(--amber-soft); stroke: var(--amber); stroke-width: 1.5; }
+  .node-txt { font-family: var(--display); font-size: 13px; font-weight: 500; fill: var(--ink); }
+  .node-txt.on-dark { fill: #f7f5ef; }
+  .node-txt.small { font-size: 11.5px; }
+  .edge { fill: none; stroke: var(--ink-faint); stroke-width: 1.5; }
+  .edge-label { font-family: var(--mono); font-size: 10.5px; fill: var(--ink-faint); font-weight: 500; }
+  .ns-node { fill: var(--accent-deep); }
+  .ns-txt { font-family: var(--display); font-size: 13px; font-weight: 600; fill: #f7f5ef; }
+  .lever-rect { fill: var(--paper); stroke: var(--accent); stroke-width: 1.4; }
+  .guard-rect { fill: var(--amber-soft); stroke: var(--amber); stroke-width: 1.4; }
+
+  /* ---------- impact cards ---------- */
+  .impact-grid { display: grid; gap: 14px; margin: 4px 0 0; }
+  .impact-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .impact-card h3 { margin: 0 0 6px; font-size: 1rem; }
+  .impact-card p { margin: 0; font-size: 15.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ---------- timeline 30/60/90 ---------- */
+  .timeline { display: grid; gap: 0; margin: 4px 0 0; }
+  .phase {
+    position: relative;
+    padding: 0 0 26px 30px;
+    border-left: 2px solid var(--line);
+  }
+  .phase:last-child { padding-bottom: 0; }
+  .phase::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+  }
+  .phase .ph-day {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+  .phase h3 { margin: 4px 0 10px; font-size: 1.04rem; }
+  .phase ul.clean { margin-bottom: 0; }
+  .phase ul.clean li { font-size: 15.5px; margin-bottom: 9px; padding-left: 22px; }
+  .phase ul.clean li::before { width: 5px; height: 5px; left: 3px; top: 0.6em; }
+
+  /* ---------- questions ---------- */
+  ol.questions { margin: 4px 0 0; padding: 0; list-style: none; counter-reset: q; }
+  ol.questions li {
+    counter-increment: q;
+    position: relative;
+    padding: 16px 0 16px 44px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  ol.questions li:last-child { border-bottom: none; }
+  ol.questions li::before {
+    content: "Q" counter(q);
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ---------- fit intro ---------- */
+  .fit-intro {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .fit-intro strong { color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer.site {
+    border-top: 1px solid var(--line);
+    margin-top: 32px;
+    padding: 38px var(--pad-x) 56px;
+  }
+  .footer-inner { max-width: var(--wrap); margin: 0 auto; }
+  .footer-name {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .contact a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .contact a:hover, .contact a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .footer-sources {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    line-height: 1.7;
+  }
+  .footer-sources a { color: var(--ink-faint); }
+
+  /* ---------- reveal (progressive enhancement) ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-on .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .js-on .reveal.in { opacity: 1; transform: none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (min-width: 881px) {
+    /* align masthead + footer + mobile-toc holder with the content column (past the rail) */
+    header.masthead, .footer-inner {
+      padding-left: calc(var(--pad-x) + var(--rail-w) + var(--rail-gap));
+    }
+  }
+
+  @media (max-width: 880px) {
+    :root { --pad-x: 22px; }
+    body { font-size: 17px; }
+    .layout { grid-template-columns: 1fr; padding-top: 8px; }
+    nav.rail { display: none; }
+    details.toc-mobile { display: block; }
+    main.content { max-width: 100%; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    header.masthead { padding-top: 44px; }
+  }
+
+  @media (max-width: 600px) {
+    figure.diagram { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 18px 14px; }
+    figure.diagram svg { min-width: 520px; }
+    figure.diagram.tall svg { min-width: 480px; }
+    .stats .stat .v { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <p class="eyebrow">Pitch for Mercury</p>
+  <h1 class="name">Mayuresh More</h1>
+  <p class="role-line">How I would solve the API and agentic banking problem for the Senior Product Manager role at Mercury.</p>
+  <p class="prepared">Prepared June 2026</p>
+</header>
+
+<!-- mobile contents -->
+<details class="toc-mobile">
+  <summary>Contents</summary>
+  <ol>
+    <li><a href="#bet">The bet</a></li>
+    <li><a href="#problem">The problem</a></li>
+    <li><a href="#who">Who it is for</a></li>
+    <li><a href="#priority">Why this problem</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#mvp">What I'd ship first</a></li>
+    <li><a href="#metrics">Metrics</a></li>
+    <li><a href="#impact">Business impact</a></li>
+    <li><a href="#plan">30/60/90</a></li>
+    <li><a href="#risks">Risks</a></li>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#fit">Why me</a></li>
+  </ol>
+</details>
+
+<div class="layout">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#who">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#impact">Business impact</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main class="content" id="main-content">
+
+    <!-- ============ THE BET ============ -->
+    <section id="bet" class="reveal">
+      <h2 class="kicker">The bet</h2>
+      <p class="lede">Mercury's API works, but it is mostly read-only and gated. The unlock is not more endpoints. It is a trust layer that lets a third-party AI agent safely move money on a customer's behalf.</p>
+      <p>AI agents can look at an account through the read-only MCP server but cannot move money. Write actions sit behind a static IP allowlist, and third-party OAuth needs manual approval (<a class="src" href="https://docs.mercury.com/docs/what-is-mercury-mcp" target="_blank" rel="noopener">Mercury MCP docs</a>). I would build an agent authorization model, expose it first through the API and CLI, and only later through the MCP. Get the trust layer right and Mercury owns the part of the agent economy Stripe and Visa cannot: agent-to-bank, the source of funds.</p>
+
+      <div class="defs">
+        <dl>
+          <dt>API</dt>
+          <dd>The programmatic doorway that lets software talk to Mercury instead of a person clicking buttons.</dd>
+          <dt>MCP (Model Context Protocol)</dt>
+          <dd>A standard way for AI tools like Claude and ChatGPT to connect to a service.</dd>
+          <dt>CLI</dt>
+          <dd>A command-line tool developers run in a terminal.</dd>
+          <dt>Write action</dt>
+          <dd>Anything that changes state, like sending a payment, versus a read that only looks.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <section id="problem" class="reveal">
+      <h2 class="kicker">The problem</h2>
+      <p>Today the API is described in the role itself as "niche read-heavy usage." The reason is structural, not a lack of interest. Three groups hurt: developers who want to automate their own accounts, software vendors who want to build banking into their product for many Mercury customers at once, and AI agents that can read an account but cannot act on it.</p>
+
+      <h3>Why write usage stays niche</h3>
+      <ul class="clean">
+        <li><strong>The MCP server is read-only and in beta.</strong> An agent can see balances and transactions, but it cannot pay an invoice or issue a card (<a class="src" href="https://www.openbankingtracker.com/banks-with-mcp-servers" target="_blank" rel="noopener">OpenBanking Tracker</a>).</li>
+        <li><strong>The write API requires a static IP allowlist.</strong> Cloud-native apps and agent runtimes get a different IP every run, so they are locked out by design.</li>
+        <li><strong>OAuth approval is manual and case-by-case.</strong> That throttles the third-party developer ecosystem at the door.</li>
+      </ul>
+
+      <h3>The caution is right, but it is now the ceiling</h3>
+      <p>Mercury's caution is correct for building trust early. Command, its new AI assistant, routes every money movement through a confirmation step and never passes card numbers or SSNs to the model (<a class="src" href="https://mercury.com/blog/introducing-mercury-command" target="_blank" rel="noopener">Mercury blog</a>). That is the right conservative baseline. But human-in-the-loop confirmation on a first-party assistant does not give an outside developer or an autonomous agent a safe path to act.</p>
+
+      <h3>What it costs the business</h3>
+      <p>While Mercury stays read-only, competitors chasing the same startup customers are shipping write-capable agentic surfaces. Ramp's AI assistant grew from 275 to 2,500-plus businesses in months, and 62% of that usage is completion work like coding transactions and approving requests, not just queries (<a class="src" href="https://ramp.com/blog/ramp-customers-are-running-month-end-with-ai-assistants" target="_blank" rel="noopener">Ramp blog</a>). Brex shipped a two-way ERP-sync accounting API in January 2026. If a technical founder can do more through a competitor's API, developer-led acquisition leaks away for the same audience Mercury already serves.</p>
+    </section>
+
+    <!-- ============ WHO IT IS FOR ============ -->
+    <section id="who" class="reveal">
+      <h2 class="kicker">Who it is for</h2>
+      <p>A job to be done describes the job a user hires a product to do, in the form: when [situation], I want to [motivation], so I can [outcome].</p>
+
+      <div class="jtbd">
+        <span class="role-tag">Primary user: the builder</span>
+        When I am running my company's finances in code or with an AI agent, I want to let my software move money and manage accounts safely, so I can stop doing banking operations by hand.
+      </div>
+
+      <div class="jtbd">
+        <span class="role-tag">Secondary user: the third-party software vendor</span>
+        When I build banking features into my product, I want one integration that works across all my Mercury-using customers without a manual approval per customer, so I can ship and scale.
+      </div>
+
+      <h3>The buyer is not always the user</h3>
+      <p>At a startup, the founder or finance owner approves connecting an agent and sets the limits. They carry the risk if an agent sends a wrong payment. So the emotional job matters as much as the functional one: the buyer needs to feel in control and able to prove, after the fact, exactly what every agent did and under whose authority. The functional job is automation. The job that drives adoption is trust.</p>
+      <p>This maps directly to Mercury's own design choice in Command: permissions, approval rules, daily limits, and spend controls all carry over automatically (<a class="src" href="https://mercury.com/blog/introducing-mercury-command" target="_blank" rel="noopener">Mercury blog</a>). The platform version of that is the product to build.</p>
+    </section>
+
+    <!-- ============ WHY THIS PROBLEM (RICE) ============ -->
+    <section id="priority" class="reveal">
+      <h2 class="kicker">Why this problem</h2>
+      <p>RICE scores work on Reach times Impact times Confidence, divided by Effort, so every candidate is judged on the same scale. This is a directional read to show the reasoning, not a claim on Mercury's internal numbers.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Initiative</th>
+              <th class="num">Reach</th>
+              <th class="num">Impact</th>
+              <th class="num">Conf.</th>
+              <th class="num">Effort</th>
+              <th>Why this score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="init">Agent authorization layer</span>scoped tokens, agent identity, audit trail</td>
+              <td class="num">Med to High</td>
+              <td class="num">3</td>
+              <td class="num">80%</td>
+              <td class="num">High</td>
+              <td>Every other agentic feature depends on it. It is the spine, so it stays in scope regardless of raw score.</td>
+            </tr>
+            <tr>
+              <td><span class="init">Self-serve OAuth and developer portal</span></td>
+              <td class="num">High</td>
+              <td class="num">2</td>
+              <td class="num">80%</td>
+              <td class="num">Med</td>
+              <td>Removes the manual-approval bottleneck that caps third-party adoption.</td>
+            </tr>
+            <tr>
+              <td><span class="init">Write actions on MCP</span></td>
+              <td class="num">Med</td>
+              <td class="num">3</td>
+              <td class="num">50%</td>
+              <td class="num">High</td>
+              <td>Highest value, lowest confidence. Unsafe until the authorization layer exists. Sequence it after, not first.</td>
+            </tr>
+            <tr>
+              <td><span class="init">More read endpoints and data coverage</span></td>
+              <td class="num">High</td>
+              <td class="num">0.5</td>
+              <td class="num">100%</td>
+              <td class="num">Low</td>
+              <td>Easy and safe, but it deepens read-heavy usage. It does not change the platform story.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The authorization layer is a dependency the whole agentic roadmap consumes, so it earns priority even though its near-term reach is modest. Self-serve OAuth is the highest-leverage adoption fix. Write-on-MCP is the prize, but its confidence is low until the trust layer is real, so it is sequenced, not skipped. This matches what the role names: not "ship more API," but move the platform from read-heavy to customer-buildable, and own the agentic direction.</p>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section id="approach" class="reveal">
+      <h2 class="kicker">Approach</h2>
+      <p>Three directions. I would run cheap tests before betting the roadmap on any one.</p>
+
+      <h3>Hypothesis 1: the blocker is authorization, not endpoints</h3>
+      <p>Write usage is niche because there is no safe model for delegated, revocable, auditable agent action, not because of a missing endpoint. <strong>Test:</strong> interview the developers and vendors already pushing against the IP allowlist and OAuth queue. If their asks cluster on "let my agent act safely and let me prove what it did," authorization is the wedge.</p>
+
+      <h3>Hypothesis 2: Mercury's wedge is agent-to-bank, not agent-to-merchant</h3>
+      <p>Stripe and Visa are building rails for agents to pay merchants (<a class="src" href="https://stripe.com/newsroom/news/agentic-commerce-suite" target="_blank" rel="noopener">Stripe newsroom</a>, <a class="src" href="https://www.visa.com/en-us/solutions/intelligent-commerce" target="_blank" rel="noopener">Visa Intelligent Commerce</a>). Mercury sits on the other side, the source of funds. Owning the bank-side authorization (which agent, on whose authority, within what limits) is defensible and distinct. <strong>Test:</strong> map where Mercury's data and money movement plug into the emerging agent protocols, and decide which to support rather than defaulting to a pass-through provider owning the connection.</p>
+
+      <h3>Hypothesis 3: phase the roadmap on the bank charter</h3>
+      <p>Mercury has OCC conditional approval for a national bank charter, with FDIC and Federal Reserve sign-off still pending (<a class="src" href="https://www.bankingdive.com/news/mercury-nabs-conditional-occ-charter/818674/" target="_blank" rel="noopener">Banking Dive</a>). What the API can expose changes between today's partner-bank setup and a future where Mercury runs its own rails. <strong>Test:</strong> build the roadmap in two phases so the team is not blocked on regulatory timing, and so charter capabilities slot in when they land.</p>
+
+      <p>How I would decide: hypothesis 1 is testable in weeks through customer conversations and the existing OAuth and allowlist backlog. It gates the rest, so I would validate it first.</p>
+    </section>
+
+    <!-- ============ MVP ============ -->
+    <section id="mvp" class="reveal">
+      <h2 class="kicker">What I'd ship first</h2>
+      <p class="lede">A scoped, revocable, fully-audited agent payment, run by a small set of design partners through the API and CLI, not the MCP yet.</p>
+      <p>The biggest assumption is that an outside agent can be allowed to move money safely. The cheapest honest test is to let a few trusted developers do exactly that, with hard limits and a complete record, and watch what breaks. The first slice would include:</p>
+
+      <ul class="clean">
+        <li><strong>A scoped agent token.</strong> An identity that is clearly an agent, tied to a human who authorized it, with a spend limit and an expiry the customer sets.</li>
+        <li><strong>A confirmation policy the customer chooses.</strong> Auto-approve under a threshold, human confirmation above it. This reuses the carry-over-permissions model Command already established.</li>
+        <li><strong>A full audit trail.</strong> Every agent action recorded with which agent, whose authority, what limit, and the outcome, so the buyer can prove what happened.</li>
+        <li><strong>One real write path.</strong> ACH or wire payment initiation, since payments are the action with the clearest demand and the clearest risk.</li>
+      </ul>
+
+      <figure class="diagram" role="img" aria-label="Flow of a scoped agent payment. The customer authorizes an agent, which gets a scoped token with a limit and expiry. An action under the limit executes through a deterministic payment service. An action over the limit requires human confirmation first. Every outcome is written to an audit trail recording the agent, the authority, the limit, and the outcome.">
+        <svg viewBox="0 0 760 224" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#7d8a83"></path>
+            </marker>
+          </defs>
+          <!-- A: authorize -->
+          <rect class="node-rect deep" x="6" y="80" width="120" height="58" rx="9"></rect>
+          <text class="node-txt" x="66" y="104" text-anchor="middle">Customer</text>
+          <text class="node-txt" x="66" y="122" text-anchor="middle">authorizes agent</text>
+          <!-- B: token -->
+          <rect class="node-rect" x="166" y="80" width="124" height="58" rx="9"></rect>
+          <text class="node-txt small" x="228" y="102" text-anchor="middle">Scoped agent token</text>
+          <text class="node-txt small" x="228" y="120" text-anchor="middle">limit + expiry</text>
+          <!-- C: decision diamond -->
+          <polygon class="diamond" points="382,109 432,79 482,109 432,139"></polygon>
+          <text class="node-txt small" x="432" y="105" text-anchor="middle">Under</text>
+          <text class="node-txt small" x="432" y="120" text-anchor="middle">limit?</text>
+          <!-- D: execute -->
+          <rect class="node-rect dark" x="566" y="20" width="188" height="60" rx="9"></rect>
+          <text class="node-txt on-dark small" x="660" y="44" text-anchor="middle">Execute via deterministic</text>
+          <text class="node-txt on-dark small" x="660" y="62" text-anchor="middle">payment service</text>
+          <!-- E: human confirm -->
+          <rect class="node-rect amber" x="566" y="104" width="188" height="44" rx="9"></rect>
+          <text class="node-txt small" x="660" y="130" text-anchor="middle">Human confirmation required</text>
+          <!-- F: audit -->
+          <rect class="node-rect" x="566" y="170" width="188" height="46" rx="9"></rect>
+          <text class="node-txt small" x="660" y="190" text-anchor="middle">Audit trail: agent, authority,</text>
+          <text class="node-txt small" x="660" y="206" text-anchor="middle">limit, outcome</text>
+
+          <!-- edges -->
+          <path class="edge" d="M126,109 L160,109" marker-end="url(#arrow)"></path>
+          <path class="edge" d="M290,109 L376,109" marker-end="url(#arrow)"></path>
+          <path class="edge" d="M482,100 L524,100 L524,50 L560,50" marker-end="url(#arrow)"></path>
+          <text class="edge-label" x="500" y="74">Yes</text>
+          <path class="edge" d="M482,120 L524,120 L524,126 L560,126" marker-end="url(#arrow)"></path>
+          <text class="edge-label" x="490" y="142">No</text>
+          <path class="edge" d="M660,148 L660,164" marker-end="url(#arrow)"></path>
+          <path class="edge" d="M660,80 L660,92 L546,92 L546,193 L560,193" marker-end="url(#arrow)"></path>
+        </svg>
+        <figcaption>The AI decides intent. A separate non-AI service actually moves the money. Every action ends in the audit trail.</figcaption>
+      </figure>
+
+      <h3>What it deliberately leaves out, and why</h3>
+      <ul class="clean">
+        <li>No MCP write access yet. Low confidence until the token and audit model is proven on the API path.</li>
+        <li>No card issuance or other write actions in v1. Payments first, by RICE.</li>
+        <li>No self-serve at large scale yet. Design partners first, so failures are contained and observed before the open ecosystem gets the keys.</li>
+      </ul>
+    </section>
+
+    <!-- ============ METRICS ============ -->
+    <section id="metrics" class="reveal">
+      <h2 class="kicker">Metrics</h2>
+      <p>The North Star is the single number that best proxies real value: it should rise only when a customer genuinely won, move before revenue, and be something the team can influence.</p>
+
+      <h3>North Star</h3>
+      <p><strong>Weekly programmatic write actions successfully completed by authorized agents and integrations.</strong> Real money movement and account changes, not read queries. It rises only when builders trust the platform enough to let software act, which is the whole bet.</p>
+
+      <figure class="diagram tall" role="img" aria-label="Metrics tree. The North Star is weekly authorized programmatic write actions. Three input levers feed it: time to first write from signup, self-serve OAuth integrations activated per month, and design partners renewing scoped agent tokens. Two guardrails sit below: the agent-initiated fraud or error rate, and unauthorized or over-limit action attempts that the system blocks.">
+        <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#7d8a83"></path>
+            </marker>
+          </defs>
+          <!-- levers row -->
+          <rect class="lever-rect" x="8" y="14" width="222" height="60" rx="9"></rect>
+          <text class="node-txt small" x="119" y="38" text-anchor="middle">Time-to-first-write</text>
+          <text class="node-txt small" x="119" y="56" text-anchor="middle">signup to first write action</text>
+
+          <rect class="lever-rect" x="269" y="14" width="222" height="60" rx="9"></rect>
+          <text class="node-txt small" x="380" y="38" text-anchor="middle">Self-serve OAuth</text>
+          <text class="node-txt small" x="380" y="56" text-anchor="middle">integrations per month</text>
+
+          <rect class="lever-rect" x="530" y="14" width="222" height="60" rx="9"></rect>
+          <text class="node-txt small" x="641" y="38" text-anchor="middle">Design partners renewing</text>
+          <text class="node-txt small" x="641" y="56" text-anchor="middle">scoped agent tokens</text>
+
+          <!-- north star -->
+          <rect class="ns-node" x="190" y="135" width="380" height="62" rx="11"></rect>
+          <text class="ns-txt" x="380" y="161" text-anchor="middle">North Star</text>
+          <text class="ns-txt" x="380" y="181" text-anchor="middle" style="font-size:11.5px;font-weight:500;">weekly authorized programmatic write actions</text>
+
+          <!-- guardrails -->
+          <rect class="guard-rect" x="100" y="258" width="252" height="60" rx="9"></rect>
+          <text class="node-txt small" x="226" y="282" text-anchor="middle">Guardrail: agent-initiated</text>
+          <text class="node-txt small" x="226" y="300" text-anchor="middle">fraud / error rate</text>
+
+          <rect class="guard-rect" x="408" y="258" width="252" height="60" rx="9"></rect>
+          <text class="node-txt small" x="534" y="282" text-anchor="middle">Guardrail: over-limit attempts</text>
+          <text class="node-txt small" x="534" y="300" text-anchor="middle">correctly blocked</text>
+
+          <!-- edges levers -> NS -->
+          <path class="edge" d="M119,74 L119,110 L300,110 L300,133" marker-end="url(#arrow2)"></path>
+          <path class="edge" d="M380,74 L380,133" marker-end="url(#arrow2)"></path>
+          <path class="edge" d="M641,74 L641,110 L460,110 L460,133" marker-end="url(#arrow2)"></path>
+          <!-- edges NS -> guardrails -->
+          <path class="edge" d="M340,197 L340,225 L226,225 L226,256" marker-end="url(#arrow2)"></path>
+          <path class="edge" d="M420,197 L420,225 L534,225 L534,256" marker-end="url(#arrow2)"></path>
+        </svg>
+        <figcaption>Three input levers feed the North Star. Two guardrails keep trust intact as write access opens.</figcaption>
+      </figure>
+
+      <h3>Guardrail and anti-metrics</h3>
+      <p>The fraud or erroneous-payment rate on agent-initiated actions must stay at or below the human-initiated baseline, or the whole platform loses trust. I would also watch unauthorized or over-limit attempts that the system correctly blocked, as a sign the controls work. <strong>The anti-metric to refuse to chase: raw API call volume.</strong> More read calls can look like growth while the read-heavy problem gets worse. The point is authorized write actions, not traffic.</p>
+    </section>
+
+    <!-- ============ BUSINESS IMPACT ============ -->
+    <section id="impact" class="reveal">
+      <h2 class="kicker">Business impact</h2>
+      <p>Mercury reports roughly $650M in annualized revenue and 300,000-plus customers (<a class="src" href="https://www.bankingdive.com/news/mercury-nabs-conditional-occ-charter/818674/" target="_blank" rel="noopener">Banking Dive</a>), $248B in 2025 transaction volume up 59% year over year (<a class="src" href="https://mercury.com/blog/annual-letter-2025" target="_blank" rel="noopener">Mercury annual letter</a>), four straight years of GAAP profitability, and about 1 in 3 U.S. startups (<a class="src" href="https://mercury.com/blog/series-d-announcement" target="_blank" rel="noopener">Mercury Series D</a>). Framed as hypotheses, here is how this work would move those numbers.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="v">$650M</div><div class="k">annualized revenue</div></div>
+        <div class="stat"><div class="v">$248B</div><div class="k">2025 volume, up 59%</div></div>
+        <div class="stat"><div class="v">300K+</div><div class="k">customers, ~1 in 3 US startups</div></div>
+        <div class="stat"><div class="v">4 yrs</div><div class="k">GAAP profitable</div></div>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <h3>Retention and LTV</h3>
+          <p>API customers embed deeper and switch less. If a customer's software and agents run on Mercury's write API, the cost of leaving rises. This work should raise retention among technical customers, the segment Ramp and Brex contest hardest.</p>
+        </div>
+        <div class="impact-card">
+          <h3>Acquisition</h3>
+          <p>A self-serve, write-capable, agent-ready API is a developer-led acquisition channel. Mercury already owns the audience; this opens a door competitors are walking through.</p>
+        </div>
+        <div class="impact-card">
+          <h3>Volume</h3>
+          <p>Programmatic and agent-initiated payments add to the $248B line by automating money movement that is manual today. The Central payroll acquisition adds a large new write surface, since payroll is about 20% of Mercury customers' total spend (<a class="src" href="https://mercury.com/blog/mercury-acquires-centralhq" target="_blank" rel="noopener">Mercury blog</a>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 30/60/90 ============ -->
+    <section id="plan" class="reveal">
+      <h2 class="kicker">30 / 60 / 90</h2>
+      <div class="timeline">
+        <div class="phase">
+          <span class="ph-day">Days 0 to 30</span>
+          <h3>Listen and find the real constraints</h3>
+          <ul class="clean">
+            <li>Interview the developers and vendors already blocked by the IP allowlist and the OAuth approval queue. What can they not build, and why.</li>
+            <li>Pull the real usage mix: how many of the 300K customers use the API, read versus write, and how big the OAuth backlog is.</li>
+            <li>Sit with engineering on the authorization architecture and the deterministic-execution boundary already built for Command.</li>
+            <li>Map Mercury's position against the agent protocols (Trusted Agent Protocol, Machine Payments Protocol, and others) so a protocol choice is informed, not defaulted.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-day">Days 30 to 60</span>
+          <h3>A quick win and a sharpened problem</h3>
+          <ul class="clean">
+            <li>Ship a fast, safe win that does not need the full trust layer: self-serve OAuth for a defined set of read scopes, removing the manual-approval bottleneck for low-risk integrations.</li>
+            <li>Turn the interviews into an evidence-backed problem statement and a two-phase roadmap (partner-bank now, charter-enabled later).</li>
+            <li>Align engineering, growth, partnerships, and risk on the agent authorization model and the MVP scope.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-day">Days 60 to 90</span>
+          <h3>Ship and validate the first bet</h3>
+          <ul class="clean">
+            <li>Launch the scoped agent payment MVP with a small set of design partners, payments only, through the API and CLI.</li>
+            <li>Set the metric baseline: time-to-first-write, agent-initiated error rate, write actions per week.</li>
+            <li>Use partner results to decide the conditions under which write moves to the MCP, and propose the full roadmap.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RISKS ============ -->
+    <section id="risks" class="reveal">
+      <h2 class="kicker">Risks</h2>
+      <p>Open questions about the proposed work, and how I would test each early.</p>
+      <ul class="clean">
+        <li><strong>Liability and authorization model.</strong> If an authorized agent sends a wrong payment, who carries it, and does the model survive legal and risk review? 65% of financial-services leaders say agentic payments need an entirely new authorization model, and 85% expect agents to execute payments autonomously (<a class="src" href="https://cloudsecurityalliance.org/blog/2026/06/23/is-financial-services-ready-for-agentic-payments" target="_blank" rel="noopener">Cloud Security Alliance</a>). Validate with risk and legal in week one, before any code.</li>
+        <li><strong>Demand shape.</strong> I am assuming the top ask is delegated write, not more read coverage. Validate by interviewing blocked developers in the first 30 days; if the asks cluster elsewhere, reprioritize.</li>
+        <li><strong>Protocol bet.</strong> Backing the wrong agent protocol wastes engineering. Validate by mapping where Mercury's source-of-funds role fits each protocol before committing.</li>
+        <li><strong>Charter timing.</strong> The roadmap cannot stall on FDIC and Fed approval. Validate the two-phase split so partner-bank work ships now and charter capabilities slot in when approved.</li>
+        <li><strong>Trust regression.</strong> Opening write access could raise fraud or errors. Validate by holding the agent-initiated error rate at or below the human baseline as a launch gate, contained to design partners first.</li>
+      </ul>
+    </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section id="questions" class="reveal">
+      <h2 class="kicker">Questions</h2>
+      <p>The first things I would ask the team.</p>
+      <ol class="questions">
+        <li>Of the 300K customers, how many use the API today, and what is the read-versus-write split? That sizes the gap precisely.</li>
+        <li>How large is the OAuth approval backlog, and what is the rejection rate? That tells me how much adoption the manual gate is costing.</li>
+        <li>What internal red lines (fraud rate, authorization model, liability framework) must be crossed before write actions reach the MCP?</li>
+        <li>Which agent authorization protocol, if any, has leadership leaned toward, and why?</li>
+        <li>Will payroll, via the Central acquisition, be exposed through the API, or stay UI-only? That is a major write-surface decision.</li>
+        <li>After the charter lands, which API capabilities become possible that the current partner-bank setup cannot offer?</li>
+      </ol>
+    </section>
+
+    <!-- ============ WHY ME ============ -->
+    <section id="fit" class="reveal">
+      <h2 class="kicker">Why me</h2>
+      <p class="fit-intro">I am a product manager with <strong>6-plus years building in technology, finance, and AI.</strong> I hold a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering. Most of my work has been close to this role's center: building API integrations in banking, rolling out AI to thousands of users with governance baked in, and right now building an AI agent grounded in trustworthy retrieval. That is the same problem Mercury is solving, an AI system that has to act safely on regulated data with a clear record of what it did.</p>
+
+      <div class="table-wrap fit-table">
+        <table>
+          <thead>
+            <tr>
+              <th>What the role needs</th>
+              <th>What I have done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>API products for developers and technical users</td>
+              <td>At Lentra, I delivered API integrations with credit bureaus (CIBIL, Equifax, Experian) and partners, improving loan decision accuracy 10% and cutting manual review 35% by automating credit decisioning and KYC.</td>
+            </tr>
+            <tr>
+              <td>Take an API from niche usage to a buildable platform</td>
+              <td>I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000-plus users across 3,000-plus branches, owning roadmap, prioritization, and partner integrations.</td>
+            </tr>
+            <tr>
+              <td>Ship AI safely with governance and compliance</td>
+              <td>At Nomura, I led the rollout of an internal AI assistant to 15,000-plus users with compliance and governance features in a phased bank-wide strategy, reaching 100% policy compliance.</td>
+            </tr>
+            <tr>
+              <td>AI agents acting on trustworthy data</td>
+              <td>At UW, I am building a policy-conflict-detection AI agent across 8 regulatory bodies, owning data ingestion for 9,000-plus documents and setting quality gates for trustworthy retrieval, after evaluating 5-plus RAG platforms and 4 retrieval architectures.</td>
+            </tr>
+            <tr>
+              <td>Discovery to launch with measurable outcomes</td>
+              <td>At Nomura, I owned discovery-to-launch of a finance budgeting app, ran research with 15-plus stakeholders, scoped the MVP, and drove a 30% reduction in spend. I also led a market-data sourcing program that delivered $700K in annual savings.</td>
+            </tr>
+            <tr>
+              <td>Hands-on technical depth</td>
+              <td>I work directly in SQL, Python, and Azure AI Studio, and built 25-plus automated reporting pipelines earlier in my career. I can sit with engineering on API design and tradeoffs, not just hand off specs.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site" id="site-footer">
+  <div class="footer-inner">
+    <p class="footer-name">Mayuresh More</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+    <div class="footer-sources">
+      Sources:
+      <a class="src" href="https://www.bankingdive.com/news/mercury-nabs-conditional-occ-charter/818674/" target="_blank" rel="noopener">Banking Dive</a> &middot;
+      <a class="src" href="https://mercury.com/blog/annual-letter-2025" target="_blank" rel="noopener">Mercury annual letter</a> &middot;
+      <a class="src" href="https://mercury.com/blog/series-d-announcement" target="_blank" rel="noopener">Mercury Series D</a> &middot;
+      <a class="src" href="https://mercury.com/blog/introducing-mercury-command" target="_blank" rel="noopener">Mercury Command</a> &middot;
+      <a class="src" href="https://docs.mercury.com/docs/what-is-mercury-mcp" target="_blank" rel="noopener">Mercury MCP docs</a> &middot;
+      <a class="src" href="https://www.openbankingtracker.com/banks-with-mcp-servers" target="_blank" rel="noopener">OpenBanking Tracker</a> &middot;
+      <a class="src" href="https://ramp.com/blog/ramp-customers-are-running-month-end-with-ai-assistants" target="_blank" rel="noopener">Ramp</a> &middot;
+      <a class="src" href="https://cloudsecurityalliance.org/blog/2026/06/23/is-financial-services-ready-for-agentic-payments" target="_blank" rel="noopener">Cloud Security Alliance</a> &middot;
+      <a class="src" href="https://stripe.com/newsroom/news/agentic-commerce-suite" target="_blank" rel="noopener">Stripe</a> &middot;
+      <a class="src" href="https://www.visa.com/en-us/solutions/intelligent-commerce" target="_blank" rel="noopener">Visa Intelligent Commerce</a> &middot;
+      <a class="src" href="https://mercury.com/blog/mercury-acquires-centralhq" target="_blank" rel="noopener">Central acquisition</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+</noscript>
+
+<script>
+  (function () {
+    document.documentElement.classList.add("js-on");
+    document.body.classList.add("js-on");
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // reveal on scroll
+    var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      reveals.forEach(function (el) { el.classList.add("in"); });
+    } else {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+      reveals.forEach(function (el) { ro.observe(el); });
+
+      // defensive fallback: never leave already-visible sections stuck hidden
+      setTimeout(function () {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add("in"); }
+        });
+      }, 120);
+    }
+
+    // scroll-spy for rail nav
+    var railLinks = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main.content section"));
+
+    function setCurrent(id) {
+      railLinks.forEach(function (a) {
+        if (a.getAttribute("href") === "#" + id) { a.setAttribute("aria-current", "true"); }
+        else { a.removeAttribute("aria-current"); }
+      });
+    }
+
+    if ("IntersectionObserver" in window) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { setCurrent(e.target.id); }
+        });
+      }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+      sections.forEach(function (s) { spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
