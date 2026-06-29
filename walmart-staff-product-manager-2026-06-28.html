@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: solving the supplier-negotiation problem for the Staff Product Manager role at Walmart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f4ee;
+    --paper-2:#fffdf8;
+    --ink:#1c1b18;
+    --ink-soft:#3c3a35;
+    --ink-mute:#6b675f;
+    --ink-faint:#928d83;
+    --line:#e2dcd0;
+    --line-2:#d3ccbe;
+    --accent:#0a4d8c;
+    --accent-deep:#073961;
+    --spark:#f0b429;
+    --spark-soft:#fbe6c0;
+    --good:#1f7a4d;
+    --good-soft:#e3f1e8;
+    --warn:#b4451c;
+    --warn-soft:#f6e4db;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:32px;
+    --wrap-max:1120px;
+    --content-max:680px;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(60% 50% at 85% -5%, rgba(240,180,41,.06), transparent 70%),
+      radial-gradient(70% 60% at -5% 0%, rgba(10,77,140,.05), transparent 70%);
+  }
+  .skip-link{
+    position:absolute;left:-999px;top:0;
+    background:var(--accent);color:#fff;
+    padding:10px 16px;border-radius:6px;
+    font-family:var(--mono);font-size:14px;z-index:100;
+  }
+  .skip-link:focus{left:12px;top:12px}
+
+  a{color:var(--accent);text-underline-offset:3px}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2.5px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  /* ---------- shell ---------- */
+  .wrap{
+    position:relative;z-index:1;
+    max-width:var(--wrap-max);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead{padding:64px 0 24px}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 3px var(--spark-soft)}
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0 0 16px;
+    color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.3vw,21px);
+    line-height:1.35;
+    color:var(--ink-soft);
+    max-width:30ch;
+    margin:0 0 14px;
+  }
+  .role-line .hl{
+    color:var(--accent);
+    box-shadow:inset 0 -.42em 0 var(--spark-soft);
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.08em;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  /* ---------- contents (mobile disclosure) ---------- */
+  .toc-mobile{
+    margin:8px 0 4px;
+    border:1px solid var(--line-2);
+    border-radius:10px;
+    background:var(--paper-2);
+  }
+  .toc-mobile summary{
+    list-style:none;cursor:pointer;
+    font-family:var(--mono);
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+    padding:14px 18px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .toc-mobile summary::-webkit-details-marker{display:none}
+  .toc-mobile summary::after{content:"+";font-size:18px;color:var(--ink-faint)}
+  .toc-mobile[open] summary::after{content:"\2212"}
+  .toc-mobile ol{
+    margin:0;padding:4px 18px 16px;
+    list-style:none;
+    columns:2;column-gap:24px;
+  }
+  .toc-mobile li{margin:0 0 8px;break-inside:avoid}
+  .toc-mobile a{
+    font-family:var(--mono);font-size:13px;
+    color:var(--ink-soft);text-decoration:none;
+    display:inline-block;padding:3px 0;
+  }
+  .toc-mobile a:hover{color:var(--accent)}
+
+  /* ---------- layout grid ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    padding:8px 0 0;
+  }
+  nav.rail{display:none}
+
+  main{max-width:var(--content-max);min-width:0;width:100%}
+
+  /* ---------- sections ---------- */
+  section{
+    padding:30px 0;
+    border-top:1px solid var(--line);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:0;padding-top:14px}
+  .kicker{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:15.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 16px;
+  }
+  h2{margin:0}
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.1vw,27px);
+    line-height:1.28;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 18px;
+  }
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:17.5px;
+    letter-spacing:-.005em;
+    color:var(--ink);
+    margin:26px 0 8px;
+  }
+  p{margin:0 0 16px;color:var(--ink-soft)}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  .takeaway{
+    font-size:20px;
+    color:var(--ink);
+    margin:0 0 18px;
+  }
+  ul.clean{margin:0 0 16px;padding:0;list-style:none}
+  ul.clean li{
+    position:relative;
+    padding:0 0 0 24px;
+    margin:0 0 13px;
+    color:var(--ink-soft);
+  }
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:.62em;
+    width:7px;height:7px;
+    border:1.5px solid var(--accent);
+    border-radius:2px;
+    transform:rotate(45deg);
+  }
+  ul.clean li .lab{
+    font-family:var(--display);
+    font-weight:600;color:var(--ink);
+  }
+
+  /* citation links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line-2);
+    font-size:.86em;
+    font-style:italic;
+    display:inline-block;
+    padding:1px 0;
+    line-height:1.3;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  a.src:hover,a.src:focus-visible{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- callout ---------- */
+  .note{
+    background:var(--paper-2);
+    border:1px solid var(--line-2);
+    border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:18px 22px;
+    margin:0 0 18px;
+    font-size:18px;
+  }
+  .note .nlab{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);
+    display:block;margin:0 0 8px;
+  }
+  .note p:last-child{margin-bottom:0}
+
+  .quote{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:21px;
+    line-height:1.5;
+    color:var(--ink);
+    border-left:3px solid var(--spark);
+    padding:6px 0 6px 22px;
+    margin:0 0 18px;
+  }
+
+  /* ---------- definition chip ---------- */
+  .def{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--spark-soft);
+    color:var(--accent-deep);
+    border-radius:6px;
+    padding:3px 9px;
+    margin:0 0 14px;
+    line-height:1.5;
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:0 0 18px;
+    border:1px solid var(--line-2);
+    border-radius:12px;
+    background:var(--paper-2);
+  }
+  table{border-collapse:collapse;width:100%;min-width:540px;font-size:16px}
+  thead th{
+    font-family:var(--mono);
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);
+    text-align:left;
+    padding:13px 16px;
+    border-bottom:1.5px solid var(--line-2);
+    vertical-align:bottom;
+    background:rgba(0,0,0,.012);
+  }
+  tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-soft);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  tbody td:first-child{color:var(--ink);font-weight:500;font-family:var(--display);font-size:15px}
+  .pill{
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.04em;
+    padding:2px 8px;border-radius:20px;display:inline-block;
+    white-space:nowrap;
+  }
+  .pill.high{background:var(--good-soft);color:var(--good)}
+  .pill.med{background:var(--spark-soft);color:#8a5a08}
+  .pill.low{background:var(--warn-soft);color:var(--warn)}
+
+  /* ---------- diagrams ---------- */
+  figure.diagram{
+    margin:6px 0 18px;
+    border:1px solid var(--line-2);
+    border-radius:14px;
+    background:var(--paper-2);
+    padding:22px 18px 16px;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:14px 2px 0;
+    line-height:1.4;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto}
+
+  /* ---------- timeline (30/60/90) ---------- */
+  .phase{
+    position:relative;
+    padding:0 0 4px 28px;
+    margin:0 0 22px;
+  }
+  .phase::before{
+    content:"";position:absolute;left:5px;top:7px;bottom:-18px;width:2px;background:var(--line-2);
+  }
+  .phase:last-child::before{display:none}
+  .phase::after{
+    content:"";position:absolute;left:0;top:5px;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:2.5px solid var(--accent);
+  }
+  .phase .ptag{
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+    color:var(--accent);font-weight:500;
+    display:block;margin:0 0 6px;
+  }
+  .phase h3{margin:0 0 8px}
+
+  /* ---------- ordered Q list ---------- */
+  ol.q{margin:0;padding:0;list-style:none;counter-reset:q}
+  ol.q li{
+    counter-increment:q;
+    position:relative;
+    padding:0 0 0 40px;
+    margin:0 0 16px;
+    color:var(--ink-soft);
+  }
+  ol.q li::before{
+    content:counter(q);
+    position:absolute;left:0;top:0;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ---------- footer ---------- */
+  footer.foot{
+    border-top:1px solid var(--line);
+    margin-top:18px;
+    padding:40px 0 64px;
+  }
+  .foot .fname{
+    font-family:var(--display);font-weight:600;font-size:18px;
+    color:var(--ink);margin:0 0 6px;
+  }
+  .foot .ftag{
+    font-family:var(--body);font-size:16px;color:var(--ink-mute);margin:0 0 22px;max-width:46ch;
+  }
+  .foot .links{display:flex;flex-wrap:wrap;gap:10px 26px;margin:0}
+  .foot .links a{
+    font-family:var(--mono);font-size:13px;
+    color:var(--ink-mute);text-decoration:none;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:6px 0;
+  }
+  .foot .links a:hover{color:var(--accent)}
+  .foot .links a .ico{width:14px;height:14px;flex:none;opacity:.7}
+
+  /* ---------- reveal (enhancement only; default visible) ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .js .reveal.in{opacity:1;transform:none}
+  }
+
+  /* ---------- desktop with rail ---------- */
+  @media (min-width:920px){
+    .toc-mobile{display:none}
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout{
+      grid-template-columns:var(--rail-w) minmax(0,1fr);
+      gap:0 var(--rail-gap);
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+      max-height:calc(100vh - 64px);
+      overflow-y:auto;
+    }
+    nav.rail .rlab{
+      font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--ink-faint);
+      margin:0 0 14px;padding:0 0 0 14px;
+    }
+    nav.rail ol{margin:0;padding:0;list-style:none}
+    nav.rail li{margin:0}
+    nav.rail a{
+      display:block;
+      font-family:var(--mono);font-size:12.5px;
+      color:var(--ink-mute);text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line-2);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    nav.rail a:hover{color:var(--accent)}
+    nav.rail a[aria-current="true"]{
+      color:var(--accent);
+      border-left-color:var(--accent);
+      font-weight:600;
+    }
+  }
+
+  /* ---------- mobile diagram scroll ---------- */
+  @media (max-width:600px){
+    body{font-size:18px}
+    header.masthead{padding-top:44px}
+    figure.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    figure.diagram svg{min-width:540px}
+    .quote{font-size:19px}
+  }
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow"><span class="dot"></span>Product Strategy Memo</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="role-line">How I would solve the <span class="hl">supplier-negotiation problem</span> for the Staff Product Manager role at Walmart</p>
+    <p class="prepared">Prepared June 2026</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#who">Who it is for</a></li>
+      <li><a href="#why-this">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#impact">Business impact</a></li>
+      <li><a href="#plan">30 / 60 / 90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </details>
+
+  <div class="layout">
+    <nav class="rail" aria-label="On this page">
+      <p class="rlab">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why-this">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#impact">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal">
+        <h2 class="kicker">The bet</h2>
+        <p class="lede">Walmart already proved AI can negotiate. The open question is how much of the supplier base it can reach, and how fast.</p>
+        <p>The autonomous negotiation bot closed deals with 68% of suppliers and saved about 3% on the spend it touched <a class="src" href="https://www.pymnts.com/news/artificial-intelligence/2023/walmart-finds-75-percent-vendors-prefer-negotiating-with-chatbot/" target="_blank" rel="noopener">(PYMNTS / Bloomberg, 2023)</a>. So the bet now is not "can AI negotiate." It is reach: how much of the supplier base gets touched at all.</p>
+        <p>I would aim the team at one number: <strong>the share of supplier spend that gets an active, data-backed negotiation each year.</strong> Closing the long tail and arming merchants with negotiation intelligence is where the next large cost savings sit.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal">
+        <h2 class="kicker">The problem</h2>
+        <p class="takeaway">Most of Walmart's suppliers never get a real negotiation, because a buyer's time costs more than a small deal is worth.</p>
+        <p>Walmart buys from more than 100,000 suppliers <a class="src" href="https://hbr.org/2022/11/how-walmart-automated-supplier-negotiations" target="_blank" rel="noopener">(HBR, 2022)</a>. Human buyers cannot reach most of them, so roughly 20% sit on standard "cookie-cutter" terms that are often not negotiated <a class="src" href="https://hbr.org/2022/11/how-walmart-automated-supplier-negotiations" target="_blank" rel="noopener">(HBR, 2022)</a>. That is money left on the table, every year, by design.</p>
+        <ul class="clean">
+          <li><span class="lab">Who hurts.</span> Walmart merchants, the buyers and category managers who own supplier relationships and cost targets. They are time-poor and data-hungry, and the long tail never gets their attention.</li>
+          <li><span class="lab">What it costs.</span> At $706.41 billion in FY2026 net sales <a class="src" href="https://finance.yahoo.com/markets/stocks/articles/walmart-revenue-rises-4-7-094100979.html" target="_blank" rel="noopener">(Yahoo Finance, reporting Walmart, 2026)</a>, even a one-tenth of one percent improvement in cost of goods is enormous. The tail and the unnegotiated terms are real, recoverable dollars.</li>
+          <li><span class="lab">Root cause.</span> Negotiation is gated by human capacity. A buyer can only run so many deals at once, so low-value contracts never get touched.</li>
+          <li><span class="lab">Workarounds today.</span> Templated terms for the tail, plus the new GenAI assistant (Wally) that frees merchant time by automating data work <a class="src" href="https://corporate.walmart.com/news/2025/03/18/walmart-develops-genai-powered-assistant-for-walmart-merchants" target="_blank" rel="noopener">(Walmart, March 2025)</a>. The autonomous bot handles a slice of the tail.</li>
+          <li><span class="lab">Why they fall short.</span> The bot has been confirmed mostly on indirect spend (fleet services, shopping carts), not goods for resale <a class="src" href="https://talkinglogistics.com/2023/05/01/negotiating-with-a-chatbot-a-walmart-procurement-case-study/" target="_blank" rel="noopener">(Talking Logistics, 2023)</a>. Wally analyzes but does not drive negotiations. The wide middle, deciding which contracts to renegotiate now and giving merchants the leverage to win, is open.</li>
+        </ul>
+        <div class="note">
+          <span class="nlab">There is a clock on this</span>
+          <p>In 2025, as tariffs loomed, Walmart asked suppliers for price cuts of up to 10% per round <a class="src" href="https://www.pymnts.com/walmart/2025/walmart-reportedly-lobbying-for-supplier-price-cuts-as-tariffs-loom/" target="_blank" rel="noopener">(PYMNTS, 2025)</a>. That is exactly the high-frequency, many-supplier renegotiation human teams cannot do at speed. A tool that can find exposed contracts and act fast becomes a margin lever, not a nice-to-have.</p>
+        </div>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal">
+        <h2 class="kicker">Who it is for</h2>
+        <span class="def">JTBD = the real outcome a person hires the product to achieve, stated as a need, not a feature.</span>
+        <h3>Primary user: the merchant / buyer</h3>
+        <p class="quote">When a new cost or term opportunity appears across my supplier base, I want to know which deals are worth pursuing and walk in with the data to win them, so I spend my limited time on the negotiations that move my margin, not on chasing reports.</p>
+        <h3>The economic decision-maker: merchandising leadership</h3>
+        <p>They fund the team and own the cost-of-goods number. Their job is to hit margin targets across categories without breaking supplier relationships. They will judge this product on dollars saved, coverage expanded, and whether merchants actually trust and use it.</p>
+        <h3>Indirect user: the supplier</h3>
+        <p>Their experience shapes whether they respond and agree. The signal is good: 83% of suppliers found the AI system easy to use, and about 75% preferred negotiating with the bot over a person <a class="src" href="https://www.pymnts.com/news/artificial-intelligence/2023/walmart-finds-75-percent-vendors-prefer-negotiating-with-chatbot/" target="_blank" rel="noopener">(PYMNTS / Bloomberg, 2023)</a>. Suppliers are not the obstacle. Reach and merchant trust are.</p>
+
+        <figure class="diagram" role="img" aria-label="Value-flow diagram. Merchandising leadership funds the work and owns cost of goods, setting targets for the negotiation-intelligence and tail-automation product. The merchant decides scope and trusts or overrides the product. The product reaches suppliers at scale. Suppliers agree to terms, which produces cost savings and coverage. Those savings are reported back to leadership.">
+          <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0L10 5L0 10z" fill="#928d83"/>
+              </marker>
+            </defs>
+            <g font-family="Space Grotesk, sans-serif">
+              <!-- leadership -->
+              <rect x="8" y="98" width="150" height="54" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+              <text x="83" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">Merchandising</text>
+              <text x="83" y="137" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">leadership</text>
+              <!-- merchant -->
+              <rect x="262" y="20" width="170" height="54" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+              <text x="347" y="42" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">Merchant / buyer</text>
+              <text x="347" y="59" text-anchor="middle" font-size="11.5" fill="#3c3a35">picks and runs deals</text>
+              <!-- product -->
+              <rect x="262" y="98" width="170" height="54" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.8"/>
+              <text x="347" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Negotiation</text>
+              <text x="347" y="137" text-anchor="middle" font-size="11.5" fill="#713f12">intelligence + tail bot</text>
+              <!-- supplier -->
+              <rect x="536" y="98" width="170" height="54" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+              <text x="621" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">Supplier</text>
+              <text x="621" y="137" text-anchor="middle" font-size="11.5" fill="#3c3a35">responds, agrees</text>
+              <!-- savings -->
+              <rect x="536" y="184" width="170" height="54" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+              <text x="621" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Cost savings</text>
+              <text x="621" y="223" text-anchor="middle" font-size="11.5" fill="#14532d">+ coverage</text>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6b675f">
+              <!-- leadership -> product -->
+              <line x1="158" y1="125" x2="256" y2="125" stroke="#928d83" stroke-width="1.4" marker-end="url(#arr)" aria-hidden="true"/>
+              <text x="207" y="118" text-anchor="middle">funds</text>
+              <!-- merchant -> product -->
+              <line x1="347" y1="74" x2="347" y2="92" stroke="#928d83" stroke-width="1.4" marker-end="url(#arr)" aria-hidden="true"/>
+              <!-- product -> supplier -->
+              <line x1="432" y1="125" x2="530" y2="125" stroke="#928d83" stroke-width="1.4" marker-end="url(#arr)" aria-hidden="true"/>
+              <text x="481" y="118" text-anchor="middle">at scale</text>
+              <!-- supplier -> savings -->
+              <line x1="621" y1="152" x2="621" y2="178" stroke="#928d83" stroke-width="1.4" marker-end="url(#arr)" aria-hidden="true"/>
+              <text x="621" y="170" text-anchor="middle">agrees</text>
+              <!-- savings -> leadership (reported back) -->
+              <path d="M536 211 L83 211 L83 158" fill="none" stroke="#928d83" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#arr)" aria-hidden="true"/>
+              <text x="300" y="205" text-anchor="middle">reported back to leadership</text>
+            </g>
+          </svg>
+          <figcaption>Who the product serves, and how value flows back to the number leadership rewards.</figcaption>
+        </figure>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why-this" class="reveal">
+        <h2 class="kicker">Why this problem</h2>
+        <span class="def">RICE = Reach &times; Impact &times; Confidence, divided by Effort. A way to rank where the team aims first.</span>
+        <p>A directional read to show the reasoning, not a promise. I would replace each value with real internal data in the first weeks.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Opportunity</th><th scope="col">Reach</th><th scope="col">Impact</th><th scope="col">Conf.</th><th scope="col">Effort</th><th scope="col">Why this score</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Expand autonomous negotiation to more of the tail</td>
+                <td><span class="pill high">High</span></td><td><span class="pill high">High</span></td><td><span class="pill high">High</span></td><td><span class="pill med">Med</span></td>
+                <td>The mechanism already works at 68% close and ~3% savings. The work is widening categories and supplier tiers, not inventing the engine.</td>
+              </tr>
+              <tr>
+                <td>Negotiation intelligence: which contracts to renegotiate, with what leverage</td>
+                <td><span class="pill high">High</span></td><td><span class="pill high">High</span></td><td><span class="pill med">Med</span></td><td><span class="pill med">Med</span></td>
+                <td>Touches every merchant. Turns tariff and cost shifts into a ranked action list. Needs clean cross-system data.</td>
+              </tr>
+              <tr>
+                <td>Tariff / cost-shock response workflow</td>
+                <td><span class="pill med">Med</span></td><td><span class="pill high">High</span></td><td><span class="pill med">Med</span></td><td><span class="pill med">Med</span></td>
+                <td>High value when it triggers, but episodic. Best built on top of the intelligence layer.</td>
+              </tr>
+              <tr>
+                <td>Direct-merchandise autonomous negotiation</td>
+                <td><span class="pill high">High</span></td><td><span class="pill high">High</span></td><td><span class="pill low">Low</span></td><td><span class="pill low">High</span></td>
+                <td>The largest prize, but goods for resale are more complex and confidence is lowest. Sequence it after the tail and intelligence layer earn trust.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>The read.</strong> The two highest-scoring bets are expanding tail automation and building the negotiation-intelligence layer. Tail expansion has the highest confidence because the engine is proven. Intelligence has the broadest reach because it serves every merchant on every deal, and it is the foundation the tariff workflow and direct-merchandise negotiation both need. I would fund those two first and treat direct merchandise as the prize we sequence toward, once trust and data quality are established.</p>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal">
+        <h2 class="kicker">Approach</h2>
+        <p class="takeaway">Three hypotheses. I would run all three as small tests early, then concentrate effort where the evidence is strongest.</p>
+        <ul class="clean">
+          <li><span class="lab">Reach: widen autonomous negotiation across the tail.</span> The proven engine can extend to new categories and the next supplier tier with configurable guardrails, and savings will hold. Decide by piloting one or two new categories and watching close rate, savings, and supplier acceptance against the established benchmarks.</li>
+          <li><span class="lab">Leverage: a negotiation-intelligence layer for merchants.</span> Merchants act faster and win more when the product ranks which contracts to renegotiate now and shows the supporting data (cost benchmarks, supplier performance, exposure). Decide by measuring whether ranked, evidence-backed recommendations change what merchants do and save, versus their current workflow.</li>
+          <li><span class="lab">Speed: a cost-shock response workflow.</span> When costs move (tariffs, commodities), merchants need a fast path from "which contracts are exposed" to "renegotiate these now." Decide by running it against a real cost event and measuring time from signal to action.</li>
+        </ul>
+        <div class="note">
+          <span class="nlab">How I would choose</span>
+          <p>Data readiness and merchant trust are the gates. Where the data is clean and merchants trust the recommendation, autonomous action wins. Where data is messy or stakes are high, the product recommends and the merchant decides. It should move along that line as confidence is earned, not jump to full autonomy everywhere.</p>
+        </div>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal">
+        <h2 class="kicker">What I'd ship first</h2>
+        <p class="lede">A negotiation-intelligence shortlist for one merchant team, in one category.</p>
+        <p>The smallest thing that tests the biggest assumption. It ranks the merchant's contracts by renegotiation opportunity (size of spend, terms gap, recent cost movement) and shows the data behind each one. The merchant picks targets and acts. For clearly tail-end, low-stakes contracts, it offers a one-click handoff to the existing autonomous engine.</p>
+        <h3>The assumption it tests</h3>
+        <p>That merchants will trust and act on a ranked, evidence-backed list, and that doing so produces measurable savings beyond their current workflow. If that holds, the path to scale and more autonomy is clear. If it does not, I learn it cheaply, in one category, before committing engineering to a broad build.</p>
+        <h3>Why this first</h3>
+        <p>High reach (it serves the merchant's whole book in that category), high impact (it points effort at the best deals), and the highest confidence available, because it leans on data the team already assembles for Wally and an engine that already negotiates. Effort is contained to one team and one category.</p>
+        <h3>What it deliberately leaves out</h3>
+        <p>Broad rollout, direct-merchandise negotiation, multi-category coverage, and any fully autonomous action on high-stakes contracts. Those come after the shortlist earns trust and the savings are real.</p>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal">
+        <h2 class="kicker">Metrics</h2>
+        <div class="note">
+          <span class="nlab">North Star</span>
+          <p><strong>Negotiated coverage of supplier spend:</strong> the share of supplier spend that received an active, data-backed negotiation in the trailing year. It ties straight to cost of goods and captures the core problem, that most of the base is never reached. Every feature should move this.</p>
+        </div>
+
+        <figure class="diagram" role="img" aria-label="Metrics tree. The North Star is negotiated coverage of supplier spend. It is driven by three input branches. Reach covers suppliers under active negotiation and share of tail spend covered. Win quality covers savings percent on negotiated spend and supplier close or agreement rate. Merchant leverage covers merchant hours freed for strategy and recommendations acted on. A separate guardrail row, fed by a dashed link from the North Star, tracks merchant trust through override rate and repeat use, and supplier health through response and ease of use.">
+          <svg viewBox="0 0 720 372" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0L10 5L0 10z" fill="#b6b0a4"/>
+              </marker>
+              <marker id="arr2r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0L10 5L0 10z" fill="#dc2626"/>
+              </marker>
+            </defs>
+            <!-- solid connectors: north star to branches, branches to leaves -->
+            <g stroke="#b6b0a4" stroke-width="1.3" fill="none" aria-hidden="true">
+              <path d="M330 56 C 210 72, 130 80, 130 96" marker-end="url(#arr2)"/>
+              <path d="M360 56 L 360 96" marker-end="url(#arr2)"/>
+              <path d="M390 56 C 510 72, 590 80, 590 96" marker-end="url(#arr2)"/>
+              <line x1="130" y1="138" x2="130" y2="160" marker-end="url(#arr2)"/>
+              <line x1="130" y1="206" x2="130" y2="224" marker-end="url(#arr2)"/>
+              <line x1="360" y1="138" x2="360" y2="160" marker-end="url(#arr2)"/>
+              <line x1="360" y1="206" x2="360" y2="224" marker-end="url(#arr2)"/>
+              <line x1="590" y1="138" x2="590" y2="160" marker-end="url(#arr2)"/>
+              <line x1="590" y1="206" x2="590" y2="224" marker-end="url(#arr2)"/>
+            </g>
+            <!-- dashed guardrail link: north star down the far-right channel to the guardrail row -->
+            <g stroke="#dc2626" stroke-width="1.3" fill="none" stroke-dasharray="4 4" aria-hidden="true">
+              <path d="M455 33 L 702 33 L 702 314 L 686 314" marker-end="url(#arr2r)"/>
+            </g>
+            <g font-family="Space Grotesk, sans-serif">
+              <!-- north star -->
+              <rect x="265" y="10" width="190" height="46" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.8"/>
+              <text x="360" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#713f12">North Star</text>
+              <text x="360" y="46" text-anchor="middle" font-size="11" fill="#713f12">Negotiated coverage of spend</text>
+              <!-- branches -->
+              <rect x="50" y="96" width="160" height="42" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="130" y="121" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a5f">Reach</text>
+              <rect x="280" y="96" width="160" height="42" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="360" y="121" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a5f">Win quality</text>
+              <rect x="470" y="96" width="200" height="42" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="570" y="121" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a5f">Merchant leverage</text>
+              <!-- leaves: Reach -->
+              <rect x="38" y="160" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="130" y="180" text-anchor="middle" font-size="10.5" fill="#1e293b">Suppliers under</text>
+              <text x="130" y="194" text-anchor="middle" font-size="10.5" fill="#1e293b">active negotiation</text>
+              <rect x="38" y="224" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="130" y="244" text-anchor="middle" font-size="10.5" fill="#1e293b">Share of tail</text>
+              <text x="130" y="258" text-anchor="middle" font-size="10.5" fill="#1e293b">spend covered</text>
+              <!-- leaves: Win quality -->
+              <rect x="268" y="160" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="360" y="180" text-anchor="middle" font-size="10.5" fill="#1e293b">Savings % on</text>
+              <text x="360" y="194" text-anchor="middle" font-size="10.5" fill="#1e293b">negotiated spend</text>
+              <rect x="268" y="224" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="360" y="244" text-anchor="middle" font-size="10.5" fill="#1e293b">Supplier close /</text>
+              <text x="360" y="258" text-anchor="middle" font-size="10.5" fill="#1e293b">agreement rate</text>
+              <!-- leaves: Merchant leverage -->
+              <rect x="498" y="160" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="590" y="180" text-anchor="middle" font-size="10.5" fill="#1e293b">Merchant hours</text>
+              <text x="590" y="194" text-anchor="middle" font-size="10.5" fill="#1e293b">freed for strategy</text>
+              <rect x="498" y="224" width="184" height="46" rx="7" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="590" y="244" text-anchor="middle" font-size="10.5" fill="#1e293b">Recommendations</text>
+              <text x="590" y="258" text-anchor="middle" font-size="10.5" fill="#1e293b">acted on</text>
+              <!-- guardrail row (separate, bottom) -->
+              <rect x="38" y="294" width="648" height="56" rx="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+              <text x="58" y="318" text-anchor="start" font-size="12" font-weight="700" fill="#7f1d1d">Guardrails: do not win the wrong way</text>
+              <text x="58" y="337" text-anchor="start" font-size="10.5" fill="#7f1d1d">Merchant trust (override rate, repeat use)   &#183;   Supplier health (response, ease of use)</text>
+            </g>
+          </svg>
+          <figcaption>Negotiated coverage, driven by reach, win quality, and merchant leverage, fenced by trust and supplier-health guardrails.</figcaption>
+        </figure>
+
+        <h3>Guardrails: the metrics that say "do not win the wrong way"</h3>
+        <ul class="clean">
+          <li><span class="lab">Merchant trust.</span> If the override rate climbs or merchants stop coming back, the recommendations are wrong or untrusted. Coverage gained by ignoring merchants is fragile.</li>
+          <li><span class="lab">Supplier health.</span> Watch supplier response and ease-of-use, already strong at 83% <a class="src" href="https://www.pymnts.com/news/artificial-intelligence/2023/walmart-finds-75-percent-vendors-prefer-negotiating-with-chatbot/" target="_blank" rel="noopener">(PYMNTS / Bloomberg, 2023)</a>. Coverage that burns supplier goodwill is a loss.</li>
+        </ul>
+      </section>
+
+      <!-- BUSINESS IMPACT -->
+      <section id="impact" class="reveal">
+        <h2 class="kicker">Business impact</h2>
+        <p class="takeaway">The proven savings rate is settled. The lever is the base: how much spend gets negotiated at all.</p>
+        <p>At $706.41 billion in FY2026 net sales <a class="src" href="https://finance.yahoo.com/markets/stocks/articles/walmart-revenue-rises-4-7-094100979.html" target="_blank" rel="noopener">(Yahoo Finance, reporting Walmart, 2026)</a>, small percentage moves on cost of goods are large absolute dollars. The proven savings rate on AI-negotiated spend is about 3% <a class="src" href="https://www.pymnts.com/news/artificial-intelligence/2023/walmart-finds-75-percent-vendors-prefer-negotiating-with-chatbot/" target="_blank" rel="noopener">(PYMNTS / Bloomberg, 2023)</a>. Each percentage point of additional supplier spend brought into active, data-backed negotiation, at that savings rate, is a direct cost-of-goods improvement. That is the line the North Star tracks, and the case for funding reach over polish.</p>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal">
+        <h2 class="kicker">30 / 60 / 90</h2>
+        <div class="phase">
+          <span class="ptag">Days 0 to 30</span>
+          <h3>Listen and find the real constraints</h3>
+          <ul class="clean">
+            <li>Sit with merchants across a few categories. Map where their time actually goes and where the tail is most under-negotiated.</li>
+            <li>Read the autonomous-engine and Wally data with the team: close rates, savings, where coverage stops and why.</li>
+            <li>Meet the partners (ML engineering, data platform, Legal, Finance, Global Sourcing) and learn what is built in-house versus licensed, since that sets what we own.</li>
+            <li>Find the data constraints early: how clean and how connected is cost, supplier-performance, and contract data.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ptag">Days 30 to 60</span>
+          <h3>A quick win and a sharper problem</h3>
+          <ul class="clean">
+            <li>Ship the negotiation-intelligence shortlist to one merchant team in one category.</li>
+            <li>Baseline the North Star and the guardrails so we can prove movement, not assert it.</li>
+            <li>Align leadership on the coverage thesis and the sequence: tail and intelligence first, direct merchandise later.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ptag">Days 60 to 90</span>
+          <h3>Validate the first bet and propose the roadmap</h3>
+          <ul class="clean">
+            <li>Measure the shortlist: did merchants act, did savings beat their old workflow, did trust hold.</li>
+            <li>Use the result to size the next bets and propose a multi-quarter roadmap from tail expansion, to intelligence at scale, to a cost-shock workflow, toward direct merchandise.</li>
+            <li>Set up the experimentation loop so every later feature is judged against coverage and the guardrails.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal">
+        <h2 class="kicker">Risks</h2>
+        <p class="takeaway">The risks in the proposed work, and how I would test each one early.</p>
+        <ul class="clean">
+          <li><span class="lab">Data quality gates everything.</span> Recommendations are only as good as the cost, supplier, and contract data behind them. <em>Validate first:</em> in week one, trace the data behind a handful of real contracts end to end and check it is accurate and current before any recommendation ships.</li>
+          <li><span class="lab">Merchant trust is fragile.</span> A wrong or unexplained recommendation early can sour adoption for a long time. <em>Validate first:</em> ship the shortlist as a recommendation with the supporting data visible and an easy override, and watch override rate and repeat use as the real signal.</li>
+          <li><span class="lab">Direct merchandise is harder than indirect spend.</span> The proven results are mostly indirect spend, not goods for resale. <em>Validate first:</em> prove the intelligence layer and tail expansion on lower-stakes spend before committing to autonomous action on direct merchandise.</li>
+          <li><span class="lab">Build versus buy is unsettled.</span> It is not fully clear in public sources how much of the negotiation capability is in-house versus licensed, which changes what the team controls. <em>Validate first:</em> confirm ownership with engineering in the first weeks, since it shapes the roadmap.</li>
+          <li><span class="lab">Autonomy must be earned, not assumed.</span> Pushing full autonomy onto high-stakes deals too early invites a costly mistake. <em>Validate first:</em> keep a human in the loop above a confidence and value threshold, and only widen autonomy where the data and outcomes justify it.</li>
+        </ul>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal">
+        <h2 class="kicker">Questions</h2>
+        <p class="takeaway">What I would ask the team in the first weeks.</p>
+        <ol class="q">
+          <li>How is negotiated coverage measured today, if at all, and what share of supplier spend gets an active negotiation now? That sets the baseline for everything.</li>
+          <li>Which parts of the negotiation stack are built on Walmart's own platform versus licensed from a vendor? That defines what we own and can move fastest on.</li>
+          <li>Where does the autonomous engine stop today, by category, supplier tier, and direct versus indirect spend, and what blocked the next step?</li>
+          <li>What does merchant adoption of the GenAI assistant actually look like in numbers, and where do merchants still drop back to manual work?</li>
+          <li>When merchants distrust an AI recommendation, what is the specific reason most often: the data, the explanation, or the stakes? That tells me where to invest in trust.</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal">
+        <h2 class="kicker">Why me</h2>
+        <p>I am a product manager with 6+ years building and scaling B2B platforms in finance and AI, with a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering. My work has lived where this role lives: AI products that have to earn trust, manual financial workflows turned into automated ones, and decisions judged in dollars saved. I am most useful when the job is to turn a proven capability into broad, trusted adoption.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Own a complex AI/ML product end to end</td>
+                <td>Led rollout of an internal AI assistant to 15,000+ users at a global bank, with the compliance and governance controls that made adoption possible. At UW, I built the proof of concept for a policy-conflict-detection AI agent for the City of Seattle, surfacing conflicts across 8 regulatory bodies.</td>
+              </tr>
+              <tr>
+                <td>Automate manual work to free people for higher-value tasks</td>
+                <td>Owned discovery to launch of a finance budgeting application at Nomura that cut spend by 30%, and shipped a reporting dashboard that removed 40+ hours a week of manual report compilation.</td>
+              </tr>
+              <tr>
+                <td>Data-driven decisions and experimentation</td>
+                <td>Ran pilot rollouts and A/B tests on a lending platform's approval flow to reduce drop-off. Assessed 4 retrieval architectures on accuracy, groundedness, hallucination, latency, and cost for a build-versus-buy call.</td>
+              </tr>
+              <tr>
+                <td>Scale a platform across many users and locations</td>
+                <td>Built and scaled a digital lending platform from MVP to 25,000+ users across 3,000+ bank branches, owning roadmap, prioritization, and partner integrations.</td>
+              </tr>
+              <tr>
+                <td>AI/ML fluency: trustworthy, guardrailed outputs</td>
+                <td>Evaluated 5+ RAG platforms and owned an ingestion pipeline for 9,000+ policy documents, setting quality gates for trustworthy retrieval at scale. Worked across RAG, vector search, hybrid retrieval, and AI governance.</td>
+              </tr>
+              <tr>
+                <td>Influence cross-functional teams without authority</td>
+                <td>Led operational-risk transformation for Global Markets across FI/FX, technology, audit, and risk, reducing events by 20% and losses by 15%. Drove a market-data sourcing program that saved $700K a year by switching providers across multiple applications.</td>
+              </tr>
+              <tr>
+                <td>Cost-sensitive, data-integration work like negotiation tooling</td>
+                <td>Delivered credit-bureau and partner API integrations that improved decision accuracy by 10% and cut manual review by 35%, automating credit decisioning and KYC verification.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="fname">Mayuresh More</p>
+    <p class="ftag">Product manager, B2B platforms in finance and AI. Open to talk about the Staff Product Manager role.</p>
+    <p class="links">
+      <a href="mailto:mayuresh33@live.com">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
+        mayuresh33@live.com
+      </a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.95-1.8-2.95s-2.07 1.4-2.07 2.85V21H9z"/></svg>
+        linkedin.com/in/mayureshmore
+      </a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/mayuresh747
+      </a>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var docEl = document.documentElement;
+  docEl.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal on scroll (enhancement; content is visible by default, including JS-off and reduced-motion)
+  var revs = document.querySelectorAll('.reveal');
+  if(!reduce && 'IntersectionObserver' in window){
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.04});
+    revs.forEach(function(el){ ro.observe(el); });
+  } else {
+    revs.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Scroll-spy for the rail
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+  if(links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if(sec) map[id] = a;
+    });
+    var visible = {};
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+      });
+      var bestId=null, best=-1;
+      Object.keys(visible).forEach(function(id){
+        if(visible[id]>best){ best=visible[id]; bestId=id; }
+      });
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      if(bestId && map[bestId] && best>0){ map[bestId].setAttribute('aria-current','true'); }
+    }, {rootMargin:'-20% 0px -65% 0px', threshold:[0,0.25,0.5,1]});
+    Object.keys(map).forEach(function(id){ spy.observe(document.getElementById(id)); });
+  }
+})();
+</script>
+</body>
+</html>
