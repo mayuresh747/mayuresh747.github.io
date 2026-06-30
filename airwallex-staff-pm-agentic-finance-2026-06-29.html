@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More. Staff Product Manager, T:0 at Airwallex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --paper:#fffdf9;
+    --ink:#1c2329;
+    --ink-soft:#3c474f;
+    --ink-faint:#7c8791;
+    --line:#e2ddd2;
+    --line-soft:#ece8df;
+    --accent:#c2410c;        /* burnt amber */
+    --accent-deep:#9a3209;
+    --accent-wash:#fbeee5;
+    --ok:#15803d;
+    --ok-wash:#e7f3ea;
+    --blue:#1d4ed8;
+    --blue-wash:#e6ecfb;
+    --warn:#a16207;
+    --warn-wash:#f7f0db;
+    --purple:#7c3aed;
+    --purple-wash:#efe9fb;
+    --danger:#b91c1c;
+    --danger-wash:#f8e8e6;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:28px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* faint paper grain / vignette */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(1200px 600px at 78% -8%, rgba(194,65,12,.05), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(29,78,216,.04), transparent 60%);
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:13px;z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-deep);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  /* ---------- shared wrap ---------- */
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    padding:64px 0 30px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5.6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:30em;
+    margin:16px 0 0;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:20px 0 0;
+  }
+
+  /* ---------- contents disclosure (mobile) ---------- */
+  details.toc-mobile{
+    margin:26px 0 0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  details.toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none;}
+  details.toc-mobile summary::after{content:"+";font-size:17px;color:var(--accent);}
+  details.toc-mobile[open] summary::after{content:"\2212";}
+  details.toc-mobile ol{
+    margin:0;padding:4px 18px 16px 34px;
+    font-family:var(--display);font-size:15px;
+  }
+  details.toc-mobile li{margin:7px 0;}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none;}
+  details.toc-mobile a:hover{color:var(--accent);}
+
+  /* ---------- main layout: rail + content ---------- */
+  .layout{
+    display:block;
+    padding-bottom:40px;
+  }
+  nav.rail{display:none;}
+
+  main{display:block;}
+
+  /* ---------- sections ---------- */
+  section{
+    padding:34px 0;
+    border-top:1px solid var(--line-soft);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2.kicker{font-size:16px;}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 6px;
+    max-width:18em;
+  }
+
+  p{margin:0 0 16px;max-width:38em;}
+  p.tk{ /* one-line takeaway */
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(18px,2.6vw,22px);
+    line-height:1.34;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:30em;
+  }
+  strong{font-weight:600;color:var(--ink);}
+  em{color:var(--ink-soft);}
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:26px 0 8px;
+  }
+
+  /* subtle source links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+    font-size:.96em;
+  }
+  a.src:hover,a.src:focus-visible{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:40em;}
+  ul.clean li{
+    position:relative;
+    padding:8px 0 8px 26px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:18px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+  }
+  ol.steps{
+    counter-reset:s;list-style:none;padding:0;margin:0 0 16px;max-width:40em;
+  }
+  ol.steps li{
+    counter-increment:s;
+    position:relative;
+    padding:6px 0 14px 44px;
+    margin:0;
+  }
+  ol.steps li::before{
+    content:counter(s);
+    position:absolute;left:0;top:4px;
+    width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--accent-wash);
+    color:var(--accent-deep);
+    border:1px solid #f0d9cb;
+    border-radius:50%;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+  }
+
+  /* JTBD quote cards */
+  .jtbd{
+    margin:18px 0;
+    display:grid;
+    gap:12px;
+  }
+  .jtbd blockquote{
+    margin:0;
+    padding:16px 18px 16px 20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .jtbd .jlab{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:6px;
+  }
+  .jtbd p{margin:0;font-style:italic;color:var(--ink-soft);max-width:none;}
+
+  /* tables */
+  .tbl-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:20px 0;
+    background:var(--paper);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:560px;
+    font-family:var(--display);
+    font-size:14.5px;
+  }
+  table.fit{min-width:600px;}
+  th,td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  thead th{
+    background:#f2eee5;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.num{font-family:var(--mono);white-space:nowrap;}
+  .pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;font-weight:600;
+    padding:2px 8px;border-radius:999px;
+    letter-spacing:.02em;
+  }
+  .pill.hi{background:var(--ok-wash);color:var(--ok);}
+  .pill.mid{background:var(--warn-wash);color:var(--warn);}
+  .pill.lo{background:var(--danger-wash);color:var(--danger);}
+
+  /* stat row */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;
+    margin:20px 0;
+  }
+  .stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .v{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-.02em;
+    color:var(--accent-deep);
+    line-height:1;
+  }
+  .stat .l{
+    font-family:var(--display);
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:7px;
+    line-height:1.35;
+  }
+
+  /* callout */
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .note p:last-child{margin-bottom:0;}
+
+  /* diagrams */
+  figure.diagram{
+    margin:24px 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  .svg-scroll{overflow:visible;}
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  .dlabel{font-family:var(--display);}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:14px;
+    margin-top:14px;
+    font-family:var(--display);font-size:13px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;}
+
+  /* phased plan */
+  .phase{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);
+    font-size:12px;font-weight:600;
+    letter-spacing:.1em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .phase h3{margin:6px 0 8px;}
+  .phase p{margin:0;max-width:none;font-size:17px;color:var(--ink-soft);}
+
+  /* questions */
+  ol.qs{counter-reset:q;list-style:none;padding:0;margin:14px 0;max-width:42em;}
+  ol.qs li{
+    counter-increment:q;
+    position:relative;
+    padding:14px 0 14px 50px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);
+  }
+  ol.qs li:last-child{border-bottom:none;}
+  ol.qs li::before{
+    content:"Q" counter(q);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.04em;
+  }
+
+  /* risks */
+  .risk{
+    border:1px solid var(--line);
+    border-left:3px solid var(--warn);
+    border-radius:8px;
+    background:var(--paper);
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .risk .rt{
+    font-family:var(--display);font-weight:600;font-size:16.5px;
+    color:var(--ink);margin:0 0 5px;
+  }
+  .risk .rv{margin:0;font-size:16px;color:var(--ink-soft);max-width:none;}
+  .risk .rv b{color:var(--ok);font-weight:600;}
+
+  /* fit intro */
+  .fit-intro{max-width:40em;}
+
+  /* footer */
+  footer.foot{
+    border-top:1px solid var(--line);
+    padding:34px 0 56px;
+    margin-top:10px;
+  }
+  .foot .fname{
+    font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);
+  }
+  .contacts{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    margin-top:14px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contacts a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  /* reveal animation (default visible; only animates with JS + motion ok) */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* ---------- desktop: rail layout ---------- */
+  @media (min-width:920px){
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout .wrap{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .rail-head{
+      font-family:var(--mono);
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:14px;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    .rail a:hover{color:var(--ink-soft);border-color:var(--ink-faint);}
+    .rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-color:var(--accent);
+      font-weight:600;
+    }
+    details.toc-mobile{display:none;}
+    main{min-width:0;}
+    .stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));}
+  }
+
+  /* ---------- mobile diagram scroll ---------- */
+  @media (max-width:600px){
+    body{font-size:18px;}
+    figure.diagram .svg-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    figure.diagram .svg-scroll svg{min-width:540px;}
+    figure.diagram::after{
+      content:"scroll \2192";
+      position:absolute;top:18px;right:16px;
+      font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      color:var(--ink-faint);
+    }
+    header.masthead{padding-top:46px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Pitch &middot; Staff Product Manager, T:0</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the agentic-finance trust problem for the Staff Product Manager, T:0 role at Airwallex.</p>
+    <p class="prepared">Prepared June 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="wrap">
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">T:0 wins or loses on one thing: will a founder let an AI agent touch their books, their taxes, and their money without checking its work.</p>
+        <p>My bet is that the road to general availability is not more automation first, it is trust first. I would build the human-in-the-loop and auditability layer as the core product, then expand what the agent does on its own as accuracy earns each new step. The fastest distribution path is the <a class="src" href="https://www.airwallex.com/global/newsroom/airwallex-secures-320-million-in-series-h-funding-valuation-hits-11-billion" target="_blank" rel="noopener">676,000 businesses already on Airwallex</a>, not net-new acquisition.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p class="tk">T:0 is meant to run a startup's whole finance function from day zero. The hard part is not the work. It is getting a founder to trust an agent that can be wrong.</p>
+        <p>T:0 launched in private beta alongside the <a class="src" href="https://www.airwallex.com/global/newsroom/airwallex-secures-320-million-in-series-h-funding-valuation-hits-11-billion" target="_blank" rel="noopener">Series H on June 25, 2026</a>: bookkeeping, forecasting, taxes, compliance, and reporting, all AI-native.</p>
+
+        <h3>Who hurts, and what it costs them</h3>
+        <ul class="clean">
+          <li>Founders running globally distributed startups juggle multi-currency books, cross-border payroll, and tax filings in more than one country at once.</li>
+          <li>The tools they use today, QuickBooks, Xero, and Gusto, were built for single-entity, single-currency companies. So the multi-entity work falls back on spreadsheets and a part-time accountant.</li>
+          <li>Spreadsheets do not reconcile across currencies. An accountant is slow and expensive. Neither closes the books in real time or tells a founder their cash position today across three entities.</li>
+        </ul>
+
+        <h3>The window is narrow</h3>
+        <p>Every month T:0 sits in private beta is a month a rival can take the segment. <a class="src" href="https://www.prnewswire.com/news-releases/ramp-launches-applied-ai-solutions-helping-enterprises-deploy-ai-agents-across-finance-operations-302796179.html" target="_blank" rel="noopener">Ramp shipped Applied AI in June 2026</a>. <a class="src" href="https://www.brex.com/journal/press/brex-helps-power-open-ai-global-spend-and-financial-operations" target="_blank" rel="noopener">Brex runs OpenAI's global spend</a>. <a class="src" href="https://puzzle.io/blog/best-ai-finance-agents" target="_blank" rel="noopener">Puzzle auto-categorizes 98% of transactions</a> for startup bookkeeping.</p>
+
+        <div class="note">
+          <p><strong>The root problem.</strong> An AI agent that touches money cannot guess. Large language models are nondeterministic: the same prompt can give different answers on different runs. <a class="src" href="https://www.finra.org/rules-guidance/guidance/reports/2026-finra-annual-regulatory-oversight-report/gen-ai" target="_blank" rel="noopener">FINRA's 2026 oversight report</a> names AI agents acting without human validation, and weak auditability, as distinct risks. A wrong tax filing has a real owner and a real liability. So the question is not "how much can the agent do." It is "how does a founder know the agent is right, and what happens when it is not."</p>
+        </div>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p class="tk">There are two people in the room, and they are not the same person.</p>
+
+        <h3>Primary user: the founder, or first finance hire</h3>
+        <p>At an early, globally distributed startup. This is the person doing the work today, in spreadsheets, late at night. What they are trying to get done:</p>
+
+        <div class="jtbd">
+          <blockquote>
+            <span class="jlab">Functional job</span>
+            <p>When I run a startup with entities in two or three countries, I want my books closed, my taxes handled, and my cash position clear without doing it by hand, so I can spend my time on the product.</p>
+          </blockquote>
+          <blockquote>
+            <span class="jlab">Emotional job</span>
+            <p>I want to stop lying awake wondering whether a filing is late or a number is wrong.</p>
+          </blockquote>
+          <blockquote>
+            <span class="jlab">Social job</span>
+            <p>I want to look buttoned-up and credible to my investors and my board when they ask about runway and burn.</p>
+          </blockquote>
+        </div>
+
+        <h3>Economic buyer: the founder still, or a head of finance by Series A</h3>
+        <p>In a five-person company the user and the buyer are the same. By 30 people they split, and the buyer cares about control and audit trail, not just speed. The emotional and social jobs, looking credible and sleeping at night, are what actually drive a team to switch.</p>
+
+        <div class="note">
+          <p><strong>The status quo is the real competitor.</strong> A spreadsheet plus an accountant has zero switching cost and full trust. Beating that needs a step change, not a small improvement.</p>
+        </div>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p class="tk">Of everything this team could fund first, I would put the trust and human-in-the-loop layer ahead of any new automated workflow.</p>
+        <p>RICE is a way to rank the options on one scale: Reach times Impact times Confidence, divided by Effort in person-months. The point is not the exact number, it is scoring every option the same way.</p>
+
+        <div class="tbl-wrap">
+          <table>
+            <caption class="sr-only">RICE comparison of candidate first bets</caption>
+            <thead>
+              <tr>
+                <th scope="col">Candidate first bet</th>
+                <th scope="col">Reach</th>
+                <th scope="col">Impact</th>
+                <th scope="col">Conf.</th>
+                <th scope="col">Effort</th>
+                <th scope="col">Why it ranks where it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Trust + auditability layer</strong><br><span style="color:var(--ink-faint);">review queue, rationale, escalation</span></td>
+                <td>Every user, every action</td>
+                <td class="num">3</td>
+                <td class="num">80%</td>
+                <td><span class="pill mid">Medium</span></td>
+                <td>Without it, no founder lets the agent act. It is the dependency the rest of the product sits on.</td>
+              </tr>
+              <tr>
+                <td>More automated workflows<br><span style="color:var(--ink-faint);">payroll, deeper tax</span></td>
+                <td>Subset who already trust the agent</td>
+                <td class="num">2</td>
+                <td class="num">50%</td>
+                <td><span class="pill lo">High</span></td>
+                <td>High effort, and it only pays off once trust exists. Premature without the layer above.</td>
+              </tr>
+              <tr>
+                <td>Net-new startup acquisition</td>
+                <td>Net-new startups</td>
+                <td class="num">2</td>
+                <td class="num">50%</td>
+                <td><span class="pill lo">High</span></td>
+                <td>Higher cost, fights Ramp and Brex head-on. Lower confidence than activating the base.</td>
+              </tr>
+              <tr>
+                <td><strong>Activate existing Airwallex customers</strong></td>
+                <td>Slice of 676,000 businesses</td>
+                <td class="num">3</td>
+                <td class="num">80%</td>
+                <td><span class="pill hi">Low to med</span></td>
+                <td>Lower acquisition cost, existing trust and data. The natural wedge.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The trust layer is a dependency, the part of the product everything else consumes, so it stays in the MVP regardless of its own score. The existing-customer wedge ranks high because reaching those users is cheap and Airwallex already holds <a class="src" href="https://www.airwallex.com/global/newsroom/airwallex-secures-320-million-in-series-h-funding-valuation-hits-11-billion" target="_blank" rel="noopener">their data and their trust</a>.</p>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p class="tk">I would not commit to one shape on day one. I would frame three directions as bets and run cheap tests to choose.</p>
+
+        <h3>Direction A: agent-first, human-on-the-exception</h3>
+        <p>The agent does the work and escalates only what it is unsure about. <a class="src" href="https://ramp.com/blog/ramp-agents-announcement" target="_blank" rel="noopener">Ramp's agents auto-handle routine expenses and escalate only the 10 to 15% that need human judgment</a>, and <a class="src" href="https://ramp.com/blog/ramp-agents-announcement" target="_blank" rel="noopener">Ramp's policy agent claims 99% accuracy</a>. This is the end state, but it assumes accuracy is already high enough to trust the default.</p>
+
+        <h3>Direction B: human-first, agent-as-drafter</h3>
+        <p>The agent prepares everything, a person approves before anything is committed. Slower, but the trust bar is low and a founder can watch the agent learn. This is where I would start a brand-new product, because it builds the confidence Direction A needs.</p>
+
+        <h3>Direction C: per-workflow trust tiers</h3>
+        <p>The agent acts on its own for low-risk, reversible work (categorizing a transaction) and asks for approval on high-risk, hard-to-reverse work (filing a return, moving money). The boundary moves per workflow as accuracy data comes in.</p>
+
+        <p>How I would decide: start at B for everything, then move each workflow to C and eventually A as its measured accuracy crosses a bar I would set with engineering and legal. The decision is driven by per-workflow accuracy data, not a one-time architecture call. This is the core PM judgment in the role: where the line between agent and human sits, and when it moves.</p>
+
+        <figure class="diagram" role="img" aria-label="Trust-tier decision flow. Each workflow starts human-first as a draft for approval. When its accuracy clears a bar over many runs it moves to a per-workflow tier where low-risk actions run automatically. Only after clearing the bar again does it become agent-first with the human handling exceptions. If accuracy does not clear the bar, the workflow stays put while the model improves.">
+          <figcaption>Figure 1 &middot; Trust-tier decision flow, per workflow</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 760 470" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#7c8791"/>
+                </marker>
+              </defs>
+              <!-- start -->
+              <rect x="250" y="14" width="260" height="56" rx="10" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.6"/>
+              <text x="380" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#1e3a5f">New workflow</text>
+              <text x="380" y="57" text-anchor="middle" font-size="12" fill="#3c4d63">categorize txn, file return, pay</text>
+
+              <!-- tier 1 -->
+              <rect x="250" y="110" width="260" height="56" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.6"/>
+              <text x="380" y="134" text-anchor="middle" font-size="14" font-weight="600" fill="#14532d">Tier 1: agent drafts</text>
+              <text x="380" y="153" text-anchor="middle" font-size="12" fill="#1f5b36">human approves every action</text>
+
+              <!-- gate (diamond) -->
+              <polygon points="380,200 470,250 380,300 290,250" fill="#f7f0db" stroke="#a16207" stroke-width="1.6"/>
+              <text x="380" y="246" text-anchor="middle" font-size="13" font-weight="600" fill="#713f12">Accuracy</text>
+              <text x="380" y="263" text-anchor="middle" font-size="12" fill="#7a5410">above bar?</text>
+
+              <!-- hold (right) -->
+              <rect x="560" y="222" width="180" height="56" rx="10" fill="#f7f0db" stroke="#a16207" stroke-width="1.4"/>
+              <text x="650" y="246" text-anchor="middle" font-size="13" font-weight="600" fill="#713f12">Stay in tier</text>
+              <text x="650" y="264" text-anchor="middle" font-size="12" fill="#7a5410">improve model + prompts</text>
+
+              <!-- tier 2 -->
+              <rect x="250" y="338" width="260" height="56" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.6"/>
+              <text x="380" y="362" text-anchor="middle" font-size="14" font-weight="600" fill="#14532d">Tier 2: auto on low-risk</text>
+              <text x="380" y="381" text-anchor="middle" font-size="12" fill="#1f5b36">approval on high-risk</text>
+
+              <!-- tier 3 -->
+              <rect x="250" y="414" width="260" height="50" rx="10" fill="#fbeee5" stroke="#c2410c" stroke-width="1.8"/>
+              <text x="380" y="436" text-anchor="middle" font-size="14" font-weight="600" fill="#7c2d12">Tier 3: agent acts</text>
+              <text x="380" y="453" text-anchor="middle" font-size="12" fill="#9a3209">human-on-exception only</text>
+
+              <!-- edges -->
+              <line x1="380" y1="70" x2="380" y2="108" stroke="#7c8791" stroke-width="1.6" marker-end="url(#ar)" aria-hidden="true"/>
+              <line x1="380" y1="166" x2="380" y2="198" stroke="#7c8791" stroke-width="1.6" marker-end="url(#ar)" aria-hidden="true"/>
+              <!-- gate -> hold (no) -->
+              <line x1="470" y1="250" x2="558" y2="250" stroke="#7c8791" stroke-width="1.6" marker-end="url(#ar)" aria-hidden="true"/>
+              <text x="514" y="242" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7a5410">no</text>
+              <!-- hold loop back up to gate -->
+              <path d="M650,222 L650,180 L380,180 L380,200" fill="none" stroke="#cbb27a" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#ar)" aria-hidden="true"/>
+              <!-- gate -> tier 2 (yes) -->
+              <line x1="380" y1="300" x2="380" y2="336" stroke="#15803d" stroke-width="1.7" marker-end="url(#ar)" aria-hidden="true"/>
+              <text x="408" y="322" text-anchor="middle" font-size="11.5" font-weight="600" fill="#15803d">yes</text>
+              <!-- tier2 -> tier3 (yes again) -->
+              <line x1="380" y1="394" x2="380" y2="412" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ar)" aria-hidden="true"/>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#e6ecfb;border:1px solid #1d4ed8;"></i>Entry</span>
+            <span><i style="background:#e7f3ea;border:1px solid #15803d;"></i>Supervised tier</span>
+            <span><i style="background:#f7f0db;border:1px solid #a16207;"></i>Gate / hold</span>
+            <span><i style="background:#fbeee5;border:1px solid #c2410c;"></i>Autonomous tier</span>
+          </div>
+        </figure>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+        <p class="tk">The MVP is the smallest test of the biggest assumption: that a founder will adopt an agent they supervise, then let it run more on its own as it earns trust.</p>
+
+        <p><strong>Ship:</strong> automated bookkeeping for one narrow profile (say, a US-incorporated startup with a UK entity, already on Airwallex for payments), running in Tier 1: agent drafts, founder approves. Three things have to be in it.</p>
+
+        <ol class="steps">
+          <li>A <strong>review queue</strong> where the agent shows what it did and what it is unsure about.</li>
+          <li>A <strong>plain rationale on every action</strong>, so the founder sees why the agent categorized a transaction the way it did. <a class="src" href="https://ramp.com/blog/ramp-agents-announcement" target="_blank" rel="noopener">Ramp ships this as "every action comes with a rationale"</a>, and it is what makes the work auditable.</li>
+          <li>A clean <strong>escalation and recovery path</strong>: how the agent says "I am not sure," and how the founder corrects it so it learns.</li>
+        </ol>
+
+        <p><strong>Why bookkeeping first, by RICE:</strong> high reach (every user needs it), high impact (it is the daily pain), and largely reversible (a miscategorized transaction can be fixed, unlike a filed return). That keeps trust risk low while we prove the loop. Tax and payroll come later, once bookkeeping accuracy clears the bar, because their errors are harder to undo.</p>
+
+        <div class="note">
+          <p><strong>What the MVP deliberately leaves out:</strong> autonomous money movement, tax filing, payroll, multi-language support, and the broad "startups globally" audience. One narrow profile, one workflow, one trust tier. We earn the right to add the next layer with accuracy data, not a roadmap promise.</p>
+        </div>
+
+        <figure class="diagram" role="img" aria-label="Zero-to-one sequencing. Bookkeeping ships first as a supervised, reversible workflow. When its accuracy clears the bar, forecasting and reporting follow as read-only low-risk work. Once trust is established, tax and compliance and then payroll follow, both high-risk and approval-gated. Autonomous money movement is the highest risk and comes last, only when proven.">
+          <figcaption>Figure 2 &middot; Zero-to-one sequencing</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 760 250" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#7c8791"/>
+                </marker>
+              </defs>
+              <!-- root -->
+              <rect x="20" y="98" width="118" height="54" rx="10" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.6"/>
+              <text x="79" y="122" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">T:0</text>
+              <text x="79" y="139" text-anchor="middle" font-size="11.5" fill="#3c4d63">finance OS</text>
+
+              <!-- v1 -->
+              <rect x="170" y="92" width="130" height="66" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.8"/>
+              <text x="235" y="112" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">1 &middot; Bookkeeping</text>
+              <text x="235" y="129" text-anchor="middle" font-size="11" fill="#1f5b36">supervised,</text>
+              <text x="235" y="143" text-anchor="middle" font-size="11" fill="#1f5b36">reversible &middot; ship now</text>
+
+              <!-- v2 -->
+              <rect x="330" y="92" width="130" height="66" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.4"/>
+              <text x="395" y="112" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">2 &middot; Forecast</text>
+              <text x="395" y="129" text-anchor="middle" font-size="11" fill="#1f5b36">+ reporting</text>
+              <text x="395" y="143" text-anchor="middle" font-size="11" fill="#1f5b36">read-only, low risk</text>
+
+              <!-- v3 -->
+              <rect x="490" y="14" width="130" height="62" rx="10" fill="#efe9fb" stroke="#7c3aed" stroke-width="1.4"/>
+              <text x="555" y="34" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1d6e">3 &middot; Tax</text>
+              <text x="555" y="51" text-anchor="middle" font-size="11" fill="#5b2e86">+ compliance</text>
+              <text x="555" y="65" text-anchor="middle" font-size="11" fill="#5b2e86">approval-gated</text>
+
+              <!-- v4 -->
+              <rect x="490" y="92" width="130" height="62" rx="10" fill="#efe9fb" stroke="#7c3aed" stroke-width="1.4"/>
+              <text x="555" y="115" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1d6e">4 &middot; Payroll</text>
+              <text x="555" y="133" text-anchor="middle" font-size="11" fill="#5b2e86">high risk, gated</text>
+
+              <!-- v5 -->
+              <rect x="490" y="170" width="130" height="64" rx="10" fill="#fbeee5" stroke="#c2410c" stroke-width="1.8"/>
+              <text x="555" y="190" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">5 &middot; Money move</text>
+              <text x="555" y="207" text-anchor="middle" font-size="11" fill="#9a3209">highest risk,</text>
+              <text x="555" y="221" text-anchor="middle" font-size="11" fill="#9a3209">last &middot; when proven</text>
+
+              <!-- edges -->
+              <line x1="138" y1="125" x2="168" y2="125" stroke="#7c8791" stroke-width="1.6" marker-end="url(#ar2)" aria-hidden="true"/>
+              <line x1="300" y1="125" x2="328" y2="125" stroke="#15803d" stroke-width="1.6" marker-end="url(#ar2)" aria-hidden="true"/>
+              <text x="314" y="116" text-anchor="middle" font-size="9.5" fill="#15803d">clears bar</text>
+              <!-- v2 -> v3 -->
+              <path d="M460,118 L478,118 L478,45 L488,45" fill="none" stroke="#7c8791" stroke-width="1.5" marker-end="url(#ar2)" aria-hidden="true"/>
+              <text x="478" y="80" text-anchor="middle" font-size="9.5" fill="#5b2e86" transform="rotate(-90 478 80)">trust established</text>
+              <!-- v3 -> v4 -->
+              <line x1="555" y1="76" x2="555" y2="90" stroke="#7c8791" stroke-width="1.5" marker-end="url(#ar2)" aria-hidden="true"/>
+              <!-- v4 -> v5 -->
+              <line x1="555" y1="154" x2="555" y2="168" stroke="#7c8791" stroke-width="1.5" marker-end="url(#ar2)" aria-hidden="true"/>
+              <text x="640" y="200" text-anchor="middle" font-size="9.5" fill="#9a3209" transform="rotate(-90 640 200)">only when proven</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#e7f3ea;border:1px solid #15803d;"></i>Ship now / next</span>
+            <span><i style="background:#efe9fb;border:1px solid #7c3aed;"></i>Later, approval-gated</span>
+            <span><i style="background:#fbeee5;border:1px solid #c2410c;"></i>Highest risk, last</span>
+          </div>
+        </figure>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+        <p class="tk">North Star: weekly active founders whose books are closed by the agent with no manual rework.</p>
+        <p>It is the single number that best proxies real value. It rises only when a founder genuinely got their finance work done without doing it by hand. It passes the three tests: if it rises the customer truly won, it moves before revenue, and the team can influence it.</p>
+        <p>Guardrails and anti-metrics matter as much here, because in autonomous finance a vanity number can hide a trust failure.</p>
+
+        <figure class="diagram" role="img" aria-label="Metrics tree. The North Star is weekly active founders with agent-closed books and no rework. It is fed by three leading indicators: time to first agent-closed book, agent accuracy versus a review set, and activation rate from the existing Airwallex base. Two guardrails protect it: escalation rate, which should fall over time but never hit zero, and correction rate, the share of agent actions a human reverses. Two anti-metrics are named as things not to chase: raw agent actions taken, and time in app.">
+          <figcaption>Figure 3 &middot; Metrics tree</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 760 360" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#7c8791"/>
+                </marker>
+                <marker id="ar3d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#b9a9d8"/>
+                </marker>
+              </defs>
+
+              <!-- North star -->
+              <rect x="250" y="14" width="260" height="68" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2.4"/>
+              <text x="380" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">North Star</text>
+              <text x="380" y="56" text-anchor="middle" font-size="12" fill="#7a5410">Weekly active founders with</text>
+              <text x="380" y="72" text-anchor="middle" font-size="12" fill="#7a5410">books closed by agent, no rework</text>
+
+              <!-- leading row -->
+              <rect x="18" y="150" width="218" height="58" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.5"/>
+              <text x="127" y="172" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Leading: time to first</text>
+              <text x="127" y="189" text-anchor="middle" font-size="11.5" fill="#1f5b36">agent-closed book</text>
+              <text x="127" y="203" text-anchor="middle" font-size="10.5" fill="#42795a">signup to value</text>
+
+              <rect x="271" y="150" width="218" height="58" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.5"/>
+              <text x="380" y="172" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Leading: agent accuracy</text>
+              <text x="380" y="189" text-anchor="middle" font-size="11.5" fill="#1f5b36">% actions correct</text>
+              <text x="380" y="203" text-anchor="middle" font-size="10.5" fill="#42795a">vs review set</text>
+
+              <rect x="524" y="150" width="218" height="58" rx="10" fill="#e7f3ea" stroke="#15803d" stroke-width="1.5"/>
+              <text x="633" y="172" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Leading: activation rate</text>
+              <text x="633" y="189" text-anchor="middle" font-size="11.5" fill="#1f5b36">from existing</text>
+              <text x="633" y="203" text-anchor="middle" font-size="10.5" fill="#42795a">Airwallex base</text>
+
+              <!-- guardrails -->
+              <rect x="80" y="262" width="262" height="58" rx="10" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.5"/>
+              <text x="211" y="284" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">Guardrail: escalation rate</text>
+              <text x="211" y="301" text-anchor="middle" font-size="11" fill="#33507e">should fall over time, never to zero</text>
+
+              <rect x="418" y="262" width="262" height="58" rx="10" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.5"/>
+              <text x="549" y="284" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">Guardrail: correction rate</text>
+              <text x="549" y="301" text-anchor="middle" font-size="11" fill="#33507e">% agent actions a human reverses</text>
+
+              <!-- anti metrics -->
+              <rect x="18" y="334" width="350" height="22" rx="6" fill="#f8e8e6" stroke="#dc2626" stroke-width="1.2"/>
+              <text x="193" y="349" text-anchor="middle" font-size="11" font-weight="600" fill="#7f1d1d">Anti-metric: raw agent actions taken (volume is not value)</text>
+              <rect x="392" y="334" width="350" height="22" rx="6" fill="#f8e8e6" stroke="#dc2626" stroke-width="1.2"/>
+              <text x="567" y="349" text-anchor="middle" font-size="11" font-weight="600" fill="#7f1d1d">Anti-metric: time in app (goal is less founder time)</text>
+
+              <!-- edges: leading -> NS -->
+              <path d="M127,150 L127,110 L300,110 L356,84" fill="none" stroke="#15803d" stroke-width="1.5" marker-end="url(#ar3)" aria-hidden="true"/>
+              <line x1="380" y1="150" x2="380" y2="84" stroke="#15803d" stroke-width="1.5" marker-end="url(#ar3)" aria-hidden="true"/>
+              <path d="M633,150 L633,110 L460,110 L404,84" fill="none" stroke="#15803d" stroke-width="1.5" marker-end="url(#ar3)" aria-hidden="true"/>
+              <!-- guardrails -> NS (dashed, protect) -->
+              <path d="M211,262 L211,118 L356,90" fill="none" stroke="#9bb2e6" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3d)" aria-hidden="true"/>
+              <path d="M549,262 L549,118 L404,90" fill="none" stroke="#9bb2e6" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3d)" aria-hidden="true"/>
+              <text x="250" y="135" text-anchor="middle" font-size="10" fill="#33507e">protects</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#fef3c7;border:1px solid #d97706;"></i>North Star</span>
+            <span><i style="background:#e7f3ea;border:1px solid #15803d;"></i>Leading indicator</span>
+            <span><i style="background:#e6ecfb;border:1px solid #1d4ed8;"></i>Guardrail</span>
+            <span><i style="background:#f8e8e6;border:1px solid #dc2626;"></i>Anti-metric (do not chase)</span>
+          </div>
+        </figure>
+
+        <p>The trick with the guardrails: escalation rate should fall as the agent improves, but it should never hit zero, because zero escalation in autonomous finance means the agent stopped flagging things it should flag. Correction rate is the honest accuracy signal from real users, not a lab benchmark.</p>
+      </section>
+
+      <!-- BUSINESS -->
+      <section id="business" class="reveal" aria-labelledby="business-h">
+        <h2 class="kicker" id="business-h">Business impact</h2>
+        <p class="tk">T:0 ladders directly into Airwallex's core growth engine: multi-product customers are where the revenue already concentrates.</p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v">$1.3B</div>
+            <div class="l">annualized revenue as of March 2026, up 74% year over year</div>
+          </div>
+          <div class="stat">
+            <div class="v">90%+</div>
+            <div class="l">of that revenue from customers on more than one Airwallex product</div>
+          </div>
+          <div class="stat">
+            <div class="v">676,000</div>
+            <div class="l">businesses already on the platform to attach T:0 to</div>
+          </div>
+        </div>
+        <p style="margin-top:-2px;font-size:14px;color:var(--ink-faint);max-width:none;">Sources: <a class="src" href="https://www.airwallex.com/global/newsroom/airwallex-secures-320-million-in-series-h-funding-valuation-hits-11-billion" target="_blank" rel="noopener">Airwallex Series H, June 2026</a>.</p>
+
+        <p>That 90% number is the whole thesis for the existing-customer wedge, framed as a hypothesis I would test. T:0 is a new product to attach to the base, and if it raises the share of customers on two or more products, it compounds the exact dynamic driving today's growth. I would frame T:0's early revenue case as attach rate and retention lift on the existing base, which is cheaper to win and easier to measure, not net-new logos first.</p>
+
+        <p>The infrastructure that makes this credible is real: <a class="src" href="https://www.airwallex.com/us/blog/2025-eoy-mission-update" target="_blank" rel="noopener">80+ licenses, local transfers in 121 countries with SWIFT coverage in 207, 160+ local payment methods, and $1.2 billion saved for customers in FX and transfer costs in 2025</a>.</p>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+        <p class="tk">Listen first, sharpen the bet, then ship the supervised MVP and set a baseline.</p>
+
+        <div class="phase">
+          <span class="ph-tag">0 to 30 days &middot; Listen</span>
+          <h3>Discovery and constraints</h3>
+          <p>Run structured discovery with 15 to 20 founders and finance leads, half from the existing base, half net-new. I would use the Mom Test discipline: ask what they did the last time they closed their books, not whether they would use a tool. Read the private beta's usage and escalation data. Sit with the ML engineers on current per-workflow accuracy. Map the roadmap and find the real constraints, technical, legal, and organizational.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">30 to 60 days &middot; Sharpen and align</span>
+          <h3>Define the bar, land a quick win</h3>
+          <p>Pick the first narrow ICP from the data and write it down precisely. With engineering and legal, define what "accuracy" means per workflow and what a false positive versus a false negative costs. Set the bar that moves a workflow from Tier 1 to Tier 2. Quick win: instrument the beta so escalation rate and correction rate are visible, which they likely are not yet. Align engineering, design, data science, and commercial on the trust-first sequence.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">60 to 90 days &middot; Ship and baseline</span>
+          <h3>Supervised MVP to design partners</h3>
+          <p>Ship the supervised bookkeeping MVP to a small set of design-partner startups. Set the baseline on the North Star and the guardrails. Run the build-eval loop weekly with the ML team. Bring back a proposed roadmap grounded in real accuracy data: which workflow moves to which trust tier, and when.</p>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p class="tk">These are the open assumptions in the proposed work. I would test the first three in week one.</p>
+
+        <div class="risk">
+          <p class="rt">Founders will not tolerate a supervised agent</p>
+          <p class="rv">The whole MVP rests on a founder approving the agent's work at first. If supervision feels like more work than a spreadsheet, the loop fails. <b>Validate:</b> in discovery, watch how design-partner founders react to a clickable supervised flow, and whether they come back unprompted.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Accuracy is not yet high enough to move past Tier 1</p>
+          <p class="rv">If bookkeeping accuracy stays low, no workflow ever earns autonomy and the product stalls at "drafts you check." <b>Validate:</b> measure per-workflow accuracy against a labeled review set in the first 30 days, before promising any roadmap.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Regulatory liability on tax and compliance</p>
+          <p class="rv">Tax filing is a regulated activity in many jurisdictions. If T:0 files a wrong return, the liability owner has to be defined before launch. <b>Validate:</b> get a legal and product framework on tax liability and human sign-off before any tax workflow leaves Tier 1.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The existing base does not convert</p>
+          <p class="rv">The wedge assumes existing customers will try a finance OS from their payments provider. They may see it as out of scope. <b>Validate:</b> run a small activation test into one segment and measure try rate and activation, not just clicks.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">ICP too broad</p>
+          <p class="rv">"Startups globally" is too wide to reach product-market fit. A day-zero team in SF is a different user from a 50-person Series A in Singapore. <b>Validate:</b> commit to one narrow profile for the MVP and resist widening it until the loop works for that one.</p>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <p class="tk">Five questions for the team that would reshape the plan.</p>
+        <ol class="qs">
+          <li>What does the private-beta data already show on per-workflow accuracy and escalation rate? That single answer reshapes the whole sequence.</li>
+          <li>Are we building on foundation-model APIs or fine-tuned proprietary models for tax and accounting, and who owns that call? It has multi-year cost and speed implications.</li>
+          <li>Where does T:0's responsibility end and Airi's begin, given both were announced together? I want the scope boundary clear before I plan the roadmap.</li>
+          <li>On the existing base, is the goal attach-and-retain or net-new acquisition first, and what does commercial expect on timeline?</li>
+          <li>What is our stance when T:0's analysis suggests a customer should move payroll or restructure an entity in a way that reduces Airwallex revenue? I want the principle set before the agent surfaces it.</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I have spent six years building products in finance, banking, and now AI, and most of that work was the unglamorous part this role needs: getting people to trust a system that touches their money. I hold a STEM bachelor's in Computer Engineering, an MBA in Finance, and I finish my Master of Science in Information Management at the University of Washington in June 2026. I have shipped a finance product from zero to one and built an AI retrieval agent where the entire job was making the output trustworthy enough to act on. That combination, financial products plus the accuracy-and-trust layer for AI, is the center of this role.</p>
+
+        <div class="tbl-wrap">
+          <table class="fit">
+            <caption class="sr-only">What the role needs, mapped to what I have done</caption>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Build a finance product from zero to one</td>
+                <td>I built and scaled a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches, owning roadmap, prioritization, and partner integrations.</td>
+              </tr>
+              <tr>
+                <td>AI / ML / LLM fluency on real systems</td>
+                <td>I built a policy-conflict-detection AI agent for the City of Seattle on retrieval-augmented generation, evaluated five RAG platforms and four retrieval architectures on accuracy, groundedness, and hallucination, and owned ingestion for 9,000+ documents with quality gates for trustworthy retrieval.</td>
+              </tr>
+              <tr>
+                <td>The trust and human-in-the-loop layer for AI in finance</td>
+                <td>I led an internal AI assistant rollout to 15,000+ users in a bank with compliance and governance built in, reaching 100% policy compliance through a phased adoption strategy.</td>
+              </tr>
+              <tr>
+                <td>Discovery to launch on financial workflows</td>
+                <td>I owned discovery-to-launch of a finance budgeting app at Nomura, ran user research with 15+ stakeholders to define MVP scope, and drove a 30% reduction in spend.</td>
+              </tr>
+              <tr>
+                <td>Commercial judgment tied to product</td>
+                <td>I drove a firm-wide market-data sourcing program onto Tradeweb that delivered $700K in annual savings, and led operational-risk work for Global Markets that cut events 20% and losses 15%.</td>
+              </tr>
+              <tr>
+                <td>First-principles structuring under regulatory constraint</td>
+                <td>I ran a build-versus-buy evaluation across five platforms on capability, architecture, and cost, and structured retrieval for legal and policy text where a wrong answer is not acceptable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The through-line: I have built financial products people rely on, and I have built AI systems where the hard part was proving the output could be trusted. T:0 is exactly that intersection.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fname">Mayuresh More</div>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+<script>
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll (enhancement only; content visible by default without JS)
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length){
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){
+            if (current) current.removeAttribute('aria-current');
+            var a = map[e.target.id];
+            if (a){ a.setAttribute('aria-current','true'); current = a; }
+          }
+        });
+      }, { rootMargin: '-20% 0px -72% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
