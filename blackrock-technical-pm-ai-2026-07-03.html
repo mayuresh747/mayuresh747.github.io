@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More. Technical Product Manager, AI and Enterprise Platforms at BlackRock</title>
+<style>
+  :root{
+    --bg:#f4f1ea;
+    --paper:#fffdf7;
+    --ink:#1b1815;
+    --ink-soft:#433c35;
+    --ink-faint:#867c70;
+    --line:#e6ddce;
+    --line-soft:#f0e9dd;
+    --accent:#8c2f39;        /* deep oxblood */
+    --accent-deep:#6d222b;
+    --accent-wash:#f5e7e7;
+    --ok:#15803d;
+    --ok-wash:#e7f3ea;
+    --blue:#1d4ed8;
+    --blue-wash:#e6ecfb;
+    --warn:#a16207;
+    --warn-wash:#f7f0db;
+    --gold:#b45309;
+    --gold-wash:#fdeecb;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:28px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* faint paper vignette */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(1200px 600px at 80% -8%, rgba(140,47,57,.05), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(29,78,216,.035), transparent 60%);
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:13px;z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-deep);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  /* ---------- shared wrap ---------- */
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    padding:64px 0 30px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5.6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:33em;
+    margin:16px 0 0;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:20px 0 0;
+  }
+
+  /* ---------- contents disclosure (mobile) ---------- */
+  details.toc-mobile{
+    margin:26px 0 0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  details.toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none;}
+  details.toc-mobile summary::after{content:"+";font-size:17px;color:var(--accent);}
+  details.toc-mobile[open] summary::after{content:"\2212";}
+  details.toc-mobile ol{
+    margin:0;padding:4px 18px 16px 34px;
+    font-family:var(--display);font-size:15px;
+  }
+  details.toc-mobile li{margin:7px 0;}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none;}
+  details.toc-mobile a:hover{color:var(--accent);}
+
+  /* ---------- main layout: rail + content ---------- */
+  .layout{
+    display:block;
+    padding-bottom:40px;
+  }
+  nav.rail{display:none;}
+  main{display:block;}
+
+  /* ---------- sections ---------- */
+  section{
+    padding:34px 0;
+    border-top:1px solid var(--line-soft);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2.kicker{font-size:16px;}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 14px;
+    max-width:20em;
+  }
+
+  p{margin:0 0 16px;max-width:38em;}
+  p.tk{ /* one-line first-person takeaway */
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(18px,2.6vw,22px);
+    line-height:1.34;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:33em;
+  }
+  strong{font-weight:600;color:var(--ink);}
+  em{color:var(--ink-soft);}
+  code{
+    font-family:var(--mono);font-size:.86em;
+    background:var(--line-soft);
+    padding:1px 6px;border-radius:5px;color:var(--ink-soft);
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:24px 0 8px;
+  }
+
+  /* subtle source links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+    font-size:.94em;
+  }
+  a.src:hover,a.src:focus-visible{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:42em;}
+  ul.clean li{
+    position:relative;
+    padding:8px 0 8px 26px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:18px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+  }
+  ol.steps{
+    counter-reset:s;list-style:none;padding:0;margin:0 0 16px;max-width:42em;
+  }
+  ol.steps li{
+    counter-increment:s;
+    position:relative;
+    padding:6px 0 16px 46px;
+    margin:0;
+  }
+  ol.steps li::before{
+    content:counter(s);
+    position:absolute;left:0;top:3px;
+    width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--accent-wash);
+    color:var(--accent-deep);
+    border:1px solid #ecd2d4;
+    border-radius:50%;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+  }
+
+  /* JTBD quote cards */
+  .jtbd{
+    margin:18px 0;
+    display:grid;
+    gap:12px;
+  }
+  .jtbd blockquote{
+    margin:0;
+    padding:16px 18px 16px 20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .jtbd .jlab{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:7px;
+  }
+  .jtbd .jrole{color:var(--accent-deep);}
+  .jtbd p{margin:0;font-style:italic;color:var(--ink-soft);max-width:none;}
+
+  /* tables */
+  .tbl-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:20px 0;
+    background:var(--paper);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:620px;
+    font-family:var(--display);
+    font-size:14.5px;
+  }
+  table.fit{min-width:600px;}
+  th,td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  thead th{
+    background:#efe7d8;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.num{font-family:var(--mono);white-space:nowrap;}
+  tr.win td{background:var(--accent-wash);}
+  tr.win td:first-child{color:var(--accent-deep);}
+  td .rice{font-family:var(--mono);font-weight:600;}
+
+  /* stat row */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+    gap:14px;
+    margin:20px 0;
+  }
+  .stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .v{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-.02em;
+    color:var(--accent-deep);
+    line-height:1.05;
+  }
+  .stat .l{
+    font-family:var(--display);
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:7px;
+    line-height:1.35;
+  }
+
+  /* callout */
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .note p{max-width:none;}
+  .note p:last-child{margin-bottom:0;}
+
+  /* diagrams */
+  figure.diagram{
+    margin:24px 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  .dlabel{font-family:var(--display);}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:10px 16px;
+    margin-top:14px;
+    font-family:var(--display);font-size:13px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;}
+
+  /* phased plan */
+  .phase{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);
+    font-size:12px;font-weight:600;
+    letter-spacing:.1em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .phase h3{margin:6px 0 8px;}
+  .phase p{margin:0;max-width:none;font-size:17px;color:var(--ink-soft);}
+
+  /* questions */
+  ol.qs{counter-reset:q;list-style:none;padding:0;margin:14px 0;max-width:44em;}
+  ol.qs li{
+    counter-increment:q;
+    position:relative;
+    padding:14px 0 14px 50px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);
+  }
+  ol.qs li:last-child{border-bottom:none;}
+  ol.qs li::before{
+    content:"Q" counter(q);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.04em;
+  }
+
+  /* risks */
+  .risk{
+    border:1px solid var(--line);
+    border-left:3px solid var(--warn);
+    border-radius:8px;
+    background:var(--paper);
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .risk .rt{
+    font-family:var(--display);font-weight:600;font-size:16.5px;
+    color:var(--ink);margin:0 0 5px;
+  }
+  .risk .rv{margin:0;font-size:16px;color:var(--ink-soft);max-width:none;}
+  .risk .rv b{color:var(--ok);font-weight:600;}
+
+  /* fit intro */
+  .fit-intro{max-width:42em;}
+
+  /* reveal animation (default visible; only animates with JS + motion ok) */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+  @media print{ .reveal{opacity:1 !important;transform:none !important;} }
+
+  /* footer */
+  footer.foot{
+    border-top:1px solid var(--line);
+    padding:34px 0 56px;
+    margin-top:10px;
+  }
+  .foot .fname{
+    font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);
+  }
+  .contacts{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    margin-top:14px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contacts a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* ---------- desktop: rail layout ---------- */
+  @media (min-width:920px){
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout .wrap{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .rail-head{
+      font-family:var(--mono);
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:14px;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    .rail a:hover{color:var(--ink-soft);border-color:var(--ink-faint);}
+    .rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-color:var(--accent);
+      font-weight:600;
+    }
+    details.toc-mobile{display:none;}
+    main{min-width:0;}
+    .stats{grid-template-columns:repeat(auto-fit,minmax(168px,1fr));}
+  }
+
+  /* ---------- mobile diagram scroll ---------- */
+  @media (max-width:600px){
+    body{font-size:18px;}
+    figure.diagram .svg-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    figure.diagram.wide .svg-scroll svg{min-width:720px;}
+    figure.diagram.tree .svg-scroll svg{min-width:600px;}
+    figure.diagram figcaption{padding-right:60px;}
+    figure.diagram::after{
+      content:"scroll \2192";
+      position:absolute;top:18px;right:16px;
+      font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      color:var(--ink-faint);
+    }
+    header.masthead{padding-top:46px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product Pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the internal-AI adoption problem for the Technical Product Manager, AI and Enterprise Platforms role at BlackRock.</p>
+    <p class="prepared">Prepared July 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#operating">Operating model</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="wrap">
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#operating">Operating model</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">Here's my bet: the scarce skill in this role is not shipping another enterprise chatbot. It is making internal AI provably worth it and defensible to a regulator, so the tools survive past pilot.</p>
+        <p>I would attack the roughly 95% pilot-stall rate <a class="src" href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" target="_blank" rel="noopener">(MIT, via Fortune 2025)</a> by standing up a governance and ROI scorecard first, then shipping automation that can pass it. The measure I care about is the count of internal AI initiatives that are in real use, ROI-proven, and cleared on model risk, not the count of pilots launched.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p class="tk">My read: BlackRock does not have too little internal automation. It has the opposite risk, too many ungoverned AI tools that never prove their worth.</p>
+        <p>The human version: an ops analyst still cannot get a fast, trustworthy answer, and the leader who funded the tool still cannot prove it earned its keep. Everyone is busy; nobody can point to the win.</p>
+        <ul class="clean">
+          <li><strong>Who hurts.</strong> Internal teams (ops, infrastructure, compliance) who need fast, trustworthy answers to do their jobs. The Technology Product leaders who fund these tools and now have to defend them. And the PM who owns the roadmap across 10+ engineering teams without managing any of them.</li>
+          <li><strong>What breaks.</strong> AI tools get built and launched, then stall before they show measurable impact or a defensible risk story.</li>
+          <li><strong>Root cause.</strong> Internal builds succeed only about a third as often as vendor-bought or partner-built tools <a class="src" href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" target="_blank" rel="noopener">(MIT, via Fortune 2025)</a>. Each app gets its own AI bolted on: "Agents are deployed without governance, and intelligence is disconnected from execution" <a class="src" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-turns-enterprise-AI-chaos-into-control-with-the-platform-for-governed-autonomous-work/default.aspx" target="_blank" rel="noopener">(ServiceNow 2026)</a>. And the regulatory bar just moved: the Federal Reserve's April 2026 model-risk rule (SR 26-2, replacing a 15-year-old standard) applies to banks with over $30 billion in assets <a class="src" href="https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm" target="_blank" rel="noopener">(Federal Reserve 2026)</a>.</li>
+          <li><strong>How people cope, and why it fails.</strong> The default is to launch more pilots and add more agents. Enterprises now run about 12 AI agents each, headed to 20, and more than 4 in 5 IT leaders say the sprawl itself creates more complexity than value <a class="src" href="https://www.ciodive.com/news/it-leaders-grapple-ai-agent-sprawl-integration/811411/" target="_blank" rel="noopener">(Salesforce Connectivity Benchmark, via CIO Dive 2026)</a>. Gartner expects over 40% of agentic AI projects to be canceled by end of 2027 on cost, unclear value, or weak risk controls <a class="src" href="https://www.predictiveanalyticsworld.com/machinelearningtimes/gartner-predicts-over-40-of-agentic-ai-projects-will-be-canceled-by-end-of-2027/13875/" target="_blank" rel="noopener">(Gartner, via PAW 2025)</a>.</li>
+          <li><strong>What it costs.</strong> Killed initiatives, wasted engineering spend, and regulatory exposure. This is board-visible: BlackRock's technology services and subscription revenue grew 22% year over year to $530 million last quarter, against $13.9 trillion in AUM <a class="src" href="https://www.stocktitan.net/sec-filings/BLK/8-k-black-rock-inc-reports-material-event-6cb2a32ffcb4.html" target="_blank" rel="noopener">(Q1 2026 filing, via StockTitan)</a>. When technology is a headline number every quarter, an internal-AI program that cannot show a return is a program that gets cut.</li>
+        </ul>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p class="tk">My read: this is a two-sided internal problem. The daily user wants a trustworthy answer. The funder wants proof. The tool has to serve both or it dies.</p>
+
+        <div class="jtbd">
+          <blockquote>
+            <span class="jlab">Primary user &middot; <span class="jrole">internal knowledge worker (ops or infrastructure analyst)</span></span>
+            <p>"When I hit a question I cannot answer from memory (a policy, an approval path, which system owns a process), I want a correct answer with its source, so I can act without waiting on a person or risking a compliance miss."</p>
+          </blockquote>
+          <blockquote>
+            <span class="jlab">Economic buyer &middot; <span class="jrole">Technology Product leader who funds the initiative</span></span>
+            <p>"When I fund an AI tool, I want proof it moved a number and will not create regulatory exposure, so I can defend it on an earnings-relevant technology line."</p>
+          </blockquote>
+        </div>
+
+        <p>The knowledge worker fires the current fix (Slack a colleague, dig through a wiki, file a ticket) the moment something answers faster and can be trusted. Trust is the switching cost, not speed.</p>
+
+        <ul class="clean">
+          <li><strong>Gatekeeper: compliance and model risk.</strong> Under SR 26-2, this function can veto. A tool that touches a regulated decision without a model-risk record does not ship. The buyer's job has an emotional layer too: they want to fund AI without being the person who shipped the ungoverned agent a regulator later flags.</li>
+          <li><strong>The 10+ engineering leads who build.</strong> Their job is social: a clear operating model so AI work is planned capacity, not unplanned risk.</li>
+        </ul>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p class="tk">My read: of everything this role could fund, the highest-leverage move is the layer every AI initiative has to pass through, not any single new tool.</p>
+        <p>Here is the reasoning, scored on the same scales. Reach is internal AI initiatives touched per quarter (using the industry figure of ~12 live agents per enterprise as a stand-in), impact on a 0.25 to 3 scale, effort in person-months (people times months).</p>
+
+        <div class="tbl-wrap">
+          <table>
+            <caption class="sr-only">RICE comparison of four bets this role could fund</caption>
+            <thead>
+              <tr><th scope="col">Bet</th><th scope="col">Reach<br>(init./qtr)</th><th scope="col">Impact</th><th scope="col">Confidence</th><th scope="col">Effort<br>(person-mo)</th><th scope="col">RICE</th></tr>
+            </thead>
+            <tbody>
+              <tr class="win"><td><strong>Operating model: intake + RACI across the 10+ teams</strong></td><td class="num">10</td><td class="num">1</td><td class="num">100%</td><td class="num">2</td><td class="num"><span class="rice">5.0</span></td></tr>
+              <tr><td>Governance + ROI scorecard (the evidence layer every tool reports into)</td><td class="num">12</td><td class="num">3</td><td class="num">80%</td><td class="num">6</td><td class="num"><span class="rice">4.8</span></td></tr>
+              <tr><td>Model-risk / compliance intake path (SR 26-2 ready)</td><td class="num">12</td><td class="num">2</td><td class="num">80%</td><td class="num">5</td><td class="num"><span class="rice">3.8</span></td></tr>
+              <tr><td>Build one more flagship chatbot first</td><td class="num">1</td><td class="num">2</td><td class="num">50%</td><td class="num">8</td><td class="num"><span class="rice">0.1</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>RACI means naming, for each step, who is responsible, accountable, consulted, and informed. Two things fall out. Building one more chatbot before the evidence layer exists scores near zero, because it touches one initiative and carries the same 50/50 odds of stalling as the industry base rate. The operating model scores highest because it is cheap and unblocks every team. The governance and ROI scorecard and the model-risk intake are the load every tool has to carry, so they stay in the first cut regardless of raw score. They are not competing with the tools they enable.</p>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p class="tk">My read: this is a build-versus-buy call before it is a build call, and the evidence says be careful about building.</p>
+        <ol class="steps">
+          <li><strong>Build the control plane in-house.</strong> A BlackRock-owned registry plus governance and ROI scorecard. Most control, but internal builds carry the lower success rate above.</li>
+          <li><strong>Adopt a vendor control plane and wrap it with BlackRock policy.</strong> ServiceNow (named as a preferred skill in the JD) is positioning its AI Control Tower for exactly governed, observable agents. Buy the plumbing, build the model-risk policy and the executive scorecard on top.</li>
+          <li><strong>Federated.</strong> A thin central standard (one intake, one ROI scorecard, one model-risk template) with the 10+ teams self-serving against it. Lightest to stand up, weakest control until the standard has teeth.</li>
+        </ol>
+        <p>How I would decide: run a real bake-off against BlackRock's own regulated criteria (capability, ingestion and query cost, groundedness, model-risk fit), not a slideware comparison. My prior leans toward direction 2 plus a federated standard: buy the governed-execution plumbing, own the policy and the leadership-facing scorecard, because the MIT data says the in-house build is where these efforts most often die.</p>
+        <div class="note"><p><strong>Groundedness</strong> here means whether an answer is backed by a real source rather than made up.</p></div>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+        <p class="tk">My read: the smallest test of the biggest assumption, that a governed ROI scorecard actually changes a funding decision, and that a model-risk intake unblocks shipping rather than blocking it.</p>
+        <p><strong>Ship:</strong> take one existing, high-traffic internal AI tool (an IT or ops helpdesk assistant is the likely candidate). Instrument it end to end: weekly active users, manual hours removed, deflection (share of questions answered without a human), and answer groundedness. Attach a one-page model-risk record that would stand up to SR 26-2 scrutiny. Put that single scorecard in front of the leaders who fund it.</p>
+        <div class="note"><p><strong>Leave out, on purpose:</strong> firm-wide rollout, the full initiative registry, an automated intake, and the multi-team RACI. Those come after the scorecard proves it moves a decision.</p></div>
+        <p><strong>Why this first:</strong> highest confidence per unit of effort. It reuses a tool that already exists, so effort is low, and it tests the one belief the whole thesis rests on before anyone funds a platform.</p>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+        <p class="tk">My read: the honest North Star is not pilots launched, it is initiatives that are used, worth it, and defensible at once.</p>
+        <p><strong>North Star: governed, in-production AI initiatives.</strong> The monthly count of internal AI initiatives that are (a) in active use past pilot, (b) carry a current, signed ROI record, and (c) carry a current model-risk sign-off. It passes the three tests: if it rises the firm genuinely won, it moves before the technology-services line does, and this role's operating model directly drives it.</p>
+
+        <figure class="diagram tree" role="img" aria-label="Metrics tree. Four leading indicators (weekly active users per tool, manual hours removed per week, answer groundedness rate, and model-risk intake cycle time) feed three lagging outcomes (initiatives live past pilot, initiatives with a signed ROI record, and tools with a current model-risk sign-off), which roll up to the North Star: governed, in-production AI initiatives.">
+          <figcaption>Figure 1 &middot; Metrics tree</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 820 300" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="mtg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#46a06b"/></marker>
+                <marker id="mtn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c98a35"/></marker>
+              </defs>
+
+              <text x="110" y="16" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3f7d57" letter-spacing="0.08em">LEADING INDICATORS</text>
+              <text x="428" y="16" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3a53a8" letter-spacing="0.08em">LAGGING OUTCOMES</text>
+
+              <!-- leading (green) -->
+              <rect x="14" y="28" width="192" height="54" rx="9" fill="#e6f2ea" stroke="#2f9457" stroke-width="1.5"/>
+              <text x="110" y="51" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Weekly active users</text>
+              <text x="110" y="69" text-anchor="middle" font-size="11" fill="#3f7d57">per tool</text>
+
+              <rect x="14" y="94" width="192" height="54" rx="9" fill="#e6f2ea" stroke="#2f9457" stroke-width="1.5"/>
+              <text x="110" y="117" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Manual hours removed</text>
+              <text x="110" y="135" text-anchor="middle" font-size="11" fill="#3f7d57">per week</text>
+
+              <rect x="14" y="160" width="192" height="54" rx="9" fill="#e6f2ea" stroke="#2f9457" stroke-width="1.5"/>
+              <text x="110" y="183" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Answer groundedness</text>
+              <text x="110" y="201" text-anchor="middle" font-size="11" fill="#3f7d57">rate</text>
+
+              <rect x="14" y="226" width="192" height="54" rx="9" fill="#e6f2ea" stroke="#2f9457" stroke-width="1.5"/>
+              <text x="110" y="249" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Model-risk intake</text>
+              <text x="110" y="267" text-anchor="middle" font-size="11" fill="#3f7d57">cycle time</text>
+
+              <!-- lagging (blue) -->
+              <rect x="330" y="40" width="196" height="58" rx="9" fill="#e8ecfa" stroke="#3b62c9" stroke-width="1.5"/>
+              <text x="428" y="65" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a8a">Initiatives live</text>
+              <text x="428" y="83" text-anchor="middle" font-size="11" fill="#3a53a8">past pilot</text>
+
+              <rect x="330" y="122" width="196" height="58" rx="9" fill="#e8ecfa" stroke="#3b62c9" stroke-width="1.5"/>
+              <text x="428" y="147" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a8a">Initiatives with a</text>
+              <text x="428" y="165" text-anchor="middle" font-size="11" fill="#3a53a8">signed ROI record</text>
+
+              <rect x="330" y="204" width="196" height="58" rx="9" fill="#e8ecfa" stroke="#3b62c9" stroke-width="1.5"/>
+              <text x="428" y="229" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a8a">Tools with a current</text>
+              <text x="428" y="247" text-anchor="middle" font-size="11" fill="#3a53a8">model-risk sign-off</text>
+
+              <!-- north star (gold) -->
+              <rect x="622" y="92" width="184" height="118" rx="12" fill="#fdeecb" stroke="#d08a2e" stroke-width="2.2"/>
+              <text x="714" y="126" text-anchor="middle" font-size="10.5" font-weight="700" fill="#a9691a" letter-spacing="0.1em">NORTH STAR</text>
+              <text x="714" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="#6f4410">Governed,</text>
+              <text x="714" y="169" text-anchor="middle" font-size="13" font-weight="600" fill="#6f4410">in-production</text>
+              <text x="714" y="188" text-anchor="middle" font-size="13" font-weight="600" fill="#6f4410">AI initiatives</text>
+
+              <!-- leading -> lagging -->
+              <line x1="206" y1="55" x2="328" y2="69" stroke="#46a06b" stroke-width="1.5" marker-end="url(#mtg)" aria-hidden="true"/>
+              <line x1="206" y1="121" x2="328" y2="151" stroke="#46a06b" stroke-width="1.5" marker-end="url(#mtg)" aria-hidden="true"/>
+              <line x1="206" y1="187" x2="328" y2="222" stroke="#46a06b" stroke-width="1.5" marker-end="url(#mtg)" aria-hidden="true"/>
+              <line x1="206" y1="253" x2="328" y2="248" stroke="#46a06b" stroke-width="1.5" marker-end="url(#mtg)" aria-hidden="true"/>
+
+              <!-- lagging -> north star -->
+              <line x1="526" y1="69" x2="620" y2="128" stroke="#c98a35" stroke-width="1.5" marker-end="url(#mtn)" aria-hidden="true"/>
+              <line x1="526" y1="151" x2="620" y2="151" stroke="#c98a35" stroke-width="1.5" marker-end="url(#mtn)" aria-hidden="true"/>
+              <line x1="526" y1="233" x2="620" y2="174" stroke="#c98a35" stroke-width="1.5" marker-end="url(#mtn)" aria-hidden="true"/>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#e6f2ea;border:1px solid #2f9457;"></i>Leading</span>
+            <span><i style="background:#e8ecfa;border:1px solid #3b62c9;"></i>Lagging</span>
+            <span><i style="background:#fdeecb;border:1px solid #d08a2e;"></i>North Star</span>
+          </div>
+        </figure>
+
+        <h3>Guardrails</h3>
+        <ul class="clean">
+          <li>Answer groundedness stays above an agreed bar, so we never buy adoption with a tool that makes things up.</li>
+          <li>Model-risk sign-off coverage stays at 100% for any tool touching a regulated decision.</li>
+        </ul>
+        <div class="note"><p><strong>Anti-metrics, named so no one chases them:</strong> number of pilots launched, number of agents deployed, raw message or session volume, and time spent in the tool. Each looks like progress while value leaks.</p></div>
+      </section>
+
+      <!-- OPERATING MODEL -->
+      <section id="operating" class="reveal" aria-labelledby="operating-h">
+        <h2 class="kicker" id="operating-h">Operating model</h2>
+        <p>Here's the loop the work creates: every initiative moves from intake, through a build-or-buy call and a model-risk record, out to users, and into a leadership scorecard that feeds the next funding decision.</p>
+
+        <figure class="diagram wide" role="img" aria-label="Governed AI initiative flow. An initiative flows from idea intake with a named RACI owner, through a build-or-buy decision that branches to either adopting a vendor control plane or building against shared standards, then both paths reconverge at a model-risk and compliance record, ship to users, and an ROI and adoption scorecard, which feeds a leadership funding decision that loops back to intake to fund or kill the next round.">
+          <figcaption>Figure 2 &middot; Governed AI initiative flow</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 840 340" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a7f6d"/></marker>
+                <marker id="fad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8c2f39"/></marker>
+              </defs>
+
+              <!-- intake -->
+              <rect x="16" y="62" width="116" height="58" rx="10" fill="#f6f0e4" stroke="#c3b49a" stroke-width="1.5"/>
+              <text x="74" y="85" text-anchor="middle" font-size="12" font-weight="600" fill="#433c35">Idea intake</text>
+              <text x="74" y="103" text-anchor="middle" font-size="10.5" fill="#6b6252">RACI owner named</text>
+
+              <!-- decide diamond -->
+              <path d="M200,54 L252,91 L200,128 L148,91 Z" fill="#f5e7e7" stroke="#8c2f39" stroke-width="1.6"/>
+              <text x="200" y="87" text-anchor="middle" font-size="12" font-weight="600" fill="#6d222b">Build</text>
+              <text x="200" y="103" text-anchor="middle" font-size="12" font-weight="600" fill="#6d222b">or buy</text>
+
+              <!-- adopt (buy, top) -->
+              <rect x="300" y="18" width="150" height="50" rx="9" fill="#e8ecfa" stroke="#3b62c9" stroke-width="1.5"/>
+              <text x="375" y="39" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a8a">Adopt vendor</text>
+              <text x="375" y="56" text-anchor="middle" font-size="11" fill="#3a53a8">control plane</text>
+
+              <!-- construct (build, bottom) -->
+              <rect x="300" y="110" width="150" height="50" rx="9" fill="#e6f2ea" stroke="#2f9457" stroke-width="1.5"/>
+              <text x="375" y="131" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Build against</text>
+              <text x="375" y="148" text-anchor="middle" font-size="11" fill="#3f7d57">shared standards</text>
+
+              <!-- risk gate -->
+              <rect x="470" y="62" width="140" height="58" rx="10" fill="#f7f0db" stroke="#a16207" stroke-width="1.6"/>
+              <text x="540" y="85" text-anchor="middle" font-size="12" font-weight="600" fill="#6b3f0c">Model-risk and</text>
+              <text x="540" y="103" text-anchor="middle" font-size="11" fill="#7a5410">compliance record</text>
+
+              <!-- ship -->
+              <rect x="644" y="62" width="110" height="58" rx="10" fill="#f6f0e4" stroke="#c3b49a" stroke-width="1.5"/>
+              <text x="699" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#433c35">Ship to users</text>
+
+              <!-- score (below ship) -->
+              <rect x="644" y="222" width="110" height="58" rx="10" fill="#f6f0e4" stroke="#c3b49a" stroke-width="1.5"/>
+              <text x="699" y="245" text-anchor="middle" font-size="12" font-weight="600" fill="#433c35">ROI and</text>
+              <text x="699" y="263" text-anchor="middle" font-size="11" fill="#6b6252">adoption scorecard</text>
+
+              <!-- board (left of score) -->
+              <rect x="470" y="222" width="132" height="58" rx="10" fill="#f5e7e7" stroke="#8c2f39" stroke-width="1.6"/>
+              <text x="536" y="245" text-anchor="middle" font-size="12" font-weight="600" fill="#6d222b">Leadership</text>
+              <text x="536" y="263" text-anchor="middle" font-size="11" fill="#843640">funding decision</text>
+
+              <!-- edges -->
+              <line x1="132" y1="91" x2="146" y2="91" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <line x1="226" y1="72" x2="298" y2="50" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <text x="255" y="44" text-anchor="middle" font-size="10" fill="#867c70">buy</text>
+              <line x1="226" y1="110" x2="298" y2="130" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <text x="255" y="150" text-anchor="middle" font-size="10" fill="#867c70">build</text>
+              <line x1="450" y1="43" x2="470" y2="78" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <line x1="450" y1="135" x2="470" y2="104" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <line x1="610" y1="91" x2="642" y2="91" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <line x1="699" y1="120" x2="699" y2="220" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+              <line x1="644" y1="251" x2="604" y2="251" stroke="#8a7f6d" stroke-width="1.5" marker-end="url(#fa)" aria-hidden="true"/>
+
+              <!-- feedback: board -> intake -->
+              <path d="M536,280 V316 H74 V122" fill="none" stroke="#8c2f39" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#fad)" aria-hidden="true"/>
+              <text x="300" y="310" text-anchor="middle" font-size="10.5" font-weight="600" fill="#8c2f39">fund or kill</text>
+            </svg>
+          </div>
+        </figure>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+        <p class="tk">My read: listen before I build anything, because the real constraints here are political and regulatory, not technical.</p>
+
+        <div class="phase">
+          <span class="ph-tag">0 to 30 days &middot; Listen</span>
+          <p>Meet the 10+ engineering leads, compliance and model risk, and the ops stakeholders. Inventory every live internal AI tool and pilot. Pull whatever adoption data already exists. Read the current model-risk process against SR 26-2 and find out what "FIPS-compliant" (a federal security standard) actually gates here. Map who can veto.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">30 to 60 days &middot; Quick win and sharpen</span>
+          <p>Ship the ROI and model-risk scorecard for one existing tool. Run discovery interviews to rank the real friction. Publish a thin operating model (one intake, one RACI) that the teams agree to rather than one I impose. Kick off the build-versus-buy bake-off.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">60 to 90 days &middot; Validate the first bet</span>
+          <p>Put the scorecard in front of a real funding decision and watch whether it changes the call. Set the North Star baseline. Propose the governed-adoption roadmap and the platform recommendation.</p>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p class="tk">My read: the thesis rests on four assumptions about the work, and each is testable early.</p>
+
+        <div class="risk">
+          <p class="rt">Leaders may not change a decision just because they have a scorecard.</p>
+          <p class="rv">This is the core assumption. <b>Validate:</b> run the MVP scorecard against one live funding decision in the first weeks. If it does not move the call, the metric is wrong and I rebuild it.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">A model-risk intake could become the bottleneck it was meant to prevent.</p>
+          <p class="rv">Governance that slows shipping kills adoption. <b>Validate:</b> time-box the intake, measure its cycle time as a first-class metric, and co-design it with compliance so it clears tools rather than parking them.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Buying the control plane may not fit BlackRock's regulated constraints.</p>
+          <p class="rv"><b>Validate:</b> a real bake-off scored on model-risk fit and cost against actual internal policy documents, not a vendor demo.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The operating model can be ignored, since roadmap authority is not org authority over the 10+ teams.</p>
+          <p class="rv"><b>Validate:</b> co-author the RACI with the engineering leads and check whether the intake is actually used within 30 days. Adoption of the process is the leading signal that the rest will work.</p>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <p class="tk">Here are the answers that would change my plan.</p>
+        <ol class="qs">
+          <li>Does this role own the build-versus-buy decision on the control plane, or is a vendor already chosen?</li>
+          <li>Where does "AI and Enterprise Platforms" end and the Digital Solutions org (Copilot, ChatGPT, collaboration tooling) begin? Who owns the employee-facing assistant?</li>
+          <li>Under SR 26-2, which internal AI tools are already in scope as "models," and who signs off today?</li>
+          <li>What does the funder count as success first: hours saved, adoption, or a defensible risk story?</li>
+          <li>Do the 10+ engineering teams share one definition of "shipped," or does each define done differently?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I'm a product manager with 6+ years across technology, finance, and AI. I'm finishing a Master of Science in Information Management at the University of Washington (June 2026), on top of an MBA in Finance and a Bachelor of Engineering in Computer Engineering. The through-line in my work is this role's exact problem: getting AI and automation adopted inside regulated banks, with the governance to make it stick.</p>
+
+        <div class="tbl-wrap">
+          <table class="fit">
+            <caption class="sr-only">What the role needs, mapped to what I have done</caption>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ship AI chatbots and drive adoption in a regulated bank</td>
+                <td>I led the rollout of an internal AI assistant to 15,000+ users at Nomura, building compliance and governance into a phased bank-wide adoption and reaching 100% policy compliance.</td>
+              </tr>
+              <tr>
+                <td>Scale automation and reduce manual operational effort</td>
+                <td>At Lentra I scaled a digital lending platform from MVP to 25,000+ users across 3,000+ branches; credit-bureau API integrations cut manual review 35% and lifted decision accuracy 10%.</td>
+              </tr>
+              <tr>
+                <td>Build dashboards that support leadership decisions</td>
+                <td>I shipped a real-time reporting dashboard for senior management that cut manual report compilation by 40+ hours a week and surfaced funnel bottlenecks across branches.</td>
+              </tr>
+              <tr>
+                <td>Prove ROI and cost impact</td>
+                <td>At Nomura I ran a firm-wide market-data sourcing program (moving to Tradeweb from Refinitiv) for $700K in annual savings, and a Budget-versus-Actual rollout that cut spend 30%.</td>
+              </tr>
+              <tr>
+                <td>Build-versus-buy on AI platforms</td>
+                <td>For the City of Seattle policy agent I evaluated 5+ retrieval platforms (Pinecone, Vertex AI, Azure AI, Bedrock, Vectara) and 4 architectures on capability, cost, groundedness, and hallucination.</td>
+              </tr>
+              <tr>
+                <td>Governance and risk in regulated environments</td>
+                <td>I led operational risk transformation for Global Markets, cutting risk events 20% and losses 15% across FI/FX, tech, audit, and risk.</td>
+              </tr>
+              <tr>
+                <td>Hands-on with Python, SQL, APIs, ServiceNow</td>
+                <td>I work in SQL, Python, and APIs directly, built RAG, knowledge-graph, and vector-search systems, and use ServiceNow.</td>
+              </tr>
+              <tr>
+                <td>Coordinate distributed teams without direct authority</td>
+                <td>I owned roadmap, remediation, and preventive controls across cross-functional teams spanning FI/FX, tech, audit, and risk.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>RAG means retrieval that grounds an AI answer in your own documents rather than the model's memory.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fname">Mayuresh More</div>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+<script>
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll (enhancement only; content visible by default without JS)
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length){
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){
+            if (current) current.removeAttribute('aria-current');
+            var a = map[e.target.id];
+            if (a){ a.setAttribute('aria-current','true'); current = a; }
+          }
+        });
+      }, { rootMargin: '-20% 0px -72% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
