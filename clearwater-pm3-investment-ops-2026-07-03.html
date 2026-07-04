@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More. Product Manager III, Investment Operations at Clearwater Analytics</title>
+<style>
+  :root{
+    --bg:#e7eef0;
+    --paper:#fbfcfd;
+    --ink:#14282e;
+    --ink-soft:#3a4d54;
+    --ink-faint:#72838a;
+    --line:#d2dde0;
+    --line-soft:#e4ebed;
+    --accent:#0e6e75;        /* deep clearwater teal */
+    --accent-deep:#0a545a;
+    --accent-wash:#dceff0;
+    --ok:#1f7a4d;
+    --ok-wash:#e3f2ea;
+    --blue:#2f5aa8;
+    --blue-wash:#e5edf7;
+    --warn:#9a6a12;
+    --warn-wash:#f6eed9;
+    --red:#b8492f;
+    --red-wash:#f8e6df;
+    --gold:#c78f2b;
+    --gold-wash:#f8ecc9;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:28px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(1200px 600px at 82% -8%, rgba(14,110,117,.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 108%, rgba(47,90,168,.045), transparent 60%);
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:13px;z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-deep);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* masthead */
+  header.masthead{padding:64px 0 26px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5.6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:34em;
+    margin:16px 0 0;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:20px 0 0;
+  }
+
+  /* mobile contents disclosure */
+  details.toc-mobile{
+    margin:26px 0 0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  details.toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none;}
+  details.toc-mobile summary::after{content:"+";font-size:17px;color:var(--accent);}
+  details.toc-mobile[open] summary::after{content:"\2212";}
+  details.toc-mobile ol{
+    margin:0;padding:4px 18px 16px 34px;
+    font-family:var(--display);font-size:15px;
+  }
+  details.toc-mobile li{margin:7px 0;}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none;}
+  details.toc-mobile a:hover{color:var(--accent);}
+
+  /* key-terms glossary */
+  aside.glossary{
+    margin:22px 0 8px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px 6px;
+  }
+  aside.glossary .glab{
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+    margin:0 0 8px;
+  }
+  aside.glossary dl{
+    margin:0;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:2px 14px;
+  }
+  aside.glossary dt{
+    font-family:var(--display);font-weight:600;font-size:14.5px;
+    color:var(--ink);
+    padding:5px 0;
+  }
+  aside.glossary dd{
+    margin:0;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    line-height:1.45;
+    padding:5px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  aside.glossary dt{border-bottom:1px solid var(--line-soft);}
+  aside.glossary dl>dt:last-of-type,aside.glossary dl>dd:last-of-type{border-bottom:none;}
+
+  /* layout */
+  .layout{display:block;padding-bottom:40px;}
+  nav.rail{display:none;}
+  main{display:block;}
+
+  section{
+    padding:34px 0;
+    border-top:1px solid var(--line-soft);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2.kicker{font-size:16px;}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 14px;
+    max-width:21em;
+  }
+
+  p{margin:0 0 16px;max-width:38em;}
+  p.tk{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(18px,2.6vw,22px);
+    line-height:1.34;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:34em;
+  }
+  strong{font-weight:600;color:var(--ink);}
+  em{color:var(--ink-soft);}
+  code{
+    font-family:var(--mono);font-size:.86em;
+    background:var(--line-soft);
+    padding:1px 6px;border-radius:5px;color:var(--ink-soft);
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:24px 0 8px;
+  }
+
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+    font-size:.94em;
+  }
+  a.src:hover,a.src:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:42em;}
+  ul.clean li{
+    position:relative;
+    padding:8px 0 8px 26px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:18px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+  }
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 16px;max-width:44em;}
+  ol.steps li{
+    counter-increment:s;
+    position:relative;
+    padding:6px 0 16px 46px;
+    margin:0;
+  }
+  ol.steps li::before{
+    content:counter(s);
+    position:absolute;left:0;top:3px;
+    width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--accent-wash);
+    color:var(--accent-deep);
+    border:1px solid #bfe1e2;
+    border-radius:50%;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+  }
+
+  /* JTBD quote cards */
+  .jtbd{margin:18px 0;display:grid;gap:12px;}
+  .jtbd blockquote{
+    margin:0;
+    padding:16px 18px 16px 20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .jtbd .jlab{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:7px;
+  }
+  .jtbd .jrole{color:var(--accent-deep);}
+  .jtbd p{margin:0 0 8px;font-style:italic;color:var(--ink-soft);max-width:none;}
+  .jtbd p:last-child{margin-bottom:0;}
+  .jtbd p.jobs{font-style:normal;font-size:15px;color:var(--ink-faint);}
+
+  /* tables */
+  .tbl-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:20px 0;
+    background:var(--paper);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:760px;
+    font-family:var(--display);
+    font-size:14px;
+  }
+  table.fit{min-width:600px;font-size:14.5px;}
+  th,td{
+    text-align:left;
+    padding:12px 15px;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+    line-height:1.42;
+  }
+  thead th{
+    background:#dde8ea;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tr.win td{background:var(--accent-wash);}
+  tr.win td:first-child{color:var(--accent-deep);}
+  td .tag{
+    display:inline-block;
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.04em;
+    padding:2px 8px;border-radius:20px;
+    background:var(--accent);color:#fff;
+    margin-top:6px;
+  }
+
+  /* stat row */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+    gap:14px;
+    margin:20px 0 8px;
+  }
+  .stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .v{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-.02em;
+    color:var(--accent-deep);
+    line-height:1.05;
+  }
+  .stat .l{
+    font-family:var(--display);
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:7px;
+    line-height:1.35;
+  }
+  .src-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);margin:0 0 16px;}
+
+  /* callout */
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .note p{max-width:none;}
+  .note p:last-child{margin-bottom:0;}
+
+  /* diagrams */
+  figure.diagram{
+    margin:24px 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  .dlabel{font-family:var(--display);}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:10px 16px;
+    margin-top:14px;
+    font-family:var(--display);font-size:13px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;}
+
+  /* phased plan */
+  .phase{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);
+    font-size:12px;font-weight:600;
+    letter-spacing:.1em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .phase p{margin:8px 0 0;max-width:none;font-size:17px;color:var(--ink-soft);}
+
+  /* questions */
+  ol.qs{counter-reset:q;list-style:none;padding:0;margin:14px 0;max-width:44em;}
+  ol.qs li{
+    counter-increment:q;
+    position:relative;
+    padding:14px 0 14px 50px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);
+  }
+  ol.qs li:last-child{border-bottom:none;}
+  ol.qs li::before{
+    content:"Q" counter(q);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.04em;
+  }
+
+  /* risks */
+  .risk{
+    border:1px solid var(--line);
+    border-left:3px solid var(--warn);
+    border-radius:8px;
+    background:var(--paper);
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .risk .rt{
+    font-family:var(--display);font-weight:600;font-size:16.5px;
+    color:var(--ink);margin:0 0 5px;
+  }
+  .risk .rv{margin:0;font-size:16px;color:var(--ink-soft);max-width:none;}
+  .risk .rv b{color:var(--ok);font-weight:600;}
+
+  .fit-intro{max-width:42em;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+  @media print{ .reveal{opacity:1 !important;transform:none !important;} }
+
+  footer.foot{
+    border-top:1px solid var(--line);
+    padding:34px 0 56px;
+    margin-top:10px;
+  }
+  .foot .fname{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);}
+  .contacts{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    margin-top:14px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contacts a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* desktop rail */
+  @media (min-width:920px){
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout .wrap{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .rail-head{
+      font-family:var(--mono);
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:14px;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    .rail a:hover{color:var(--ink-soft);border-color:var(--ink-faint);}
+    .rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-color:var(--accent);
+      font-weight:600;
+    }
+    details.toc-mobile{display:none;}
+    main{min-width:0;}
+    .stats{grid-template-columns:repeat(auto-fit,minmax(168px,1fr));}
+  }
+
+  /* mobile diagram scroll */
+  @media (max-width:600px){
+    body{font-size:18px;}
+    aside.glossary dl{grid-template-columns:1fr;gap:0;}
+    aside.glossary dt{border-bottom:none;padding-bottom:0;}
+    aside.glossary dd{padding-top:2px;}
+    figure.diagram .svg-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    figure.diagram.flow .svg-scroll svg{min-width:800px;}
+    figure.diagram.tree .svg-scroll svg{min-width:740px;}
+    figure.diagram figcaption{padding-right:60px;}
+    figure.diagram::after{
+      content:"scroll \2192";
+      position:absolute;top:18px;right:16px;
+      font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      color:var(--ink-faint);
+    }
+    header.masthead{padding-top:46px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product Pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the reconciliation and data-processing problem for the Product Manager III, Investment Operations role at Clearwater Analytics.</p>
+    <p class="prepared">Prepared July 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="wrap">
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <aside class="glossary" aria-label="Key terms">
+        <p class="glab">Key terms, in plain words</p>
+        <dl>
+          <dt>Reconciliation</dt>
+          <dd>Matching Clearwater's own record of what a client owns against the feeds that arrive from custodian banks and fund administrators, then flagging every mismatch.</dd>
+          <dt>Book of record (IBOR)</dt>
+          <dd>Clearwater's authoritative record of a client's positions and cash. Feeds are checked against it.</dd>
+          <dt>Break</dt>
+          <dd>A single mismatch that reconciliation flags. Someone has to explain or clear it.</dd>
+          <dt>Suspense / unapplied cash</dt>
+          <dd>Money that arrived but has not been matched to a trade yet.</dd>
+        </dl>
+      </aside>
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">Here is my bet: the scarce win in this product is not matching more transactions, it is earning enough trust in the audit trail that clients and Clearwater's own analysts stop re-checking the machine.</p>
+        <p>Clearwater already claims a 90% reduction in manual reconciliation effort <a class="src" href="https://cwan.com/press-releases/cwan-reports-800-ai-agents-now-available-for-deployment-across-10-trillion-in-client-assets/" target="_blank" rel="noopener">(Clearwater GenAI, Nov 2025)</a>. But the margin and NPS this seat is measured on only show up when a break the system resolved is accepted without a human re-verifying it. Trust is also what lets legacy and newly acquired clients migrate onto one reconciliation pipeline, which is the claim that drives bookings. So I would attack trust, not throughput.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p class="tk">My read: this seat owns the gap between "the model matched it" and "the client signed off on it."</p>
+        <p>A middle-office analyst at an insurer or asset manager opens the reconciliation screen at month-end close. Positions and cash from the custodian do not match the book of record. The system proposes resolutions for most breaks. The analyst still re-verifies many of them by hand, because their name goes on a regulatory filing and a wrong number is an audit finding. So the automation is claimed, but the hours are not saved and the anxiety is not removed.</p>
+
+        <p>That gap costs Clearwater in three places the job description names directly.</p>
+        <ul class="clean">
+          <li><strong>Gross margin.</strong> Clearwater bundles software with an outsourced-operations service, and its 10-K states that the roughly 9% of accounts flagged by automation are reconciled by Clearwater's own reconciliation team <a class="src" href="https://www.sec.gov/Archives/edgar/data/1866368/000186636826000011/cwan-20251231.htm" target="_blank" rel="noopener">(Clearwater 10-K, Feb 2026)</a>. Every break that needs a human re-check is labor Clearwater staffs as the asset base grows past $10 trillion <a class="src" href="https://cwan.com/" target="_blank" rel="noopener">(Clearwater, July 2026)</a>.</li>
+          <li><strong>Client NPS.</strong> Until Recon Transparency shipped in June 2026, clients chased reconciliation status through "manual email chains" <a class="src" href="https://cwan.com/press-releases/clearwater-analytics-brings-ai-directly-into-institutional-investment-workflows/" target="_blank" rel="noopener">(Clearwater Compass, June 2026)</a>.</li>
+          <li><strong>Bookings.</strong> The single-platform sales claim only holds if migrated data actually reconciles.</li>
+        </ul>
+
+        <figure class="diagram flow" role="img" aria-label="Reconciliation flow. Custodian and administrator feeds carrying positions, cash, and trades are matched against the book of record. A match clears automatically. A mismatch becomes a break, an AI agent proposes a resolution, and then the question is whether a human re-checks it. If no, because the analyst trusts the trail, hours are saved and margin and NPS improve. If yes, the analyst re-verifies, so the automation is claimed but the hours are not saved.">
+          <figcaption>Figure 1 &middot; Where the hours are won or lost</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 900 400" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="fw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7d8f94"/></marker>
+              </defs>
+
+              <!-- feeds -->
+              <rect x="10" y="150" width="142" height="82" rx="11" fill="#eef3f4" stroke="#b7c6ca" stroke-width="1.5"/>
+              <text x="81" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#14282e">Custodian &amp; admin</text>
+              <text x="81" y="194" text-anchor="middle" font-size="11" font-weight="600" fill="#14282e">feeds</text>
+              <text x="81" y="213" text-anchor="middle" font-size="9.5" fill="#5c6b70">positions, cash, trades</text>
+
+              <!-- match diamond -->
+              <path d="M232,146 L288,190 L232,234 L176,190 Z" fill="#dceff0" stroke="#0e6e75" stroke-width="1.7"/>
+              <text x="232" y="185" text-anchor="middle" font-size="11" font-weight="600" fill="#0a545a">Match vs book</text>
+              <text x="232" y="200" text-anchor="middle" font-size="10" fill="#0a545a">of record (IBOR)</text>
+
+              <!-- clears (matched) -->
+              <rect x="326" y="44" width="152" height="52" rx="9" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.5"/>
+              <text x="402" y="75" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Clears automatically</text>
+
+              <!-- break (mismatch) -->
+              <rect x="336" y="164" width="132" height="54" rx="9" fill="#f6eed9" stroke="#9a6a12" stroke-width="1.5"/>
+              <text x="402" y="196" text-anchor="middle" font-size="11.5" font-weight="600" fill="#6b4a0c">Break / exception</text>
+
+              <!-- ai agent -->
+              <rect x="510" y="164" width="158" height="54" rx="9" fill="#dceff0" stroke="#0e6e75" stroke-width="1.5"/>
+              <text x="589" y="186" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0a545a">AI agent proposes</text>
+              <text x="589" y="203" text-anchor="middle" font-size="10.5" fill="#0a545a">a resolution</text>
+
+              <!-- re-check diamond -->
+              <path d="M752,140 L814,190 L752,240 L690,190 Z" fill="#dceff0" stroke="#0e6e75" stroke-width="1.7"/>
+              <text x="752" y="186" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0a545a">Human</text>
+              <text x="752" y="202" text-anchor="middle" font-size="10.5" fill="#0a545a">re-check?</text>
+
+              <!-- waste outcome -->
+              <rect x="464" y="316" width="194" height="68" rx="10" fill="#f8e6df" stroke="#b8492f" stroke-width="1.6"/>
+              <text x="561" y="345" text-anchor="middle" font-size="11.5" font-weight="600" fill="#8f3a26">Automation claimed,</text>
+              <text x="561" y="363" text-anchor="middle" font-size="10.5" fill="#a5462e">hours not saved</text>
+
+              <!-- save outcome -->
+              <rect x="700" y="316" width="196" height="68" rx="10" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.6"/>
+              <text x="798" y="345" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Hours saved:</text>
+              <text x="798" y="363" text-anchor="middle" font-size="10.5" fill="#2f7d55">margin and NPS</text>
+
+              <!-- edges -->
+              <line x1="152" y1="190" x2="174" y2="190" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+
+              <!-- matched -->
+              <line x1="258" y1="160" x2="330" y2="86" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+              <text x="272" y="112" text-anchor="middle" font-size="9.5" fill="#72838a">matched</text>
+
+              <!-- mismatch -->
+              <line x1="288" y1="190" x2="334" y2="190" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+              <text x="311" y="181" text-anchor="middle" font-size="9.5" fill="#72838a">mismatch</text>
+
+              <line x1="468" y1="190" x2="508" y2="190" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+              <line x1="668" y1="190" x2="688" y2="190" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+
+              <!-- re-check yes -->
+              <line x1="722" y1="220" x2="600" y2="312" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+              <text x="646" y="262" text-anchor="middle" font-size="9.5" fill="#b8492f">yes, re-verifies</text>
+
+              <!-- re-check no -->
+              <line x1="782" y1="220" x2="794" y2="312" stroke="#7d8f94" stroke-width="1.5" marker-end="url(#fw)" aria-hidden="true"/>
+              <text x="840" y="262" text-anchor="middle" font-size="9.5" fill="#1f7a4d">no, trusted</text>
+            </svg>
+          </div>
+        </figure>
+
+        <p>Three forces make this harder right now, not easier.</p>
+        <ul class="clean">
+          <li><strong>Merged data models, not just merged companies.</strong> Clearwater closed Enfusion (about $1.5 billion), Beacon, and Blackstone's BISTRO in 2025, and now positions itself as "the industry's first single-instance, multi-tenant, cloud-native platform to unify front, middle, and back-office investment operations" <a class="src" href="https://cwan.com/press-releases/clearwater-analytics-finalizes-acquisition-of-enfusion/" target="_blank" rel="noopener">(Enfusion close)</a>. The reconciliation engine has to make that real across position, transaction, and pricing structures from formerly separate codebases.</li>
+          <li><strong>Private markets are the growth edge and the reconciliation pain.</strong> Private and alternative insurance assets reached $947 billion, "approaching one-third of outsourced insurance allocations" <a class="src" href="https://cwan.com/press-releases/insurance-investment-outsourcing-surpasses-5-5-trillion-as-private-markets-and-global-expansion-reshape-the-industry/" target="_blank" rel="noopener">(Insurance Investment Outsourcing Report, May 2026)</a>. A private-credit position, a capital call (a scheduled draw of committed money), or a K-1 tax document does not arrive in a clean daily custodian feed the way a public equity trade does.</li>
+          <li><strong>Competitors are racing on the same axis.</strong> SimCorp launched Agent Launchpad in April 2026, where every agent interaction generates "a structured audit trail and guardrails" <a class="src" href="https://www.prnewswire.com/news-releases/introducing-agent-launchpad-simcorps-agentic-ai-ecosystem-for-investment-managers-302748955.html" target="_blank" rel="noopener">(PRNewswire, Apr 2026)</a>. Auditability is becoming the category's competitive ground, not a nice-to-have.</li>
+        </ul>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p class="tk">My read: two daily users and one economic buyer, and they hire this product for different jobs.</p>
+
+        <div class="jtbd">
+          <blockquote>
+            <span class="jlab">Primary user, external &middot; <span class="jrole">middle-office reconciliation analyst</span></span>
+            <p>"When the custodian feed does not match my book of record at close, I want to know which breaks are real, why, and how to clear them, so I can close on time without personally re-verifying the machine."</p>
+            <p class="jobs">The emotional job: never be the person who signed off on a wrong number to an auditor. The social job: look in control at month-end.</p>
+          </blockquote>
+          <blockquote>
+            <span class="jlab">Second user, internal &middot; <span class="jrole">Clearwater's own analysts in Boise</span></span>
+            <p>"When I work a client's break queue, I want to clear more breaks per hour without losing the audit trail, so the account stays profitable as it grows."</p>
+            <p class="jobs">They clear breaks for clients, so they are both a user and the gross-margin lever.</p>
+          </blockquote>
+          <blockquote>
+            <span class="jlab">Economic buyer &middot; <span class="jrole">Head of Investment Operations or Controller</span></span>
+            <p>"I want to cut ops headcount and audit risk while trusting a vendor's numbers enough to put my name on regulatory filings."</p>
+          </blockquote>
+        </div>
+
+        <div class="note">
+          <p><strong>Gatekeeper: internal audit and the regulator-facing controller.</strong> They can veto if the audit trail is not defensible, and the 2026 NAIC private-credit disclosure changes are tightening that bar <a class="src" href="https://content.naic.org/insurance-topics/private-credit" target="_blank" rel="noopener">(NAIC private credit)</a>. The demo has to speak to all four: the analyst wants speed, the buyer wants headcount and risk down, the gatekeeper wants a defensible trail.</p>
+        </div>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p class="tk">My read: four bets compete for this roadmap. An auditable exception workflow funds first, because it has the widest reach, the fastest test, and it moves both metrics the job is judged on.</p>
+
+        <div class="tbl-wrap">
+          <table>
+            <caption class="sr-only">RICE comparison of four bets this component could fund</caption>
+            <thead>
+              <tr>
+                <th scope="col">Bet</th>
+                <th scope="col">Reach</th>
+                <th scope="col">Impact</th>
+                <th scope="col">Confidence</th>
+                <th scope="col">Effort</th>
+                <th scope="col">My read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="win">
+                <td><strong>A. Auditable exception flow</strong> (confidence score, root cause, source file) on the highest re-check break type</td>
+                <td>Every client plus the internal analyst pod</td>
+                <td>High: moves NPS and margin directly</td>
+                <td>Med to high</td>
+                <td>Medium</td>
+                <td>Fund first. Widest reach, fastest test, hits both levers. <span class="tag">Fund first</span></td>
+              </tr>
+              <tr>
+                <td>B. Private-markets reconciliation (capital calls, unstructured docs)</td>
+                <td>Growing subset, $947B private insurance AUM</td>
+                <td>High per client</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td>Big follow-on. Growth edge, slower and less certain.</td>
+              </tr>
+              <tr>
+                <td>C. Cross-data-model migration breaks (Enfusion, Beacon, BISTRO onto one pipeline)</td>
+                <td>The migrating client cohort</td>
+                <td>High near-term: unblocks the single-platform bookings claim</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td>Time-sensitive follow-on. Validate integration state first.</td>
+              </tr>
+              <tr>
+                <td>D. Custodian-feed normalization at ingestion</td>
+                <td>All feeds</td>
+                <td>Medium: an enabler</td>
+                <td>High</td>
+                <td>High</td>
+                <td>Dependency layer everything else consumes. Fund as enabling work.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bet D is the layer the other three consume, so it stays funded regardless of its own score. Bet A is where I would put the first roadmap slot, because it turns the automation claim Clearwater already markets into hours that actually leave the P&amp;L.</p>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p class="tk">My read: I would treat these as bets to validate, not a fixed answer, and let the first 30 days pick between them.</p>
+        <ol class="steps">
+          <li><strong>Make the existing matches trustworthy (my lead bet).</strong> Add a calibrated confidence score, a plain-language root cause, and the source file to every break the system resolves. Direction to prove: analysts re-check because they cannot see why the machine decided, not because the decision is wrong. If true, transparency removes the re-check.</li>
+          <li><strong>Attack the hardest data at the source (private markets).</strong> Build a reconciliation flow for assets whose data arrives late and unstructured. Direction to prove: for private credit and capital calls, the break is often a data-arrival problem, not a matching problem, so the fix is expectation and status tracking, not a better matcher.</li>
+          <li><strong>Reconcile the merged data models (migration).</strong> Normalize position and transaction structures from the acquired platforms so migrated clients reconcile cleanly. Direction to prove: migration-driven breaks are a distinct, temporary spike that needs its own handling, separate from steady-state breaks.</li>
+        </ol>
+        <p>I would decide between them with one number from discovery: where does the internal analyst pod spend the most re-verification time. That answer, not my prior, sets the order.</p>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+        <p class="tk">My read: the smallest test of the biggest assumption, that trust, not match rate, is the binding constraint on margin and NPS.</p>
+        <p><strong>Ship:</strong> a confidence-scored, auditable resolution flow for the one break category the Boise analyst pod spends the most re-verification time on (identified in the first 30 days). For each break in that category, show the confidence score, the root cause in plain words, the source file, and a one-click accept or override. Run it internally first, then with a small pilot cohort of clients.</p>
+        <p><strong>Why first:</strong> highest reach (every client and analyst touches breaks), medium effort (it rides on matches that already exist rather than a new matcher), and it is the fastest way to read whether transparency changes re-check behavior. It also de-risks the two expensive follow-on bets, because the same audit trail is what private-markets and migration breaks will need.</p>
+        <div class="note"><p><strong>What it deliberately leaves out:</strong> it does not try to raise the raw automation rate, it does not tackle unstructured private-markets ingestion yet, and it does not auto-resolve anything without a human in the loop until the confidence score is proven calibrated in shadow mode.</p></div>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+        <p class="tk">My read: the North Star is not how much the system automates, it is how much it automates and the client accepts without re-checking.</p>
+        <p><strong>North Star: trusted auto-resolved rate.</strong> The share of reconciliation breaks the system resolves and a human accepts without re-verifying. It passes three tests: if it rises the client genuinely saved work and trusts the number (value), it moves before renewals and margin (leading), and the team can influence it through match quality and audit-trail design (actionable).</p>
+
+        <figure class="diagram tree" role="img" aria-label="Metrics tree. Four leading indicators feed the North Star: match precision on the target break type, confidence-score calibration, audit-trail completeness, and analyst re-verification time per 100 breaks. The North Star is the trusted auto-resolved rate, defined as breaks resolved and accepted without a re-check. It rolls up to four outcomes: gross margin measured as analyst hours per client asset, client NPS with fewer manual status chases, net revenue retention and expansion in reconciliation accounts, and bookings from migrated clients live on one pipeline.">
+          <figcaption>Figure 2 &middot; Metrics tree</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 900 372" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4c9c6d"/></marker>
+                <marker id="og" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5b7fc0"/></marker>
+              </defs>
+
+              <text x="112" y="16" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2f7d55" letter-spacing="0.08em">LEADING INDICATORS</text>
+              <text x="799" y="16" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2f5aa8" letter-spacing="0.08em">OUTCOMES</text>
+
+              <!-- leading (green) -->
+              <rect x="14" y="30" width="196" height="72" rx="9" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.5"/>
+              <text x="112" y="61" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Match precision</text>
+              <text x="112" y="79" text-anchor="middle" font-size="10" fill="#3f7d57">on the target break type</text>
+
+              <rect x="14" y="114" width="196" height="72" rx="9" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.5"/>
+              <text x="112" y="145" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Confidence calibration</text>
+              <text x="112" y="163" text-anchor="middle" font-size="10" fill="#3f7d57">high-confidence is correct</text>
+
+              <rect x="14" y="198" width="196" height="72" rx="9" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.5"/>
+              <text x="112" y="229" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Audit-trail completeness</text>
+              <text x="112" y="247" text-anchor="middle" font-size="10" fill="#3f7d57">source file, rule, root cause</text>
+
+              <rect x="14" y="282" width="196" height="72" rx="9" fill="#e3f2ea" stroke="#1f7a4d" stroke-width="1.5"/>
+              <text x="112" y="313" text-anchor="middle" font-size="11.5" font-weight="600" fill="#12482c">Analyst re-verification</text>
+              <text x="112" y="331" text-anchor="middle" font-size="10" fill="#3f7d57">time per 100 breaks</text>
+
+              <!-- north star (gold) -->
+              <rect x="352" y="118" width="196" height="140" rx="12" fill="#f8ecc9" stroke="#c78f2b" stroke-width="2.2"/>
+              <text x="450" y="148" text-anchor="middle" font-size="10.5" font-weight="700" fill="#9a6b18" letter-spacing="0.1em">NORTH STAR</text>
+              <text x="450" y="174" text-anchor="middle" font-size="14" font-weight="600" fill="#6b4a12">Trusted</text>
+              <text x="450" y="193" text-anchor="middle" font-size="14" font-weight="600" fill="#6b4a12">auto-resolved rate</text>
+              <text x="450" y="214" text-anchor="middle" font-size="9.5" fill="#7a5a20">resolved and accepted</text>
+              <text x="450" y="229" text-anchor="middle" font-size="9.5" fill="#7a5a20">without a re-check</text>
+
+              <!-- outcomes (blue) -->
+              <rect x="702" y="30" width="194" height="72" rx="9" fill="#e5edf7" stroke="#2f5aa8" stroke-width="1.5"/>
+              <text x="799" y="61" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a72">Gross margin</text>
+              <text x="799" y="79" text-anchor="middle" font-size="10" fill="#3560a0">analyst hours per client asset</text>
+
+              <rect x="702" y="114" width="194" height="72" rx="9" fill="#e5edf7" stroke="#2f5aa8" stroke-width="1.5"/>
+              <text x="799" y="145" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a72">Client NPS</text>
+              <text x="799" y="163" text-anchor="middle" font-size="10" fill="#3560a0">fewer manual status chases</text>
+
+              <rect x="702" y="198" width="194" height="72" rx="9" fill="#e5edf7" stroke="#2f5aa8" stroke-width="1.5"/>
+              <text x="799" y="229" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a72">Net revenue retention</text>
+              <text x="799" y="247" text-anchor="middle" font-size="10" fill="#3560a0">expansion in recon accounts</text>
+
+              <rect x="702" y="282" width="194" height="72" rx="9" fill="#e5edf7" stroke="#2f5aa8" stroke-width="1.5"/>
+              <text x="799" y="313" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a72">Bookings</text>
+              <text x="799" y="331" text-anchor="middle" font-size="10" fill="#3560a0">migrated clients on one pipeline</text>
+
+              <!-- leading -> north star -->
+              <line x1="210" y1="66" x2="350" y2="150" stroke="#4c9c6d" stroke-width="1.5" marker-end="url(#lg)" aria-hidden="true"/>
+              <line x1="210" y1="150" x2="350" y2="168" stroke="#4c9c6d" stroke-width="1.5" marker-end="url(#lg)" aria-hidden="true"/>
+              <line x1="210" y1="234" x2="350" y2="208" stroke="#4c9c6d" stroke-width="1.5" marker-end="url(#lg)" aria-hidden="true"/>
+              <line x1="210" y1="318" x2="350" y2="228" stroke="#4c9c6d" stroke-width="1.5" marker-end="url(#lg)" aria-hidden="true"/>
+
+              <!-- north star -> outcomes -->
+              <line x1="548" y1="150" x2="700" y2="66" stroke="#5b7fc0" stroke-width="1.5" marker-end="url(#og)" aria-hidden="true"/>
+              <line x1="548" y1="170" x2="700" y2="150" stroke="#5b7fc0" stroke-width="1.5" marker-end="url(#og)" aria-hidden="true"/>
+              <line x1="548" y1="206" x2="700" y2="234" stroke="#5b7fc0" stroke-width="1.5" marker-end="url(#og)" aria-hidden="true"/>
+              <line x1="548" y1="228" x2="700" y2="318" stroke="#5b7fc0" stroke-width="1.5" marker-end="url(#og)" aria-hidden="true"/>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#e3f2ea;border:1px solid #1f7a4d;"></i>Leading indicator</span>
+            <span><i style="background:#f8ecc9;border:1px solid #c78f2b;"></i>North Star</span>
+            <span><i style="background:#e5edf7;border:1px solid #2f5aa8;"></i>Outcome</span>
+          </div>
+        </figure>
+
+        <h3>Guardrails and anti-metrics</h3>
+        <ul class="clean">
+          <li><strong>Anti-metric: raw automation rate on its own.</strong> It looks good while clients quietly re-check everything, so no hours leave the P&amp;L. I would refuse to report it without the "accepted without re-check" qualifier.</li>
+          <li><strong>Guardrail: false-auto-resolve rate.</strong> A break closed wrong is worse than a break left open, because it becomes an audit finding. This stays near zero or the North Star is gamed.</li>
+          <li><strong>Guardrail: time-to-resolve for breaks that still need a human.</strong> The machine must not dump the hard cases on analysts with no context.</li>
+        </ul>
+      </section>
+
+      <!-- BUSINESS IMPACT -->
+      <section id="business" class="reveal" aria-labelledby="business-h">
+        <h2 class="kicker" id="business-h">Business impact</h2>
+        <p class="tk">My read, framed as hypotheses tied to Clearwater's own numbers, not promises.</p>
+
+        <div class="stats">
+          <div class="stat"><div class="v">78.1%</div><div class="l">non-GAAP gross margin, Q1 2026</div></div>
+          <div class="stat"><div class="v">$221.2M</div><div class="l">revenue, up 74% year over year</div></div>
+          <div class="stat"><div class="v">$872M</div><div class="l">annual recurring revenue</div></div>
+          <div class="stat"><div class="v">108%</div><div class="l">net revenue retention</div></div>
+        </div>
+        <p class="src-note"><a class="src" href="https://cwan.com/press-releases/clearwater-analytics-announces-first-quarter-2026-financial-results/" target="_blank" rel="noopener">Clearwater Q1 2026 results</a></p>
+
+        <ul class="clean">
+          <li><strong>Gross margin.</strong> The residual cost under a 78.1% margin is heavily services and ops labor. Every re-check hour the trusted auto-resolved rate removes is a direct margin lever as the asset base grows past $10 trillion. This is the metric the job names, and it is the one the MVP targets first.</li>
+          <li><strong>Net revenue retention and expansion.</strong> At 108% NRR, growth comes largely from existing accounts. A defensible audit trail is a retention and expansion argument for the reconciliation component, especially with the gatekeeper who signs regulatory filings.</li>
+          <li><strong>Bookings.</strong> The single-platform pitch that wins new logos only closes if migrated Enfusion, Beacon, and BISTRO data reconciles cleanly. Bet C protects that claim, which is why I would sequence it right behind the trust MVP.</li>
+        </ul>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+        <p class="tk">My read: listen first and find the real constraint, because that answer sets the order of everything else.</p>
+
+        <div class="phase">
+          <span class="ph-tag">0 to 30 days &middot; Listen and find the real constraint</span>
+          <p>Sit with the Boise reconciliation analyst pod and watch them work breaks. I would use past behavior, not opinions: walk me through the last ten breaks you cleared, how long each took, which ones you re-verified and why. Pull the break taxonomy and volumes: which break types, segments, and custodian feeds generate the most manual re-verification. Read where Compass, Smart Suspense, and Recon Transparency already sit <a class="src" href="https://cwan.com/press-releases/clearwater-analytics-brings-ai-directly-into-institutional-investment-workflows/" target="_blank" rel="noopener">(Compass, June 2026)</a>. Talk to five to eight client operations teams about what makes them re-check the machine. Establish the re-check baseline.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">30 to 60 days &middot; A quick win and a sharpened problem</span>
+          <p>Instrument re-check and override rate on today's flow so the baseline is a number, not a story. Pick the single break category with the highest re-verification cost. Ship the confidence, root cause, and source-file view on that category to the internal pod first, since they are the fastest feedback loop and the direct margin lever. Align engineering, the insurance and asset-owner product org, and ops leadership on the trust hypothesis and the North Star.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">60 to 90 days &middot; Ship and validate the first bet</span>
+          <p>Roll the auditable flow to a small client cohort, ideally clients mid-migration so it also reads on Bet C. Set explicit success and kill criteria: re-check time down by a target percentage, false-auto-resolve near zero, override rate falling. Baseline the North Star. Propose the roadmap for private markets and migration breaks, backed by the pilot evidence rather than my prior.</p>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p class="tk">My read: the thesis rests on assumptions about the work, and each is testable in week one.</p>
+
+        <div class="risk">
+          <p class="rt">The trust hypothesis could be wrong.</p>
+          <p class="rv">Clients may re-check because a regulator mandates it, not because they distrust the machine. Then no UX removes the re-check. <b>Validate:</b> ask analysts and clients exactly what triggers a re-check before building anything.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">False auto-resolution is asymmetric.</p>
+          <p class="rv">Auto-closing a wrong break is worse than leaving it open. <b>Validate:</b> run the confidence score in shadow mode against analyst decisions before it is allowed to auto-resolve.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The data-model unification may still be in flight.</p>
+          <p class="rv">If the Enfusion, Beacon, and BISTRO pipelines are still merging, today's break taxonomy could shift and my scope could become throwaway. <b>Validate:</b> confirm the integration state with engineering before committing scope.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Private-markets breaks may be a data-arrival problem, not a matching problem.</p>
+          <p class="rv">A confidence score is meaningless when the source data is simply late or missing. <b>Validate:</b> separate "cannot match" from "has not arrived" before designing that flow.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The internal analyst pod is both my key user and the group whose work I am automating.</p>
+          <p class="rv"><b>Validate:</b> frame the pod as co-owners and measure capacity redeployed, not headcount removed, so I keep the feedback loop I depend on.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Attribution to one component is hard.</p>
+          <p class="rv">Margin and NPS move for many reasons. <b>Validate:</b> design the pilot with a control cohort so the effect is attributable before I claim it.</p>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <p class="tk">Here are the answers that would change my plan.</p>
+        <ol class="qs">
+          <li>Today, what is the split between breaks that are truly auto-resolved and breaks that are auto-resolved and then re-verified by a human? That gap is the whole thesis.</li>
+          <li>Where is the Enfusion, Beacon, and BISTRO data-model unification right now, and how much break volume is migration-driven versus steady-state?</li>
+          <li>What is the internal analyst cost per client, and how is gross margin attributed down to a single product component?</li>
+          <li>Which client segments drive the most reconciliation-related NPS detractors?</li>
+          <li>What regulatory or audit rules force a human re-check regardless of automation, especially under the 2026 NAIC private-credit disclosure changes?</li>
+          <li>Is client NPS surveyed at a granularity that can attribute movement to this component?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I am a product manager with 6+ years across finance, enterprise tooling, and AI. I hold an MBA in Finance, an MS in Information Management from the University of Washington (expected June 2026), and a bachelor's in Computer Engineering. My work has sat squarely in this stack: fund accounting systems, fixed-income market data, bank operational risk, and, most recently, making AI retrieval trustworthy and auditable. That last piece is the exact tension this role owns, turning an AI claim into a number a client will put their name on.</p>
+
+        <div class="tbl-wrap">
+          <table class="fit">
+            <caption class="sr-only">What the role needs, mapped to what I have done</caption>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Enterprise investment accounting, fund and asset-management systems</td>
+                <td>At BNY Mellon I built 25+ automated reporting pipelines (C#, Python, SQL) for fund accounting and asset-management systems, from requirements to production.</td>
+              </tr>
+              <tr>
+                <td>Reconciliation and middle-office, data quality, breaks</td>
+                <td>At Nomura I led operational-risk transformation for Global Markets, cutting risk events 20% and losses 15% by owning break remediation, incident analysis, and preventive controls. I drove a firm-wide market-data switch to Tradeweb that improved data quality across fixed-income applications and saved $700K a year.</td>
+              </tr>
+              <tr>
+                <td>Capital markets: fixed income, FX, derivatives, private</td>
+                <td>Global Markets work at Nomura across FI and FX and fixed-income applications; credit-decisioning and bureau integrations (CIBIL, Equifax, Experian) at Lentra.</td>
+              </tr>
+              <tr>
+                <td>AI, ML, or LLM for accuracy and efficiency</td>
+                <td>I rolled an internal AI assistant to 15,000+ users with governance and compliance controls. At UW I am building a policy-conflict AI agent: I evaluated retrieval architectures on groundedness, hallucination, and latency, and I own a 9,000-document ingestion pipeline with quality gates for trustworthy retrieval.</td>
+              </tr>
+              <tr>
+                <td>Discovery to launch, backlog, client discovery</td>
+                <td>I owned discovery-to-launch of a budgeting product at Nomura (15+ stakeholder interviews, MVP scope, 30% spend reduction) and scaled a lending platform to 25,000+ users across 3,000+ branches with roadmap, A/B tests, and partner integrations.</td>
+              </tr>
+              <tr>
+                <td>Data processing and ingestion at scale</td>
+                <td>9,000+ policy documents across 8 agencies with quality gates; 25+ automated reporting pipelines in fund accounting.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fname">Mayuresh More</div>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+<script>
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll (enhancement only; content visible by default without JS)
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length){
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){
+            if (current) current.removeAttribute('aria-current');
+            var a = map[e.target.id];
+            if (a){ a.setAttribute('aria-current','true'); current = a; }
+          }
+        });
+      }, { rootMargin: '-20% 0px -72% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
