@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More. Sr. Product Manager, AI at Validity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f4f2ef;
+    --paper:#fffdfb;
+    --ink:#1f1a26;
+    --ink-soft:#443d50;
+    --ink-faint:#7c7488;
+    --line:#e5e0dc;
+    --line-soft:#eee9e3;
+    --accent:#6d28d9;        /* deep violet */
+    --accent-deep:#5b21b6;
+    --accent-wash:#f0e9fb;
+    --ok:#15803d;
+    --ok-wash:#e7f3ea;
+    --blue:#1d4ed8;
+    --blue-wash:#e6ecfb;
+    --teal:#0f766e;
+    --teal-wash:#e3f1ef;
+    --warn:#a16207;
+    --warn-wash:#f7f0db;
+    --danger:#b91c1c;
+    --danger-wash:#f8e8e6;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:28px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* faint paper grain / vignette */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(1200px 600px at 80% -8%, rgba(109,40,217,.05), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(15,118,110,.04), transparent 60%);
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:13px;z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-deep);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  /* ---------- shared wrap ---------- */
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    padding:64px 0 30px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5.6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:34em;
+    margin:16px 0 0;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:20px 0 0;
+  }
+
+  /* ---------- contents disclosure (mobile) ---------- */
+  details.toc-mobile{
+    margin:26px 0 0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  details.toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none;}
+  details.toc-mobile summary::after{content:"+";font-size:17px;color:var(--accent);}
+  details.toc-mobile[open] summary::after{content:"\2212";}
+  details.toc-mobile ol{
+    margin:0;padding:4px 18px 16px 34px;
+    font-family:var(--display);font-size:15px;
+  }
+  details.toc-mobile li{margin:7px 0;}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none;}
+  details.toc-mobile a:hover{color:var(--accent);}
+
+  /* ---------- main layout: rail + content ---------- */
+  .layout{
+    display:block;
+    padding-bottom:40px;
+  }
+  nav.rail{display:none;}
+
+  main{display:block;}
+
+  /* ---------- sections ---------- */
+  section{
+    padding:34px 0;
+    border-top:1px solid var(--line-soft);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2.kicker{font-size:16px;}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 14px;
+    max-width:20em;
+  }
+
+  p{margin:0 0 16px;max-width:38em;}
+  p.tk{ /* one-line first-person takeaway */
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(18px,2.6vw,22px);
+    line-height:1.34;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:32em;
+  }
+  strong{font-weight:600;color:var(--ink);}
+  em{color:var(--ink-soft);}
+  code{
+    font-family:var(--mono);font-size:.86em;
+    background:var(--line-soft);
+    padding:1px 6px;border-radius:5px;color:var(--ink-soft);
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:26px 0 8px;
+  }
+
+  /* subtle source links */
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+    font-size:.96em;
+  }
+  a.src:hover,a.src:focus-visible{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+
+  /* lists */
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:42em;}
+  ul.clean li{
+    position:relative;
+    padding:8px 0 8px 26px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:18px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+  }
+
+  /* JTBD quote cards */
+  .jtbd{
+    margin:18px 0;
+    display:grid;
+    gap:12px;
+  }
+  .jtbd blockquote{
+    margin:0;
+    padding:16px 18px 16px 20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .jtbd .jlab{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:6px;
+  }
+  .jtbd .jrole{color:var(--accent-deep);}
+  .jtbd p{margin:0;font-style:italic;color:var(--ink-soft);max-width:none;}
+
+  /* tables */
+  .tbl-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:20px 0;
+    background:var(--paper);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:640px;
+    font-family:var(--display);
+    font-size:14.5px;
+  }
+  table.fit{min-width:600px;}
+  th,td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  thead th{
+    background:#f1eef4;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.num{font-family:var(--mono);white-space:nowrap;}
+  .pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;font-weight:600;
+    padding:2px 8px;border-radius:999px;
+    letter-spacing:.02em;
+  }
+  .pill.hi{background:var(--ok-wash);color:var(--ok);}
+  .pill.mid{background:var(--warn-wash);color:var(--warn);}
+  .pill.lo{background:var(--danger-wash);color:var(--danger);}
+
+  /* stat row */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;
+    margin:20px 0;
+  }
+  .stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .v{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:24px;
+    letter-spacing:-.02em;
+    color:var(--accent-deep);
+    line-height:1.05;
+  }
+  .stat .l{
+    font-family:var(--display);
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:7px;
+    line-height:1.35;
+  }
+  .src-line{margin-top:-2px;font-size:14px;color:var(--ink-faint);max-width:none;}
+
+  /* callout */
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .note p{max-width:none;}
+  .note p:last-child{margin-bottom:0;}
+
+  /* diagrams */
+  figure.diagram{
+    margin:24px 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  .svg-scroll{overflow:visible;}
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  .dlabel{font-family:var(--display);}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:12px 16px;
+    margin-top:14px;
+    font-family:var(--display);font-size:13px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;}
+
+  /* phased plan */
+  .phase{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);
+    font-size:12px;font-weight:600;
+    letter-spacing:.1em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .phase h3{margin:6px 0 8px;}
+  .phase p{margin:0;max-width:none;font-size:17px;color:var(--ink-soft);}
+
+  /* questions */
+  ol.qs{counter-reset:q;list-style:none;padding:0;margin:14px 0;max-width:44em;}
+  ol.qs li{
+    counter-increment:q;
+    position:relative;
+    padding:14px 0 14px 50px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);
+  }
+  ol.qs li:last-child{border-bottom:none;}
+  ol.qs li::before{
+    content:"Q" counter(q);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.04em;
+  }
+
+  /* risks */
+  .risk{
+    border:1px solid var(--line);
+    border-left:3px solid var(--warn);
+    border-radius:8px;
+    background:var(--paper);
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .risk .rt{
+    font-family:var(--display);font-weight:600;font-size:16.5px;
+    color:var(--ink);margin:0 0 5px;
+  }
+  .risk .rv{margin:0;font-size:16px;color:var(--ink-soft);max-width:none;}
+  .risk .rv b{color:var(--ok);font-weight:600;}
+
+  /* fit intro */
+  .fit-intro{max-width:42em;}
+
+  /* footer */
+  footer.foot{
+    border-top:1px solid var(--line);
+    padding:34px 0 56px;
+    margin-top:10px;
+  }
+  .foot .fname{
+    font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);
+  }
+  .contacts{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    margin-top:14px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contacts a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  /* reveal animation (default visible; only animates with JS + motion ok) */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+
+  /* print: always show every section regardless of scroll/JS state */
+  @media print{
+    .reveal{opacity:1 !important;transform:none !important;}
+  }
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* ---------- desktop: rail layout ---------- */
+  @media (min-width:920px){
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout .wrap{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .rail-head{
+      font-family:var(--mono);
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:14px;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    .rail a:hover{color:var(--ink-soft);border-color:var(--ink-faint);}
+    .rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-color:var(--accent);
+      font-weight:600;
+    }
+    details.toc-mobile{display:none;}
+    main{min-width:0;}
+    .stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));}
+  }
+
+  /* ---------- mobile diagram scroll ---------- */
+  @media (max-width:600px){
+    body{font-size:18px;}
+    figure.diagram .svg-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    figure.diagram .svg-scroll svg{min-width:680px;}
+    figure.diagram figcaption{padding-right:60px;}
+    figure.diagram::after{
+      content:"scroll \2192";
+      position:absolute;top:18px;right:16px;
+      font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      color:var(--ink-faint);
+    }
+    header.masthead{padding-top:46px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Pitch &middot; Sr. Product Manager, AI</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would make CRM data safe for AI agents for the Sr. Product Manager, AI role at Validity.</p>
+    <p class="prepared">Prepared July 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="wrap">
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">Here's my bet: Validity's next agent should live on the CRM data-quality side, not on more email agents.</p>
+        <p>I'd build a "clean data for AI agents" layer on DemandTools and GridBuddy: an agent that tells a customer whether their CRM data is safe for AI to act on, and fixes what is not. Validity already sells the leading Salesforce data-quality tool, and it has shipped agents once, with Engage. Connecting those two is white space Validity owns the tools for, and it answers the loudest pain in the market: roughly <a class="src" href="https://mountainise.com/blog/dirty-crm-data-sabotaging-ai-agent-deployment/" target="_blank" rel="noopener">88% of enterprise AI agent pilots fail to reach production because of bad CRM data underneath them</a>, not weak agents. It is the fastest route to the 12-month bar of moving the needle, through expansion and retention in the data-quality line.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p class="tk">My read of the portfolio: Validity shipped agents on the email side, but the CRM data underneath them is still nobody's product.</p>
+        <p>In February 2026 Validity shipped Engage: four AI agents (Ignite, Guardian, Expression, Insight) trained on its sender-reputation network of more than <a class="src" href="https://www.prnewswire.com/news-releases/validity-announces-engage-the-next-generation-ai-email-platform-to-help-marketers-execute-with-confidence-302685294.html" target="_blank" rel="noopener">2.5 billion data points a day</a>. Every one of those agents sits on email and deliverability. DemandTools, GridBuddy, and BriteVerify have no public agent layer yet. That is the gap.</p>
+
+        <figure class="diagram" role="img" aria-label="Validity portfolio and where agentic AI has shipped. On the email and deliverability side, Everest and Litmus feed Engage, which shipped four AI agents in February 2026. On the CRM data-quality side, DemandTools and GridBuddy have no public agent layer yet, which is the white space this role can claim. BriteVerify, the email verification tool, also has no public agent layer.">
+          <figcaption>Figure 1 &middot; Where agentic AI has shipped, and where it has not</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 820 400" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="pv1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#7c7488"/>
+                </marker>
+              </defs>
+
+              <!-- email container -->
+              <rect x="18" y="44" width="372" height="232" rx="12" fill="#eef4fb" stroke="#c2d4f0" stroke-width="1.4"/>
+              <text x="38" y="70" font-size="11.5" font-weight="700" fill="#1e3a5f" letter-spacing="0.06em">EMAIL / DELIVERABILITY SIDE</text>
+
+              <rect x="48" y="92" width="312" height="66" rx="9" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.5"/>
+              <text x="204" y="122" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f">Everest / Litmus</text>
+              <text x="204" y="142" text-anchor="middle" font-size="11" fill="#3c4d63">deliverability</text>
+
+              <rect x="48" y="192" width="312" height="66" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.7"/>
+              <text x="204" y="220" text-anchor="middle" font-size="12.5" font-weight="600" fill="#14532d">Engage: 4 shipped AI agents</text>
+              <text x="204" y="240" text-anchor="middle" font-size="10" fill="#3f6b4f">Ignite &#183; Guardian &#183; Expression &#183; Insight</text>
+
+              <line x1="204" y1="158" x2="204" y2="190" stroke="#7c7488" stroke-width="1.6" marker-end="url(#pv1)" aria-hidden="true"/>
+
+              <!-- crm container -->
+              <rect x="430" y="44" width="372" height="232" rx="12" fill="#fdf7e8" stroke="#e6d3a3" stroke-width="1.4"/>
+              <text x="450" y="70" font-size="11.5" font-weight="700" fill="#8a6a20" letter-spacing="0.06em">CRM DATA-QUALITY SIDE</text>
+
+              <rect x="460" y="92" width="312" height="66" rx="9" fill="#e6ecfb" stroke="#1d4ed8" stroke-width="1.5"/>
+              <text x="616" y="122" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a5f">DemandTools + GridBuddy</text>
+              <text x="616" y="142" text-anchor="middle" font-size="11" fill="#3c4d63">Salesforce data quality</text>
+
+              <rect x="460" y="192" width="312" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.7"/>
+              <text x="616" y="220" text-anchor="middle" font-size="12.5" font-weight="600" fill="#713f12">No public agent layer yet</text>
+              <text x="616" y="240" text-anchor="middle" font-size="10.5" fill="#8a6a20">the white space this role can claim</text>
+
+              <line x1="616" y1="158" x2="616" y2="190" stroke="#7c7488" stroke-width="1.6" marker-end="url(#pv1)" aria-hidden="true"/>
+
+              <!-- briteverify -->
+              <rect x="210" y="312" width="400" height="64" rx="10" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+              <text x="410" y="338" text-anchor="middle" font-size="12.5" font-weight="600" fill="#713f12">BriteVerify: email verification</text>
+              <text x="410" y="358" text-anchor="middle" font-size="10.5" fill="#8a6a20">no public agent layer either</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#e6ecfb;border:1px solid #1d4ed8;"></i>Existing tool</span>
+            <span><i style="background:#dcfce7;border:1px solid #16a34a;"></i>Shipped agents</span>
+            <span><i style="background:#fef9c3;border:1px solid #ca8a04;"></i>White space</span>
+          </div>
+        </figure>
+
+        <h3>Who hurts, and what it costs</h3>
+        <ul class="clean">
+          <li><strong>Who.</strong> RevOps and Salesforce admins who keep the CRM clean, and the GTM leaders above them who are now being told to deploy AI SDRs and agents on top of that same CRM.</li>
+          <li><strong>The root cause.</strong> CRM contact data decays fast: B2B contact data goes stale at about <a class="src" href="https://mountainise.com/blog/dirty-crm-data-sabotaging-ai-agent-deployment/" target="_blank" rel="noopener">22.5% a year</a>, and <a class="src" href="https://www.tofuhq.com/post/best-tools-make-crm-data-agent-ready" target="_blank" rel="noopener">91% of CRM data decays within a year</a>. AI acts on whatever it finds, so a duplicate or a dead contact becomes an action, not just a bad row.</li>
+          <li><strong>The workaround, and why it fails.</strong> Teams run periodic cleanup in tools like DemandTools. That was fine when a human read the list before acting. It fails the moment an autonomous agent acts on the data between cleanups, at machine speed, with no human in the loop.</li>
+          <li><strong>The cost.</strong> Forrester projects more than <a class="src" href="https://mountainise.com/blog/dirty-crm-data-sabotaging-ai-agent-deployment/" target="_blank" rel="noopener">$10 billion in 2026 losses tied to ungoverned AI in B2B sales and marketing</a>. Validity's own April 2026 survey of 500+ marketers ranked poor data quality and proving AI's ROI as the <a class="src" href="https://www.prnewswire.com/news-releases/new-validity-research-reveals-how-ai-integration-is-reshaping-email-marketing-performance-302741555.html" target="_blank" rel="noopener">#3 and #4 blockers to AI adoption, with only 12% of organizations at integrated AI maturity</a>.</li>
+        </ul>
+
+        <div class="note">
+          <p><strong>Competitors already see it.</strong> CRM data-quality vendors like Cloudingo, RingLead, and Insycle, and newer entrants like Tofu and Syncari, are repositioning around making CRM data safe for AI agents. That repositioning is moving faster than Validity's public story for DemandTools and GridBuddy. Closing that gap is the job.</p>
+        </div>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p class="tk">Let me name the people, because the buyer is not the user here.</p>
+        <ul class="clean">
+          <li><strong>Primary user:</strong> the RevOps or Salesforce admin who runs DemandTools and GridBuddy today. They dedupe, standardize fields, and mass-edit records so downstream teams trust the CRM.</li>
+          <li><strong>Economic buyer:</strong> the VP of RevOps, Marketing Ops, or the CRO who signs the expansion. They care about ROI they can show. Advanced AI adopters in Validity's survey were <a class="src" href="https://www.prnewswire.com/news-releases/new-validity-research-reveals-how-ai-integration-is-reshaping-email-marketing-performance-302741555.html" target="_blank" rel="noopener">75% more likely to hit ROI above 45 to 1</a>, so the buyer wants that number to point at.</li>
+          <li><strong>Gatekeeper:</strong> IT, security, and data governance. Their veto is simple: they will not let an agent write to the system of record unsupervised.</li>
+        </ul>
+
+        <h3>The job the admin is hiring this product to do</h3>
+        <div class="jtbd">
+          <blockquote>
+            <span class="jlab">RevOps / Salesforce admin <span class="jrole">&middot; primary user</span></span>
+            <p>When I am about to point AI agents or an AI SDR at our CRM, I want to know the data underneath will not make them act on duplicates or dead contacts, so I can turn the automation on without being blamed for what it does.</p>
+          </blockquote>
+        </div>
+
+        <div class="note">
+          <p><strong>The job is also emotional and social.</strong> The emotional job: not be the person who gets blamed when the AI emails a dead lead. The social job is newer and stronger: be seen as the person who made the CRM AI-ready, a mandate RevOps leaders are being handed for the first time this year.</p>
+        </div>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p class="tk">Here's why I'd fund the data-quality agent before another email agent.</p>
+        <p>I'd score the plausible AI bets on one RICE scale (Reach &#215; Impact &#215; Confidence &#247; Effort). The numbers below are my estimates, to show the reasoning, not Validity's internal figures.</p>
+
+        <div class="tbl-wrap">
+          <table>
+            <caption class="sr-only">RICE comparison of candidate AI bets at Validity</caption>
+            <thead>
+              <tr>
+                <th scope="col">Bet</th>
+                <th scope="col">Reach</th>
+                <th scope="col">Impact</th>
+                <th scope="col">Conf.</th>
+                <th scope="col">Effort</th>
+                <th scope="col">My read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CRM data-readiness agent</strong> (DemandTools / GridBuddy)</td>
+                <td>High</td>
+                <td class="num">3</td>
+                <td class="num">80%</td>
+                <td><span class="pill mid">Medium</span></td>
+                <td>Reuses existing data-quality operations, opens new expansion revenue, answers the loudest market pain. <strong>Top.</strong></td>
+              </tr>
+              <tr>
+                <td>More email agents on Engage</td>
+                <td>Medium</td>
+                <td class="num">1.5</td>
+                <td class="num">100%</td>
+                <td><span class="pill hi">Low</span></td>
+                <td>Proven pattern, but the team already owns it. Low marginal reach for a new hire, no new product line.</td>
+              </tr>
+              <tr>
+                <td>AI-spam / deliverability-risk agent on Everest</td>
+                <td>Medium</td>
+                <td class="num">2</td>
+                <td class="num">80%</td>
+                <td><span class="pill lo">High</span></td>
+                <td>Real problem (<a class="src" href="https://www.gblock.app/articles/ai-phishing-82-percent-email-attacks-2026" target="_blank" rel="noopener">82.6% of phishing is now AI-generated</a>), but a model arms race and adjacent to Engage.</td>
+              </tr>
+              <tr>
+                <td>Verification AI on BriteVerify</td>
+                <td>Medium</td>
+                <td class="num">0.75</td>
+                <td class="num">80%</td>
+                <td><span class="pill mid">Medium</span></td>
+                <td>Accuracy is a commodity race; rivals claim <a class="src" href="https://syncgtm.com/blog/briteverify-alternatives" target="_blank" rel="noopener">97 to 99%+ accuracy</a>. Little room to differentiate.</td>
+              </tr>
+              <tr>
+                <td>Competitive-intelligence agent</td>
+                <td>Low</td>
+                <td class="num">1</td>
+                <td class="num">50%</td>
+                <td><span class="pill mid">Medium</span></td>
+                <td>Narrow reach, weak confidence. Later, if at all.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The CRM data-readiness agent wins on reach and impact for the same effort, because DemandTools already has the primitives (dedupe, standardize, verify) the agent reasons over. It also clears two of the four adoption blockers Validity's own customers named.</p>
+
+        <div class="note">
+          <p><strong>One thing stays in scope regardless of its score.</strong> An evaluation and guardrail harness that checks every agent's output before a human sees it. It is a dependency the whole roadmap consumes, so it is not competing with the features it enables. From building agents myself, I hold this as a rule: they break when you ship features without evals and guardrails, so this comes first.</p>
+        </div>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p class="tk">I see two directions worth running now, and a third to hold for later. Each is a bet I'd validate, not an answer.</p>
+
+        <h3>Direction A: the readiness scan (read-only)</h3>
+        <p>An agent that scores a CRM org's data health specifically for agent safety: duplicates, decayed contacts, missing fields the agents rely on. It explains each risk in plain language and recommends a fix, but changes nothing. Read-only clears the IT and governance gatekeeper on day one. This is the cheapest test of the biggest assumption.</p>
+
+        <h3>Direction B: agentic cleanup</h3>
+        <p>The same agent proposes fixes and, with a human's approval, executes them through DemandTools' existing operations. Higher value, higher trust bar. It only earns its place after A proves customers act on the findings.</p>
+
+        <h3>Direction C: a cross-portfolio data-trust layer (later)</h3>
+        <p>One layer that feeds both sides: BriteVerify-verified emails and DemandTools-clean records, so the deliverability agents and the CRM agents draw on the same trusted data. Bigger, and it should wait until the wedge is real.</p>
+
+        <p>How I'd decide between them: prototype A, put it in front of design partners, and watch whether the scan output actually changes what they do. If it does not change behavior, B and C are premature no matter how good the demo looks.</p>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+        <p class="tk">I'd ship the smallest safe thing: a read-only scan that tests the biggest assumption.</p>
+        <p>A read-only AI data-readiness scan on a design partner's Salesforce sandbox, built in Python against the Salesforce API with an LLM to explain findings. It is the smallest test of the biggest assumption: that RevOps leaders treat "agent-ready data" as a distinct, budgeted problem, not re-badged cleanup.</p>
+
+        <figure class="diagram" role="img" aria-label="Read-only AI data-readiness scan, the first prototype. The prototype reads a customer's CRM org data through the existing DemandTools connection. Data-quality checks detect duplicates, decay, and missing fields. An LLM reasons over why each risk breaks an agent. An evaluation and guardrail step scores the findings and drops false positives. The output is a plain-language risk report with a recommended fix, which the account owner reviews. Writing an approved fix back to the CRM through DemandTools is a later phase, out of scope for the first version.">
+          <figcaption>Figure 2 &middot; The read-only prototype pipeline</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 850 244" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="mv1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+                </marker>
+                <marker id="mv2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#9ca3af"/>
+                </marker>
+              </defs>
+
+              <!-- n1 -->
+              <rect x="8" y="54" width="120" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="68" y="94" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">CRM org data</text>
+              <text x="68" y="114" text-anchor="middle" font-size="10.5" fill="#3c4d63">(read-only)</text>
+
+              <!-- n2 -->
+              <rect x="146" y="54" width="128" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="210" y="85" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">Data-quality checks</text>
+              <text x="210" y="103" text-anchor="middle" font-size="10" fill="#3c4d63">dupes, decay,</text>
+              <text x="210" y="118" text-anchor="middle" font-size="10" fill="#3c4d63">missing fields</text>
+
+              <!-- n3 -->
+              <rect x="290" y="54" width="128" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="354" y="85" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">LLM reasoning</text>
+              <text x="354" y="103" text-anchor="middle" font-size="10" fill="#3c4d63">why each risk</text>
+              <text x="354" y="118" text-anchor="middle" font-size="10" fill="#3c4d63">breaks an agent</text>
+
+              <!-- n4 -->
+              <rect x="434" y="54" width="128" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="498" y="85" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">Eval + guardrail</text>
+              <text x="498" y="103" text-anchor="middle" font-size="10" fill="#3c4d63">score findings,</text>
+              <text x="498" y="118" text-anchor="middle" font-size="10" fill="#3c4d63">drop false positives</text>
+
+              <!-- n5 -->
+              <rect x="578" y="54" width="128" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="642" y="85" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">Risk report</text>
+              <text x="642" y="103" text-anchor="middle" font-size="10" fill="#3c4d63">plain language</text>
+              <text x="642" y="118" text-anchor="middle" font-size="10" fill="#3c4d63">+ recommended fix</text>
+
+              <!-- n6 -->
+              <rect x="722" y="54" width="120" height="90" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="782" y="94" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">Account owner</text>
+              <text x="782" y="114" text-anchor="middle" font-size="10.5" fill="#3c4d63">reviews</text>
+
+              <!-- arrows between -->
+              <line x1="128" y1="99" x2="146" y2="99" stroke="#2563eb" stroke-width="1.6" marker-end="url(#mv1)" aria-hidden="true"/>
+              <line x1="274" y1="99" x2="290" y2="99" stroke="#2563eb" stroke-width="1.6" marker-end="url(#mv1)" aria-hidden="true"/>
+              <line x1="418" y1="99" x2="434" y2="99" stroke="#2563eb" stroke-width="1.6" marker-end="url(#mv1)" aria-hidden="true"/>
+              <line x1="562" y1="99" x2="578" y2="99" stroke="#2563eb" stroke-width="1.6" marker-end="url(#mv1)" aria-hidden="true"/>
+              <line x1="706" y1="99" x2="722" y2="99" stroke="#2563eb" stroke-width="1.6" marker-end="url(#mv1)" aria-hidden="true"/>
+
+              <!-- later (out of scope) -->
+              <rect x="662" y="186" width="180" height="50" rx="9" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.4"/>
+              <text x="752" y="208" text-anchor="middle" font-size="10.5" font-weight="600" fill="#374151">Approved fix executes</text>
+              <text x="752" y="224" text-anchor="middle" font-size="10.5" fill="#374151">via DemandTools (later)</text>
+
+              <path d="M782,144 V186" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#mv2)" aria-hidden="true"/>
+              <text x="650" y="172" text-anchor="end" font-size="9.5" fill="#6b7280">out of scope for v1</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#dbeafe;border:1px solid #2563eb;"></i>In scope for v1</span>
+            <span><i style="background:#f3f4f6;border:1px solid #9ca3af;"></i>Later phase</span>
+          </div>
+        </figure>
+
+        <div class="note">
+          <p><strong>Why this first, and what it leaves out.</strong> By RICE: high reach (most of the DemandTools and GridBuddy base faces the AI-readiness question this year), impact 3 (it enables the customer's own AI plans), confidence 80%, and low-to-medium effort because it reuses the checks DemandTools already runs. It deliberately leaves out writing any change back to the CRM, multi-agent orchestration, and anything cross-portfolio. All of that waits until the scan proves customers act on it. This also hits the 90-day bar: a working prototype that shows a meaningful capability, not a slide.</p>
+        </div>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+        <p class="tk">This is how I'd know it's working.</p>
+        <p>The North Star for the product line is <strong>weekly active accounts that apply at least one recommended fix</strong>. If it rises, a customer's CRM genuinely got safer for their AI; it moves before renewal revenue does; and the team can influence it through better detection and clearer recommendations. For the read-only MVP, the leading proxy is narrower: accounts that run a scan and change something as a result.</p>
+
+        <figure class="diagram" role="img" aria-label="Metrics tree for the data-readiness agent. Three leading indicators feed the North Star: scan completion rate, recommendation acceptance rate, and time to first fix. The North Star is weekly active accounts that apply at least one recommended fix. It drives two lagging outcomes: net revenue retention in the DemandTools and GridBuddy line, and expansion to an AI-readiness tier. One guardrail is watched closely, false-positive flags. One anti-metric is named as not to chase: raw edits made and scans run.">
+          <figcaption>Figure 3 &middot; Metrics tree</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 820 362" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="mt_g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+                </marker>
+                <marker id="mt_t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/>
+                </marker>
+                <marker id="mt_a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#a16207"/>
+                </marker>
+              </defs>
+
+              <text x="108" y="24" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d" letter-spacing="0.08em">LEADING</text>
+              <text x="702" y="24" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0f766e" letter-spacing="0.08em">LAGGING</text>
+
+              <!-- leading -->
+              <rect x="12" y="44" width="192" height="60" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="108" y="79" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Scan completion rate</text>
+
+              <rect x="12" y="116" width="192" height="60" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="108" y="142" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Recommendation</text>
+              <text x="108" y="160" text-anchor="middle" font-size="10.5" fill="#3f6b4f">acceptance rate</text>
+
+              <rect x="12" y="188" width="192" height="60" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="108" y="223" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Time to first fix</text>
+
+              <!-- north star -->
+              <rect x="286" y="96" width="232" height="112" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2.4"/>
+              <text x="402" y="126" text-anchor="middle" font-size="11" font-weight="700" fill="#713f12" letter-spacing="0.1em">NORTH STAR</text>
+              <text x="402" y="152" text-anchor="middle" font-size="12.5" font-weight="600" fill="#713f12">Weekly active accounts</text>
+              <text x="402" y="171" text-anchor="middle" font-size="12.5" font-weight="600" fill="#713f12">that apply at least one</text>
+              <text x="402" y="190" text-anchor="middle" font-size="12.5" font-weight="600" fill="#713f12">recommended fix</text>
+
+              <!-- lagging -->
+              <rect x="596" y="104" width="212" height="64" rx="9" fill="#d5efe9" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="702" y="130" text-anchor="middle" font-size="12.5" font-weight="600" fill="#134e48">Net revenue retention</text>
+              <text x="702" y="150" text-anchor="middle" font-size="10.5" fill="#3f6b64">DemandTools / GridBuddy</text>
+
+              <rect x="596" y="182" width="212" height="64" rx="9" fill="#d5efe9" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="702" y="208" text-anchor="middle" font-size="12.5" font-weight="600" fill="#134e48">Expansion to</text>
+              <text x="702" y="228" text-anchor="middle" font-size="11" fill="#3f6b64">AI-readiness tier</text>
+
+              <!-- leading -> NS -->
+              <line x1="204" y1="74" x2="286" y2="124" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mt_g)" aria-hidden="true"/>
+              <line x1="204" y1="146" x2="286" y2="152" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mt_g)" aria-hidden="true"/>
+              <line x1="204" y1="218" x2="286" y2="180" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mt_g)" aria-hidden="true"/>
+
+              <!-- NS -> lagging -->
+              <line x1="518" y1="138" x2="596" y2="136" stroke="#0f766e" stroke-width="1.5" marker-end="url(#mt_t)" aria-hidden="true"/>
+              <line x1="518" y1="170" x2="596" y2="214" stroke="#0f766e" stroke-width="1.5" marker-end="url(#mt_t)" aria-hidden="true"/>
+
+              <!-- bottom bands -->
+              <rect x="12" y="300" width="388" height="46" rx="8" fill="#f7f0db" stroke="#a16207" stroke-width="1.4"/>
+              <text x="206" y="322" text-anchor="middle" font-size="11" font-weight="600" fill="#713f12">Watch closely</text>
+              <text x="206" y="339" text-anchor="middle" font-size="10.5" fill="#7a5410">false-positive flags</text>
+
+              <rect x="420" y="300" width="388" height="46" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.3"/>
+              <text x="614" y="322" text-anchor="middle" font-size="11" font-weight="600" fill="#7f1d1d">Do not chase</text>
+              <text x="614" y="339" text-anchor="middle" font-size="10.5" fill="#991b1b">raw edits made &#183; scans run</text>
+
+              <!-- NS -> guardrail (watch) -->
+              <path d="M402,208 V276 H206 V300" fill="none" stroke="#a16207" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#mt_a)" aria-hidden="true"/>
+              <text x="300" y="270" text-anchor="middle" font-size="10" fill="#8a6a20">watch</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#fef3c7;border:1px solid #d97706;"></i>North Star</span>
+            <span><i style="background:#dcfce7;border:1px solid #16a34a;"></i>Leading</span>
+            <span><i style="background:#d5efe9;border:1px solid #0f766e;"></i>Lagging</span>
+            <span><i style="background:#f7f0db;border:1px solid #a16207;"></i>Guardrail</span>
+            <span><i style="background:#fee2e2;border:1px solid #dc2626;"></i>Anti-metric</span>
+          </div>
+        </figure>
+
+        <p>The anti-metrics matter as much as the North Star. I would not chase raw edits made: an agent that mass-edits looks busy while quietly corrupting the system of record, the exact failure this product exists to prevent. I would not chase scans run, a vanity count. And I would watch false-positive flags closely, because an agent that cries wolf on clean records gets switched off faster than one that misses a few.</p>
+      </section>
+
+      <!-- BUSINESS -->
+      <section id="business" class="reveal" aria-labelledby="business-h">
+        <h2 class="kicker" id="business-h">Business impact</h2>
+        <p class="tk">I expect revenue to move two ways, expansion and retention, and I'd frame both as bets to test, not promises.</p>
+        <p>The logic rests on numbers Validity's own customers and the market already report.</p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v">88%</div>
+            <div class="l">of enterprise AI agent pilots fail to reach production because of bad CRM data underneath</div>
+          </div>
+          <div class="stat">
+            <div class="v">$10B+</div>
+            <div class="l">projected 2026 losses tied to ungoverned AI in B2B sales and marketing</div>
+          </div>
+          <div class="stat">
+            <div class="v">75%</div>
+            <div class="l">more likely to hit ROI above 45 to 1 among advanced AI adopters</div>
+          </div>
+        </div>
+        <p class="src-line">Sources: <a class="src" href="https://mountainise.com/blog/dirty-crm-data-sabotaging-ai-agent-deployment/" target="_blank" rel="noopener">Mountainise, 2026</a> &middot; <a class="src" href="https://www.prnewswire.com/news-releases/new-validity-research-reveals-how-ai-integration-is-reshaping-email-marketing-performance-302741555.html" target="_blank" rel="noopener">Validity, Apr 2026</a>.</p>
+
+        <ul class="clean">
+          <li><strong>A new expansion tier.</strong> If "AI-readiness" becomes a budgeted line item on top of DemandTools and GridBuddy, it opens an expansion the CRM data-quality line does not sell today.</li>
+          <li><strong>Higher retention.</strong> Clean-data-for-agents raises the switching cost, because the customer's own AI now depends on it. I'd expect that to lift net revenue retention in the line.</li>
+          <li><strong>Tied to the 12-month bar.</strong> Both are hypotheses tied to the "move the needle" metric, and I would set the baseline before claiming either.</li>
+        </ul>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+        <p class="tk">My first ninety days: listen and map, prototype, then propose the roadmap.</p>
+
+        <div class="phase">
+          <span class="ph-tag">0 to 30 days &middot; Listen and map</span>
+          <h3>Find where cleanup clusters</h3>
+          <p>Pull DemandTools and GridBuddy usage data to find where manual cleanup clusters. Interview RevOps admins and the Engage team about which agents customers actually adopted versus which just demoed well. Map Engage's existing agent, eval, and guardrail architecture so I reuse it instead of rebuilding it. Line up three to five design partners. Stand up a throwaway prototype against a sample Salesforce org to learn the data shape.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">30 to 60 days &middot; Sharpen and prototype</span>
+          <h3>Ship the read-only scan to design partners</h3>
+          <p>Ship the first working read-only readiness scan into two or three design-partner sandboxes. Measure whether the output changes their behavior, asking what they did the last time an AI tool acted on bad CRM data, not whether they would like this. Align engineering, the Engage team, and RevOps leadership on the wedge.</p>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">60 to 90 days &middot; Harden and propose</span>
+          <h3>Pilot, baseline, propose the roadmap</h3>
+          <p>Turn the prototype into a customer-facing pilot with explicit success and kill criteria. Set the metric baseline (data health score, recommendation acceptance). Propose the roadmap from scan, to approved-fix, to the cross-portfolio data-trust layer. This clears the 90-day bar.</p>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p class="tk">What I'm not sure of yet, and how I'd test it in week one. Every one is about the work, not a settled fact.</p>
+
+        <div class="risk">
+          <p class="rt">The demand assumption</p>
+          <p class="rv">Do RevOps leaders treat "agent-ready data" as a distinct, budgeted problem, or just re-badged cleanup? This is the whole thesis. <b>Validate:</b> customer interviews about past behavior, first.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The governance veto</p>
+          <p class="rv">IT may refuse to let any agent write to the system of record. <b>Mitigate:</b> ship read-only first, so the wedge does not depend on write access.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Architecture reuse</p>
+          <p class="rv">Engage's agent framework was built for email data. It may not fit CRM data shapes or Salesforce API limits. <b>Confirm:</b> map that architecture in month one before committing to reuse.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">False positives</p>
+          <p class="rv">In data quality, crying wolf on clean records kills trust faster than missing a risk. <b>Test:</b> accuracy against a labeled review set before any customer sees output.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Positioning overlap</p>
+          <p class="rv">"AI-readiness" could blur into BriteVerify and Engage in the customer's mind. <b>Sequence:</b> the portfolio story has to be crisp before launch, not after.</p>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <p class="tk">Five answers that would change my plan.</p>
+        <ol class="qs">
+          <li>Does this role own AI across the whole portfolio, or is it scoped to the Engage and Litmus side first? The JD says "across its products," but Engage is the only shipped agentic product so far.</li>
+          <li>What did Engage teach us about which agents customers adopt and keep, versus which demo well and go unused?</li>
+          <li>Is the current agent, eval, and guardrail stack meant to be portfolio-wide infrastructure, or was it built specifically for Engage?</li>
+          <li>What data access and API limits do we have into a customer's Salesforce or Dynamics org for a data-quality agent to read?</li>
+          <li>How is "moving the needle" actually measured at 12 months, expansion revenue, retention, or usage, and which product line's number matters most?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I've spent about six years building products across banking, finance, and AI, and I'm finishing an MS in Information Management at the University of Washington. I also hold an MBA in Finance and a BE in Computer Engineering. Right now I'm building a policy-conflict-detection AI agent for the City of Seattle: I prototype with LLMs and RAG first, make the build-versus-buy calls, then design the production architecture with engineers. That is the shape of this role, and it's what I do this week.</p>
+
+        <div class="tbl-wrap">
+          <table class="fit">
+            <caption class="sr-only">What the role needs, mapped to what I have done</caption>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hands-on prototyping with LLMs and agents in Python</td>
+                <td>Built the working POC of a policy-conflict-detection chat agent for the City of Seattle that surfaces conflicts across 8 regulatory bodies. Owned the ingestion pipeline for 9,000+ policy documents across 8 agencies, with quality gates for trustworthy retrieval. Python and SQL.</td>
+              </tr>
+              <tr>
+                <td>Judgment on agent and retrieval architecture</td>
+                <td>Assessed 4 retrieval architectures (vector, BM25, hybrid, and a knowledge graph with a custom schema) and 5+ RAG platforms (Pinecone, Vertex AI, Azure AI, Bedrock, Vectara) on accuracy, groundedness, hallucination, latency, and cost, then made the build-versus-buy call.</td>
+              </tr>
+              <tr>
+                <td>Define strategy and ship B2B SaaS features</td>
+                <td>Owned discovery-to-launch of a finance budgeting app at Nomura with 15+ stakeholders, delivering a 30% reduction in spend. Built a digital lending platform for India's largest private bank from MVP to 25,000+ users across 3,000+ branches.</td>
+              </tr>
+              <tr>
+                <td>AI governance, guardrails, and adoption</td>
+                <td>Rolled out an internal AI assistant to 15,000+ users at a global bank with compliance and governance built in, reaching 100% policy compliance in a phased rollout.</td>
+              </tr>
+              <tr>
+                <td>Product analytics instincts</td>
+                <td>Ran A/B tests on loan-approval flows to cut drop-off, shipped real-time dashboards that cut manual report compilation by 40+ hours a week, and built a Budget vs Actual analytics layer.</td>
+              </tr>
+              <tr>
+                <td>Cross-team influence</td>
+                <td>Led an operational-risk transformation across FI/FX, tech, audit, and risk, cutting events 20% and losses 15%.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The through-line: I prototype AI agents against real data, make the retrieval and build-versus-buy calls, and ship financial products people rely on. That is the center of this role.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fname">Mayuresh More</div>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+<script>
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll (enhancement only; content visible by default without JS)
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length){
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){
+            if (current) current.removeAttribute('aria-current');
+            var a = map[e.target.id];
+            if (a){ a.setAttribute('aria-current','true'); current = a; }
+          }
+        });
+      }, { rootMargin: '-20% 0px -72% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>

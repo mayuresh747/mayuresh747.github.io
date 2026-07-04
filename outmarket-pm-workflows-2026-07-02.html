@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More, Product Manager, Workflows at Outmarket AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f4ee;
+    --card:#fffdf9;
+    --ink:#1d2321;
+    --ink-soft:#3f4744;
+    --ink-faint:#8a8f88;
+    --line:#e2ddd2;
+    --line-strong:#d4cec1;
+    --accent:#1f6f5c;      /* deep teal-green */
+    --accent-soft:#e7f0ec;
+    --accent-ink:#134034;
+    --amber:#a9781f;       /* trust / caution */
+    --amber-soft:#f7efdc;
+    --blue:#2b5f8f;
+    --blue-soft:#e3ecf4;
+    --green:#2f7d4f;
+    --green-soft:#e2efe6;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --wrap:960px;
+    --rail:196px;
+    --rail-gap:44px;
+    --pad:24px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  /* faint paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:radial-gradient(rgba(0,0,0,.015) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .skip-link{
+    position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;
+    padding:10px 16px;border-radius:0 0 8px 0;z-index:1000;font-family:var(--mono);font-size:13px;
+  }
+  .skip-link:focus{left:0}
+  a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2.5px solid var(--accent);outline-offset:3px;border-radius:3px;
+  }
+
+  /* ---- source citation links ---- */
+  .src{
+    color:var(--ink-faint);
+    text-decoration:underline;
+    text-decoration-thickness:.5px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line-strong);
+    font-style:normal;
+    transition:color .15s ease,text-decoration-color .15s ease;
+  }
+  .src:hover,.src:focus-visible{color:var(--accent);text-decoration-color:var(--accent)}
+
+  /* ---- masthead + footer alignment wrap ---- */
+  .align-wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 var(--pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---- masthead ---- */
+  header.masthead{padding:56px 0 30px}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,52px);
+    line-height:1.02;letter-spacing:-.02em;margin:0 0 16px;color:var(--ink);
+  }
+  .role-line{
+    font-family:var(--body);font-size:clamp(18px,2.4vw,22px);line-height:1.4;
+    color:var(--ink-soft);margin:0 0 22px;max-width:38ch;
+  }
+  .prepared{
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0;
+  }
+
+  /* ---- mobile contents disclosure ---- */
+  details.toc-mobile{
+    margin:8px 0 4px;border:1px solid var(--line);border-radius:12px;
+    background:var(--card);overflow:hidden;
+  }
+  details.toc-mobile summary{
+    cursor:pointer;list-style:none;padding:14px 18px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;display:flex;align-items:center;justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none}
+  details.toc-mobile summary::after{content:"+";font-size:18px;line-height:1;color:var(--ink-faint)}
+  details.toc-mobile[open] summary::after{content:"\2212"}
+  details.toc-mobile ol{margin:0;padding:4px 18px 16px;list-style:none;
+    columns:2;column-gap:20px;font-family:var(--display);font-size:14px}
+  details.toc-mobile li{margin:0 0 8px;break-inside:avoid}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none}
+  details.toc-mobile a:hover{color:var(--accent)}
+
+  /* ---- two-column shell ---- */
+  .shell{
+    max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 40px;
+    position:relative;z-index:1;
+  }
+  .rail{display:none}
+
+  main{max-width:66ch}
+
+  /* ---- sections ---- */
+  section{padding:34px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none;padding-top:20px}
+  .kicker{
+    font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 18px;line-height:1.2;
+  }
+  h2.kicker{font-family:var(--mono)} /* ensure heading semantics keep mono */
+  .lede{
+    font-family:var(--body);font-size:20px;line-height:1.5;color:var(--ink);
+    margin:0 0 20px;font-weight:500;
+  }
+  .lede .tag{color:var(--accent);font-weight:600}
+  p{margin:0 0 16px;max-width:64ch}
+  h3{
+    font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em;
+    color:var(--ink);margin:26px 0 10px;
+  }
+  strong{font-weight:600;color:var(--ink)}
+  ul.clean{list-style:none;padding:0;margin:0 0 16px}
+  ul.clean li{position:relative;padding-left:22px;margin-bottom:12px;max-width:64ch}
+  ul.clean li::before{
+    content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;
+    background:var(--accent);border-radius:2px;transform:rotate(45deg);
+  }
+  ul.clean li strong{color:var(--ink)}
+
+  blockquote.jtbd{
+    margin:20px 0;padding:20px 24px;background:var(--card);
+    border-left:4px solid var(--accent);border-radius:0 10px 10px 0;
+    font-size:19px;line-height:1.55;color:var(--ink);
+    box-shadow:0 1px 0 var(--line);
+  }
+  blockquote.jtbd .lbl{
+    display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:600;font-style:normal;
+  }
+
+  /* ---- tables ---- */
+  .table-wrap{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0;
+    border:1px solid var(--line);border-radius:12px;background:var(--card);
+  }
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+  table.wide{min-width:640px}
+  thead th{
+    font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.03em;
+    text-transform:uppercase;text-align:left;color:var(--ink-soft);
+    background:var(--accent-soft);padding:12px 14px;border-bottom:1px solid var(--line-strong);
+    vertical-align:bottom;
+  }
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;color:var(--ink-soft)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody td:first-child{font-weight:600;color:var(--ink);font-family:var(--body)}
+  .rice td.n{font-family:var(--mono);font-weight:600;color:var(--ink);white-space:nowrap}
+  tr.highlight td{background:var(--accent-soft)}
+  tr.highlight td:first-child{color:var(--accent-ink)}
+  .pill{
+    display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+    padding:2px 8px;border-radius:20px;letter-spacing:.02em;white-space:nowrap;
+  }
+  .pill.hi{background:var(--green-soft);color:var(--green)}
+  .pill.med{background:var(--amber-soft);color:var(--amber)}
+  .pill.lo{background:var(--line);color:var(--ink-faint)}
+
+  /* ---- approach numbered cards ---- */
+  ol.bets{list-style:none;counter-reset:bet;padding:0;margin:20px 0}
+  ol.bets li{
+    counter-increment:bet;position:relative;padding:18px 20px 18px 62px;margin-bottom:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+  }
+  ol.bets li::before{
+    content:counter(bet);position:absolute;left:18px;top:18px;
+    width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;
+    font-family:var(--display);font-weight:700;font-size:16px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  ol.bets h3{margin:0 0 6px;font-size:17px}
+  ol.bets p{margin:0;font-size:16px;color:var(--ink-soft)}
+  ol.bets .bet-lbl{color:var(--accent);font-weight:600}
+
+  /* ---- callout ---- */
+  .callout{
+    margin:22px 0;padding:18px 22px;border-radius:12px;background:var(--accent-soft);
+    border:1px solid #cfe0d9;font-size:16.5px;line-height:1.55;color:var(--accent-ink);
+  }
+  .callout .lbl{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;display:block;margin-bottom:6px;
+  }
+
+  /* ---- figures / diagrams ---- */
+  figure.diagram{
+    margin:24px 0;padding:0;border:1px solid var(--line);border-radius:14px;
+    background:var(--card);overflow:hidden;
+  }
+  figure.diagram .cap{
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-faint);padding:12px 18px 0;margin:0;
+  }
+  figure.diagram .svg-holder{padding:14px 18px 18px}
+  figure.diagram svg{display:block;width:100%;height:auto;max-width:100%}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:8px 18px;padding:0 18px 16px;margin:0;
+    font-family:var(--display);font-size:13px;color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend .sw{width:13px;height:13px;border-radius:3px;flex:0 0 auto;border:1px solid rgba(0,0,0,.12)}
+  .sw.ai{background:var(--blue-soft);border-color:var(--blue)}
+  .sw.trust{background:var(--amber-soft);border-color:var(--amber)}
+  .sw.done{background:var(--green-soft);border-color:var(--green)}
+  .sw.lead{background:var(--amber-soft);border-color:var(--amber)}
+  .sw.star{background:var(--blue-soft);border-color:var(--blue)}
+  .sw.lag{background:var(--green-soft);border-color:var(--green)}
+
+  /* svg text base */
+  svg text{font-family:var(--display);fill:var(--ink)}
+  .n-label{font-size:13px;font-weight:500}
+  .n-sub{font-size:11px;fill:var(--ink-soft)}
+  .edge-label{font-family:var(--mono);font-size:11px;fill:var(--ink-soft);font-weight:600}
+
+  /* gantt */
+  .gantt-phase{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .gantt-task{font-family:var(--display);font-size:13px;fill:var(--ink)}
+  .gantt-axis{font-family:var(--mono);font-size:11px;fill:var(--ink-faint)}
+
+  /* ---- metrics guardrails list ---- */
+  .metric-grid{display:grid;gap:12px;margin:18px 0}
+  .metric-card{
+    padding:14px 18px;border:1px solid var(--line);border-radius:11px;background:var(--card);
+  }
+  .metric-card .mlabel{
+    font-family:var(--display);font-weight:600;font-size:14px;color:var(--ink);
+    display:flex;align-items:center;gap:9px;margin-bottom:4px;
+  }
+  .metric-card .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .dot.guard{background:var(--amber)}
+  .dot.anti{background:#b04a3a}
+  .metric-card p{margin:0;font-size:15px;color:var(--ink-soft)}
+
+  /* ---- 30/60/90 phase blocks ---- */
+  .phases{display:grid;gap:16px;margin:20px 0}
+  .phase{padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+    border-left:4px solid var(--accent)}
+  .phase h3{margin:0 0 4px;font-size:16px}
+  .phase .span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent);
+    text-transform:uppercase;font-weight:600;display:block;margin-bottom:10px}
+  .phase ul.clean{margin:0}
+  .phase ul.clean li{font-size:15.5px;margin-bottom:9px}
+
+  /* ---- questions ---- */
+  ol.questions{padding-left:0;list-style:none;counter-reset:q;margin:18px 0}
+  ol.questions li{counter-increment:q;position:relative;padding-left:40px;margin-bottom:14px;max-width:64ch}
+  ol.questions li::before{
+    content:"Q"counter(q);position:absolute;left:0;top:0;
+    font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);
+    background:var(--accent-soft);padding:3px 7px;border-radius:6px;line-height:1.2;
+  }
+
+  /* ---- fit intro ---- */
+  .fit-intro{font-size:19px;line-height:1.55;color:var(--ink);margin-bottom:14px;max-width:64ch}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line-strong);margin-top:20px;padding:40px 0 56px;position:relative;z-index:1}
+  .footer-name{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);margin:0 0 6px}
+  .footer-role{font-size:15px;color:var(--ink-soft);margin:0 0 20px}
+  .contact{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--mono);font-size:13px}
+  .contact a{color:var(--ink-faint);text-decoration:none;letter-spacing:.01em;
+    border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+  .contact a:hover,.contact a:focus-visible{color:var(--accent);border-color:var(--accent)}
+  .contact .sep{color:var(--line-strong)}
+
+  /* ---- reveal (progressive enhancement: hidden state only when JS is on) ---- */
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .js .reveal.in{opacity:1;transform:none}
+  }
+
+  /* =================== DESKTOP: rail =================== */
+  @media (min-width:900px){
+    .align-wrap{
+      padding-left:calc(var(--pad) + var(--rail) + var(--rail-gap));
+    }
+    details.toc-mobile{display:none}
+    .shell{
+      display:grid;
+      grid-template-columns:var(--rail) 1fr;
+      gap:var(--rail-gap);
+      align-items:start;
+    }
+    .rail{
+      display:block;position:sticky;top:32px;align-self:start;
+    }
+    .rail .rail-head{
+      font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--ink-faint);margin:0 0 14px;font-weight:600;
+    }
+    .rail ol{list-style:none;margin:0;padding:0;counter-reset:navi}
+    .rail li{margin:0}
+    .rail a{
+      display:block;font-family:var(--display);font-size:13.5px;line-height:1.3;
+      color:var(--ink-soft);text-decoration:none;padding:6px 0 6px 14px;
+      border-left:2px solid var(--line);transition:color .15s,border-color .15s;
+    }
+    .rail a:hover{color:var(--ink)}
+    .rail a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+    main{max-width:none}
+  }
+
+  /* =================== MOBILE diagram scroll =================== */
+  @media (max-width:640px){
+    body{font-size:17px}
+    figure.diagram .svg-holder{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    figure.diagram.flow svg{min-width:560px}
+    figure.diagram.tree svg{min-width:540px}
+    figure.diagram.gantt svg{min-width:560px}
+    .lede{font-size:18px}
+    header.masthead{padding:40px 0 22px}
+    ol.bets li{padding-left:56px}
+  }
+  @media print{.rail,.toc-mobile,.skip-link{display:none}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="align-wrap">
+  <header class="masthead">
+    <p class="eyebrow">Product pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="role-line">How I would solve the AI-workflow-trust problem for the Product Manager, Workflows role at Outmarket AI.</p>
+    <p class="prepared">Prepared July 2026</p>
+  </header>
+</div>
+
+<div class="align-wrap">
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </details>
+</div>
+
+<div class="shell">
+  <nav class="rail" aria-label="On this page">
+    <p class="rail-head">On this page</p>
+    <ol>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ol>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ============ THE BET ============ -->
+    <section id="bet" class="reveal">
+      <h2 class="kicker">The bet</h2>
+      <p class="lede">Here's my bet: <span class="tag">what decides whether an Outmarket workflow becomes a daily habit or gets abandoned is not raw speed, it is trust.</span></p>
+      <p>So I would make trust the product, not a feature bolted on the side. I'd instrument every workflow to show where the AI's answer came from, flag the outputs it is unsure about, and put a fast human-review step exactly where a wrong answer would cause real harm at binding. The goal is to move workflows from "tried once" to "daily ritual" and to lift the share of pilots that convert to production use.</p>
+    </section>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <section id="problem" class="reveal">
+      <h2 class="kicker">The problem</h2>
+      <p class="lede">My read: the industry's failure mode is not that AI is too slow, it is that people do not trust it enough to let it leave the pilot.</p>
+      <p>The pattern is stark. Over 90% of insurers are exploring or testing AI, but only 22% have fully deployed it in production <a class="src" href="https://www.insurancethoughtleadership.com/ai-machine-learning/2026-year-ai-goes-operational-insurance" target="_blank" rel="noopener">(Insurance Thought Leadership, 2026)</a>. The same report is blunt about why: "Models that lacked transparency struggled to gain adoption. Explainability, not speed, proved essential." Only 38% of property-and-casualty insurers say they capture AI value at scale in their core workflows <a class="src" href="https://pibit.ai/blog/streamline-underwriting-ai-submissions-powerhouse" target="_blank" rel="noopener">(Pibit, 2026)</a>.</p>
+
+      <h3>Who hurts, and what it costs</h3>
+      <ul class="clean">
+        <li><strong>Who hurts.</strong> The daily users at a brokerage: customer service representatives (CSRs), account managers, producers (the people who sell and service policies), and operations leads. They live inside their agency management system (AMS), the software of record for every policy.</li>
+        <li><strong>What they struggle with.</strong> Comparing carrier quotes, checking a policy against what was quoted, generating a certificate of insurance (COI), and pulling data out of carrier PDFs. Slow, repetitive, and easy to get wrong. Manual submission intake alone runs 60 to 140 minutes per submission across triage, classification, extraction, validation, appetite check, and routing <a class="src" href="https://pibit.ai/blog/streamline-underwriting-ai-submissions-powerhouse" target="_blank" rel="noopener">(Pibit, 2026)</a>.</li>
+        <li><strong>Root cause.</strong> The work depends on unstructured documents that vary by carrier. An AI can read them fast, but if it reads one field wrong and the user cannot see that it did, the user stops trusting the whole tool.</li>
+        <li><strong>Workarounds today.</strong> Double-checking every AI output by hand, or falling back to spreadsheets and manual comparison. Both erase the time savings the tool promised.</li>
+        <li><strong>Why the workarounds fail, and the cost.</strong> A user who re-verifies everything is not faster, just more anxious. A user who blindly accepts a wrong output ships a bad policy and pays for it at binding. Either way the workflow gets run once and abandoned, and the account never expands. For a company whose growth depends on brokerages going live fast and expanding usage, an abandoned workflow is lost revenue that never shows up as a complaint.</li>
+      </ul>
+
+      <div class="callout">
+        <span class="lbl">Outmarket's own figures</span>
+        Outmarket reports its Compare Quotes workflow cuts quote comparison from roughly 2 hours to 4 minutes, and that customers see up to a 65% reduction in errors and omissions through AI-assisted comparison <a class="src" href="https://outmarket.ai/products/workflows" target="_blank" rel="noopener">(product page)</a>, <a class="src" href="https://outmarket.ai/" target="_blank" rel="noopener">(homepage)</a>. Those are Outmarket's own figures, not independently audited. I would treat them as the target to protect, and I'd worry about the workflows that do not hit that bar yet.
+      </div>
+    </section>
+
+    <!-- ============ WHO IT IS FOR ============ -->
+    <section id="users" class="reveal">
+      <h2 class="kicker">Who it is for</h2>
+      <p class="lede">I'd be building for two different people: the one who runs the workflow and the one who buys it. The product has to win both.</p>
+      <p>Here is the job I'd design for:</p>
+      <blockquote class="jtbd">
+        <span class="lbl">The job to be done</span>
+        When I am comparing three carrier quotes for a client renewal, I want to trust the summary in front of me without re-reading every PDF, so I can advise the client today instead of tomorrow and not get blamed for a coverage gap later.
+      </blockquote>
+      <p>That job has three layers. The functional layer is finishing the comparison fast. The emotional layer is not feeling anxious that the AI missed something. The social layer is looking sharp and reliable in front of the client and the agency owner. In insurance, the emotional and social layers drive adoption as much as the functional one, because the cost of one visible mistake is high.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Persona</th><th>The job they hire the product for</th><th>What earns their trust</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CSR / account manager<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">daily user</span></td>
+              <td>Finish quote comparison, COI generation, and policy checks fast, without getting blamed for an error</td>
+              <td>Seeing where each number came from; an easy way to fix a wrong field</td>
+            </tr>
+            <tr>
+              <td>Producer / operations lead<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">power user, internal champion</span></td>
+              <td>Serve more accounts with the same headcount; standardize how the team works</td>
+              <td>Consistent output across the team; proof the tool is reliable enough to mandate</td>
+            </tr>
+            <tr>
+              <td>Agency principal / owner<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">economic buyer</span></td>
+              <td>Get more capacity per person without adding risk</td>
+              <td>Adoption that sticks, and no compliance or binding errors traced to the tool</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The daily user decides whether the tool survives. The owner decides whether the contract renews and expands. My design has to speak to both: fast for the CSR, reliable and measurable for the owner.</p>
+    </section>
+
+    <!-- ============ WHY THIS PROBLEM ============ -->
+    <section id="priority" class="reveal">
+      <h2 class="kicker">Why this problem</h2>
+      <p class="lede">I'd fund trust instrumentation first. It is the one investment that raises the ceiling on every other workflow.</p>
+      <p>Here is how I'd rank what this role could fund, scored RICE-style (Reach &times; Impact &times; Confidence &divide; Effort), given 250-plus brokerages on the platform today <a class="src" href="https://www.prnewswire.com/news-releases/outmarket-ai-raises-17m-series-a-to-power-the-intelligence-era-of-insurance-302770379.html" target="_blank" rel="noopener">(Outmarket, 2026)</a>.</p>
+
+      <div class="table-wrap">
+        <table class="rice wide">
+          <thead>
+            <tr><th>Candidate</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>Read</th></tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td>Trust layer<br><span style="font-weight:400;color:var(--accent);font-size:13px">source attribution, confidence flags, review step</span></td>
+              <td>Every user, every workflow</td>
+              <td class="n">3</td>
+              <td class="n">80%</td>
+              <td class="n">Medium</td>
+              <td>Highest. The dependency the rest sits on.</td>
+            </tr>
+            <tr>
+              <td>New line expansion<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">benefits, specialty</span></td>
+              <td>New segments, not yet at scale</td>
+              <td class="n">2</td>
+              <td class="n">50%</td>
+              <td class="n">High</td>
+              <td>Real growth, but risky before trust is solved on existing lines</td>
+            </tr>
+            <tr>
+              <td>More workflows in the library<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">breadth</span></td>
+              <td>Medium</td>
+              <td class="n">1</td>
+              <td class="n">80%</td>
+              <td class="n">Medium</td>
+              <td>Adds surface area, thins quality if trust is unsolved</td>
+            </tr>
+            <tr>
+              <td>AMS write-back reliability<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">Applied Epic, AMS360, HawkSoft, Nexsure</span></td>
+              <td>Every bound policy</td>
+              <td class="n">2</td>
+              <td class="n">80%</td>
+              <td class="n">Medium</td>
+              <td>Close second. A safety floor, not a growth lever</td>
+            </tr>
+            <tr>
+              <td>Custom workflow governance<br><span style="font-weight:400;color:var(--ink-faint);font-size:13px">plain-English builder</span></td>
+              <td>Low today, high later</td>
+              <td class="n">2</td>
+              <td class="n">50%</td>
+              <td class="n">Medium</td>
+              <td>Matters for enterprise brokerages; not yet the bottleneck</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The trust layer is not competing with the workflows it protects. It is the base they all consume, so it stays in scope regardless of a tidy score. Everything else, breadth, new lines, custom governance, gets more valuable only after a user believes the outputs. That is why I'd sequence trust first, AMS write-back safety alongside it, and expansion after.</p>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section id="approach" class="reveal">
+      <h2 class="kicker">Approach</h2>
+      <p class="lede">I don't yet know which trust mechanism moves adoption most, so I'd frame three bets and let evidence pick.</p>
+      <ol class="bets">
+        <li>
+          <h3>Source attribution first</h3>
+          <p>Every AI-derived field shows the exact place in the carrier document it came from, one click away. <span class="bet-lbl">Bet:</span> users abandon workflows because they cannot verify a number, and showing the source removes the need to re-read the whole PDF. This is closest to what Outmarket already claims on its homepage: "Every data point cited to its source" <a class="src" href="https://outmarket.ai/" target="_blank" rel="noopener">(homepage)</a>.</p>
+        </li>
+        <li>
+          <h3>Confidence and exception routing</h3>
+          <p>The AI marks low-confidence outputs and routes only those to a human, so users review the 10% that is risky instead of 100% out of anxiety. <span class="bet-lbl">Bet:</span> the trust problem is really an attention problem, and telling users where to look is worth more than showing every source.</p>
+        </li>
+        <li>
+          <h3>Human-review checkpoint at the harm point</h3>
+          <p>A required review step placed only where a wrong answer causes downstream damage (for example, before write-back to the AMS at binding). <span class="bet-lbl">Bet:</span> trust is won by proving the tool refuses to guess where guessing is expensive.</p>
+        </li>
+      </ol>
+      <p><strong>How I'd decide between them.</strong> Run all three as lightweight variants on one high-volume workflow, and watch two behaviors that reveal distrust directly. The <strong>re-run rate</strong> (a user running the same workflow again because they did not believe the first result) and the <strong>override rate</strong> (how often users correct a field). The variant that lowers re-runs and abandonment without slowing the workflow to a crawl wins. My prior is that attribution plus targeted confidence flags beats a blanket review step, because a review step on everything just recreates the manual work. But that is a bet to test, not a conclusion.</p>
+    </section>
+
+    <!-- ============ MVP ============ -->
+    <section id="mvp" class="reveal">
+      <h2 class="kicker">What I'd ship first</h2>
+      <p class="lede">I'd start with the smallest test of the biggest assumption: a trust layer on the single most-run workflow, not a trust layer everywhere.</p>
+      <p>The biggest assumption is that visible source attribution plus confidence flags will move a real behavior (fewer re-runs, less abandonment) on a workflow users already run a lot. So the MVP is:</p>
+      <ul class="clean">
+        <li><strong>One workflow.</strong> The highest-volume one in the current base. Compare Quotes is the likely candidate given it is Outmarket's headline claim, but I'd confirm with usage data in week one rather than assume.</li>
+        <li><strong>Source attribution on every AI-derived field.</strong> Click a field, see the exact spot in the carrier document it was pulled from.</li>
+        <li><strong>Confidence flags on low-certainty fields.</strong> The output visibly marks what it is unsure about, so the user's eye goes there first.</li>
+        <li><strong>One-click correction that is captured.</strong> When a user fixes a field, that correction is logged. This gives me the override signal and a stream of real errors to improve the workflow.</li>
+      </ul>
+      <p><strong>What it deliberately leaves out.</strong> No new workflows. No new lines of business (benefits, specialty). No custom-builder governance. No full human-review-queue product. Those are all more valuable after I know the trust layer changes behavior. Shipping them first would spread effort across surface area while the core question, "do users trust the output," stays unanswered.</p>
+
+      <figure class="diagram flow">
+        <p class="cap">The workflow with the trust layer added</p>
+        <div class="svg-holder">
+          <svg viewBox="0 0 720 470" role="img" aria-label="A user runs an AI workflow. The AI reads carrier documents and tags each field with a source link and a confidence score. High-confidence output is shown to the user who verifies via the source link. Low-confidence fields route to a quick human review, where the user corrects them and the correction is logged. Both paths then write back to the agency management system.">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#9aa19c"></path>
+              </marker>
+            </defs>
+            <!-- edges (drawn first, under nodes) -->
+            <g fill="none" stroke="#c4cac4" stroke-width="1.6" marker-end="url(#arrow)" aria-hidden="true">
+              <line x1="360" y1="58"  x2="360" y2="82"></line>
+              <line x1="360" y1="130" x2="360" y2="154"></line>
+              <line x1="360" y1="202" x2="360" y2="226"></line>
+              <!-- decision to show (left/high) -->
+              <path d="M300 285 C220 300, 168 302, 168 330"></path>
+              <!-- decision to review (right/low) -->
+              <path d="M420 285 C540 300, 588 302, 588 330"></path>
+              <!-- review to correct -->
+              <line x1="588" y1="378" x2="588" y2="402"></line>
+              <!-- show to writeback -->
+              <path d="M168 378 C168 412, 240 430, 300 434"></path>
+              <!-- correct to writeback -->
+              <path d="M588 450 C588 462, 480 440, 420 434"></path>
+            </g>
+            <!-- edge labels -->
+            <text class="edge-label" x="196" y="312" text-anchor="middle">high</text>
+            <text class="edge-label" x="560" y="312" text-anchor="middle">low</text>
+
+            <!-- node: start -->
+            <g>
+              <rect x="250" y="18" width="220" height="40" rx="9" fill="#fff" stroke="#c4cac4"></rect>
+              <text class="n-label" x="360" y="43" text-anchor="middle">User runs the workflow (Compare Quotes)</text>
+            </g>
+            <!-- node: ai -->
+            <g>
+              <rect x="248" y="90" width="224" height="40" rx="9" fill="var(--blue-soft)" stroke="var(--blue)"></rect>
+              <text class="n-label" x="360" y="115" text-anchor="middle" fill="#1c3f5e">AI reads carrier documents, extracts fields</text>
+            </g>
+            <!-- node: annotate -->
+            <g>
+              <rect x="256" y="162" width="208" height="40" rx="9" fill="var(--blue-soft)" stroke="var(--blue)"></rect>
+              <text class="n-label" x="360" y="187" text-anchor="middle" fill="#1c3f5e">Each field tagged: source link + confidence</text>
+            </g>
+            <!-- node: decision (diamond) -->
+            <g>
+              <path d="M360 224 L432 262 L360 300 L288 262 Z" fill="var(--amber-soft)" stroke="var(--amber)"></path>
+              <text class="n-label" x="360" y="258" text-anchor="middle" fill="#6d4c12">Confidence</text>
+              <text class="n-label" x="360" y="274" text-anchor="middle" fill="#6d4c12">high or low?</text>
+            </g>
+            <!-- node: show (left) -->
+            <g>
+              <rect x="56" y="330" width="224" height="48" rx="9" fill="var(--green-soft)" stroke="var(--green)"></rect>
+              <text class="n-label" x="168" y="351" text-anchor="middle" fill="#1a4a2f">Output shown</text>
+              <text class="n-sub" x="168" y="368" text-anchor="middle">user verifies via source link</text>
+            </g>
+            <!-- node: review (right) -->
+            <g>
+              <rect x="476" y="330" width="224" height="48" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="588" y="351" text-anchor="middle" fill="#6d4c12">Low-confidence fields</text>
+              <text class="n-sub" x="588" y="368" text-anchor="middle">routed to quick human review</text>
+            </g>
+            <!-- node: correct (right) -->
+            <g>
+              <rect x="476" y="402" width="224" height="48" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="588" y="423" text-anchor="middle" fill="#6d4c12">User corrects field</text>
+              <text class="n-sub" x="588" y="440" text-anchor="middle">correction logged</text>
+            </g>
+            <!-- node: writeback (center bottom) -->
+            <g>
+              <rect x="248" y="414" width="224" height="46" rx="9" fill="var(--green-soft)" stroke="var(--green)"></rect>
+              <text class="n-label" x="360" y="434" text-anchor="middle" fill="#1a4a2f">Write back to AMS</text>
+              <text class="n-sub" x="360" y="451" text-anchor="middle">Applied Epic, AMS360, etc.</text>
+            </g>
+          </svg>
+        </div>
+        <p class="legend" aria-hidden="true">
+          <span><span class="sw ai"></span>AI step</span>
+          <span><span class="sw trust"></span>Trust layer (the three additions)</span>
+          <span><span class="sw done"></span>Completed / written back</span>
+        </p>
+      </figure>
+    </section>
+
+    <!-- ============ METRICS ============ -->
+    <section id="metrics" class="reveal">
+      <h2 class="kicker">Metrics</h2>
+      <p class="lede">I'd pick one number that only rises when a user genuinely trusted the output, then guard it against the ways it could be gamed.</p>
+      <p><strong>North Star: weekly trusted workflow completions per active user.</strong> A "trusted completion" is a workflow a user finished and acted on (moved forward, wrote back to the AMS) without re-running it out of doubt. I picked it because it rises only when a user got real value (they used the result), it moves before revenue (adoption precedes renewal and expansion), and it is a number the team can move directly through the trust layer.</p>
+      <p>This ladders to the business. Retention and expansion across the 250-plus brokerage base <a class="src" href="https://www.prnewswire.com/news-releases/outmarket-ai-raises-17m-series-a-to-power-the-intelligence-era-of-insurance-302770379.html" target="_blank" rel="noopener">(Outmarket, 2026)</a> depend on daily use sticking. Outmarket's headline claim of 12 to 15 hours saved per person per week <a class="src" href="https://outmarket.ai/" target="_blank" rel="noopener">(homepage)</a> is Outmarket's own figure, and it only holds if users actually run and trust the workflows week after week, which is exactly what this metric tracks.</p>
+
+      <figure class="diagram tree">
+        <p class="cap">Metrics tree: from leading signals up to the business outcome</p>
+        <div class="svg-holder">
+          <svg viewBox="0 0 720 360" role="img" aria-label="Four leading indicators feed the North Star. Source-link usage, override rate, re-run rate, and abandonment rate all point up into the North Star, which is weekly trusted workflow completions per active user. The North Star in turn drives two lagging business outcomes: pilot-to-production conversion and net revenue retention.">
+            <defs>
+              <marker id="arrow2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#9aa19c"></path>
+              </marker>
+            </defs>
+            <!-- edges leading -> ns (bottom row up to center) -->
+            <g fill="none" stroke="#c4cac4" stroke-width="1.6" marker-end="url(#arrow2)" aria-hidden="true">
+              <path d="M95 300 C120 240, 260 210, 300 196"></path>
+              <path d="M270 300 C290 260, 320 220, 335 202"></path>
+              <path d="M450 300 C430 260, 400 220, 385 202"></path>
+              <path d="M625 300 C600 240, 460 210, 420 196"></path>
+              <!-- ns -> lagging -->
+              <path d="M300 150 C230 118, 180 96, 168 78"></path>
+              <path d="M420 150 C490 118, 540 96, 552 78"></path>
+            </g>
+
+            <!-- leading (bottom, amber) -->
+            <g>
+              <rect x="10" y="302" width="170" height="46" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="95" y="322" text-anchor="middle" fill="#6d4c12">Source-link usage</text>
+              <text class="n-sub" x="95" y="339" text-anchor="middle">users verifying</text>
+            </g>
+            <g>
+              <rect x="190" y="302" width="160" height="46" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="270" y="322" text-anchor="middle" fill="#6d4c12">Override rate</text>
+              <text class="n-sub" x="270" y="339" text-anchor="middle">field corrections</text>
+            </g>
+            <g>
+              <rect x="370" y="302" width="160" height="46" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="450" y="322" text-anchor="middle" fill="#6d4c12">Re-run rate</text>
+              <text class="n-sub" x="450" y="339" text-anchor="middle">distrust proxy</text>
+            </g>
+            <g>
+              <rect x="540" y="302" width="170" height="46" rx="9" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="n-label" x="625" y="322" text-anchor="middle" fill="#6d4c12">Abandonment rate</text>
+              <text class="n-sub" x="625" y="339" text-anchor="middle">started, not finished</text>
+            </g>
+
+            <!-- north star (center, blue) -->
+            <g>
+              <rect x="252" y="150" width="216" height="52" rx="11" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="2"></rect>
+              <text x="360" y="170" text-anchor="middle" fill="#1c3f5e" style="font-size:13px;font-weight:700">North Star</text>
+              <text class="n-sub" x="360" y="186" text-anchor="middle" fill="#1c3f5e">Weekly trusted workflow</text>
+              <text class="n-sub" x="360" y="199" text-anchor="middle" fill="#1c3f5e">completions per active user</text>
+            </g>
+
+            <!-- lagging (top, green) -->
+            <g>
+              <rect x="70" y="30" width="196" height="48" rx="9" fill="var(--green-soft)" stroke="var(--green)"></rect>
+              <text class="n-label" x="168" y="50" text-anchor="middle" fill="#1a4a2f">Pilot-to-production</text>
+              <text class="n-sub" x="168" y="67" text-anchor="middle">conversion</text>
+            </g>
+            <g>
+              <rect x="454" y="30" width="196" height="48" rx="9" fill="var(--green-soft)" stroke="var(--green)"></rect>
+              <text class="n-label" x="552" y="50" text-anchor="middle" fill="#1a4a2f">Net revenue retention</text>
+              <text class="n-sub" x="552" y="67" text-anchor="middle">seats + workflows</text>
+            </g>
+          </svg>
+        </div>
+        <p class="legend" aria-hidden="true">
+          <span><span class="sw lead"></span>Leading signals</span>
+          <span><span class="sw star"></span>North Star</span>
+          <span><span class="sw lag"></span>Lagging business outcome</span>
+        </p>
+      </figure>
+
+      <h3>Guardrail and anti-metrics</h3>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="mlabel"><span class="dot guard"></span>Guardrail: AMS write-back error rate</div>
+          <p>Speed and adoption must not rise on the back of silent bad data landing in the system of record. If write-back errors climb, the trust layer has failed at the point that matters most.</p>
+        </div>
+        <div class="metric-card">
+          <div class="mlabel"><span class="dot anti"></span>Anti-metric: time-in-tool</div>
+          <p>More minutes in Outmarket is not a win. A user stuck re-reading outputs spends more time and trusts less. I would not celebrate engagement time.</p>
+        </div>
+        <div class="metric-card">
+          <div class="mlabel"><span class="dot anti"></span>Anti-metric: raw workflow run count</div>
+          <p>A workflow re-run three times out of doubt counts as three runs but signals a problem. I'd separate trusted completions from anxious repeats.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 30/60/90 ============ -->
+    <section id="plan" class="reveal">
+      <h2 class="kicker">30 / 60 / 90</h2>
+      <p class="lede">I'd spend the first month listening and learning the domain, the second sharpening the problem with real data and shipping a quick win, the third validating the trust bet.</p>
+
+      <figure class="diagram gantt">
+        <p class="cap">The first 90 days at a glance</p>
+        <div class="svg-holder">
+          <svg viewBox="0 0 720 250" role="img" aria-label="A three-month plan. Days zero to thirty: user research and workflow shadowing, plus a usage-data read and domain ramp. Days thirty to sixty: ship a quick win on the worst workflow, and set the metric baseline while aligning the team. Days sixty to ninety: ship the MVP trust layer as an A/B test, then read results and propose the roadmap.">
+            <!-- month gridlines -->
+            <g stroke="#e6e1d6" stroke-width="1" aria-hidden="true">
+              <line x1="150" y1="34" x2="150" y2="210"></line>
+              <line x1="340" y1="34" x2="340" y2="210"></line>
+              <line x1="530" y1="34" x2="530" y2="210"></line>
+              <line x1="720" y1="34" x2="720" y2="210"></line>
+            </g>
+            <!-- axis labels -->
+            <text class="gantt-axis" x="245" y="26" text-anchor="middle">DAYS 0 to 30</text>
+            <text class="gantt-axis" x="435" y="26" text-anchor="middle">DAYS 30 to 60</text>
+            <text class="gantt-axis" x="625" y="26" text-anchor="middle">DAYS 60 to 90</text>
+
+            <!-- phase 1 -->
+            <text class="gantt-phase" x="8" y="60" fill="var(--accent)">LISTEN</text>
+            <g>
+              <rect x="150" y="48" width="185" height="24" rx="6" fill="var(--blue-soft)" stroke="var(--blue)"></rect>
+              <text class="gantt-task" x="158" y="64" fill="#1c3f5e">Research + workflow shadowing</text>
+            </g>
+            <g>
+              <rect x="150" y="78" width="185" height="24" rx="6" fill="var(--blue-soft)" stroke="var(--blue)"></rect>
+              <text class="gantt-task" x="158" y="94" fill="#1c3f5e">Usage-data read + domain ramp</text>
+            </g>
+
+            <!-- phase 2 -->
+            <text class="gantt-phase" x="8" y="126" fill="var(--amber)">SHARPEN</text>
+            <g>
+              <rect x="340" y="114" width="185" height="24" rx="6" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="gantt-task" x="348" y="130" fill="#6d4c12">Ship quick win on worst flow</text>
+            </g>
+            <g>
+              <rect x="340" y="144" width="185" height="24" rx="6" fill="var(--amber-soft)" stroke="var(--amber)"></rect>
+              <text class="gantt-task" x="348" y="160" fill="#6d4c12">Set baseline + align team</text>
+            </g>
+
+            <!-- phase 3 -->
+            <text class="gantt-phase" x="8" y="192" fill="var(--green)">VALIDATE</text>
+            <g>
+              <rect x="530" y="180" width="185" height="24" rx="6" fill="var(--green-soft)" stroke="var(--green)"></rect>
+              <text class="gantt-task" x="538" y="196" fill="#1a4a2f">Ship MVP as A/B test</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="phases">
+        <div class="phase">
+          <h3>Days 0 to 30: listen, map the domain, and read the data</h3>
+          <span class="span">Listen</span>
+          <ul class="clean">
+            <li>Sit with CSRs, account managers, and operations leads at several brokerages and watch them run workflows live. I'd use the Mom Test discipline: ask what they did the last time they hit a problem, not whether they would like a feature.</li>
+            <li>Pull usage data to find which workflows are daily rituals and which get run once and dropped. Abandonment and re-run rates are my first read on where trust breaks.</li>
+            <li>Build my own insurance-domain map: how a quote-to-bind lifecycle works, what a COI is for, how a submission moves, where a wrong field causes real harm. I'd pair with customer success and go-to-market to compress this.</li>
+            <li>Learn the current AI evaluation setup: how the team decides an output is "good" today, and where source attribution and confidence already exist.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>Days 30 to 60: a quick win, and sharpen the problem</h3>
+          <span class="span">Sharpen</span>
+          <ul class="clean">
+            <li>Ship one small, visible improvement to the highest-abandonment workflow, most likely a source-attribution fix that removes a specific re-read users complained about. Early credibility with users and engineering.</li>
+            <li>Set the baseline: measure re-run, override, and abandonment rates on the target workflow so the MVP has something to beat.</li>
+            <li>Align stakeholders on the trust-first sequence: bring the usage evidence to engineering and go-to-market so the roadmap call is shared, not imposed.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>Days 60 to 90: ship and validate the first bet</h3>
+          <span class="span">Validate</span>
+          <ul class="clean">
+            <li>Ship the MVP trust layer on the highest-volume workflow as an A/B test against the current experience.</li>
+            <li>Read the result against the North Star and guardrails. Did trusted completions rise? Did re-runs and abandonment fall? Did write-back errors stay flat?</li>
+            <li>Propose the next quarter's roadmap from evidence: which trust mechanism to standardize across workflows, and whether expansion into a new line is ready to start.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RISKS ============ -->
+    <section id="risks" class="reveal">
+      <h2 class="kicker">Risks</h2>
+      <p class="lede">The biggest risks I see are in the work, not the plan. Here is what I'd test in week one.</p>
+      <ul class="clean">
+        <li><strong>The trust bet might be wrong.</strong> Maybe users abandon workflows for a reason other than distrust, like the output landing in the wrong place or the workflow being slow. <em>Validate first:</em> before building anything, interview users who abandoned a workflow and read the re-run data to confirm distrust is the real driver.</li>
+        <li><strong>Source attribution might not be enough.</strong> Showing a source link is only useful if users click it and it resolves their doubt. <em>Validate first:</em> instrument source-link usage in the MVP and check whether clicking it lowers the re-run rate.</li>
+        <li><strong>Carrier document variance could break accuracy.</strong> Real carrier PDFs vary far more than test files, and the bar users expect is high: a competitor's case study reports roughly 99% accuracy on submissions within three months <a class="src" href="https://www.furtherai.com/blog/from-basic-automation-to-ai-agents-transforming-insurance-submission-processing" target="_blank" rel="noopener">(FurtherAI, 2026)</a>. <em>Validate first:</em> measure the override rate on real customer documents, not a clean test set, and treat corrections as the signal to tune.</li>
+        <li><strong>AMS write-back is a silent failure surface.</strong> Applied Epic, AMS360, HawkSoft, and Nexsure each have different schemas and permissions; a field-mapping error is invisible until binding. <em>Validate first:</em> define an integration test that checks a completed workflow round-trips correctly into each AMS before I trust any adoption number.</li>
+        <li><strong>New-line expansion could thin quality.</strong> Outmarket is expanding into benefits and specialty, which have different document types and terminology. <em>Validate first:</em> hold the quality bar on existing lines as a gate, and require a defined quality benchmark for a new line before its pilot starts.</li>
+        <li><strong>A confidence flag is only as good as the confidence estimate.</strong> If the AI is confidently wrong, the flag misleads. <em>Validate first:</em> check flagged-versus-actual error alignment on a labeled review set before shipping confidence flags widely.</li>
+      </ul>
+    </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section id="questions" class="reveal">
+      <h2 class="kicker">Questions</h2>
+      <p class="lede">These answers would change my plan, so I'd ask them early.</p>
+      <ol class="questions">
+        <li>Which workflows have the highest abandonment or re-run rates today, and is that already visible in the data or does it need instrumentation first?</li>
+        <li>How does the team currently decide an AI output is "good" for a workflow step, and is there a labeled review set I can measure against?</li>
+        <li>How mature is the benefits workflow tooling versus commercial P&amp;C, and is a benefits pilot expected on the near-term roadmap?</li>
+        <li>When a workflow writes back to an AMS, how are field-mapping errors caught today, and how often do they reach binding?</li>
+        <li>Does Outmarket get structured data feeds from carriers, or is comparison built on parsing carrier PDFs? The technical risk profile differs a lot between the two.</li>
+        <li>For the plain-English custom workflow builder, what governs the quality of user-generated workflows today, and is that a near-term priority or a later one?</li>
+      </ol>
+    </section>
+
+    <!-- ============ WHY ME ============ -->
+    <section id="fit" class="reveal">
+      <h2 class="kicker">Why me</h2>
+      <p class="fit-intro">I'm a product manager with six-plus years building products in banking, lending, and AI. I hold a Master of Science in Information Management from the University of Washington (expected June 2026), an MBA in Finance, and a Bachelor of Engineering in Computer Engineering. Right now I'm building a policy-conflict-detection AI agent for the City of Seattle, which is the same class of problem this role owns: making an AI's output over messy documents trustworthy enough that a professional will act on it.</p>
+      <p>That current work maps tightly to Outmarket's hardest requirement, building trust in AI behavior. I own the data-ingestion pipeline for 9,000-plus policy documents across 8 agencies, and I evaluated retrieval architectures on exactly the axes this role cares about: accuracy, groundedness, hallucination, and latency, with source attribution built in so a user can see where an answer came from. That is the trust layer this pitch is built around.</p>
+      <p>I've also spent years shipping AI and workflow products inside regulated finance, where a wrong output has real consequences, so trust and compliance are not new constraints for me. At Nomura, I ran an internal AI assistant rollout to 15,000-plus users with compliance and governance built in. At India's largest private bank, I scaled a digital lending platform from MVP to 25,000-plus users across 3,000-plus branches, and shipped credit-bureau integrations that cut manual review by 35%, the same document-automation-plus-integration problem Outmarket lives in.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>What the role needs</th><th>What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Build product design that makes AI outputs trustworthy</td><td>Built a policy-AI agent with source attribution; evaluated retrieval on groundedness and hallucination for legal and policy text</td></tr>
+            <tr><td>Partner with engineering on AI behavior</td><td>Owned ingestion and quality gates across 9,000-plus documents; ran build-versus-buy across 5-plus RAG platforms</td></tr>
+            <tr><td>Turn operational pain into product decisions</td><td>Ran discovery with 15-plus stakeholders at Nomura to scope an MVP that cut spend 30%</td></tr>
+            <tr><td>Design workflow automation that reduces manual effort</td><td>Shipped credit-bureau integrations that cut manual review 35% and automated decisioning</td></tr>
+            <tr><td>Ship polished features fast without getting sloppy</td><td>Scaled a lending platform MVP to 25,000-plus users across 3,000-plus branches; A/B tested flows to cut drop-off</td></tr>
+            <tr><td>Be the connective partner between go-to-market and engineering</td><td>Led an AI-assistant rollout to 15,000-plus users across compliance, tech, and business teams</td></tr>
+            <tr><td>Comfort with SQL and data analysis</td><td>SQL and Python; built real-time reporting dashboards and 25-plus automated data pipelines</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="align-wrap">
+    <p class="footer-name">Mayuresh More</p>
+    <p class="footer-role">Product Manager, Workflows &middot; Outmarket AI</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal-on-scroll (enhancement only; content already visible if this never runs) */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    reveals.forEach(function(el){ ro.observe(el); });
+  }
+
+  /* scroll-spy for the desktop rail */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  if (links.length && 'IntersectionObserver' in window) {
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var sections = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+    var current = null;
+    function setCurrent(id){
+      if (current === id) return;
+      current = id;
+      links.forEach(function(a){
+        if (a.getAttribute('href').slice(1) === id){ a.setAttribute('aria-current','true'); }
+        else { a.removeAttribute('aria-current'); }
+      });
+    }
+    var spy = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; })
+        .sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+      if (visible.length){ setCurrent(visible[0].target.id); }
+    }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
