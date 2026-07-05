@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More · Staff Product Manager, Finance Applications at Reddit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#f7f4ef;
+    --paper-2:#fffdf9;
+    --ink:#1c1b19;
+    --ink-soft:#413e38;
+    --ink-muted:#6f6b62;
+    --ink-faint:#9b968b;
+    --accent:#b23c17;
+    --accent-deep:#8a2d10;
+    --line:#e4ded2;
+    --line-strong:#d3ccbd;
+
+    --intake-fill:#e2ecf4; --intake-stroke:#3d6b8f; --intake-ink:#22415a;
+    --erp-fill:#e0ede0;    --erp-stroke:#4a7d55;    --erp-ink:#28472f;
+    --control-fill:#f3ead0;--control-stroke:#9a7a1f;--control-ink:#5b4712;
+    --glue-fill:#e9e1f0;   --glue-stroke:#6f5490;   --glue-ink:#3f2d55;
+    --guard-fill:#f4dfda;  --guard-stroke:#b0503b;  --guard-ink:#6e2c1f;
+
+    --disp:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+    --rail:190px;
+    --rail-gap:56px;
+    --wrap:1000px;
+    --pad:40px;
+    --offset:calc(var(--rail) + var(--rail-gap));
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){
+    html{scroll-behavior:smooth}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:var(--body);
+    font-size:17.5px;
+    line-height:1.66;
+    font-optical-sizing:auto;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  /* faint atmosphere */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(1100px 520px at 78% -6%, rgba(178,60,23,.045), transparent 60%),
+      radial-gradient(900px 460px at -8% 4%, rgba(61,107,143,.05), transparent 55%);
+    z-index:0;
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:var(--paper);
+    padding:.6rem 1rem;border-radius:6px;z-index:100;
+    font-family:var(--mono);font-size:.8rem;text-decoration:none;
+  }
+  .skip-link:focus{left:12px;top:12px}
+
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2.5px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 var(--pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding-top:64px;
+    padding-bottom:26px;
+    padding-left:var(--offset);
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 20px;
+  }
+  h1{
+    font-family:var(--disp);
+    font-weight:700;
+    font-size:clamp(2rem,5vw,2.55rem);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    margin:0 0 16px;
+  }
+  .role-line{
+    font-family:var(--body);
+    font-size:clamp(1.12rem,2.3vw,1.28rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:44ch;
+    margin:0 0 20px;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .masthead > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+    .eyebrow{animation-delay:0s}
+    h1{animation-delay:.06s}
+    .role-line{animation-delay:.13s}
+    .prepared{animation-delay:.2s}
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+  /* ---------- mobile contents ---------- */
+  .m-contents{
+    display:block;
+    margin:22px 0 4px;
+    border:1px solid var(--line-strong);
+    border-radius:9px;
+    background:var(--paper-2);
+    padding:0 16px;
+  }
+  .m-contents summary{
+    cursor:pointer;
+    list-style:none;
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    padding:13px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .m-contents summary::-webkit-details-marker{display:none}
+  .m-contents summary::after{content:"+";font-size:1.1rem;color:var(--accent)}
+  .m-contents[open] summary::after{content:"\2212"}
+  .m-contents ol{
+    list-style:none;
+    margin:0;padding:0 0 12px;
+    columns:2;
+    column-gap:20px;
+  }
+  .m-contents li{margin:0 0 9px;break-inside:avoid}
+  .m-contents a{
+    font-family:var(--disp);
+    font-size:.92rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  .m-contents a:hover{color:var(--accent)}
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail) minmax(0,1fr);
+    gap:var(--rail-gap);
+    align-items:start;
+  }
+  .rail{
+    position:sticky;
+    top:34px;
+    align-self:start;
+  }
+  .rail-head{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 16px;
+    padding-left:14px;
+  }
+  .rail ul{list-style:none;margin:0;padding:0}
+  .rail li{margin:0}
+  .rail a{
+    display:block;
+    font-family:var(--disp);
+    font-weight:500;
+    font-size:.86rem;
+    line-height:1.3;
+    color:var(--ink-muted);
+    text-decoration:none;
+    padding:7px 0 7px 14px;
+    border-left:2px solid var(--line-strong);
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .rail a:hover{color:var(--ink)}
+  .rail a.active{
+    color:var(--accent);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- sections ---------- */
+  main{display:block}
+  .section{
+    padding:40px 0;
+    border-top:1px solid var(--line);
+    scroll-margin-top:24px;
+  }
+  .section:first-child{border-top:none;padding-top:34px}
+  .kicker{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  .lead{
+    font-family:var(--body);
+    font-size:1.32rem;
+    line-height:1.44;
+    color:var(--ink);
+    margin:0 0 20px;
+    max-width:40ch;
+  }
+  .section p{max-width:66ch;margin:0 0 17px}
+  .section p:last-child{margin-bottom:0}
+  strong{color:var(--ink);font-weight:600}
+
+  /* citation links */
+  a.src{
+    color:var(--ink-muted);
+    text-decoration:underline;
+    text-decoration-thickness:.5px;
+    text-underline-offset:2px;
+    text-decoration-color:var(--line-strong);
+    transition:color .16s ease,text-decoration-color .16s ease;
+  }
+  a.src:hover,a.src:focus-visible{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+  .cite{color:var(--ink-faint);font-size:.9em}
+
+  /* stacked list (problem pressures / approach / mvp / risks) */
+  .stack{list-style:none;margin:6px 0 0;padding:0;max-width:66ch}
+  .stack > li{
+    padding:16px 0 16px 22px;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+  .stack > li:first-child{border-top:none;padding-top:2px}
+  .stack > li::before{
+    content:"";
+    position:absolute;
+    left:0;top:24px;
+    width:7px;height:7px;
+    background:var(--accent);
+    border-radius:50%;
+  }
+  .stack > li:first-child::before{top:10px}
+  .stack b{color:var(--ink);font-weight:600}
+
+  /* numbered directions */
+  ol.dirs{list-style:none;counter-reset:d;margin:6px 0 22px;padding:0;max-width:66ch}
+  ol.dirs > li{
+    counter-increment:d;
+    position:relative;
+    padding:4px 0 4px 44px;
+    margin:0 0 14px;
+    min-height:30px;
+  }
+  ol.dirs > li::before{
+    content:counter(d);
+    position:absolute;left:0;top:2px;
+    width:30px;height:30px;
+    display:grid;place-items:center;
+    font-family:var(--mono);font-weight:700;font-size:.85rem;
+    color:var(--accent);
+    background:var(--paper-2);
+    border:1.5px solid var(--accent);
+    border-radius:50%;
+  }
+  ol.dirs b{color:var(--ink);font-weight:600}
+
+  ol.qs{margin:6px 0 0;padding-left:1.3em;max-width:66ch}
+  ol.qs li{margin:0 0 13px;padding-left:6px}
+  ol.qs li::marker{font-family:var(--mono);color:var(--accent);font-size:.9em}
+
+  /* decision bullets */
+  ul.plain{list-style:none;margin:6px 0 0;padding:0;max-width:66ch}
+  ul.plain > li{
+    position:relative;padding:0 0 12px 22px;
+  }
+  ul.plain > li::before{
+    content:"";position:absolute;left:2px;top:11px;
+    width:9px;height:2px;background:var(--accent);
+  }
+  ul.plain b{color:var(--ink);font-weight:600}
+
+  /* callout */
+  .insight{
+    margin:24px 0 0;
+    padding:18px 22px;
+    background:var(--paper-2);
+    border:1px solid var(--line-strong);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+    max-width:66ch;
+  }
+  .insight p{margin:0;font-size:1.02rem}
+  .note{
+    font-size:.9rem;
+    color:var(--ink-muted);
+    font-style:italic;
+    max-width:66ch;
+    margin-top:10px;
+  }
+
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:8px 0 0;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    background:var(--paper-2);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-family:var(--body);
+    font-size:.98rem;
+    min-width:560px;
+  }
+  thead th{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:.66rem;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    text-align:left;
+    padding:13px 16px;
+    border-bottom:1.5px solid var(--line-strong);
+    vertical-align:bottom;
+    background:#fbf8f2;
+  }
+  tbody td{
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    line-height:1.45;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(178,60,23,.03)}
+  td .rowh{color:var(--ink);font-weight:600;font-family:var(--body)}
+  .num{font-family:var(--mono);font-size:.86rem;text-align:center;white-space:nowrap;color:var(--ink-soft)}
+  .rice{font-family:var(--mono);font-weight:700;text-align:center;color:var(--accent);white-space:nowrap}
+  th.n,td.n{text-align:center}
+
+  /* figures / diagrams */
+  figure.diagram{
+    margin:26px 0 6px;
+    padding:0;
+  }
+  .diagram-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    background:var(--paper-2);
+    padding:20px 18px;
+  }
+  .diagram svg{display:block;width:100%;height:auto}
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.05em;
+    color:var(--ink-muted);
+    margin-top:10px;
+    text-transform:uppercase;
+  }
+  .svg-node{font-family:var(--disp);}
+  .svg-t{font-weight:600}
+  .svg-s{font-weight:400}
+  .svg-lab{font-family:var(--mono);letter-spacing:.06em}
+
+  /* fit intro */
+  .fit-intro{max-width:66ch}
+
+  /* footer */
+  footer{
+    margin-top:8px;
+    border-top:1px solid var(--line);
+  }
+  .foot-inner{
+    padding:40px 0 70px;
+    padding-left:var(--offset);
+  }
+  .foot-name{
+    font-family:var(--disp);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .foot-sub{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 18px;
+  }
+  .contacts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 20px;
+    font-family:var(--mono);
+    font-size:.8rem;
+  }
+  .contacts a{
+    color:var(--ink-muted);
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:2px;
+    transition:color .16s ease,border-color .16s ease;
+  }
+  .contacts a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    :root{--offset:0px}
+    .layout{grid-template-columns:minmax(0,1fr);gap:0}
+    .rail{display:none}
+    .masthead{padding-top:44px}
+  }
+  @media (min-width:981px){
+    .m-contents{display:none}
+  }
+  @media (max-width:600px){
+    body{font-size:16.5px}
+    .wrap{padding:0 20px}
+    .lead{font-size:1.18rem}
+    .section{padding:32px 0}
+    table{min-width:520px}
+    .diagram svg{min-width:600px}
+    .m-contents ol{columns:1}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="wrap">
+  <div class="masthead">
+    <p class="eyebrow">Product strategy · Finance Applications</p>
+    <h1>Mayuresh More</h1>
+    <p class="role-line">How I would solve the close-and-controls problem for the Staff Product Manager, Finance Applications role at Reddit.</p>
+    <p class="prepared">Prepared July 2026</p>
+  </div>
+
+  <details class="m-contents">
+    <summary>Contents</summary>
+    <ol>
+      <li><a href="#the-bet">The bet</a></li>
+      <li><a href="#the-problem">The problem</a></li>
+      <li><a href="#who-its-for">Who it is for</a></li>
+      <li><a href="#why-first">Why this first</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">What I'd ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#why-me">Why me</a></li>
+    </ol>
+  </details>
+</header>
+
+<div class="wrap">
+  <div class="layout">
+
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ul>
+        <li><a href="#the-bet">The bet</a></li>
+        <li><a href="#the-problem">The problem</a></li>
+        <li><a href="#who-its-for">Who it is for</a></li>
+        <li><a href="#why-first">Why this first</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#plan">30/60/90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#why-me">Why me</a></li>
+      </ul>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- THE BET -->
+      <section id="the-bet" class="section" aria-labelledby="h-bet">
+        <h2 class="kicker" id="h-bet">The bet</h2>
+        <p class="lead">My read of this seat is that one job matters most in year one: make Reddit's monthly close both faster and audit-ready in the same motion.</p>
+        <p>Reddit is growing revenue about 69% a year on barely more people, and it is very likely entering its first year of full external-auditor sign-off on its financial controls. Those two facts collide inside NetSuite and Workiva.</p>
+        <p>So my bet is to automate the slowest, riskiest close step and wire its audit evidence in from day one, instead of treating "go faster" and "pass the audit" as two separate projects. Do that well and the same playbook extends to Procure-to-Pay (the request-to-payment cycle) and multi-currency scaling.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="the-problem" class="section" aria-labelledby="h-problem">
+        <h2 class="kicker" id="h-problem">The problem</h2>
+        <p class="lead">When I line up Reddit's growth against its headcount, the strain is obvious.</p>
+        <p>FY2025 revenue was $2,203M, up 69% year over year, and Q1 2026 held that pace at $663M (<a class="src" href="https://s203.q4cdn.com/380862485/files/doc_financials/2025/q4/Q4-25-Earnings-Press-Release.pdf" target="_blank" rel="noopener">Reddit FY2025 release</a>, <a class="src" href="https://www.stocktitan.net/sec-filings/RDDT/8-k-reddit-inc-reports-material-event-d0fdc37a63b3.html" target="_blank" rel="noopener">Q1 2026 8-K</a>). Full-time headcount grew only 14.4% over the comparable year, from 2,233 to 2,555 (<a class="src" href="https://stockanalysis.com/stocks/rddt/employees/" target="_blank" rel="noopener">stockanalysis.com</a>). The finance org is absorbing far more transaction volume and reporting scrutiny per person than a year ago.</p>
+
+        <p style="margin-bottom:2px">Four pressures land squarely on this role.</p>
+        <ul class="stack">
+          <li><b>The close is under time pressure.</b> SaaS and tech companies close the books in about 4.3 days without automation versus 2.4 days with automated close agents, and the gap between best and average performers has widened to five days in 2026 (<a class="src" href="https://chatfin.ai/blog/month-end-close-time-by-industry-finance-benchmark-2026/" target="_blank" rel="noopener">ChatFin, 2026</a>). A lean team growing this fast falls toward the slow end unless NetSuite close automation keeps up.</li>
+          <li><b>International makes multi-currency a core problem, not an edge case.</b> FY2025 international revenue was $417M, up 76%, faster than the domestic business (<a class="src" href="https://s203.q4cdn.com/380862485/files/doc_financials/2025/q4/Q4-25-Earnings-Press-Release.pdf" target="_blank" rel="noopener">earnings release</a>). That is exactly the mix that stresses multi-currency accounting, tax, and intercompany elimination (removing transactions between Reddit's own legal entities so revenue and cost are not double-counted), consistently one of the most time-consuming parts of close (<a class="src" href="https://www.cfodive.com/spons/why-cfos-are-turning-to-netsuite-to-fix-their-intercompany-transaction-prob/821887/" target="_blank" rel="noopener">CFO Dive</a>).</li>
+          <li><b>The first full SOX audit raises the documentation bar.</b> Reddit's FY2024 10-K, its first as a public company, was filed as a non-accelerated filer with no external-auditor attestation of internal controls (<a class="src" href="https://s203.q4cdn.com/380862485/files/doc_financials/2024/q4/v2/Reddit-Inc-10-K-2024-as-filed.pdf" target="_blank" rel="noopener">10-K cover page</a>). Its market value has sat far above the $700M large-filer threshold since IPO, rising from $8.02B to $43.56B by the end of 2025 (<a class="src" href="https://stockanalysis.com/stocks/rddt/market-cap/" target="_blank" rel="noopener">stockanalysis.com</a>). By that trajectory, FY2025 is very likely Reddit's first year facing SOX 404(b): the rule that an outside auditor (KPMG) must independently test and sign off on the financial controls, not just management. <span class="note" style="display:inline;font-style:italic">This is an inference from the filer status and market-cap trajectory above, not a line quoted from the FY2025 filing.</span></li>
+          <li><b>The base-rate risk is real.</b> Of 122 companies that IPO'd in 2023, 44% disclosed a material weakness (a control gap serious enough that a real error could reach the financial statements) in their first filings, and 42% still had one by their first 10-K or 10-Q (<a class="src" href="https://kpmg.com/us/en/articles/2025/2024-ipo-material-weakness-study.html" target="_blank" rel="noopener">KPMG, 2024</a>). Clean system configuration and documented controls are how this seat drives that risk down.</li>
+        </ul>
+
+        <p style="margin-top:20px">The cost of getting this wrong is not an engagement dip. It is a slow close that burns the team every month, or a public control failure that moves the stock.</p>
+
+        <p style="margin-top:22px;margin-bottom:0">Here is the stack this role owns and how work flows through it.</p>
+        <figure class="diagram">
+          <div class="diagram-scroll">
+            <svg viewBox="0 0 900 300" role="img" aria-label="Reddit finance application stack, intake to report. A purchase request enters through Zip intake, routes into Coupa for approval and spend record, posts to NetSuite as the ERP of record, and feeds Workiva for SOX control documentation and public reporting. Integration middleware, Workato, MuleSoft or Boomi, keeps all four systems in sync.">
+              <defs>
+                <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#8a857a"/></marker>
+              </defs>
+              <!-- nodes -->
+              <g class="svg-node">
+                <rect x="8" y="40" width="150" height="74" rx="9" fill="var(--intake-fill)" stroke="var(--intake-stroke)" stroke-width="1.6"/>
+                <text x="83" y="72" text-anchor="middle" font-size="15" class="svg-t" fill="var(--intake-ink)">Purchase request</text>
+                <text x="83" y="92" text-anchor="middle" font-size="13" class="svg-s" fill="var(--intake-ink)">from any team</text>
+
+                <rect x="182" y="40" width="150" height="74" rx="9" fill="var(--intake-fill)" stroke="var(--intake-stroke)" stroke-width="1.6"/>
+                <text x="257" y="72" text-anchor="middle" font-size="15" class="svg-t" fill="var(--intake-ink)">Zip</text>
+                <text x="257" y="92" text-anchor="middle" font-size="13" class="svg-s" fill="var(--intake-ink)">intake + orchestration</text>
+
+                <rect x="356" y="40" width="150" height="74" rx="9" fill="var(--intake-fill)" stroke="var(--intake-stroke)" stroke-width="1.6"/>
+                <text x="431" y="72" text-anchor="middle" font-size="15" class="svg-t" fill="var(--intake-ink)">Coupa</text>
+                <text x="431" y="92" text-anchor="middle" font-size="13" class="svg-s" fill="var(--intake-ink)">P2P + spend record</text>
+
+                <rect x="530" y="40" width="150" height="74" rx="9" fill="var(--erp-fill)" stroke="var(--erp-stroke)" stroke-width="1.6"/>
+                <text x="605" y="72" text-anchor="middle" font-size="15" class="svg-t" fill="var(--erp-ink)">NetSuite</text>
+                <text x="605" y="90" text-anchor="middle" font-size="12.5" class="svg-s" fill="var(--erp-ink)">GL, intercompany</text>
+                <text x="605" y="104" text-anchor="middle" font-size="12.5" class="svg-s" fill="var(--erp-ink)">AP/AR, tax</text>
+
+                <rect x="704" y="40" width="150" height="74" rx="9" fill="var(--control-fill)" stroke="var(--control-stroke)" stroke-width="1.6"/>
+                <text x="779" y="72" text-anchor="middle" font-size="15" class="svg-t" fill="var(--control-ink)">Workiva</text>
+                <text x="779" y="92" text-anchor="middle" font-size="13" class="svg-s" fill="var(--control-ink)">SOX + 10-K/10-Q</text>
+              </g>
+              <!-- solid flow arrows -->
+              <g stroke="#8a857a" stroke-width="1.8" marker-end="url(#ah)" aria-hidden="true">
+                <line x1="160" y1="77" x2="180" y2="77"/>
+                <line x1="334" y1="77" x2="354" y2="77"/>
+                <line x1="508" y1="77" x2="528" y2="77"/>
+                <line x1="682" y1="77" x2="702" y2="77"/>
+              </g>
+              <!-- sync bus -->
+              <rect x="182" y="212" width="672" height="54" rx="9" fill="var(--glue-fill)" stroke="var(--glue-stroke)" stroke-width="1.6"/>
+              <text x="518" y="236" text-anchor="middle" font-size="14" class="svg-node svg-t" fill="var(--glue-ink)">Integration middleware (Workato / MuleSoft / Boomi)</text>
+              <text x="518" y="254" text-anchor="middle" font-size="13" class="svg-node svg-s" fill="var(--glue-ink)">keeps all four systems in sync</text>
+              <!-- dashed sync connectors -->
+              <g stroke="var(--glue-stroke)" stroke-width="1.4" stroke-dasharray="4 4" opacity=".8" aria-hidden="true">
+                <line x1="257" y1="114" x2="257" y2="212"/>
+                <line x1="431" y1="114" x2="431" y2="212"/>
+                <line x1="605" y1="114" x2="605" y2="212"/>
+                <line x1="779" y1="114" x2="779" y2="212"/>
+              </g>
+            </svg>
+          </div>
+          <figcaption>Intake to report: the four systems this seat owns, kept in sync by middleware.</figcaption>
+        </figure>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who-its-for" class="section" aria-labelledby="h-who">
+        <h2 class="kicker" id="h-who">Who it is for</h2>
+        <p class="lead">This role really serves three people with three different jobs, plus one gatekeeper who has to be satisfied for any of it to count.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Persona</th>
+                <th scope="col">The job they hire the systems to do</th>
+                <th scope="col">Where it hurts today</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rowh">Controller / close owner</span><br><span class="cite">primary user</span></td>
+                <td>"When I run month-end close, let me trust the numbers and finish before the reporting deadline, without a week of manual rework."</td>
+                <td>Intercompany elimination, multi-currency, and manual journal entries eat days each cycle.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">AP and Procurement operator</span></td>
+                <td>"When a purchase request comes in, let it route, match, and pay itself so I am not chasing approvals or matching invoices by hand."</td>
+                <td>Two intake-and-pay systems (Zip and Coupa) have to stay reconciled with each other and with NetSuite.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Finance and Corp Tech leadership</span><br><span class="cite">economic buyer</span></td>
+                <td>"Get through the first full external audit clean, and let finance keep scaling with revenue without adding headcount."</td>
+                <td>A lean org is absorbing 69% revenue growth; they fund this roadmap and carry the audit risk.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">External auditor</span><br><span class="cite">gatekeeper, not a user</span></td>
+                <td>"Show me control design and evidence I can independently test and sign."</td>
+                <td>Their sign-off is the bar every configuration and control narrative has to clear this year.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:18px">The primary user is the Controller. The buyer is finance and Corp Tech leadership. The auditor never logs in but can veto the whole thing, so the design has to speak to all three.</p>
+      </section>
+
+      <!-- WHY THIS FIRST -->
+      <section id="why-first" class="section" aria-labelledby="h-why1">
+        <h2 class="kicker" id="h-why1">Why this first</h2>
+        <p class="lead">If I could fund only one thing first, RICE points me at the close and the controls together.</p>
+        <p>Reach is how much of the finance org and the close a bet touches. Impact is how much it moves days-to-close or audit risk. Confidence is how sure I am today, and Effort is rough build size. The scores are directional; I would recalibrate them against Reddit's real data in weeks one through four.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Candidate bet</th>
+                <th scope="col" class="n">Reach</th>
+                <th scope="col" class="n">Impact</th>
+                <th scope="col" class="n">Conf.</th>
+                <th scope="col" class="n">Effort</th>
+                <th scope="col" class="n">RICE</th>
+                <th scope="col">Why it lands here</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rowh">SOX 404(b) audit readiness</span><br><span class="cite">Workiva narratives, evidence, access controls</span></td>
+                <td class="num">3</td><td class="num">3</td><td class="num">0.9</td><td class="num">8</td><td class="rice">1.01</td>
+                <td>Fixed external deadline. A material weakness is public and moves the stock. Non-negotiable this year.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Close automation</span><br><span class="cite">auto-reconciliation, intercompany elimination, JE automation in NetSuite</span></td>
+                <td class="num">3</td><td class="num">2</td><td class="num">0.8</td><td class="num">5</td><td class="rice">0.96</td>
+                <td>Hits the whole team every month and moves the visible metric, days-to-close.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Integration reliability</span><br><span class="cite">monitoring across Workato / MuleSoft / Boomi</span></td>
+                <td class="num">3</td><td class="num">1</td><td class="num">0.7</td><td class="num">3</td><td class="rice">0.70</td>
+                <td>Cheap enabler. A silent sync failure shows up as bad GL data or missing control evidence.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">P2P reconciliation</span><br><span class="cite">Zip + Coupa + NetSuite three-way match</span></td>
+                <td class="num">2</td><td class="num">2</td><td class="num">0.7</td><td class="num">6</td><td class="rice">0.47</td>
+                <td>High value, but lower urgency than the audit and the close. Phase two.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Multi-currency / intercompany scaling</span></td>
+                <td class="num">2</td><td class="num">2</td><td class="num">0.6</td><td class="num">8</td><td class="rice">0.30</td>
+                <td>Rising fast with international, but can build on the close baseline. Phase two.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="insight">
+          <p>The numbers surface one insight: audit readiness and close automation are not really two bets. A faster close that is not audit-ready is worthless, and an audit-ready close that still takes a week burns the team. So the first move fuses them, with integration reliability as the cheap layer underneath.</p>
+        </div>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="section" aria-labelledby="h-approach">
+        <h2 class="kicker" id="h-approach">Approach</h2>
+        <p class="lead">I'd hold three directions open and let a structured fit/gap decide between them.</p>
+        <p>Fit/gap means comparing what finance actually needs against what NetSuite and Workiva already do out of the box, before building anything custom.</p>
+        <ol class="dirs">
+          <li><b>Automation-first.</b> Attack the close directly with native auto-reconciliation, journal-entry automation, and intercompany elimination in NetSuite.</li>
+          <li><b>Controls-first.</b> Attack audit readiness in Workiva, so control narratives, evidence, and access controls hold up under independent testing in the first 404(b) year.</li>
+          <li><b>Consolidation-first.</b> Rationalize where Zip and Coupa overlap and tighten the three-way match (purchase order, receipt, invoice all agree before payment) to cut manual matching.</li>
+        </ol>
+        <p style="margin-bottom:4px">How I'd decide between them:</p>
+        <ul class="plain">
+          <li><b>Fit/gap against native capability first.</b> Every custom SuiteScript or workflow becomes a future upgrade cost and a SOX-testing liability, so native wins unless the gap is real. This is the difference between a senior owner and a ticket queue.</li>
+          <li><b>Sequence by the audit calendar.</b> The 404(b) deadline is fixed, so controls readiness cannot slip. Automation is sequenced to be audit-ready by design, not retrofitted after go-live.</li>
+          <li><b>Score each against two numbers:</b> days-to-close and control-deficiency count.</li>
+        </ul>
+        <p style="margin-top:16px">That decision rule is why directions 1 and 2 merge into the first bet.</p>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="section" aria-labelledby="h-mvp">
+        <h2 class="kicker" id="h-mvp">What I'd ship first</h2>
+        <p class="lead">The first thing I'd ship is deliberately small: automate intercompany elimination for Reddit's international entities in NetSuite, and wire that step's control evidence straight into Workiva from day one.</p>
+        <p style="margin-bottom:4px">Why this slice:</p>
+        <ul class="stack">
+          <li>It is the <b>biggest time sink</b> in a multi-entity close (<a class="src" href="https://www.cfodive.com/spons/why-cfos-are-turning-to-netsuite-to-fix-their-intercompany-transaction-prob/821887/" target="_blank" rel="noopener">CFO Dive</a>), and it sits in the same category of complex, judgment-heavy transactions that KPMG's study flags as a common source of <b>material weaknesses</b> (<a class="src" href="https://kpmg.com/us/en/articles/2025/2024-ipo-material-weakness-study.html" target="_blank" rel="noopener">KPMG</a>). Reddit's 76% international growth (<a class="src" href="https://s203.q4cdn.com/380862485/files/doc_financials/2025/q4/Q4-25-Earnings-Press-Release.pdf" target="_blank" rel="noopener">earnings release</a>) makes it the step that hurts more each quarter.</li>
+          <li>It is the <b>smallest test of the biggest assumption:</b> that a close step can be automated and made audit-ready in one motion, on Reddit's actual NetSuite instance, without a customization that becomes a control liability.</li>
+        </ul>
+        <p style="margin-top:16px">What it deliberately leaves out: full P2P consolidation, the rest of the close, and any Zip-versus-Coupa redesign. Those wait for phase two, once this proves the pattern.</p>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="section" aria-labelledby="h-metrics">
+        <h2 class="kicker" id="h-metrics">Metrics</h2>
+        <p class="lead">I'd tie the team to one number Reddit's leaders already watch, and guard it with two more so speed never comes at the cost of control.</p>
+        <ul class="stack">
+          <li><b>North Star: days to monthly close.</b> Toward the 2026 top-quartile benchmark of under three days for tech and SaaS (<a class="src" href="https://chatfin.ai/blog/month-end-close-time-by-industry-finance-benchmark-2026/" target="_blank" rel="noopener">ChatFin</a>).</li>
+          <li><b>Guardrail 1: SOX control deficiencies,</b> counted by internal audit and, starting this cycle, the external auditor. Faster close, zero new deficiencies.</li>
+          <li><b>Guardrail 2: UAT defect escape rate.</b> No un-tested configuration reaches production in the finance stack.</li>
+          <li><b>Anti-metric to watch: net new NetSuite customizations.</b> If we "automate" by piling on custom scripts, we are buying speed with future upgrade pain and audit risk. Native-first keeps this flat.</li>
+        </ul>
+
+        <figure class="diagram">
+          <div class="diagram-scroll">
+            <svg viewBox="0 0 900 340" role="img" aria-label="Finance applications metrics tree. The North Star is days to monthly close. Four leading inputs feed it: percent of close tasks automated versus manual, intercompany reconciliation time per entity, invoice approval cycle time plus first-time match rate, and integration uptime across Zip, Coupa, NetSuite and Workiva. Two guardrails sit alongside the North Star: SOX control deficiencies from internal and external audit, and UAT defect escape rate.">
+              <defs>
+                <marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7fa77e"/></marker>
+              </defs>
+              <!-- guardrail connectors (no arrowhead) -->
+              <g stroke="var(--guard-stroke)" stroke-width="1.5" stroke-dasharray="5 4" aria-hidden="true">
+                <line x1="330" y1="49" x2="220" y2="49"/>
+                <line x1="570" y1="49" x2="680" y2="49"/>
+              </g>
+              <!-- leading -> north star arrows -->
+              <g stroke="#7fa77e" stroke-width="1.8" marker-end="url(#ah2)" aria-hidden="true">
+                <line x1="110" y1="250" x2="385" y2="84"/>
+                <line x1="340" y1="250" x2="430" y2="84"/>
+                <line x1="569" y1="250" x2="475" y2="84"/>
+                <line x1="793" y1="250" x2="520" y2="84"/>
+              </g>
+              <!-- north star -->
+              <rect x="330" y="16" width="240" height="66" rx="10" fill="var(--intake-fill)" stroke="var(--intake-stroke)" stroke-width="1.8"/>
+              <text x="450" y="42" text-anchor="middle" font-size="11" class="svg-lab" fill="var(--intake-stroke)">NORTH STAR</text>
+              <text x="450" y="64" text-anchor="middle" font-size="15" class="svg-node svg-t" fill="var(--intake-ink)">Days to monthly close</text>
+              <!-- guardrails -->
+              <rect x="8" y="16" width="212" height="66" rx="10" fill="var(--guard-fill)" stroke="var(--guard-stroke)" stroke-width="1.6"/>
+              <text x="114" y="37" text-anchor="middle" font-size="10.5" class="svg-lab" fill="var(--guard-stroke)">GUARDRAIL</text>
+              <text x="114" y="54" text-anchor="middle" font-size="13" class="svg-node svg-t" fill="var(--guard-ink)">SOX control deficiencies</text>
+              <text x="114" y="71" text-anchor="middle" font-size="12" class="svg-node svg-s" fill="var(--guard-ink)">internal + external audit</text>
+
+              <rect x="680" y="16" width="212" height="66" rx="10" fill="var(--guard-fill)" stroke="var(--guard-stroke)" stroke-width="1.6"/>
+              <text x="786" y="37" text-anchor="middle" font-size="10.5" class="svg-lab" fill="var(--guard-stroke)">GUARDRAIL</text>
+              <text x="786" y="58" text-anchor="middle" font-size="13" class="svg-node svg-t" fill="var(--guard-ink)">UAT defect escape rate</text>
+              <!-- leading inputs -->
+              <g class="svg-node">
+                <rect x="8" y="250" width="205" height="78" rx="10" fill="var(--erp-fill)" stroke="var(--erp-stroke)" stroke-width="1.6"/>
+                <text x="110" y="283" text-anchor="middle" font-size="13" class="svg-t" fill="var(--erp-ink)">% close tasks automated</text>
+                <text x="110" y="302" text-anchor="middle" font-size="13" class="svg-s" fill="var(--erp-ink)">vs manual</text>
+
+                <rect x="237" y="250" width="205" height="78" rx="10" fill="var(--erp-fill)" stroke="var(--erp-stroke)" stroke-width="1.6"/>
+                <text x="339" y="283" text-anchor="middle" font-size="13" class="svg-t" fill="var(--erp-ink)">Intercompany recon</text>
+                <text x="339" y="302" text-anchor="middle" font-size="13" class="svg-s" fill="var(--erp-ink)">time per entity</text>
+
+                <rect x="466" y="250" width="205" height="78" rx="10" fill="var(--erp-fill)" stroke="var(--erp-stroke)" stroke-width="1.6"/>
+                <text x="568" y="283" text-anchor="middle" font-size="13" class="svg-t" fill="var(--erp-ink)">Invoice cycle time</text>
+                <text x="568" y="302" text-anchor="middle" font-size="13" class="svg-s" fill="var(--erp-ink)">+ first-time match rate</text>
+
+                <rect x="695" y="250" width="197" height="78" rx="10" fill="var(--erp-fill)" stroke="var(--erp-stroke)" stroke-width="1.6"/>
+                <text x="793" y="283" text-anchor="middle" font-size="13" class="svg-t" fill="var(--erp-ink)">Integration uptime</text>
+                <text x="793" y="302" text-anchor="middle" font-size="12" class="svg-s" fill="var(--erp-ink)">Zip, Coupa, NetSuite, Workiva</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption>One North Star, four leading inputs, two guardrails that speed must never break.</figcaption>
+        </figure>
+
+        <p style="margin-top:18px">For the P2P side of the roadmap, the leading metrics are invoice-approval cycle time and first-time (touchless) match rate. Top performers hit 10.4 business hours and an 85.8% first-time match (<a class="src" href="https://valtatech.com/thought-leadership/source-to-pay/procure-to-pay-kpis-with-benchmarks/" target="_blank" rel="noopener">Valtatech</a>). Zip's own case for the intake layer cites a 55% cut in purchasing cycle times and a 29% rise in spend under management (<a class="src" href="https://zip.com/blog/4-years-of-innovating-intake-and-procurement-orchestration" target="_blank" rel="noopener">Zip</a>), the numbers this seat is implicitly accountable to once the close is stable.</p>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="section" aria-labelledby="h-plan">
+        <h2 class="kicker" id="h-plan">30 / 60 / 90</h2>
+        <p class="lead">My first ninety days are mostly listening, then one visible win.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Window</th>
+                <th scope="col">What I would do</th>
+                <th scope="col">What I would produce</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rowh">0 to 30</span><br><span class="cite">listen and map</span></td>
+                <td>Shadow a full month-end close. Read the last internal-audit findings and the FY2024 control narratives. Map every Zip to Coupa to NetSuite to Workiva flow and its integrations. Meet Controllership, FP&amp;A, Procurement, IT, and the external-audit lead. Inventory NetSuite customizations, entities, and currencies.</td>
+                <td>A fit/gap baseline and the real list of constraints.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">30 to 60</span><br><span class="cite">one quick win, sharpen the bet</span></td>
+                <td>Ship one visible fix, likely a brittle integration that keeps breaking the close or one manual reconciliation. Write the functional spec and data-flow map for the intercompany close step. Align stakeholders on the MVP and the metric baseline.</td>
+                <td>Agreed MVP scope, plus a baseline days-to-close and control-deficiency count.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">60 to 90</span><br><span class="cite">ship and validate</span></td>
+                <td>Ship the intercompany-elimination automation for international entities, with control evidence wired into Workiva. Run UAT. Measure the close-day and manual-JE reduction. Propose the two-to-three-quarter roadmap.</td>
+                <td>First bet live, baseline moved, roadmap proposed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="section" aria-labelledby="h-risks">
+        <h2 class="kicker" id="h-risks">Risks and what I'd validate first</h2>
+        <p class="lead">Here is what I'm least sure of, and how I'd test each in week one.</p>
+        <ul class="stack">
+          <li><b>The 404(b) timing is an inference.</b> It fits the filer status and market-cap trajectory, but I have not confirmed it against the FY2025 filing. <i>Validate:</i> confirm with Controllership and the external-audit lead exactly which cycle is the first full attestation year and what the audit calendar demands.</li>
+          <li><b>The NetSuite architecture is unknown to me today.</b> Single instance or multi-entity, and how many legal entities and currencies are live. The MVP scope depends on it. <i>Validate:</i> pull the entity-and-currency map and the customization inventory.</li>
+          <li><b>The close might not be the biggest pain.</b> It could be P2P or integration reliability. <i>Validate:</i> shadow a close and read the last two internal-audit cycles before locking scope.</li>
+          <li><b>Automation can create a control liability.</b> Automating with custom SuiteScript can create future upgrade and SOX-testing debt. <i>Validate:</i> run every fit/gap against native NetSuite and Workiva capability first.</li>
+          <li><b>Running Zip and Coupa together is a design choice.</b> It could be duplicative or deliberately reconciled. <i>Validate:</i> map what each system owns before proposing any consolidation.</li>
+          <li><b>Integration failures are often silent.</b> A broken middleware sync surfaces as bad GL data or missing control evidence. <i>Validate:</i> review current monitoring and failure rates across Workato, MuleSoft, and Boomi.</li>
+        </ul>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="section" aria-labelledby="h-q">
+        <h2 class="kicker" id="h-q">Questions I'd ask the team</h2>
+        <p class="lead">A few answers would reshape this plan, so I'd ask them early.</p>
+        <ol class="qs">
+          <li>Which reporting cycle is Reddit's first full external-auditor attestation under SOX 404(b), and what does the audit calendar require of the systems team? This single fact sequences the whole roadmap.</li>
+          <li>What is today's actual days-to-close, and which step (intercompany, multi-currency, revenue recognition, manual JEs) eats the most time?</li>
+          <li>How many legal entities and currencies are live in NetSuite now, and what does the customization inventory look like?</li>
+          <li>Why both Zip and Coupa: what does each own today, and is consolidation on the table or explicitly off it?</li>
+          <li>Where have integrations silently failed before, and what monitoring exists across the middleware layer?</li>
+          <li>Has internal audit or management already flagged a control area I should design around now?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="why-me" class="section" aria-labelledby="h-me">
+        <h2 class="kicker" id="h-me">Why me</h2>
+        <p class="fit-intro" style="max-width:66ch">I'm a product manager with 6+ years building finance and platform systems inside regulated banks, and I'm finishing a Master of Science in Information Management at the University of Washington (June 2026) on top of an MBA in Finance and a computer-engineering degree. My work has mostly lived where a finance process meets the systems that run it: a budgeting application at Nomura, a firm-wide vendor and market-data switch that saved $700K a year, and an operational-risk program that worked hand in hand with audit and risk teams. Those are the same problems this role owns: finance workflows, controls, vendor systems, and the integrations that connect them.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rowh">Own the roadmap for a finance application stack (P2P, Record-to-Report, reporting)</span></td>
+                <td>Owned discovery-to-launch of a finance budgeting application at Nomura, and the roadmap and prioritization for a lending platform I scaled to 25,000+ users across 3,000+ branches.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Fit/gap and build-vs-buy discipline before customizing</span></td>
+                <td>Ran a build-vs-buy evaluation across 5+ platforms and 4 retrieval architectures at UW, scored on capability, architecture, and cost before building anything.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">SOX controls and working with auditors</span></td>
+                <td>Led operational-risk transformation for Global Markets: remediation strategy, preventive controls, and incident analysis across audit, risk, and technology teams, cutting loss events 20% and losses 15%.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Vendor management and system performance</span></td>
+                <td>Drove a firm-wide market-data vendor switch, connecting directly to Tradeweb and replacing Refinitiv, saving $700K a year with better data quality across Fixed Income applications.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Integrations across finance systems (Workato / MuleSoft / Boomi)</span></td>
+                <td>Delivered API integrations with credit bureaus (CIBIL, Equifax, Experian) that automated decisioning and KYC; built 25+ automated reporting pipelines wiring fund-accounting systems at BNY Mellon.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">General ledger accounting and financial reporting</span></td>
+                <td>Built fund-accounting and asset-management reporting pipelines at BNY Mellon; delivered Budget-vs-Actual analytics that cut spend 30% for cost-center owners at Nomura.</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Enterprise rollouts, UAT, and Agile ceremonies</span></td>
+                <td>Rolled out an AI assistant to 15,000+ users with governance gates and phased adoption; ran pilots and A/B tests at Lentra; Professional Scrum Product Owner (PSPO I).</td>
+              </tr>
+              <tr>
+                <td><span class="rowh">Public-company, regulated-finance environment</span></td>
+                <td>6+ years across Nomura and BNY Mellon, both regulated global banks, plus an MBA in Finance.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="wrap">
+  <div class="foot-inner">
+    <p class="foot-name">Mayuresh More</p>
+    <p class="foot-sub">Staff Product Manager, Finance Applications · Prepared July 2026</p>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+    if(!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){return document.getElementById(id);}).filter(Boolean);
+    var current = null;
+    function setActive(id){
+      if(current === id) return;
+      current = id;
+      links.forEach(function(a){
+        var on = a.getAttribute('href') === '#'+id;
+        a.classList.toggle('active', on);
+        if(on){ a.setAttribute('aria-current','true'); } else { a.removeAttribute('aria-current'); }
+      });
+    }
+    function pick(){
+      var best = null, bestTop = -Infinity;
+      sections.forEach(function(s){
+        var r = s.getBoundingClientRect();
+        if(r.top - 120 <= 0 && r.top > bestTop){ bestTop = r.top; best = s.id; }
+      });
+      if(!best && sections.length) best = sections[0].id;
+      if(best) setActive(best);
+    }
+    var ticking = false;
+    var obs = new IntersectionObserver(function(){
+      if(ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function(){ pick(); ticking = false; });
+    }, {rootMargin:'-110px 0px -55% 0px', threshold:[0,.25,.5,1]});
+    sections.forEach(function(s){ obs.observe(s); });
+    window.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function(){ pick(); ticking = false; });
+    }, {passive:true});
+    pick();
+  })();
+</script>
+</body>
+</html>
