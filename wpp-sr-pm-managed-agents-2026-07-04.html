@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sr. Product Manager, Managed Agents at WPP: how I would solve the routing problem. Pitch by Mayuresh More</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3efe6;
+    --paper-2:#ece5d7;
+    --paper-3:#e3dbc8;
+    --panel:#efe9dc;
+    --ink:#211e18;
+    --ink-soft:#4d473b;
+    --ink-faint:#6f684f;
+    --line:#d9d0bd;
+    --line-soft:#e2dccb;
+    --accent:#b1382b;
+    --accent-2:#8f2c21;
+    --accent-tint:#efdad4;
+    --wrap:1080px;
+    --pad:2rem;
+    --rail-w:200px;
+    --rail-gap:56px;
+    --content-offset:calc(var(--pad) + var(--rail-w) + var(--rail-gap));
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 620px at 50% -8%, #f9f5ee, transparent 70%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Spectral", Georgia, "Times New Roman", serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.035;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0; z-index:100;
+    background:var(--ink); color:var(--paper); padding:.6rem 1rem;
+    font-family:"Space Mono", monospace; font-size:.8rem; border-radius:0 0 6px 0;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent); text-underline-offset:2px;}
+
+  /* ---------- masthead ---------- */
+  .masthead{position:relative; z-index:1; padding-top:3.4rem; padding-bottom:1.4rem;}
+  .mast-inner, .layout, .foot-inner{
+    max-width:var(--wrap); margin:0 auto;
+    padding-left:var(--pad); padding-right:var(--pad);
+  }
+  .mast-inner h1{
+    font-family:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-weight:700; font-size:clamp(1.7rem, 4.2vw, 2.15rem);
+    letter-spacing:-.015em; line-height:1.04; margin:0 0 .5rem;
+  }
+  .frame{
+    font-family:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-weight:500; font-size:clamp(1rem, 2.5vw, 1.16rem);
+    color:var(--ink-soft); line-height:1.4; margin:0 0 .9rem; max-width:40ch;
+  }
+  .prepared{
+    font-family:"Space Mono", monospace; font-size:.72rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-faint); margin:0;
+  }
+  .rule{border:0; border-top:1px solid var(--line); margin:0;}
+
+  /* mobile contents disclosure */
+  .contents{
+    margin-top:1.5rem; border:1px solid var(--line);
+    border-radius:8px; background:var(--panel); padding:.15rem .9rem;
+  }
+  .contents summary{
+    font-family:"Space Mono", monospace; font-size:.74rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); font-weight:700;
+    padding:.6rem 0; cursor:pointer; list-style:none;
+  }
+  .contents summary::-webkit-details-marker{display:none;}
+  .contents summary::after{content:"+"; float:right; font-weight:700;}
+  .contents[open] summary::after{content:"\00D7";}
+  .contents ol{margin:.2rem 0 .8rem; padding-left:1.1rem;}
+  .contents a{
+    font-family:"Space Mono", monospace; font-size:.8rem; color:var(--ink-soft);
+    text-decoration:none; display:inline-block; padding:.22rem 0;
+  }
+  .contents a:hover{color:var(--accent);}
+
+  /* ---------- layout ---------- */
+  .layout{display:block; position:relative; z-index:1;}
+  .rail{display:none;}
+  main{max-width:680px;}
+
+  @media (min-width:960px){
+    .layout{display:grid; grid-template-columns:var(--rail-w) 1fr; column-gap:var(--rail-gap); align-items:start;}
+    .mast-inner, .foot-inner{padding-left:var(--content-offset);}
+    .contents{display:none;}
+    .rail{display:block; position:sticky; top:2rem; align-self:start;}
+    main{max-width:680px;}
+  }
+
+  .rail-head{
+    font-family:"Space Mono", monospace; font-size:.68rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-faint); margin:0 0 .7rem;
+    padding-bottom:.5rem; border-bottom:1px solid var(--line);
+  }
+  .rail ul{list-style:none; margin:0; padding:0;}
+  .rail li{margin:0;}
+  .rail a{
+    display:block; font-family:"Space Mono", monospace; font-size:.76rem;
+    color:var(--ink-soft); text-decoration:none; padding:.32rem 0 .32rem .7rem;
+    border-left:2px solid transparent; line-height:1.25; transition:color .18s, border-color .18s;
+  }
+  .rail a:hover{color:var(--accent);}
+  .rail a.active{color:var(--accent); border-left-color:var(--accent); font-weight:700;}
+
+  /* ---------- sections ---------- */
+  section{padding:2.4rem 0; border-top:1px solid var(--line-soft); scroll-margin-top:1.4rem;}
+  section:first-of-type{border-top:0; padding-top:1.4rem;}
+  .kicker{
+    font-family:"Space Mono", monospace; font-weight:700; font-size:1rem;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+    margin:0 0 .8rem;
+  }
+  .takeaway{
+    font-family:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-weight:500; font-size:1.12rem; line-height:1.42; color:var(--ink);
+    margin:0 0 1.1rem;
+  }
+  h3{
+    font-family:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-weight:600; font-size:1rem; letter-spacing:-.005em; color:var(--ink);
+    margin:1.5rem 0 .5rem;
+  }
+  p{margin:0 0 1rem;}
+  main ul, main ol{margin:0 0 1rem; padding-left:1.15rem;}
+  main li{margin:0 0 .7rem;}
+  main li::marker{color:var(--accent);}
+  strong{font-weight:600; color:var(--ink);}
+  .lead-in{font-weight:600; color:var(--ink);}
+
+  /* citations */
+  .src{
+    color:var(--ink-faint);
+    text-decoration:underline; text-decoration-thickness:.5px;
+    text-underline-offset:2px; text-decoration-color:var(--line);
+    font-size:.86em; white-space:nowrap;
+  }
+  .src:hover, .src:focus{color:var(--accent); text-decoration-color:var(--accent);}
+
+  /* callout / aside */
+  .note{
+    background:var(--panel); border:1px solid var(--line);
+    border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+    padding:.9rem 1.1rem; margin:1.2rem 0; font-size:.96rem; color:var(--ink-soft);
+  }
+  .note .lab{
+    display:block; font-family:"Space Mono", monospace; font-size:.66rem;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:.35rem;
+  }
+
+  /* north-star callout */
+  .northstar{
+    background:linear-gradient(180deg,#eef2f5,#e9eef2);
+    border:1px solid #cdd8df; border-radius:10px; padding:1.1rem 1.2rem; margin:1.2rem 0;
+  }
+  .northstar h3{margin:0 0 .35rem;}
+  .northstar p{margin:0; color:var(--ink-soft); font-size:.98rem;}
+
+  /* tables */
+  .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.1rem 0 1.3rem; border:1px solid var(--line); border-radius:8px;}
+  table{border-collapse:collapse; width:100%; font-size:.92rem; min-width:520px;}
+  thead th{
+    font-family:"Space Mono", monospace; font-weight:700; font-size:.68rem;
+    letter-spacing:.06em; text-transform:uppercase; text-align:left;
+    background:var(--paper-3); color:var(--ink); padding:.6rem .8rem;
+    border-bottom:1px solid var(--line); vertical-align:bottom;
+  }
+  tbody td{padding:.62rem .8rem; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--ink-soft);}
+  tbody tr:last-child td{border-bottom:0;}
+  tbody td:first-child{color:var(--ink); font-weight:500;}
+  .num{font-family:"Space Mono", monospace; font-size:.85rem; white-space:nowrap;}
+  .score-cell{font-family:"Space Mono", monospace; font-weight:700; color:var(--ink);}
+  tr.top-pick td{background:#eef2f5;}
+
+  /* direction cards */
+  .cards{display:grid; gap:.9rem; margin:1.1rem 0 1.3rem;}
+  @media (min-width:620px){.cards.three{grid-template-columns:1fr 1fr 1fr;} .cards.plan{grid-template-columns:1fr 1fr 1fr;}}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:9px;
+    padding:.95rem 1rem; font-size:.93rem; color:var(--ink-soft);
+  }
+  .card h3{margin:.1rem 0 .5rem; font-size:.94rem;}
+  .card .tag{
+    font-family:"Space Mono", monospace; font-size:.64rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.3rem;
+  }
+  .card p{margin:0 0 .55rem;}
+  .card p:last-child{margin:0;}
+  .card .bet{color:var(--ink); font-weight:500;}
+
+  /* glossary */
+  dl.terms{margin:1.1rem 0 0; display:grid; gap:.7rem;}
+  @media (min-width:620px){dl.terms{grid-template-columns:1fr 1fr 1fr; gap:.9rem;}}
+  dl.terms > div{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:.75rem .85rem;}
+  dl.terms dt{
+    font-family:"Space Mono", monospace; font-weight:700; font-size:.72rem;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:.3rem;
+  }
+  dl.terms dd{margin:0; font-size:.9rem; color:var(--ink-soft); line-height:1.45;}
+
+  /* diagrams */
+  figure.diagram{
+    margin:1.3rem 0; padding:1rem; background:var(--panel);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  figure.diagram svg{display:block; width:100%; height:auto;}
+  figure.diagram figcaption{
+    font-family:"Space Mono", monospace; font-size:.66rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-faint); margin-top:.7rem; text-align:center;
+  }
+  @media (max-width:600px){
+    figure.diagram{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+    figure.diagram svg{min-width:560px;}
+  }
+  /* svg shared styling */
+  .diagram text{font-family:"Space Mono", monospace; fill:var(--ink);}
+  .n-entry{fill:#e8edf1; stroke:#557a9c; stroke-width:1.6;}
+  .n-decision{fill:#f6ecd6; stroke:#b0812f; stroke-width:1.6;}
+  .n-route{fill:#e6efe4; stroke:#5c8457; stroke-width:1.6;}
+  .n-star{fill:#e7eef4; stroke:#3f6f9e; stroke-width:1.8;}
+  .n-driver{fill:#e6efe4; stroke:#5c8457; stroke-width:1.6;}
+  .n-guard{fill:#f4e4de; stroke:#b0473a; stroke-width:1.6;}
+  .n-strip{fill:#f4e4de; stroke:#b0473a; stroke-width:1.2;}
+  .edge{stroke:#857c68; stroke-width:1.5; fill:none;}
+  .edge-dash{stroke:#a67d4e; stroke-width:1.4; fill:none; stroke-dasharray:5 4;}
+  .node-label{font-size:12.5px; fill:var(--ink);}
+  .node-sub{font-size:11px; fill:var(--ink-soft);}
+  .node-strong{font-size:12.5px; font-weight:700; fill:var(--ink);}
+  .edge-label{font-size:10.5px; fill:var(--ink-soft);}
+  .edge-bg{fill:var(--panel);}
+  .strip-label{font-size:10px; font-weight:700; fill:#8f2c21; letter-spacing:.06em;}
+  .state-dot{fill:var(--ink);}
+
+  /* footer */
+  footer{position:relative; z-index:1; margin-top:1rem; padding:2.2rem 0 3rem; border-top:1px solid var(--line);}
+  .foot-inner .signoff{
+    font-family:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-weight:500; font-size:1rem; color:var(--ink); margin:0 0 1rem;
+  }
+  .contact{display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; align-items:center;}
+  .contact a{
+    font-family:"Space Mono", monospace; font-size:.78rem; color:var(--ink-faint);
+    text-decoration:none; letter-spacing:.02em;
+  }
+  .contact a:hover{color:var(--accent);}
+  .contact .sep{color:var(--line); font-family:"Space Mono", monospace;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .mast-inner > *{animation:rise .6s cubic-bezier(.2,.6,.2,1) both;}
+    .mast-inner > *:nth-child(1){animation-delay:.02s;}
+    .mast-inner > *:nth-child(2){animation-delay:.10s;}
+    .mast-inner > *:nth-child(3){animation-delay:.18s;}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(9px);} to{opacity:1; transform:none;}}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <h1>Mayuresh More</h1>
+    <p class="frame">How I would solve the managed-agents routing problem for the Senior Product Manager role at WPP</p>
+    <p class="prepared">Prepared July 2026</p>
+    <details class="contents">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#the-bet">The bet</a></li>
+        <li><a href="#the-problem">The problem</a></li>
+        <li><a href="#who-its-for">Who it's for</a></li>
+        <li><a href="#why-this-problem">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#ship-first">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business-impact">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#why-me">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="rail">
+    <nav aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ul>
+        <li><a href="#the-bet">The bet</a></li>
+        <li><a href="#the-problem">The problem</a></li>
+        <li><a href="#who-its-for">Who it's for</a></li>
+        <li><a href="#why-this-problem">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#ship-first">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business-impact">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#why-me">Why me</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- THE BET -->
+    <section id="the-bet" aria-labelledby="h-bet">
+      <h2 class="kicker" id="h-bet">The bet</h2>
+      <p class="takeaway">My bet: this team compounds value fastest when it is graded on demand served per unit of engineering effort, not on how many agents it builds.</p>
+      <p>I would run a disciplined front door that routes each request to the cheapest durable answer: self-serve guidance, a shared catalog agent, or a new managed build. Every managed build is a candidate to become reusable platform capability. Done well, the same engineering time serves more demand each quarter while the raw count of one-off managed agents falls by design. That is how a team whose success metric is its own shrinking dependency stays motivated and stays funded.</p>
+      <dl class="terms">
+        <div>
+          <dt>Managed agent</dt>
+          <dd>A centrally built, production-grade AI agent maintained by WPP's engineering team.</dd>
+        </div>
+        <div>
+          <dt>Self-serve</dt>
+          <dd>The requester builds it themselves in the no-code Agent Builder.</dd>
+        </div>
+        <div>
+          <dt>Transition</dt>
+          <dd>Moving a managed agent into a self-serve feature, into a shared catalog agent, or confirming it stays bespoke.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="the-problem" aria-labelledby="h-problem">
+      <h2 class="kicker" id="h-problem">The problem</h2>
+      <p class="takeaway">The tension I would be hired to manage is unusual, and it sits at the center of everything below.</p>
+      <p>The public story is that WPP Open democratizes expertise and anyone can build agents with no code. The operational reality is that a large, engineering-heavy layer still sits underneath that story, and someone has to decide, case by case, what can and cannot be self-served yet. This role owns that decision, and it is built to make itself less necessary over time.</p>
+      <ul>
+        <li><span class="lead-in">Who hurts.</span> Agency and client teams with a recurring, high-stakes task their own no-code agents cannot do reliably. They need something they can trust in front of a client without babysitting the output.</li>
+        <li><span class="lead-in">Why now.</span> WPP Open already carries over 75,000 users and more than 90% of client-facing staff <a class="src" href="https://www.wpp.com/en/news/2026/01/wpp-launches-agent-hub-on-wpp-open-providing-clients-with-access-to-advanced-agentic-ai" target="_blank" rel="noopener">(WPP, Jan 2026)</a>. Over the prior year, staff and clients built tens of thousands of bespoke agents, and the curated Agent Hub launched with around 150 vetted ready-made agents plus four flagship Super Agents <a class="src" href="https://aws2.campaignasia.com/article/wpp-open-unveils-ai-agent-hub-to-make-agency-expertise-available-to-entire-busin/506834" target="_blank" rel="noopener">(Campaign, Jan 2026)</a>. Demand has outrun the ability to serve it centrally.</li>
+        <li><span class="lead-in">The workaround, and why it fails.</span> Today the default answer to a hard request is "build another managed agent." That does not scale, it duplicates work across overlapping bespoke agents, and it grows a backlog the team can never fully clear.</li>
+        <li><span class="lead-in">What it costs.</span> WPP is under real cost pressure. Full-year 2025 revenue fell to &pound;13,550m, down 8.1% reported <a class="src" href="https://www.wpp.com/en/news/2026/02/strategy-update-and-2025-preliminary-results" target="_blank" rel="noopener">(WPP, Feb 2026)</a>, and Q1 2026 fell a further 6.6% reported <a class="src" href="https://www.wpp.com/en/news/news/2026/04/first-quarter-2026-trading-update" target="_blank" rel="noopener">(WPP, Apr 2026)</a>. Every hour of scarce specialist engineering time spent on a one-off build is an hour not spent making self-serve better.</li>
+        <li><span class="lead-in">The industry backdrop.</span> Gartner projects the average Fortune 500 company will run over 150,000 agents by 2028, up from about 15 in 2025, and that only 13% of organizations believe their agent governance is adequate today <a class="src" href="https://tech.co/news/gartner-steps-governing-ai-agents" target="_blank" rel="noopener">(Gartner via Tech.co, Apr 2026)</a>. Agent count is exploding ahead of governance everywhere, which is exactly the gap this role and Agent Governance Operations are split to cover.</li>
+      </ul>
+      <div class="note">
+        <span class="lab">One thing to confirm first</span>
+        The role's scope references a 150,000-plus agent estate. Publicly, WPP has confirmed about 150 curated ready-made agents plus tens of thousands of bespoke agents. The larger figure may be an internal inventory count or a forward target. I would confirm the real, queryable inventory before I bet a mining strategy on it.
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section id="who-its-for" aria-labelledby="h-who">
+      <h2 class="kicker" id="h-who">Who it's for</h2>
+      <p class="takeaway">I see four groups feeling this problem, and each is hiring this capability to do a different job.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Persona</th><th scope="col">Role</th><th scope="col">The job they hire this for</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The requester <em>(primary user)</em></td>
+              <td>Agency or client team with a recurring task</td>
+              <td>When my bespoke agent cannot reliably do a high-stakes task, give me something production-grade I can trust in front of a client, so I stop babysitting output and stop risking a compliance miss.</td>
+            </tr>
+            <tr>
+              <td>The engineering team <em>(ex-Satalia specialists)</em></td>
+              <td>Internal builders</td>
+              <td>When I invest months in a hard agent, show me it mattered and will not be quietly killed, so I stay motivated on a team whose mandate is to shrink.</td>
+            </tr>
+            <tr>
+              <td>The sibling PMs</td>
+              <td>Agent Hub and Catalog, Agent Builder</td>
+              <td>When I plan my roadmap, give me clear demand signals from the managed front line, so I build the right self-serve capability instead of guessing.</td>
+            </tr>
+            <tr>
+              <td>The platform executive <em>(economic buyer)</em></td>
+              <td>Funds managed vs platform investment</td>
+              <td>When I allocate scarce budget under a cost mandate, prove that managed spend converts into durable platform capability, so I can defend it.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The requester is the user. The executive is the buyer. The engineering team is the group whose trust I most have to earn, because the metric that defines success can read as a threat to them if I frame it badly. More on that under metrics.</p>
+    </section>
+
+    <!-- WHY THIS PROBLEM -->
+    <section id="why-this-problem" aria-labelledby="h-why">
+      <h2 class="kicker" id="h-why">Why this problem first</h2>
+      <p class="takeaway">Given scarce specialist time, I would not try to do everything at once.</p>
+      <p>I scored the four things this role could invest in against reach, impact, confidence, and effort. Reach here is a relative read pending your real intake volume, not a hard count.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Initiative</th><th scope="col">Reach (rel.)</th><th scope="col">Impact</th><th scope="col">Confidence</th><th scope="col">Effort (pm)</th><th scope="col">Score</th></tr>
+          </thead>
+          <tbody>
+            <tr class="top-pick">
+              <td>Scored intake and triage front door</td>
+              <td class="num">100</td><td class="num">2.0</td><td class="num">80%</td><td class="num">1.5</td><td class="score-cell">107</td>
+            </tr>
+            <tr>
+              <td>Production-grade quality bar (with Governance Ops)</td>
+              <td class="num">60</td><td class="num">1.5</td><td class="num">70%</td><td class="num">2</td><td class="score-cell">32</td>
+            </tr>
+            <tr>
+              <td>Insight-mining and dedup engine</td>
+              <td class="num">100</td><td class="num">1.0</td><td class="num">50%</td><td class="num">3</td><td class="score-cell">17</td>
+            </tr>
+            <tr>
+              <td>Transition and sunset engine</td>
+              <td class="num">40</td><td class="num">2.0</td><td class="num">60%</td><td class="num">3</td><td class="score-cell">16</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li><span class="lead-in">The scored intake wins by a wide margin.</span> It touches every incoming request, it is cheap because it is mostly a scoring rubric and a decision record rather than new tooling, and it is the single lever that sets the managed-versus-self-serve split. The whole thesis rides on it, so I fund it first.</li>
+        <li><span class="lead-in">The quality bar comes second because it unlocks confident deflection.</span> I can only route demand away from a managed build if requesters trust the alternative. A clear definition of production-grade, built with Agent Governance Operations, is what makes "no, use self-serve" a safe answer instead of a risky one.</li>
+        <li><span class="lead-in">Insight-mining scores low on confidence on purpose.</span> Its value depends on whether the agent estate is actually queryable at scale. Until I have proven the data is real and structured, I mine by hand.</li>
+        <li><span class="lead-in">The transition engine is the strategic payoff but is sequenced last.</span> It is high-effort and depends on the intake and quality bar existing first. It is where managed builds convert into durable capability, so it is last in order, not in importance.</li>
+      </ul>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" aria-labelledby="h-approach">
+      <h2 class="kicker" id="h-approach">Approach</h2>
+      <p class="takeaway">I would hold three directions open and let evidence pick, rather than committing to one on day one.</p>
+      <div class="cards three">
+        <div class="card">
+          <span class="tag">Direction A</span>
+          <h3>A scored front door</h3>
+          <p>Route every request through validation, feasibility, and a risk-and-reuse score that pushes it to self-serve, catalog, or managed.</p>
+          <p class="bet">Bet: most requests do not actually need a bespoke build. Test by scoring real requests and measuring how many stick as self-serve.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Direction B</span>
+          <h3>A quality bar that makes deflection safe</h3>
+          <p>Define production-grade once, apply it to every managed agent, and use it as the standard self-serve agents aspire to.</p>
+          <p class="bet">Bet: trust, not capability, is what blocks self-serve adoption. Test by tracking whether deflected requesters succeed unaided.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Direction C</span>
+          <h3>A transition pipeline</h3>
+          <p>Assign every managed agent a fate and actually move the good ones into self-serve features or catalog agents.</p>
+          <p class="bet">Bet: managed builds are reusable more often than they look. Test by promoting one or two live agents and measuring reuse.</p>
+        </div>
+      </div>
+      <p>These are not exclusive. My read is that A comes first and unblocks the rest, B runs alongside it to make routing safe, and C follows once there is a stocked managed fleet worth transitioning. The intake flow I would run:</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 800 580" role="img" aria-labelledby="d1t d1d">
+          <title id="d1t">Managed agent intake and triage flow</title>
+          <desc id="d1d">An incoming request from an agency or client team is validated for business case and feasibility, then scored on recurrence, risk, and self-serve readiness, and routed to self-serve guidance, a managed build held to the quality bar, or a product feature request to sibling PMs. Every managed build is then assigned a transition fate.</desc>
+          <defs>
+            <marker id="ar1" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#857c68"/></marker>
+          </defs>
+          <!-- connectors -->
+          <path class="edge" d="M400,72 L400,104" marker-end="url(#ar1)" aria-hidden="true"/>
+          <path class="edge" d="M400,156 L400,188" marker-end="url(#ar1)" aria-hidden="true"/>
+          <path class="edge" d="M400,256 L400,320" aria-hidden="true"/>
+          <path class="edge" d="M152,320 L648,320" aria-hidden="true"/>
+          <path class="edge" d="M152,320 L152,372" marker-end="url(#ar1)" aria-hidden="true"/>
+          <path class="edge" d="M400,320 L400,372" marker-end="url(#ar1)" aria-hidden="true"/>
+          <path class="edge" d="M648,320 L648,372" marker-end="url(#ar1)" aria-hidden="true"/>
+          <path class="edge" d="M400,456 L400,496" marker-end="url(#ar1)" aria-hidden="true"/>
+          <!-- edge labels -->
+          <g aria-hidden="true">
+            <rect class="edge-bg" x="90" y="330" width="124" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="152" y="343"><tspan x="152">reusable, low risk,</tspan><tspan x="152" dy="12">self-serve ready</tspan></text>
+            <rect class="edge-bg" x="316" y="330" width="168" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="400" y="343"><tspan x="400">recurring, high stakes,</tspan><tspan x="400" dy="12">not yet self-servable</tspan></text>
+            <rect class="edge-bg" x="576" y="330" width="144" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="648" y="343"><tspan x="648">systemic gap across</tspan><tspan x="648" dy="12">many requests</tspan></text>
+          </g>
+          <!-- nodes -->
+          <rect class="n-entry" x="275" y="20" width="250" height="52" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="42"><tspan x="400">Incoming request</tspan><tspan class="node-sub" x="400" dy="16">from agency or client team</tspan></text>
+
+          <rect class="n-entry" x="290" y="104" width="220" height="52" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="126"><tspan x="400">Validate business case</tspan><tspan class="node-sub" x="400" dy="16">and feasibility</tspan></text>
+
+          <rect class="n-decision" x="278" y="188" width="244" height="68" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="216"><tspan x="400">Score the request</tspan><tspan class="node-sub" x="400" dy="16">recurring? risk level?</tspan><tspan class="node-sub" x="400" dy="14">self-serve ready?</tspan></text>
+
+          <rect class="n-route" x="40" y="372" width="224" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="152" y="406"><tspan x="152">Route to self-serve</tspan><tspan class="node-sub" x="152" dy="16">guidance in the</tspan><tspan class="node-sub" x="152" dy="14">Agent Builder</tspan></text>
+
+          <rect class="n-route" x="288" y="372" width="224" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="406"><tspan x="400">Managed build</tspan><tspan class="node-sub" x="400" dy="16">held to the</tspan><tspan class="node-sub" x="400" dy="14">quality bar</tspan></text>
+
+          <rect class="n-route" x="536" y="372" width="224" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="648" y="406"><tspan x="648">Product feature</tspan><tspan class="node-sub" x="648" dy="16">request to the</tspan><tspan class="node-sub" x="648" dy="14">sibling PMs</tspan></text>
+
+          <rect class="n-route" x="300" y="496" width="200" height="54" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="528"><tspan x="400">Assign a transition fate</tspan></text>
+        </svg>
+        <figcaption>Managed agent intake and triage flow</figcaption>
+      </figure>
+    </section>
+
+    <!-- WHAT I'D SHIP FIRST -->
+    <section id="ship-first" aria-labelledby="h-ship">
+      <h2 class="kicker" id="h-ship">What I'd ship first</h2>
+      <p class="takeaway">I would start with the smallest thing that tests the biggest assumption.</p>
+      <p>That assumption is that demand can actually be routed away from managed builds and that self-serve absorbs it. If it cannot, the declining-dependency thesis collapses, so I want to know early. The MVP, run over the first 60 to 90 days:</p>
+      <ul>
+        <li>A <span class="lead-in">scored intake rubric plus a written decision record</span>, applied live to the next quarter's incoming requests. Each request gets a managed, self-serve, or feature decision and a one-line reason.</li>
+        <li>A <span class="lead-in">first-draft production-grade checklist</span>, tested against two or three real managed agents, so the quality bar is grounded in live cases, not written in the abstract.</li>
+        <li>A <span class="lead-in">top-patterns memo</span> to the two sibling PMs, listing the most common recurring needs I see coming through the door.</li>
+      </ul>
+      <p>What it deliberately leaves out: automated dedup tooling, live monitoring dashboards, and the full transition pipeline. Those are worth building only after the intake data proves the routing works and the estate proves minable.</p>
+      <p>What the MVP produces is a baseline I do not have today: the real managed-versus-self-serve split, a deflection rate, and, most important, a "deflection that stuck" number, meaning requests routed to self-serve that did not bounce back within 90 days.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" aria-labelledby="h-metrics">
+      <h2 class="kicker" id="h-metrics">Metrics</h2>
+      <p class="takeaway">I would grade the team on leverage, not output.</p>
+      <p>The JD's stated metric is decreasing dependency on managed agents. A raw shrink number is easy to game, just reject requests, and it quietly tells the engineering team their job is to disappear. So I would make the North Star a value metric and keep the shrink signal as a guardrail.</p>
+      <div class="northstar">
+        <h3>North Star: recurring, validated demand met by durable capability, per unit of managed-engineering effort.</h3>
+        <p>As self-serve matures, the same effort serves more demand, because managed builds get promoted into reusable features and catalog agents instead of staying one-off. The number rises even as raw managed-build count falls. That reframe is what keeps the team motivated: they are building leverage, not building themselves out of a job.</p>
+      </div>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 800 460" role="img" aria-labelledby="d2t d2d">
+          <title id="d2t">Managed agents metrics tree</title>
+          <desc id="d2d">The North Star, demand met by durable capability per unit of engineering effort, is driven by three measures: deflection that stuck, transition completion, and reuse rate. It is protected by three guardrails and an anti-metric that must not degrade: production quality, intake-to-decision cycle time, and bounce-back.</desc>
+          <defs>
+            <marker id="ar2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#857c68"/></marker>
+          </defs>
+          <!-- solid connectors -->
+          <path class="edge" d="M400,100 L400,126" aria-hidden="true"/>
+          <path class="edge" d="M160,126 L640,126" aria-hidden="true"/>
+          <path class="edge" d="M160,126 L160,156" marker-end="url(#ar2)" aria-hidden="true"/>
+          <path class="edge" d="M400,126 L400,156" marker-end="url(#ar2)" aria-hidden="true"/>
+          <path class="edge" d="M640,126 L640,156" marker-end="url(#ar2)" aria-hidden="true"/>
+          <!-- dashed constraint connector -->
+          <path class="edge-dash" d="M388,100 L280,120 L280,297" aria-hidden="true"/>
+          <path class="edge-dash" d="M160,322 L160,334" aria-hidden="true"/>
+          <path class="edge-dash" d="M400,322 L400,334" aria-hidden="true"/>
+          <path class="edge-dash" d="M640,322 L640,334" aria-hidden="true"/>
+          <!-- north star -->
+          <rect class="n-star" x="250" y="16" width="300" height="84" rx="10"/>
+          <text text-anchor="middle" x="400" y="46"><tspan class="node-strong" x="400">North Star</tspan><tspan class="node-sub" x="400" dy="17">demand met by durable capability</tspan><tspan class="node-sub" x="400" dy="15">per unit of engineering effort</tspan></text>
+          <!-- drivers -->
+          <rect class="n-driver" x="47" y="156" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="160" y="186"><tspan class="node-label" x="160">Deflection that stuck</tspan><tspan class="node-sub" x="160" dy="17">self-serve requests that</tspan><tspan class="node-sub" x="160" dy="15">did not return in 90 days</tspan></text>
+          <rect class="n-driver" x="287" y="156" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="400" y="186"><tspan class="node-label" x="400">Transition completion</tspan><tspan class="node-sub" x="400" dy="17">managed agents moved to</tspan><tspan class="node-sub" x="400" dy="15">feature or catalog</tspan></text>
+          <rect class="n-driver" x="527" y="156" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="640" y="194"><tspan class="node-label" x="640">Reuse rate</tspan><tspan class="node-sub" x="640" dy="17">agents reused vs one-off</tspan></text>
+          <!-- guardrail strip -->
+          <rect class="n-strip" x="47" y="298" width="706" height="24" rx="6"/>
+          <text class="strip-label" text-anchor="middle" x="400" y="314">GUARDRAILS (MUST NOT DEGRADE) AND ANTI-METRIC (WATCH)</text>
+          <!-- guardrails -->
+          <rect class="n-guard" x="47" y="334" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="160" y="364"><tspan class="node-label" x="160">Production quality</tspan><tspan class="node-sub" x="160" dy="17">incident and accuracy</tspan><tspan class="node-sub" x="160" dy="15">regression rate</tspan></text>
+          <rect class="n-guard" x="287" y="334" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="400" y="372"><tspan class="node-label" x="400">Intake-to-decision</tspan><tspan class="node-sub" x="400" dy="17">cycle time</tspan></text>
+          <rect class="n-guard" x="527" y="334" width="226" height="98" rx="9"/>
+          <text text-anchor="middle" x="640" y="364"><tspan class="node-label" x="640">Bounce-back</tspan><tspan class="node-sub" x="640" dy="17">deflected requests that</tspan><tspan class="node-sub" x="640" dy="15">escalated back to managed</tspan></text>
+        </svg>
+        <figcaption>Managed agents metrics tree</figcaption>
+      </figure>
+
+      <p>The guardrails matter as much as the North Star. Quality must not slip as I push volume toward self-serve. Decision speed must stay fast so the intake does not become a bottleneck. And the bounce-back anti-metric stops me from claiming a win for deflections that quietly fail and return.</p>
+    </section>
+
+    <!-- BUSINESS IMPACT -->
+    <section id="business-impact" aria-labelledby="h-biz">
+      <h2 class="kicker" id="h-biz">Business impact</h2>
+      <p class="takeaway">I would tie this work directly to the cost mandate WPP just set itself.</p>
+      <p>The Elevate28 plan restructures WPP into four operating units unified by WPP Open and targets &pound;500m of annualized cost savings by 2028 <a class="src" href="https://www.wpp.com/en/news/2026/02/strategy-update-and-2025-preliminary-results" target="_blank" rel="noopener">(WPP, Feb 2026)</a>, against the revenue decline noted above. Framed as hypotheses, not promises:</p>
+      <ul>
+        <li><span class="lead-in">Managed agents that graduate into reusable self-serve or catalog capability lower the marginal cost of serving recurring demand.</span> One build serves many teams instead of one. That is the efficiency lever an Elevate28-era platform needs.</li>
+        <li><span class="lead-in">Disciplined intake protects scarce specialist engineering time</span> by keeping it on the hard, genuinely bespoke work and off duplicate builds. Under cost pressure, protecting that time is a defensible commercial argument for keeping the team funded.</li>
+        <li><span class="lead-in">The insight signals fed to sibling PMs reduce wasted roadmap effort</span> across Agent Hub and Agent Builder, so the platform invests ahead of demand instead of behind it.</li>
+      </ul>
+      <p>I would want to attach real numbers to each of these once I can see intake volume and per-build cost, which is why they sit in the first-90-days plan rather than as claims here.</p>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" aria-labelledby="h-plan">
+      <h2 class="kicker" id="h-plan">The first 90 days</h2>
+      <p class="takeaway">I would spend the first month listening before I change any process.</p>
+      <div class="cards plan">
+        <div class="card">
+          <span class="tag">Days 0 to 30</span>
+          <h3>Listen and baseline</h3>
+          <p>Read every intake case from the last two quarters. Sit with the ex-Satalia engineering team and understand what they are proud of and what they dread. Meet the two sibling PMs and Agent Governance Operations to map the current handoffs. Pull the backlog and measure today's real managed-versus-self-serve split. Talk to a handful of requesters. Confirm what quality standards exist and how the estate inventory is stored.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Days 30 to 60</span>
+          <h3>A quick win and a sharper problem</h3>
+          <p>Ship the scored intake rubric and the first-draft quality checklist, and run them live on incoming requests. Publish a baseline deflection dashboard. Send the first top-patterns memo to the sibling PMs. Co-design the North Star with the engineering team so they own the framing.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Days 60 to 90</span>
+          <h3>Validate the first bet and propose the roadmap</h3>
+          <p>Assign a transition fate to the top managed agents and move one or two into self-serve or catalog as a proof. Set the metric baselines. Propose the portfolio roadmap and a standing operating rhythm for intake, quality, and transition.</p>
+        </div>
+      </div>
+      <p>The transition motion I would set up, so every managed agent has a defined fate rather than sitting in limbo:</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 820 580" role="img" aria-labelledby="d3t d3d">
+          <title id="d3t">Managed agent transition lifecycle</title>
+          <desc id="d3d">A managed agent moves from intake to live once it passes the quality bar, then is assigned one of three fates: a product feature when the pattern is broad and self-servable, a catalog super agent when reusable across many teams, or confirmed bespoke when genuinely one-off and high-risk. The first two retire from the managed fleet, while bespoke agents are re-reviewed each cycle.</desc>
+          <defs>
+            <marker id="ar3" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#857c68"/></marker>
+          </defs>
+          <!-- start dot -->
+          <circle class="state-dot" cx="400" cy="20" r="7" aria-hidden="true"/>
+          <!-- connectors -->
+          <path class="edge" d="M400,29 L400,42" marker-end="url(#ar3)" aria-hidden="true"/>
+          <path class="edge" d="M400,92 L400,126" marker-end="url(#ar3)" aria-hidden="true"/>
+          <path class="edge" d="M400,184 L400,212" aria-hidden="true"/>
+          <path class="edge" d="M150,212 L650,212" aria-hidden="true"/>
+          <path class="edge" d="M150,212 L150,286" marker-end="url(#ar3)" aria-hidden="true"/>
+          <path class="edge" d="M400,212 L400,286" marker-end="url(#ar3)" aria-hidden="true"/>
+          <path class="edge" d="M650,212 L650,286" marker-end="url(#ar3)" aria-hidden="true"/>
+          <!-- retire manifold -->
+          <path class="edge" d="M150,370 L150,410 L400,410 L400,370" aria-hidden="true"/>
+          <path class="edge" d="M275,410 L275,440" marker-end="url(#ar3)" aria-hidden="true"/>
+          <path class="edge" d="M275,496 L275,522" marker-end="url(#ar3)" aria-hidden="true"/>
+          <!-- bespoke loop back to managed live -->
+          <path class="edge" d="M760,328 L792,328 L792,155 L502,155" marker-end="url(#ar3)" aria-hidden="true"/>
+          <!-- edge labels -->
+          <g aria-hidden="true">
+            <rect class="edge-bg" x="358" y="100" width="118" height="16" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="417" y="112">passes quality bar</text>
+
+            <rect class="edge-bg" x="96" y="232" width="112" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="150" y="245"><tspan x="150">pattern is broad</tspan><tspan x="150" dy="12">and self-servable</tspan></text>
+
+            <rect class="edge-bg" x="346" y="232" width="108" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="400" y="245"><tspan x="400">reusable across</tspan><tspan x="400" dy="12">many teams</tspan></text>
+
+            <rect class="edge-bg" x="592" y="232" width="116" height="30" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="650" y="245"><tspan x="650">genuinely one-off,</tspan><tspan x="650" dy="12">high-risk</tspan></text>
+
+            <rect class="edge-bg" x="580" y="147" width="132" height="16" rx="4"/>
+            <text class="edge-label" text-anchor="middle" x="646" y="159">re-reviewed each cycle</text>
+          </g>
+          <!-- nodes -->
+          <rect class="n-entry" x="330" y="42" width="140" height="50" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="72"><tspan x="400">Intake</tspan></text>
+
+          <rect class="n-route" x="300" y="126" width="200" height="58" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="160"><tspan x="400">Managed agent, live</tspan></text>
+
+          <rect class="n-route" x="40" y="286" width="220" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="150" y="323"><tspan x="150">Product feature</tspan><tspan class="node-sub" x="150" dy="16">in self-serve</tspan></text>
+
+          <rect class="n-route" x="290" y="286" width="220" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="400" y="323"><tspan x="400">Catalog super agent</tspan><tspan class="node-sub" x="400" dy="16">shared across teams</tspan></text>
+
+          <rect class="n-route" x="540" y="286" width="220" height="84" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="650" y="323"><tspan x="650">Confirmed bespoke</tspan><tspan class="node-sub" x="650" dy="16">stays managed</tspan></text>
+
+          <rect class="n-entry" x="155" y="440" width="240" height="56" rx="9"/>
+          <text class="node-label" text-anchor="middle" x="275" y="472"><tspan x="275">Retired from managed fleet</tspan></text>
+
+          <!-- end state -->
+          <circle cx="275" cy="533" r="9" fill="none" stroke="#211e18" stroke-width="1.6" aria-hidden="true"/>
+          <circle class="state-dot" cx="275" cy="533" r="5" aria-hidden="true"/>
+        </svg>
+        <figcaption>Managed agent transition lifecycle</figcaption>
+      </figure>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" aria-labelledby="h-risks">
+      <h2 class="kicker" id="h-risks">Risks and what I'd validate first</h2>
+      <p class="takeaway">The thesis rests on a few assumptions about the work, and I would test each in week one rather than assume it.</p>
+      <ul>
+        <li><span class="lead-in">Self-serve is mature enough to absorb deflected demand.</span> If the Agent Builder cannot yet do what requesters need, disciplined intake just creates frustration. Validate by running five real deflected cases through self-serve and watching whether the requester succeeds unaided.</li>
+        <li><span class="lead-in">The agent estate is queryable at scale.</span> My insight-mining plan depends on it, and the public numbers do not confirm a 150,000-plus minable inventory. Validate by auditing the actual inventory and its structure before building any mining tooling.</li>
+        <li><span class="lead-in">A shrink metric will not demoralize the engineering team.</span> Validate by co-designing the North Star with them as a leverage metric, not a headcount metric, and checking that it reads that way to them.</li>
+        <li><span class="lead-in">The quality bar and Agent Governance Operations do not overlap or conflict.</span> Validate by mapping both in week one and agreeing who owns the accuracy threshold.</li>
+        <li><span class="lead-in">Intake discipline could become a bottleneck.</span> A slow intake process loses trust fast. Validate against the cycle-time guardrail and cap decision turnaround from the start.</li>
+      </ul>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="h-q">
+      <h2 class="kicker" id="h-q">Questions I'd ask the team</h2>
+      <p class="takeaway">I would want answers to a handful of questions before I commit to this plan.</p>
+      <ol>
+        <li>Of the last quarter's requests, how many became managed builds versus self-serve versus feature requests, and who made each call today?</li>
+        <li>How queryable is the agent estate right now? Can I actually mine tens of thousands of bespoke agents for patterns, or is that inventory not yet structured for it?</li>
+        <li>Where does the managed-agents quality bar end and Agent Governance Operations verification begin? Who owns the accuracy threshold?</li>
+        <li>What does decreasing dependency mean to leadership in numbers, and over what horizon, given the Elevate28 cost targets?</li>
+        <li>When a managed agent graduates to a self-serve feature, who carries the maintenance and the client relationship afterward? What is the handoff contract with the sibling PMs?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="why-me" aria-labelledby="h-me">
+      <h2 class="kicker" id="h-me">Why me</h2>
+      <p>I'm a product manager with six years across technology, finance, and AI. I hold an MBA in finance and a computer-engineering degree, and I finish a Master of Science in Information Management at the University of Washington in June 2026. I fit this role for one specific reason: I have already run the managed-to-governed motion it centers on. At a global bank I led the rollout of an internal AI assistant to 15,000-plus users with compliance and governance built into a phased adoption plan, and right now I am defining production-grade quality standards for an AI policy agent, testing retrieval architectures on accuracy, groundedness, and hallucination across 9,000-plus documents from eight agencies.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Intake triage: managed vs self-serve vs feature</td>
+              <td>Owned discovery to launch of a finance budgeting app at Nomura. I found the spend-visibility gap, ran research with 15-plus stakeholders, scoped the MVP, and prioritized the analytics layer, which cut spend 30%.</td>
+            </tr>
+            <tr>
+              <td>Production-grade AI standards: testing, accuracy, monitoring</td>
+              <td>Currently setting quality gates for a policy AI agent. I assessed four retrieval architectures on accuracy, groundedness, hallucination, latency, and cost across 9,000-plus documents.</td>
+            </tr>
+            <tr>
+              <td>Governed rollout of a central AI capability</td>
+              <td>I led an internal AI assistant rollout to 15,000-plus users with compliance and governance in a phased bank-wide plan, reaching 100% policy compliance.</td>
+            </tr>
+            <tr>
+              <td>Commercial ROI of build vs platform</td>
+              <td>I replaced a market-data vendor with a direct Tradeweb feed for $700K in annual savings, and I ran a five-platform build-versus-buy evaluation for the policy agent.</td>
+            </tr>
+            <tr>
+              <td>Insight mining across a large estate</td>
+              <td>I shipped a real-time dashboard that surfaced funnel bottlenecks across 3,000-plus bank branches, and built 25-plus reporting pipelines earlier in my career.</td>
+            </tr>
+            <tr>
+              <td>Counterpart to specialist engineers</td>
+              <td>I owned roadmap, prioritization, and partner integrations scaling a digital lending platform from MVP to 25,000-plus users across 3,000-plus branches.</td>
+            </tr>
+            <tr>
+              <td>Deliberate evolution and sunset paths</td>
+              <td>I led operational risk transformation for Global Markets, owning remediation strategy, roadmaps, and preventive controls, which cut risk events 20% and losses 15%.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <p class="signoff">Happy to walk through any part of this with the team.</p>
+    <div class="contact">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.rail a[href^="#"]'));
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (l) { map[l.getAttribute('href').slice(1)] = l; });
+    function setActive(id) {
+      links.forEach(function (l) { l.classList.remove('active'); l.removeAttribute('aria-current'); });
+      var l = map[id];
+      if (l) { l.classList.add('active'); l.setAttribute('aria-current', 'true'); }
+    }
+    var sections = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-12% 0px -70% 0px', threshold: 0 });
+    sections.forEach(function (s) { obs.observe(s); });
+    if (sections[0]) setActive(sections[0].id);
+  })();
+</script>
+</body>
+</html>
