@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mayuresh More. Technical Product Manager, Sanctions Compliance at Quantifind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e9edf2;
+    --paper:#fbfcfe;
+    --ink:#141d2b;
+    --ink-soft:#3a4757;
+    --ink-faint:#6f7d8c;
+    --line:#d2dbe4;
+    --line-soft:#e5ebf1;
+    --accent:#1f5aa6;
+    --accent-deep:#174680;
+    --accent-wash:#dbe8f6;
+    --ok:#1f7a4d;
+    --alarm:#b0392a;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --rail-w:200px;
+    --rail-gap:48px;
+    --wrap-pad:28px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(1200px 600px at 84% -8%, rgba(31,90,166,.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 108%, rgba(23,70,128,.05), transparent 60%);
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ink);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;
+    font-family:var(--mono);font-size:13px;z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  a{color:var(--accent-deep);}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--wrap-pad);
+    position:relative;
+    z-index:1;
+  }
+
+  /* masthead */
+  header.masthead{padding:64px 0 26px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,5.6vw,52px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0;
+    color:var(--ink);
+  }
+  .frame{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:35em;
+    margin:16px 0 0;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:20px 0 0;
+  }
+
+  /* mobile contents disclosure */
+  details.toc-mobile{
+    margin:26px 0 0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+  }
+  details.toc-mobile summary{
+    cursor:pointer;
+    list-style:none;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  details.toc-mobile summary::-webkit-details-marker{display:none;}
+  details.toc-mobile summary::after{content:"+";font-size:17px;color:var(--accent);}
+  details.toc-mobile[open] summary::after{content:"\2212";}
+  details.toc-mobile ol{
+    margin:0;padding:4px 18px 16px 34px;
+    font-family:var(--display);font-size:15px;
+  }
+  details.toc-mobile li{margin:7px 0;}
+  details.toc-mobile a{color:var(--ink-soft);text-decoration:none;}
+  details.toc-mobile a:hover{color:var(--accent);}
+
+  /* key-terms glossary */
+  aside.glossary{
+    margin:22px 0 8px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px 6px;
+  }
+  aside.glossary .glab{
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+    margin:0 0 8px;
+  }
+  aside.glossary dl{
+    margin:0;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:2px 14px;
+  }
+  aside.glossary dt{
+    font-family:var(--display);font-weight:600;font-size:14.5px;
+    color:var(--ink);
+    padding:5px 0;
+    border-bottom:1px solid var(--line-soft);
+    white-space:nowrap;
+  }
+  aside.glossary dd{
+    margin:0;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    line-height:1.45;
+    padding:5px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  aside.glossary dl>dt:last-of-type,aside.glossary dl>dd:last-of-type{border-bottom:none;}
+
+  /* layout */
+  .layout{display:block;padding-bottom:40px;}
+  nav.rail{display:none;}
+  main{display:block;}
+
+  section{
+    padding:34px 0;
+    border-top:1px solid var(--line-soft);
+    scroll-margin-top:24px;
+  }
+  section:first-of-type{border-top:none;}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h2.kicker{font-size:16px;}
+
+  .lede{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(22px,3.4vw,30px);
+    line-height:1.22;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    margin:0 0 16px;
+    max-width:23em;
+  }
+
+  p{margin:0 0 16px;max-width:38em;}
+  p.tk{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(18px,2.6vw,22px);
+    line-height:1.34;
+    color:var(--ink);
+    margin:0 0 18px;
+    max-width:34em;
+  }
+  strong{font-weight:600;color:var(--ink);}
+  em{color:var(--ink-soft);}
+  code{
+    font-family:var(--mono);font-size:.86em;
+    background:var(--line-soft);
+    padding:1px 6px;border-radius:5px;color:var(--ink-soft);
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:24px 0 8px;
+  }
+
+  a.src{
+    color:var(--ink-faint);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+    font-size:.94em;
+  }
+  a.src:hover,a.src:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:43em;}
+  ul.clean li{
+    position:relative;
+    padding:8px 0 8px 26px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";
+    position:absolute;left:2px;top:18px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+  }
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 16px;max-width:44em;}
+  ol.steps li{
+    counter-increment:s;
+    position:relative;
+    padding:6px 0 16px 46px;
+    margin:0;
+  }
+  ol.steps li::before{
+    content:counter(s);
+    position:absolute;left:0;top:3px;
+    width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--accent-wash);
+    color:var(--accent-deep);
+    border:1px solid #bcd4ee;
+    border-radius:50%;
+    font-family:var(--mono);font-size:13px;font-weight:600;
+  }
+
+  /* stat band */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:22px 0;
+  }
+  .stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-top:3px solid var(--accent);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .num{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(25px,4vw,33px);
+    color:var(--accent-deep);line-height:1;letter-spacing:-.02em;
+  }
+  .stat .lab{font-size:14.5px;color:var(--ink-soft);margin-top:9px;line-height:1.42;}
+
+  /* JTBD quote card */
+  .jtbd{margin:18px 0;display:grid;gap:12px;}
+  .jtbd blockquote{
+    margin:0;
+    padding:16px 18px 16px 20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .jtbd .jlab{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:7px;
+  }
+  .jtbd .jrole{color:var(--accent-deep);}
+  .jtbd p{margin:0;font-style:italic;color:var(--ink-soft);max-width:none;}
+
+  /* tables */
+  .tbl-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:20px 0;
+    background:var(--paper);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:760px;
+    font-family:var(--display);
+    font-size:14px;
+  }
+  table.rice{min-width:880px;}
+  table.fit{min-width:640px;font-size:14.5px;}
+  table.persona{min-width:700px;}
+  table.biz{min-width:820px;}
+  th,td{
+    text-align:left;
+    padding:12px 15px;
+    border-bottom:1px solid var(--line-soft);
+    vertical-align:top;
+    line-height:1.42;
+  }
+  thead th{
+    background:#dce6f1;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tr.win td{background:var(--accent-wash);}
+  tr.win td:first-child{color:var(--accent-deep);}
+  td .tag{
+    display:inline-block;
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.04em;
+    padding:2px 8px;border-radius:20px;
+    background:var(--accent);color:#fff;
+    margin-top:6px;
+  }
+  td .rank{
+    font-family:var(--mono);font-weight:600;font-size:16px;color:var(--ink-soft);
+  }
+  tr.win .rank{color:var(--accent-deep);}
+
+  .src-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);margin:0 0 16px;max-width:44em;}
+
+  /* callout */
+  .note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .note p{max-width:none;}
+  .note p:last-child{margin-bottom:0;}
+  .note.brake{border-left:3px solid var(--alarm);}
+  .note.win{border-left:3px solid var(--accent);}
+
+  /* diagrams */
+  figure.diagram{
+    margin:24px 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+  }
+  figure.diagram figcaption{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  figure.diagram svg{display:block;width:100%;height:auto;}
+  .dlabel{font-family:var(--display);}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:10px 16px;
+    margin-top:14px;
+    font-family:var(--display);font-size:13px;
+    color:var(--ink-soft);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;}
+  figure.diagram .dcap{
+    font-family:var(--body);font-style:italic;
+    font-size:15px;color:var(--ink-soft);
+    margin:14px 0 0;max-width:none;
+  }
+
+  /* phased plan */
+  .phase{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .phase .ph-tag{
+    font-family:var(--mono);
+    font-size:12px;font-weight:600;
+    letter-spacing:.1em;
+    color:var(--accent);
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:6px;
+  }
+  .phase ul.clean{margin:0;}
+  .phase ul.clean li{font-size:16.5px;color:var(--ink-soft);}
+
+  /* questions */
+  ol.qs{counter-reset:q;list-style:none;padding:0;margin:14px 0;max-width:45em;}
+  ol.qs li{
+    counter-increment:q;
+    position:relative;
+    padding:14px 0 14px 50px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--ink-soft);
+  }
+  ol.qs li:last-child{border-bottom:none;}
+  ol.qs li::before{
+    content:"Q" counter(q);
+    position:absolute;left:0;top:14px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.04em;
+  }
+
+  /* risks */
+  .risk{
+    border:1px solid var(--line);
+    border-left:3px solid #9a6a12;
+    border-radius:8px;
+    background:var(--paper);
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .risk .rt{
+    font-family:var(--display);font-weight:600;font-size:16.5px;
+    color:var(--ink);margin:0 0 5px;max-width:none;
+  }
+  .risk .rv{margin:0;font-size:16px;color:var(--ink-soft);max-width:none;}
+  .risk .rv b{color:var(--ok);font-weight:600;}
+
+  .fit-intro{max-width:43em;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+    .js .reveal.in{opacity:1;transform:none;}
+  }
+  @media print{ .reveal{opacity:1 !important;transform:none !important;} }
+
+  footer.foot{
+    border-top:1px solid var(--line);
+    padding:34px 0 56px;
+    margin-top:10px;
+  }
+  .foot .fname{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);}
+  .contacts{
+    display:flex;flex-wrap:wrap;gap:8px 22px;
+    margin-top:14px;
+    font-family:var(--mono);font-size:13px;
+  }
+  .contacts a{
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .contacts a:hover,.contacts a:focus-visible{color:var(--accent);border-color:var(--accent);}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* desktop rail */
+  @media (min-width:920px){
+    header.masthead .wrap,
+    footer.foot .wrap{
+      padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    }
+    .layout .wrap{
+      display:grid;
+      grid-template-columns:var(--rail-w) 1fr;
+      column-gap:var(--rail-gap);
+      align-items:start;
+    }
+    nav.rail{
+      display:block;
+      position:sticky;
+      top:32px;
+      align-self:start;
+    }
+    .rail-head{
+      font-family:var(--mono);
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--ink-faint);
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .rail ol{list-style:none;margin:0;padding:0;}
+    .rail li{margin:0;}
+    .rail a{
+      display:block;
+      font-family:var(--display);
+      font-size:14px;
+      color:var(--ink-faint);
+      text-decoration:none;
+      padding:6px 0 6px 13px;
+      border-left:2px solid var(--line);
+      transition:color .15s ease,border-color .15s ease;
+      line-height:1.3;
+    }
+    .rail a:hover{color:var(--ink-soft);border-color:var(--ink-faint);}
+    .rail a[aria-current="true"]{
+      color:var(--accent-deep);
+      border-color:var(--accent);
+      font-weight:600;
+    }
+    details.toc-mobile{display:none;}
+    main{min-width:0;}
+  }
+
+  /* mobile diagram scroll */
+  @media (max-width:600px){
+    body{font-size:18px;}
+    aside.glossary dl{grid-template-columns:1fr;gap:0;}
+    aside.glossary dt{border-bottom:none;padding-bottom:0;white-space:normal;}
+    aside.glossary dd{padding-top:2px;}
+    .stats{grid-template-columns:1fr;}
+    figure.diagram .svg-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    figure.diagram.flow .svg-scroll svg{min-width:740px;}
+    figure.diagram.tree .svg-scroll svg{min-width:700px;}
+    figure.diagram figcaption{padding-right:60px;}
+    figure.diagram::after{
+      content:"scroll \2192";
+      position:absolute;top:18px;right:16px;
+      font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      color:var(--ink-faint);
+    }
+    header.masthead{padding-top:46px;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Product Pitch</p>
+    <h1 class="name">Mayuresh More</h1>
+    <p class="frame">How I would solve the false-positive alert-review problem for the Technical Product Manager, Sanctions Compliance role at Quantifind.</p>
+    <p class="prepared">Prepared July 2026</p>
+
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </details>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="wrap">
+    <nav class="rail" aria-label="On this page">
+      <p class="rail-head">On this page</p>
+      <ol>
+        <li><a href="#bet">The bet</a></li>
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#who">Who it is for</a></li>
+        <li><a href="#why">Why this problem</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#mvp">What I'd ship first</a></li>
+        <li><a href="#metrics">Metrics</a></li>
+        <li><a href="#business">Business impact</a></li>
+        <li><a href="#plan">30 / 60 / 90</a></li>
+        <li><a href="#risks">Risks</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#fit">Why me</a></li>
+      </ol>
+    </nav>
+
+    <main id="main-content">
+
+      <aside class="glossary" aria-label="Key terms">
+        <p class="glab">Key terms, in plain words</p>
+        <dl>
+          <dt>OFAC</dt>
+          <dd>The US Treasury office that publishes sanctions lists and enforces them.</dd>
+          <dt>False positive</dt>
+          <dd>A screening alert that looked like a sanctioned party but is not one.</dd>
+          <dt>Entity resolution</dt>
+          <dd>Deciding whether two records point to the same real person or company.</dd>
+          <dt>UBO</dt>
+          <dd>Ultimate beneficial owner: the person who actually owns or controls a company.</dd>
+          <dt>Model-risk management</dt>
+          <dd>A bank's internal process for validating any model or AI before it can influence a decision.</dd>
+        </dl>
+      </aside>
+
+      <!-- THE BET -->
+      <section id="bet" class="reveal" aria-labelledby="bet-h">
+        <h2 class="kicker" id="bet-h">The bet</h2>
+        <p class="lede">My bet is that Quantifind wins the sanctions line fastest by fixing the one workflow that bleeds the most money first: false-positive alert review.</p>
+        <p>That is where analyst hours disappear, where Graphyte's matching already has an edge, and where a bank will pay to cut the load. The catch that makes it sellable: every alert the product clears has to arrive with an audit record a bank's model-risk team will sign off on. So the first product is not just faster triage. It is triage a regulator's examiner would accept.</p>
+      </section>
+
+      <!-- THE PROBLEM -->
+      <section id="problem" class="reveal" aria-labelledby="problem-h">
+        <h2 class="kicker" id="problem-h">The problem</h2>
+        <p class="tk">The way I see it, a sanctions team's day is mostly spent clearing alerts that were never real.</p>
+
+        <ul class="clean">
+          <li><strong>Who hurts.</strong> Sanctions analysts and their compliance-operations leaders at large banks. Six of the world's top 10 Tier 1 banks already run Graphyte <a class="src" href="https://www.prnewswire.com/news-releases/quantifind-announces-200-million-growth-investment-led-by-summit-partners-to-advance-ai-native-risk-intelligence-and-governed-agentic-middleware-for-modern-risk-operations-302811745.html" target="_blank" rel="noopener">(Quantifind, June 2026)</a>, so the buyer is already inside the tent.</li>
+          <li><strong>What.</strong> They drown in screening alerts that are overwhelmingly false matches.</li>
+          <li><strong>Root cause.</strong> Legacy screening tools match names against static lists with fuzzy string logic. Common names, transliterations, and partial matches trip the filter constantly.</li>
+          <li><strong>Workarounds, and why they fail.</strong> Teams throw analyst hours at it and tune match thresholds up and down. Raise the threshold and you risk missing a real hit, which is unacceptable. Lower it and you bury the team. Manual review does not scale as alert volumes and list counts keep climbing.</li>
+        </ul>
+
+        <h3>What it costs, at a glance</h3>
+        <div class="stats">
+          <div class="stat">
+            <div class="num">85 to 90%</div>
+            <div class="lab">of screening hits are false positives <a class="src" href="https://sphinxhq.com/blog-posts/reduce-screening-alert-review-time" target="_blank" rel="noopener">(Everest Group 2025, via Sphinx)</a></div>
+          </div>
+          <div class="stat">
+            <div class="num">~$18K</div>
+            <div class="lab">burned per week clearing noise, for an institution running 500 alerts a week <a class="src" href="https://sphinxhq.com/blog-posts/reduce-screening-alert-review-time" target="_blank" rel="noopener">(via Sphinx)</a></div>
+          </div>
+          <div class="stat">
+            <div class="num">$266M</div>
+            <div class="lab">in OFAC enforcement across 14 public actions in 2025 <a class="src" href="https://www.corporatecomplianceinsights.com/state-ofac-sanctions-enforcement-2026/" target="_blank" rel="noopener">(Corporate Compliance Insights, 2026)</a></div>
+          </div>
+        </div>
+        <p>Each false hit takes 30 to 45 minutes and 25 to 50 dollars of analyst time. The tail risk dwarfs the running cost: 2025's actions included a single 215,988,868 dollar penalty, the largest ever against a nonbank financial institution <a class="src" href="https://www.lowenstein.com/news-insights/publications/client-alerts/ofac-imposes-largest-ever-penalty-on-nonbank-financial-institution-for-egregious-and-sustained-sanctions-violations-a-216m-warning-to-us-fund-managers-know-your-investors-aml" target="_blank" rel="noopener">(Lowenstein, 2025)</a>. The buyer feels both the weekly cost and the fear of the exam.</p>
+      </section>
+
+      <!-- WHO IT IS FOR -->
+      <section id="who" class="reveal" aria-labelledby="who-h">
+        <h2 class="kicker" id="who-h">Who it is for</h2>
+        <p class="tk">I count three people who touch a sanctions alert, and each is hiring the product for a different job; any one of them can stall a deal.</p>
+
+        <div class="jtbd">
+          <blockquote>
+            <span class="jlab">Job to be done &middot; <span class="jrole">model-risk reviewer, the gatekeeper</span></span>
+            <p>"When a new AI tool wants to touch sanctions decisions, give me a reproducible, explainable record of every match and no-match call, so I can sign off that it meets our standards and survives an OFAC exam."</p>
+          </blockquote>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="persona">
+            <caption class="sr-only">The three people I would design for</caption>
+            <thead>
+              <tr>
+                <th scope="col">Persona</th>
+                <th scope="col">The job they hire the product to do</th>
+                <th scope="col">What they fear</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sanctions analyst</strong><br>daily user</td>
+                <td>Confirm fast whether an alert is a real match or noise, so I clear my queue without being the one who missed a true hit.</td>
+                <td>Personal liability for a missed hit.</td>
+              </tr>
+              <tr>
+                <td><strong>Compliance-operations lead</strong><br>economic buyer</td>
+                <td>Cut the noise without raising audit risk, so I hit my SLAs and can defend the program to regulators and the board.</td>
+                <td>An enforcement action on my watch.</td>
+              </tr>
+              <tr class="win">
+                <td><strong>Model-risk / audit reviewer</strong><br>gatekeeper</td>
+                <td>Get a reproducible, explainable record of every call, so I can sign off that it meets our standards.</td>
+                <td>Approving a black box she cannot defend.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note win">
+          <p>The gatekeeper is the one most pitches forget. In a bank, she holds the veto. If the model-risk reviewer cannot explain and reproduce a decision, the analyst never gets to use the tool, no matter how good the matching is. That is why the audit record is a hard requirement, not a feature request.</p>
+        </div>
+      </section>
+
+      <!-- WHY THIS PROBLEM -->
+      <section id="why" class="reveal" aria-labelledby="why-h">
+        <h2 class="kicker" id="why-h">Why this problem</h2>
+        <p class="tk">Ranked against every other workflow, false-positive review is the one I'd fund first, and the math holds up.</p>
+        <p class="src-note">RICE read across the workflows the role names. Reach and Effort are in real units; Impact (tier 1 to 3) and Confidence are judgment calls I would sharpen with customer data in month one, not settled numbers.</p>
+
+        <div class="tbl-wrap">
+          <table class="rice">
+            <caption class="sr-only">A RICE ranking of the sanctions workflows</caption>
+            <thead>
+              <tr>
+                <th scope="col">Workflow</th>
+                <th scope="col">Reach</th>
+                <th scope="col">Impact</th>
+                <th scope="col">Confidence</th>
+                <th scope="col">Effort</th>
+                <th scope="col">My read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="win">
+                <td><strong>Alert triage and disposition</strong> (false-positive review)</td>
+                <td>High: every screening customer, every analyst, daily</td>
+                <td>3</td>
+                <td>80%</td>
+                <td>~6 to 9 person-months</td>
+                <td>Biggest measurable payback, builds on matching Quantifind already has. <span class="tag">First</span></td>
+              </tr>
+              <tr>
+                <td><strong>UBO / 50% Rule ownership tracing</strong></td>
+                <td>Medium, growing</td>
+                <td>3</td>
+                <td>50%</td>
+                <td>~12+ person-months</td>
+                <td>The most defensible moat, but data-heavy and unproven. Too big for the first MVP. Second bet.</td>
+              </tr>
+              <tr>
+                <td><strong>Auditor documentation record</strong></td>
+                <td>High</td>
+                <td>2</td>
+                <td>80%</td>
+                <td>~3, as a feature of triage</td>
+                <td>Not standalone. Build it into the triage MVP as the acceptance bar.</td>
+              </tr>
+              <tr>
+                <td><strong>List / data management</strong></td>
+                <td>High</td>
+                <td>1</td>
+                <td>80%</td>
+                <td>Low</td>
+                <td>Largely bought. Quantifind already integrated OpenSanctions' 290+ sources <a class="src" href="https://www.opensanctions.org/articles/2025-08-07-quantifind/" target="_blank" rel="noopener">(Aug 2025)</a>. Maintain, do not rebuild.</td>
+              </tr>
+              <tr>
+                <td><strong>Real-time / payment-path screening</strong></td>
+                <td>Medium</td>
+                <td>2</td>
+                <td>50%</td>
+                <td>Very high</td>
+                <td>Later horizon. SEPA Instant makes it matter (3 to 5% blocked breaks "instant", <a class="src" href="https://www.sanctions.io/blog/real-time-payments-and-sanctions-risk" target="_blank" rel="noopener">sanctions.io</a>), but millisecond latency is a separate hard problem.</td>
+              </tr>
+              <tr>
+                <td><strong>Entity resolution / Name Science</strong></td>
+                <td>Dependency</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>The matching engine everything else consumes. In scope regardless: it enables the workflows, it does not compete with them.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <p>A note on the 50% Rule, since it drives the UBO row. Any company that is 50 percent or more owned, directly or through intermediaries, by sanctioned parties is itself blocked, even with no name-list hit <a class="src" href="https://complyadvantage.com/insights/ofac-50-rule/" target="_blank" rel="noopener">(ComplyAdvantage)</a>. Tracing that is the hardest and most defensible problem in this space. It is the right second move, not the first. I would not open a 0 to 1 line on the riskiest, longest build.</p>
+        </div>
+      </section>
+
+      <!-- APPROACH -->
+      <section id="approach" class="reveal" aria-labelledby="approach-h">
+        <h2 class="kicker" id="approach-h">Approach</h2>
+        <p class="tk">My plan is to keep two versions of the same first workflow alive until a design partner's model-risk team tells me which one they can actually accept.</p>
+        <ol class="steps">
+          <li><strong>Direction A, auto-triage.</strong> The product recommends clear, escalate, or needs-judgment on each alert, and can eventually auto-clear obvious false positives. Highest payback. Highest trust bar.</li>
+          <li><strong>Direction B, analyst copilot.</strong> The product never auto-clears. It ranks the alert, pre-fills the dossier, and explains its reasoning, and the human still makes every call. Lower payback, but a far lower trust bar and faster adoption.</li>
+          <li><strong>Direction C, UBO tracing.</strong> Go straight for the moat. I would hold this as the next horizon, gated on A or B proving the trust model first.</li>
+        </ol>
+        <p>How I would decide between A and B: run both in the same shadow-mode pilot. They share the matching engine and the audit record, so testing both costs little extra. The design partner's model-risk reviewer sets how far the automation is allowed to go. I let the customer's audit bar, not my preference, pick the aggressiveness.</p>
+      </section>
+
+      <!-- MVP -->
+      <section id="mvp" class="reveal" aria-labelledby="mvp-h">
+        <h2 class="kicker" id="mvp-h">What I'd ship first</h2>
+        <p class="tk">The smallest thing I'd ship first is whatever answers the scariest question: will a bank trust AI to touch a sanctions decision at all?</p>
+        <p><strong>The MVP: an explainable sanctions alert-triage layer, run in recommend-only shadow mode.</strong> On each screening alert, Graphyte's entity resolution and Name Science score the hit, recommend clear, escalate, or needs-judgment, and generate a disposition record that states why, on what data, and at what confidence, in the customer's own language. It runs side by side with the analyst's live process at one or two design-partner banks. It recommends; it does not yet decide.</p>
+        <p>Effort is contained because it reuses the matching engine and sits next to the existing Case Accelerator <a class="src" href="https://www.prnewswire.com/news-releases/quantifind-launches-its-ai-native-case-accelerator-to-redefine-case-management-for-accuracy-speed-and-scale-302550802.html" target="_blank" rel="noopener">(Sept 2025)</a> rather than duplicating it.</p>
+
+        <figure class="diagram flow" role="img" aria-label="The MVP flow. A screening alert lands and is scored by entity resolution and Name Science. A decision node splits three ways. A high-confidence false match is recommended CLEAR, recommend-only in the MVP. A high-confidence or near match is escalated to an analyst with a pre-filled dossier. A low-confidence or unsure alert is routed to an analyst, flagged NEEDS JUDGMENT, with no automated call. All three paths append a disposition record stating why, on what data, and at what confidence, which then goes to model-risk or QA review.">
+          <figcaption>Figure 1 &middot; The MVP triage flow, including the fork where the product admits it is unsure</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 900 580" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5aa6"/></marker>
+              </defs>
+
+              <!-- A start -->
+              <rect x="350" y="14" width="200" height="46" rx="9" fill="#eef1f5" stroke="#9aa7b4" stroke-width="1.5"/>
+              <text x="450" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#141d2b">Screening alert lands</text>
+
+              <line x1="450" y1="60" x2="450" y2="86" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+
+              <!-- B score -->
+              <rect x="300" y="88" width="300" height="58" rx="9" fill="#dbe8f6" stroke="#1f5aa6" stroke-width="1.5"/>
+              <text x="450" y="113" text-anchor="middle" font-size="12" font-weight="600" fill="#123a63">Entity resolution + Name Science</text>
+              <text x="450" y="131" text-anchor="middle" font-size="12" font-weight="600" fill="#123a63">score the hit</text>
+
+              <line x1="450" y1="146" x2="450" y2="172" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+
+              <!-- C decision -->
+              <rect x="342" y="174" width="216" height="50" rx="25" fill="#174680" stroke="#123a63" stroke-width="1.5"/>
+              <text x="450" y="204" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Decision: how confident?</text>
+
+              <!-- distribution bus C -> D/E/F -->
+              <line x1="450" y1="224" x2="450" y2="258" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="155" y1="258" x2="745" y2="258" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="155" y1="258" x2="155" y2="300" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+              <line x1="450" y1="258" x2="450" y2="300" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+              <line x1="745" y1="258" x2="745" y2="300" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+
+              <!-- D clear (green) -->
+              <rect x="24" y="300" width="262" height="98" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="155" y="328" text-anchor="middle" font-size="11" fill="#14532d">High-confidence false match</text>
+              <text x="155" y="352" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Recommend CLEAR</text>
+              <text x="155" y="374" text-anchor="middle" font-size="10.5" fill="#3f6b4c">recommend-only in MVP</text>
+
+              <!-- E escalate (red) -->
+              <rect x="319" y="300" width="262" height="98" rx="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+              <text x="450" y="328" text-anchor="middle" font-size="11" fill="#7f1d1d">High-confidence or near match</text>
+              <text x="450" y="352" text-anchor="middle" font-size="13" font-weight="700" fill="#7f1d1d">Escalate to analyst</text>
+              <text x="450" y="374" text-anchor="middle" font-size="10.5" fill="#9a4038">with a pre-filled dossier</text>
+
+              <!-- F needs judgment (amber) -->
+              <rect x="614" y="300" width="262" height="98" rx="9" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+              <text x="745" y="328" text-anchor="middle" font-size="11" fill="#7c4a03">Low confidence / unsure</text>
+              <text x="745" y="352" text-anchor="middle" font-size="13" font-weight="700" fill="#7c4a03">NEEDS JUDGMENT</text>
+              <text x="745" y="374" text-anchor="middle" font-size="10.5" fill="#8a5a13">routed to analyst, no auto-call</text>
+
+              <!-- converge bus D/E/F -> G -->
+              <line x1="155" y1="398" x2="155" y2="420" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="450" y1="398" x2="450" y2="420" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="745" y1="398" x2="745" y2="420" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="155" y1="420" x2="745" y2="420" stroke="#1f5aa6" stroke-width="1.6" aria-hidden="true"/>
+              <line x1="450" y1="420" x2="450" y2="446" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+
+              <!-- G disposition record -->
+              <rect x="250" y="448" width="400" height="56" rx="9" fill="#dbe8f6" stroke="#1f5aa6" stroke-width="1.6"/>
+              <text x="450" y="473" text-anchor="middle" font-size="12.5" font-weight="700" fill="#123a63">Append disposition record</text>
+              <text x="450" y="492" text-anchor="middle" font-size="11" fill="#345680">why, what data, what confidence</text>
+
+              <line x1="450" y1="504" x2="450" y2="528" stroke="#1f5aa6" stroke-width="1.6" marker-end="url(#mv)" aria-hidden="true"/>
+
+              <!-- H model-risk review -->
+              <rect x="310" y="530" width="280" height="46" rx="9" fill="#174680" stroke="#123a63" stroke-width="1.5"/>
+              <text x="450" y="558" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Model-risk / QA review</text>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#dcfce7;border:1px solid #16a34a;"></i>Recommend clear</span>
+            <span><i style="background:#fee2e2;border:1px solid #dc2626;"></i>Escalate, possible real hit</span>
+            <span><i style="background:#fef3c7;border:1px solid #d97706;"></i>Needs judgment</span>
+            <span><i style="background:#dbe8f6;border:1px solid #1f5aa6;"></i>Shared record and review</span>
+          </div>
+          <p class="dcap">The needs-judgment path is where trust is won. A tool that says "I am not sure, a human should look" survives a model-risk review. One that hides its uncertainty does not.</p>
+        </figure>
+
+        <div class="note">
+          <p><strong>What it deliberately leaves out:</strong> auto-execution in production (recommend-only until recall and the audit record clear the model-risk bar), UBO auto-tracing (the second bet), real-time payment-path screening (a later latency problem), full case management (Case Accelerator already owns that; triage sits upstream), and list curation (OpenSanctions already handles the source data).</p>
+        </div>
+      </section>
+
+      <!-- METRICS -->
+      <section id="metrics" class="reveal" aria-labelledby="metrics-h">
+        <h2 class="kicker" id="metrics-h">Metrics</h2>
+        <p class="tk">I'd judge this on cleared noise that keeps its audit trail, never on speed alone.</p>
+        <p>The North Star is the <strong>auditable false-positive clearance rate</strong>: the share of false-positive alerts the product resolves with a disposition record the customer's model-risk team accepts, per analyst-hour. It rises only when the customer genuinely wins, less manual review with the trail intact. It moves before revenue, and the team can influence it directly.</p>
+
+        <figure class="diagram tree" role="img" aria-label="The metrics tree. Four leading inputs feed the North Star: entity-resolution recall on a labeled review set, auto-clear precision, audit-acceptance rate (dispositions QA or model-risk accepts), and median time per alert. The North Star is the auditable false-positive clearance rate, per analyst-hour. Two guardrails brake it: missed-hit rate at or below the manual baseline, and audit-rejection rate. The North Star feeds three lagging outcomes: analyst hours saved per customer, pilot-to-paid conversion, and renewal and expansion in the sanctions line.">
+          <figcaption>Figure 2 &middot; Metrics tree, from daily inputs up to the outcomes that follow</figcaption>
+          <div class="svg-scroll">
+            <svg viewBox="0 0 880 500" class="dlabel" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="t2g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+                <marker id="t2y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ca8a04"/></marker>
+                <marker id="t2r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+              </defs>
+
+              <!-- leading inputs (green) -->
+              <rect x="16" y="18" width="204" height="68" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="118" y="46" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Entity-resolution recall</text>
+              <text x="118" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">on a labeled review set</text>
+
+              <rect x="236" y="18" width="192" height="68" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="332" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Auto-clear precision</text>
+
+              <rect x="444" y="18" width="204" height="68" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="546" y="46" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Audit-acceptance rate</text>
+              <text x="546" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">(QA / model-risk accepts)</text>
+
+              <rect x="664" y="18" width="200" height="68" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="764" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Median time per alert</text>
+
+              <!-- north star (blue) -->
+              <rect x="300" y="210" width="280" height="110" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
+              <text x="440" y="234" text-anchor="middle" font-size="10" font-weight="700" fill="#2563eb" letter-spacing="0.12em">NORTH STAR</text>
+              <text x="440" y="260" text-anchor="middle" font-size="12" font-weight="700" fill="#17324f">Auditable false-positive</text>
+              <text x="440" y="278" text-anchor="middle" font-size="12" font-weight="700" fill="#17324f">clearance rate</text>
+              <text x="440" y="300" text-anchor="middle" font-size="10" fill="#3a597c">per analyst-hour</text>
+
+              <!-- guardrails (red) -->
+              <text x="750" y="146" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b0392a" letter-spacing="0.12em">GUARDRAILS</text>
+              <rect x="636" y="154" width="228" height="72" rx="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+              <text x="750" y="184" text-anchor="middle" font-size="10.5" font-weight="600" fill="#7f1d1d">Missed-hit rate at or below</text>
+              <text x="750" y="200" text-anchor="middle" font-size="10.5" font-weight="600" fill="#7f1d1d">the manual baseline</text>
+              <text x="750" y="216" text-anchor="middle" font-size="9.5" fill="#9a4038">the sacred guardrail</text>
+
+              <rect x="636" y="300" width="228" height="62" rx="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+              <text x="750" y="336" text-anchor="middle" font-size="10.5" font-weight="600" fill="#7f1d1d">Audit-rejection rate</text>
+
+              <!-- outcomes (gold) -->
+              <rect x="124" y="420" width="200" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"/>
+              <text x="224" y="449" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">Analyst hours saved</text>
+              <text x="224" y="465" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">per customer</text>
+
+              <rect x="340" y="420" width="200" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"/>
+              <text x="440" y="449" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">Pilot-to-paid</text>
+              <text x="440" y="465" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">conversion</text>
+
+              <rect x="556" y="420" width="200" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"/>
+              <text x="656" y="449" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">Renewal and expansion</text>
+              <text x="656" y="465" text-anchor="middle" font-size="10.5" font-weight="600" fill="#713f12">in the sanctions line</text>
+
+              <!-- edges: inputs -> north star -->
+              <line x1="118" y1="86" x2="360" y2="208" stroke="#16a34a" stroke-width="1.4" marker-end="url(#t2g)" aria-hidden="true"/>
+              <line x1="332" y1="86" x2="412" y2="208" stroke="#16a34a" stroke-width="1.4" marker-end="url(#t2g)" aria-hidden="true"/>
+              <line x1="546" y1="86" x2="468" y2="208" stroke="#16a34a" stroke-width="1.4" marker-end="url(#t2g)" aria-hidden="true"/>
+              <line x1="764" y1="86" x2="520" y2="208" stroke="#16a34a" stroke-width="1.4" marker-end="url(#t2g)" aria-hidden="true"/>
+
+              <!-- edges: north star -> outcomes -->
+              <line x1="400" y1="320" x2="232" y2="418" stroke="#ca8a04" stroke-width="1.4" marker-end="url(#t2y)" aria-hidden="true"/>
+              <line x1="440" y1="320" x2="440" y2="418" stroke="#ca8a04" stroke-width="1.4" marker-end="url(#t2y)" aria-hidden="true"/>
+              <line x1="480" y1="320" x2="648" y2="418" stroke="#ca8a04" stroke-width="1.4" marker-end="url(#t2y)" aria-hidden="true"/>
+
+              <!-- edges: guardrails -> north star -->
+              <line x1="634" y1="196" x2="582" y2="238" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#t2r)" aria-hidden="true"/>
+              <line x1="634" y1="331" x2="582" y2="300" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#t2r)" aria-hidden="true"/>
+            </svg>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:#dcfce7;border:1px solid #16a34a;"></i>Leading input</span>
+            <span><i style="background:#dbeafe;border:1px solid #2563eb;"></i>North Star</span>
+            <span><i style="background:#fee2e2;border:1px solid #dc2626;"></i>Guardrail</span>
+            <span><i style="background:#fef9c3;border:1px solid #ca8a04;"></i>Lagging outcome</span>
+          </div>
+        </figure>
+
+        <div class="note brake">
+          <p><strong>The sacred guardrail: missed-hit rate.</strong> The false-negative rate against a labeled review set must stay at or below the customer's own manual baseline. In sanctions you never trade recall for throughput. A single missed true hit can undo every efficiency gain and then some. Two anti-metrics I would name so the team never chases them: raw alert-handling speed on its own (fast is worthless if it misses hits), and sheer volume of auto-clears (looks productive, can hide recall loss).</p>
+        </div>
+      </section>
+
+      <!-- BUSINESS IMPACT -->
+      <section id="business" class="reveal" aria-labelledby="business-h">
+        <h2 class="kicker" id="business-h">Business impact</h2>
+        <p class="tk">I lean on the numbers Quantifind already publishes to show where this work pays back, and I frame these as bets, not promises.</p>
+
+        <div class="tbl-wrap">
+          <table class="biz">
+            <caption class="sr-only">Where the work pays back, tied to Quantifind's own published numbers</caption>
+            <thead>
+              <tr>
+                <th scope="col">Lever</th>
+                <th scope="col">Quantifind's own number</th>
+                <th scope="col">My hypothesis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Analyst cost per customer</strong></td>
+                <td>Up to $177.9M a year in potential savings for Tier 1 banks on Graphyte, from an 80 to 90% cut in alert volume <a class="src" href="https://www.prnewswire.com/news-releases/quantifind-can-unlock-up-to-177-9m-in-annual-compliance-efficiency-for-tier-1-banks-according-to-celent-report-302684116.html" target="_blank" rel="noopener">(Celent, via Quantifind)</a></td>
+                <td>A triage layer that clears verified false positives is the direct mechanism behind that number. I can attribute a measurable slice to the sanctions workflow, per deployed customer.</td>
+              </tr>
+              <tr>
+                <td><strong>Deal velocity in a 0 to 1 line</strong></td>
+                <td>$266M in 2025 OFAC actions is why a compliance buyer signs fast <a class="src" href="https://www.corporatecomplianceinsights.com/state-ofac-sanctions-enforcement-2026/" target="_blank" rel="noopener">(Corporate Compliance Insights)</a></td>
+                <td>The MVP's audit record converts that urgency into a pilot, because it answers the model-risk objection that usually stalls new AI in a bank.</td>
+              </tr>
+              <tr>
+                <td><strong>Expansion in the installed base</strong></td>
+                <td>Six of the top 10 Tier 1 banks already run Graphyte <a class="src" href="https://www.prnewswire.com/news-releases/quantifind-announces-200-million-growth-investment-led-by-summit-partners-to-advance-ai-native-risk-intelligence-and-governed-agentic-middleware-for-modern-risk-operations-302811745.html" target="_blank" rel="noopener">(Quantifind, June 2026)</a></td>
+                <td>The cheapest first revenue is a sanctions module sold into those existing KYC and AML accounts, not a cold standalone sale. I would validate the standalone-versus-bundled question in week one.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 30/60/90 -->
+      <section id="plan" class="reveal" aria-labelledby="plan-h">
+        <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+        <p class="tk">My first ninety days are mostly listening, then one contained pilot.</p>
+
+        <div class="phase">
+          <span class="ph-tag">Days 0 to 30 &middot; Listen and map</span>
+          <ul class="clean">
+            <li>Ride along with sanctions analysts at two or three design-partner banks and watch real alert queues.</li>
+            <li>Sit with a model-risk reviewer to learn exactly what a sign-off requires, and map where the current screening tool breaks.</li>
+            <li>Read what I am building on: the entity-resolution engine, Case Accelerator, the OpenSanctions data layer.</li>
+            <li>Pull the baseline: false-positive rate, time per alert, current audit process.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Days 30 to 60 &middot; Sharpen and commit</span>
+          <ul class="clean">
+            <li>Write the MVP PRD with measurable goals and non-goals.</li>
+            <li>Lock the disposition-record schema with a real model-risk reviewer as a hard acceptance criterion.</li>
+            <li>Get one or two design partners committed, each with explicit success and kill criteria.</li>
+            <li>Align engineering and data science on the matching engine and the audit record.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Days 60 to 90 &middot; Ship the shadow pilot</span>
+          <ul class="clean">
+            <li>Run recommend-only alongside the analysts' live process.</li>
+            <li>Measure false-positive clearance, missed-hit rate against a labeled set, and audit-acceptance. Set the metric baseline.</li>
+            <li>Take the audit artifact to the customer's model-risk team for a mock validation.</li>
+            <li>Propose the roadmap, with UBO tracing as the sequenced second bet.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- RISKS -->
+      <section id="risks" class="reveal" aria-labelledby="risks-h">
+        <h2 class="kicker" id="risks-h">Risks</h2>
+        <p class="tk">The things that could sink this are about trust and data, and I would test them in week one.</p>
+
+        <div class="risk">
+          <p class="rt">Banks may not accept AI clearing sanctions false positives, even in shadow mode.</p>
+          <p class="rv"><b>Validate:</b> get the model-risk sign-off bar written down in week one, and run recommend-only until it clears.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Matching output may not be explainable enough to survive an exam.</p>
+          <p class="rv"><b>Validate:</b> co-design the disposition record with a real model-risk reviewer against a real exam scenario.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Auto-clear quality depends on list, PEP, and entity-resolution recall. Garbage in means missed hits.</p>
+          <p class="rv"><b>Validate:</b> measure recall on a labeled review set before touching throughput. Recall is the gate.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The triage layer could overlap Case Accelerator.</p>
+          <p class="rv"><b>Validate:</b> map the boundary with the existing product team in week one, and position triage upstream of case management.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">The wrong first design partner produces the wrong MVP.</p>
+          <p class="rv"><b>Validate:</b> pick a partner whose alert volume and audit maturity are representative, and set kill criteria up front.</p>
+        </div>
+        <div class="risk">
+          <p class="rt">Scope could drift toward UBO and real-time too early.</p>
+          <p class="rv"><b>Validate:</b> hold the line. The MVP is disposition only; everything else is roadmap.</p>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section id="questions" class="reveal" aria-labelledby="questions-h">
+        <h2 class="kicker" id="questions-h">Questions</h2>
+        <ol class="qs">
+          <li>Is the sanctions line sold standalone, or bundled into existing KYC and AML accounts? This changes packaging, pricing, and the first target list.</li>
+          <li>How does this sit next to Case Accelerator and the OpenSanctions data layer, and who owns the boundary?</li>
+          <li>Which design-partner banks can we get in the room in the first 60 days, and what is their appetite for AI in a model-risk-governed workflow?</li>
+          <li>How explainable is the matching engine today, and what does a disposition record currently look like to an examiner?</li>
+          <li>What is the current sanctions false-positive baseline across deployed customers, and do we have labeled data to measure recall?</li>
+        </ol>
+      </section>
+
+      <!-- WHY ME -->
+      <section id="fit" class="reveal" aria-labelledby="fit-h">
+        <h2 class="kicker" id="fit-h">Why me</h2>
+        <p class="fit-intro">I am a product manager with six-plus years building data and compliance products inside banks. I am finishing a Master of Science in Information Management at the University of Washington, and I hold an MBA in Finance and a Bachelor of Engineering in Computer Engineering. Most of my work has lived where this role lives: regulated financial workflows, API integrations into bank stacks, and AI systems that had to be trusted before anyone would use them. The sanctions problem, cut the noise but keep an audit trail an examiner accepts, is the exact tension I have been working in.</p>
+
+        <div class="tbl-wrap">
+          <table class="fit">
+            <caption class="sr-only">What the role needs, mapped to what I have done</caption>
+            <thead>
+              <tr>
+                <th scope="col">What the role needs</th>
+                <th scope="col">What I have done</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fluency in regulated compliance workflows</td>
+                <td>I led operational risk transformation for Global Markets at Nomura, cutting risk events 20% and losses 15%, working across FI/FX, tech, audit, and risk. I rolled out compliance and governance features on a bank-wide AI assistant to 15,000+ users.</td>
+              </tr>
+              <tr>
+                <td>Alert review and false-positive economics</td>
+                <td>At Lentra I built the KYC and credit-decisioning flows for India's largest private bank, cutting manual review 35% and improving decision accuracy 10% by automating who needed a human look and who did not.</td>
+              </tr>
+              <tr>
+                <td>Entity matching and API integration into bank stacks</td>
+                <td>I delivered direct API integrations with the credit bureaus (CIBIL, Equifax, Experian) and drove a firm-wide market-data program connecting directly to Tradeweb in place of Refinitiv, saving $700K a year with better data quality.</td>
+              </tr>
+              <tr>
+                <td>Explainable AI that survives audit</td>
+                <td>At UW I built a policy-conflict-detection agent that surfaces conflicts across 8 regulatory bodies, and I benchmarked retrieval architectures (vector, BM25, hybrid, knowledge graph) on groundedness, hallucination, and accuracy for legal text. That is the explainability-versus-recall tradeoff this MVP turns on.</td>
+              </tr>
+              <tr>
+                <td>Data quality and list management at scale</td>
+                <td>I owned the ingestion pipeline and quality gates for 9,000+ policy documents across 8 agencies, and improved data quality across multiple Fixed Income applications.</td>
+              </tr>
+              <tr>
+                <td>0 to 1 product definition and MVP scoping</td>
+                <td>I owned discovery-to-launch of a finance budgeting product at Nomura, from a business gap to a shipped analytics layer that cut spend 30%, and scaled a lending platform from MVP to 25,000+ users across 3,000+ branches.</td>
+              </tr>
+              <tr>
+                <td>Data literacy for metrics and decisions</td>
+                <td>I work in SQL and Python, ran A/B tests on the loan flow, and shipped real-time reporting that cut manual compilation by 40+ hours a week.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fname">Mayuresh More</div>
+    <div class="contacts">
+      <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+      <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">linkedin.com/in/mayureshmore</a>
+      <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">github.com/mayuresh747</a>
+    </div>
+  </div>
+</footer>
+
+<noscript>
+  <style>.reveal{opacity:1 !important;transform:none !important;}</style>
+</noscript>
+<script>
+  (function(){
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll (enhancement only; content visible by default without JS)
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      reveals.forEach(function(el){ ro.observe(el); });
+    }
+
+    // Scroll-spy for the rail
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail a'));
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    if ('IntersectionObserver' in window && sections.length){
+      var current = null;
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){
+            if (current) current.removeAttribute('aria-current');
+            var a = map[e.target.id];
+            if (a){ a.setAttribute('aria-current','true'); current = a; }
+          }
+        });
+      }, { rootMargin: '-20% 0px -72% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
