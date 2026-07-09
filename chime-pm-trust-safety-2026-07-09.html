@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: Trust and Safety proposal for Chime</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF6;
+    --paper-2:#F3F1EA;
+    --card:#FFFFFF;
+    --ink:#1B211E;
+    --ink-soft:#4A524D;
+    --ink-faint:#8B9088;
+    --rule:#E4E1D8;
+    --rule-strong:#D2CEC2;
+    --accent:#0B6E4F;
+    --accent-strong:#075B41;
+    --accent-soft:#E7F1EC;
+    --amber-bg:#FBF3DD; --amber-line:#C79A3A; --amber-ink:#6E4E12;
+    --blue-bg:#E7EEF5; --blue-line:#6E93B8; --blue-ink:#274B6B;
+    --green-bg:#E4F1E9; --green-line:#57A67C; --green-ink:#1B5E3A;
+    --red-bg:#F6E5E1;  --red-line:#C77A6B;  --red-ink:#8E362A;
+
+    --wrap-pad:40px;
+    --rail-w:200px;
+    --rail-gap:56px;
+    --content-max:720px;
+
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* subtle paper texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(1100px 620px at 12% -8%, rgba(11,110,79,.05), transparent 60%),
+      radial-gradient(900px 520px at 108% 6%, rgba(199,154,58,.05), transparent 60%);
+  }
+
+  a{color:var(--accent)}
+  a:focus-visible, button:focus-visible, summary:focus-visible, .toc a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--accent); color:#fff;
+    padding:.6rem 1rem; z-index:50; border-radius:0 0 8px 0;
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.04em;
+  }
+  .skip-link:focus{left:0}
+
+  .shell{max-width:1080px; margin:0 auto; padding:0 var(--wrap-pad)}
+  .aligned{
+    padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    padding-right:var(--wrap-pad);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-top:clamp(38px,7vw,64px); padding-bottom:8px}
+  .masthead h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2rem,4.6vw,2.7rem);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .lede{
+    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:40ch;
+    margin:0 0 1.1rem;
+    font-weight:400;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  .toc-mobile{display:none}
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,1fr);
+    gap:var(--rail-gap);
+    padding-top:34px;
+    padding-bottom:24px;
+  }
+  .content{max-width:var(--content-max)}
+
+  /* ---------- rail nav ---------- */
+  .rail-inner{position:sticky; top:30px}
+  .rail-label{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 .85rem;
+    padding-left:14px;
+  }
+  .toc{list-style:none; margin:0; padding:0}
+  .toc li{margin:0}
+  .toc a{
+    display:block;
+    padding:.34rem 0 .34rem 14px;
+    border-left:2px solid var(--rule);
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-family:var(--display);
+    font-size:.86rem;
+    font-weight:500;
+    letter-spacing:.005em;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .toc a:hover{color:var(--accent); border-left-color:var(--rule-strong)}
+  .toc a[aria-current="true"]{
+    color:var(--accent);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:30px 0; border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0; padding-top:6px}
+  section h2, section h3{scroll-margin-top:24px}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:.95rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .7rem;
+  }
+  .takeaway{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.18rem,2.5vw,1.42rem);
+    line-height:1.34;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 1rem;
+  }
+  section p{margin:0 0 1rem}
+  section p:last-child{margin-bottom:0}
+  .muted{color:var(--ink-soft)}
+  .note{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    border-left:3px solid var(--rule-strong);
+    padding:.15rem 0 .15rem 1rem;
+    margin:0 0 1.2rem;
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-.01em;
+    margin:1.4rem 0 .5rem;
+    color:var(--ink);
+  }
+
+  strong{font-weight:600; color:var(--ink)}
+
+  /* source links */
+  .src{
+    color:var(--ink-faint);
+    font-size:.8em;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:rgba(139,144,136,.5);
+    white-space:nowrap;
+  }
+  .src:hover, .src:focus{color:var(--accent); text-decoration-color:currentColor}
+
+  /* lists */
+  ul.clean{list-style:none; margin:0 0 1rem; padding:0}
+  ul.clean > li{
+    position:relative;
+    padding:0 0 .85rem 1.25rem;
+    margin:0;
+  }
+  ul.clean > li::before{
+    content:"";
+    position:absolute; left:0; top:.62em;
+    width:7px; height:7px; border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+  ul.clean > li:last-child{padding-bottom:0}
+
+  ol.qs{margin:0; padding-left:1.3rem}
+  ol.qs li{margin:0 0 .8rem; padding-left:.25rem}
+  ol.qs li:last-child{margin-bottom:0}
+
+  /* two-column cards (JTBD) */
+  .cards{display:grid; gap:14px; margin:0 0 .4rem}
+  .card{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .card h3{margin:0 0 .35rem}
+  .card .role{
+    font-family:var(--mono);
+    font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .card p{margin:.3rem 0 0; font-size:.98rem; color:var(--ink-soft); line-height:1.5}
+
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    margin:0 0 1rem;
+    background:var(--card);
+  }
+  table{border-collapse:collapse; width:100%; min-width:520px; font-size:.94rem}
+  thead th{
+    font-family:var(--display);
+    font-weight:600; font-size:.78rem;
+    letter-spacing:.02em;
+    text-align:left;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:11px 14px;
+    border-bottom:1px solid var(--rule-strong);
+    white-space:nowrap;
+  }
+  tbody td{padding:12px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.45}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  tr.win td{background:var(--accent-soft)}
+  tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+  .rice-val{font-family:var(--display); font-weight:700; color:var(--accent)}
+
+  /* fit table */
+  .fit td:first-child{width:44%; font-weight:500; color:var(--ink)}
+  .fit td:last-child{color:var(--ink-soft)}
+  .fit-intro{margin-bottom:1.2rem}
+
+  /* risks table */
+  .risk-tbl td:first-child{width:38%; font-weight:600; color:var(--ink)}
+  .risk-tbl td:last-child{color:var(--ink-soft)}
+
+  /* ---------- diagrams: shared ---------- */
+  figure.diagram{margin:1.3rem 0 .4rem; padding:0}
+  figcaption{
+    font-family:var(--mono);
+    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:.75rem;
+  }
+
+  /* onboarding flow (css) */
+  .flow{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:20px 18px;
+  }
+  .flow-spine{display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; margin-bottom:6px}
+  .node{
+    font-family:var(--display); font-weight:600;
+    font-size:.9rem; line-height:1.2;
+    border-radius:10px; padding:9px 14px;
+    background:var(--paper-2); border:1px solid var(--rule-strong);
+    color:var(--ink); max-width:280px;
+  }
+  .node small{display:block; font-family:var(--body); font-weight:400; font-size:.78rem; color:var(--ink-soft); margin-top:2px}
+  .node--band{background:#fff; border:1.5px dashed var(--accent); color:var(--accent); font-family:var(--mono); font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; border-radius:999px}
+  .flow-arrow{color:var(--accent); font-size:1rem; line-height:1}
+  .flow-lanes{display:grid; gap:12px; margin-top:12px}
+  .lane{border-radius:12px; padding:12px 14px; border:1px solid var(--rule); border-left-width:4px; background:var(--paper)}
+  .lane--low{border-left-color:var(--green-line)}
+  .lane--med{border-left-color:var(--blue-line)}
+  .lane--high{border-left-color:var(--red-line)}
+  .lane-tag{
+    display:inline-block;
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:700; margin-bottom:9px; color:var(--ink-soft);
+  }
+  .lane--low .lane-tag{color:var(--green-ink)}
+  .lane--med .lane-tag{color:var(--blue-ink)}
+  .lane--high .lane-tag{color:var(--red-ink)}
+  .lane-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px}
+  .chip{
+    font-family:var(--display); font-weight:500; font-size:.84rem; line-height:1.2;
+    background:#fff; border:1px solid var(--rule-strong); border-radius:8px;
+    padding:7px 11px; color:var(--ink);
+  }
+  .chip small{display:block; font-family:var(--body); font-weight:400; font-size:.74rem; color:var(--ink-faint)}
+  .chip--good{background:var(--green-bg); border-color:var(--green-line); color:var(--green-ink)}
+  .chip--warn{background:var(--amber-bg); border-color:var(--amber-line); color:var(--amber-ink)}
+  .chip--bad{background:var(--red-bg); border-color:var(--red-line); color:var(--red-ink)}
+  .chip--dec{background:#fff; border-style:dashed; border-color:var(--blue-line); color:var(--blue-ink)}
+  .branch{display:flex; flex-direction:column; gap:6px}
+  .branch-line{display:flex; flex-wrap:wrap; align-items:center; gap:7px; font-size:.84rem}
+  .branch-line em{font-style:normal; font-family:var(--mono); font-size:.68rem; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint)}
+
+  /* metrics tree (svg) */
+  .tree-wrap{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:18px 14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tree-wrap svg{display:block; width:100%; height:auto; min-width:560px}
+
+  .metric-legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:.82rem; color:var(--ink-soft)}
+  .metric-legend span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:13px; height:13px; border-radius:3px; border:1px solid}
+  .sw-star{background:var(--amber-bg); border-color:var(--amber-line)}
+  .sw-lag{background:var(--blue-bg); border-color:var(--blue-line)}
+  .sw-lead{background:var(--green-bg); border-color:var(--green-line)}
+
+  /* anti-metrics inline */
+  .anti{font-size:.94rem; color:var(--ink-soft); background:var(--paper-2); border:1px dashed var(--rule-strong); border-radius:10px; padding:12px 15px; margin:1rem 0 0}
+  .anti strong{color:var(--ink)}
+
+  /* timeline (30/60/90) */
+  .timeline{display:grid; gap:14px}
+  .phase{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    padding:16px 18px; position:relative;
+  }
+  .phase .day{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .phase h3{margin:.15rem 0 .5rem}
+  .phase p{margin:0; font-size:.96rem; color:var(--ink-soft); line-height:1.55}
+
+  /* guardrails list */
+  .guard{display:grid; gap:10px; margin:0 0 1rem}
+  .guard div{
+    background:var(--card); border:1px solid var(--rule); border-radius:10px;
+    padding:11px 15px; font-size:.95rem; line-height:1.5; color:var(--ink-soft);
+  }
+  .guard strong{color:var(--ink)}
+
+  /* ---------- footer ---------- */
+  .foot{
+    border-top:1px solid var(--rule);
+    padding-top:26px; padding-bottom:56px;
+    margin-top:10px;
+  }
+  .foot .name{font-family:var(--display); font-weight:600; font-size:1rem; margin:0 0 .55rem; color:var(--ink)}
+  .contacts{display:flex; flex-wrap:wrap; gap:8px 22px; margin:0}
+  .contacts a{
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.02em;
+    color:var(--ink-faint); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .contacts a:hover, .contacts a:focus{color:var(--accent); border-bottom-color:currentColor}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    :root{--wrap-pad:22px}
+    .aligned{padding-left:var(--wrap-pad); padding-right:var(--wrap-pad)}
+    .rail{display:none}
+    .layout{grid-template-columns:minmax(0,1fr); gap:0; padding-top:14px}
+    .content{min-width:0}
+    .toc-mobile{
+      display:block;
+      margin-top:22px;
+      border:1px solid var(--rule);
+      border-radius:12px;
+      background:var(--card);
+    }
+    .toc-mobile summary{
+      cursor:pointer;
+      font-family:var(--mono); font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--accent); font-weight:700;
+      padding:13px 16px;
+      list-style:none;
+    }
+    .toc-mobile summary::-webkit-details-marker{display:none}
+    .toc-mobile summary::after{content:"+"; float:right; font-family:var(--mono)}
+    .toc-mobile[open] summary::after{content:"-"; float:right; font-family:var(--mono)}
+    .toc-mobile .toc{padding:2px 16px 14px}
+    .toc-mobile .toc a{border-left:0; padding:.42rem 0}
+  }
+  @media (max-width:560px){
+    body{font-size:17px}
+    .cards{gap:12px}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="shell masthead aligned">
+  <h1>Mayuresh More</h1>
+  <p class="lede">How I would solve the enrollment and identity-verification problem for the Product Manager, Trust and Safety role at Chime.</p>
+  <p class="prepared">Prepared July 2026</p>
+
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ul class="toc">
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">Ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#business">Business impact</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ul>
+  </details>
+</header>
+
+<div class="shell layout">
+  <aside class="rail">
+    <div class="rail-inner">
+      <p class="rail-label">On this page</p>
+      <nav aria-label="On this page">
+        <ul class="toc">
+          <li><a href="#bet">The bet</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#users">Who it is for</a></li>
+          <li><a href="#priority">Why this problem</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#mvp">Ship first</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#business">Business impact</a></li>
+          <li><a href="#plan">30/60/90</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#questions">Questions</a></li>
+          <li><a href="#fit">Why me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main" class="content">
+
+    <!-- THE BET -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="takeaway">I would go after the cheapest dollar of fraud loss to prevent, which is the one you stop at signup.</p>
+      <p>I would put a risk score on every new application so the safe majority breezes through untouched and only the risky slice gets extra verification, and I would hold the whole thing against a wrongful-freeze guardrail so faster onboarding never becomes another frozen-account headline. That is how I would start bending Chime's $407.3 million transaction-and-risk-loss line down without slowing the member growth investors now price the stock on. <a class="src" href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener">(FY2025 results, StockTitan)</a></p>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">Here is the tension I would be walking into: Chime wins underbanked members with fast, mobile-only signup, and that same low-friction door is the easiest one for synthetic-identity attackers to walk through.</p>
+      <p>Industry-wide, 62% of banks name digital onboarding as their highest-risk point for synthetic identity, <a class="src" href="https://www.biia.com/synthetic-identity-fraud-statistics-2026-hard-numbers-big-threats/" target="_blank" rel="noopener">(BIIA, 2026)</a> and US unsecured-credit losses tied to synthetic identities are projected past $2.94 billion for 2025. <a class="src" href="https://fintech.global/2026/06/15/synthetic-identity-fraud-now-a-systemic-threat-in-2026/" target="_blank" rel="noopener">(fintech.global, 2026)</a></p>
+
+      <h3>Who hurts, and what it costs</h3>
+      <div class="cards">
+        <div class="card">
+          <span class="role">The P and L</span>
+          <p>"Transaction and risk losses" ran $407.3 million and the "provision for transaction dispute losses" ran $63.6 million in FY2025. Both are now public line items every quarter since the June 2025 IPO. <a class="src" href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener">(StockTitan)</a></p>
+        </div>
+        <div class="card">
+          <span class="role">Legitimate members</span>
+          <p>When a blunt fraud filter over-corrects, it freezes real people out of their own money. A 2021 investigation documented hundreds of members locked out, often right after a stimulus deposit, <a class="src" href="https://www.propublica.org/article/chime" target="_blank" rel="noopener">(ProPublica)</a> and since 2020, more than 3,500 complaints reached the CFPB (as of late 2022). <a class="src" href="https://chicago.suntimes.com/2022/11/25/23473765/chime-fintech-neobank-app-account-consumer-financial-protection-bureau-cfpb" target="_blank" rel="noopener">(Chicago Sun-Times)</a> A separate 2024 CFPB consent order cost a $3.25 million penalty plus at least $1.3 million in redress for delayed refunds. <a class="src" href="https://www.consumerfinance.gov/archive/newsroom/cfpb-takes-action-against-chime-financial-for-illegally-delaying-consumer-refunds/" target="_blank" rel="noopener">(CFPB)</a></p>
+        </div>
+      </div>
+
+      <h3>Why today's approaches fail</h3>
+      <ul class="clean">
+        <li>Manual review does not scale to 1.5 million net-new members a year. <a class="src" href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener">(StockTitan)</a></li>
+        <li>Blanket friction dents the 19% year-over-year member growth investors are pricing.</li>
+        <li>Reactive account freezes are exactly what produced the 2021 pattern.</li>
+        <li>The root cause: one signup design serves two opposite jobs, and a single blunt filter cannot tell a synthetic identity apart from an underbanked first-timer.</li>
+        <li>Federal enforcement pressure is loosening, with the CFPB closing roughly 40% of open investigations in 2025, which means product discipline, not the regulator, has to catch the next failure. <a class="src" href="https://www.consumerfinance.gov/enforcement/2025-enforcement-lookback/" target="_blank" rel="noopener">(CFPB, 2025)</a></li>
+      </ul>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="takeaway">I would design for four parties, not one. Naming them keeps the tradeoff honest.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="role">New member &middot; primary user</span>
+          <h3>Reach my own money fast, without being treated like a suspect</h3>
+          <p>Functional job: open a usable account in minutes. Emotional job: feel trusted. Social job: not be the person whose account gets frozen after payday.</p>
+        </div>
+        <div class="card">
+          <span class="role">Risk analyst and support agent &middot; internal user</span>
+          <h3>Clear signals and a fast path to the right call</h3>
+          <p>When an application gets flagged, I want to clear good members and stop fraud without guessing.</p>
+        </div>
+        <div class="card">
+          <span class="role">Risk and Compliance &middot; gatekeeper</span>
+          <h3>Keep fraud loss and partner-bank obligations satisfied</h3>
+          <p>Chime's banking services run through Bancorp and Stride, so the KYC and BSA obligations are anchored to the partner banks, not a Chime charter. <a class="src" href="https://help.chime.com/i-have-a-stride-checking-account-who-is-the-bancorp-ban-edfdd9d3" target="_blank" rel="noopener">(Chime Help)</a></p>
+        </div>
+        <div class="card">
+          <span class="role">Hiring team &middot; the buyer</span>
+          <h3>Loss lines trending down without stalling growth</h3>
+          <p>The VP who leads Product for Risk and Identity, and the Group PM for Trust and Safety, need the public loss lines falling without triggering the next enforcement action.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:1rem">A win for the member that spikes fraud loss is not a win, and neither is a fraud win that freezes good members.</p>
+    </section>
+
+    <!-- WHY THIS PROBLEM: RICE -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="takeaway">I scored the four Trust and Safety domains on the same scales to show why I would start with onboarding rather than the others.</p>
+      <p class="note">Reach figures are my estimates, inferred from the 1.5 million net-new-members figure and the 50 million yearly support interactions in the sources; treat them as order-of-magnitude, not precise. Impact uses fixed tiers (0.25 to 3), confidence uses 50% or 80%.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Opportunity area</th>
+              <th scope="col">Reach (est. members/qtr)</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort (person-months)</th>
+              <th scope="col">RICE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="win">
+              <td>Risk-based onboarding verification (Enrollment and KYC)</td>
+              <td class="num">500,000</td>
+              <td class="num">3</td>
+              <td class="num">80%</td>
+              <td class="num">24</td>
+              <td class="num"><span class="rice-val">50,000</span></td>
+            </tr>
+            <tr>
+              <td>AI containment on money-sensitive support flows</td>
+              <td class="num">300,000</td>
+              <td class="num">2</td>
+              <td class="num">50%</td>
+              <td class="num">24</td>
+              <td class="num">12,500</td>
+            </tr>
+            <tr>
+              <td>Disputes intelligence (first-party fraud plus Reg E)</td>
+              <td class="num">150,000</td>
+              <td class="num">3</td>
+              <td class="num">80%</td>
+              <td class="num">30</td>
+              <td class="num">12,000</td>
+            </tr>
+            <tr>
+              <td>Agent tooling for complex-issue resolution</td>
+              <td class="num">50,000</td>
+              <td class="num">1</td>
+              <td class="num">80%</td>
+              <td class="num">18</td>
+              <td class="num">2,222</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Onboarding wins on two things at once. It touches every single new member (highest reach), and it gates the largest loss line: the $407.3 million transaction-and-risk figure dwarfs the $63.6 million dispute provision, so a small percentage improvement there is worth more than a large one downstream. <a class="src" href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener">(StockTitan)</a> Confidence is high because risk-based verification is a known playbook, not an unproven bet.</p>
+      <p>AI containment on money-sensitive flows scores lower on confidence: the obstacle there is member trust, not technology, and a wrong AI answer on someone's money carries regulatory weight. <a class="src" href="https://www.customerexperiencedive.com/news/how-chime-overcame-trust-challenges-deploying-ai-agent-jade/819651/" target="_blank" rel="noopener">(Customer Experience Dive)</a> Disputes matter and I would sequence them next, but they touch a smaller population and cost more to build well.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">My read: the answer is not more friction, it is friction placed only where it earns its keep.</p>
+      <p>I would explore three directions and let a shadow-mode backtest on labeled historical data decide between them.</p>
+
+      <h3>1. Risk-based step-up verification</h3>
+      <p class="muted">Score each application at signup on device, behavior, and bureau signals. Low-risk applicants (the large majority) pass with no added friction. Medium-risk applicants get a step-up check such as a document or liveness scan. Only a narrow high-risk band goes to human review. This is the dependency the other two build on, so it goes first regardless of its exact score.</p>
+
+      <h3>2. Identity linking to catch synthetic clusters</h3>
+      <p class="muted">Synthetic identities rarely arrive one at a time. Linking device, behavioral, and application signals across accounts surfaces the rings that a single-application check misses. This feeds better signals into direction one.</p>
+
+      <h3>3. Fast, honest reinstatement</h3>
+      <p class="muted">Make the appeal and step-up path near-instant so that when the system does hold a legitimate member, the harm lasts minutes, not the weeks documented in 2021. <a class="src" href="https://www.propublica.org/article/chime" target="_blank" rel="noopener">(ProPublica)</a> This protects the guardrail directly.</p>
+
+      <p style="margin-top:1.1rem"><strong>How I would decide:</strong> run all three in shadow mode against a labeled set of known-fraud and known-good accounts, and pick the sequence that separates fraud from good members at the lowest false-positive cost. My working hypothesis is that direction one is the spine, direction two sharpens it, and direction three caps the downside.</p>
+
+      <figure class="diagram" role="img" aria-label="Risk-based onboarding verification flow. Every new applicant is scored at signup on device, behavior, and bureau signals, then routed by risk band. Low-risk applicants, the majority, are approved with no added friction and activated. Medium-risk applicants get a step-up document or liveness check; if cleared they are activated, if not they go to human review. High-risk applicants go straight to a human review queue where an analyst decides: legitimate applicants are activated, fraud is declined or held.">
+        <div class="flow">
+          <div class="flow-spine">
+            <span class="node node--start">New applicant signs up</span>
+            <span class="flow-arrow" aria-hidden="true">&darr;</span>
+            <span class="node node--score">Risk score at signup<small>device, behavior, bureau signals</small></span>
+            <span class="flow-arrow" aria-hidden="true">&darr;</span>
+            <span class="node node--band">Risk band?</span>
+          </div>
+          <div class="flow-lanes">
+            <div class="lane lane--low">
+              <span class="lane-tag">Low &middot; most applicants</span>
+              <div class="lane-row">
+                <span class="chip chip--good">Approve, no added friction</span>
+                <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                <span class="chip chip--good">Member activated</span>
+              </div>
+            </div>
+            <div class="lane lane--med">
+              <span class="lane-tag">Medium</span>
+              <div class="lane-row">
+                <span class="chip">Step-up check<small>document / liveness</small></span>
+                <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                <span class="chip chip--dec">Cleared?</span>
+                <span class="branch">
+                  <span class="branch-line"><em>Yes</em><span class="flow-arrow" aria-hidden="true">&rarr;</span><span class="chip chip--good">Member activated</span></span>
+                  <span class="branch-line"><em>No</em><span class="flow-arrow" aria-hidden="true">&rarr;</span><span class="chip chip--warn">Human review</span></span>
+                </span>
+              </div>
+            </div>
+            <div class="lane lane--high">
+              <span class="lane-tag">High</span>
+              <div class="lane-row">
+                <span class="chip chip--warn">Human review queue</span>
+                <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                <span class="chip chip--dec">Analyst decision</span>
+                <span class="branch">
+                  <span class="branch-line"><em>Legitimate</em><span class="flow-arrow" aria-hidden="true">&rarr;</span><span class="chip chip--good">Member activated</span></span>
+                  <span class="branch-line"><em>Fraud</em><span class="flow-arrow" aria-hidden="true">&rarr;</span><span class="chip chip--bad">Decline / hold</span></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Friction is added only where the risk score earns it.</figcaption>
+      </figure>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">Ship first</h2>
+      <p class="takeaway">I would ship the smallest thing that tests the biggest assumption: that we can separate the risky slice of applicants from the safe majority well enough to add friction only where it pays.</p>
+
+      <h3>Step one: shadow mode</h3>
+      <p class="muted">Run the risk score on live signups with zero member impact. Compare its decisions against a labeled set of known-fraud and known-good accounts. This gives a first read on fraud caught versus good members it would have wrongly flagged, at no risk to anyone.</p>
+
+      <h3>Step two: narrow pilot</h3>
+      <p class="muted">Turn on the step-up check for only the top-risk decile, with a holdout group left on the current flow. Measure fraud caught against good-member drop-off, head to head.</p>
+
+      <p style="margin-top:1.1rem"><strong>Why this first:</strong> highest reach, it gates the biggest loss line, and shadow mode buys a strong confidence gain for very little effort because nothing touches a member until the numbers hold up. <strong>What it deliberately leaves out:</strong> disputes, support automation, the full identity-linking build, and the entire low-risk segment, which stays exactly as frictionless as it is today.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">I would tie one North Star to the business and defend it with guardrails, because in Trust and Safety a single number chased alone is how you recreate the 2021 freezes.</p>
+
+      <h3>North Star: legitimate members onboarded per week</h3>
+      <p class="muted">Defined as applicants approved and reaching a first successful transaction who are not later flagged as fraud or wrongly frozen. It only rises when good members get through fast and the approved population stays clean. It is a real value proxy, it moves before the quarterly loss line, and the onboarding decision layer can act on it.</p>
+
+      <h3>Guardrails: none may worsen</h3>
+      <div class="guard">
+        <div><strong>New-account fraud loss rate.</strong> Protects the $407.3 million line.</div>
+        <div><strong>Wrongful-freeze rate on legitimate members,</strong> proxied by appeal-overturn rate. The direct check against the 2021 pattern.</div>
+        <div><strong>Manual-review rate per 1,000 applications.</strong> The cost-to-serve check.</div>
+      </div>
+
+      <figure class="diagram" role="img" aria-label="Onboarding trust metrics tree. The North Star is legitimate members onboarded per week. It rolls up from three lagging outcomes: new-account fraud loss rate, 90-day wrongful-freeze rate, and conversion of good applicants. Each lagging outcome is driven by a leading indicator: step-up catch rate on the high-risk band, appeal-overturn rate, and median time to activation.">
+        <div class="tree-wrap">
+          <svg viewBox="0 0 760 366" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#9aa39c"></path>
+              </marker>
+            </defs>
+            <g fill="none" stroke="#B9C0B7" stroke-width="1.6" marker-end="url(#ar)">
+              <path d="M380,78 C380,110 128,112 128,148"></path>
+              <path d="M380,78 L380,148"></path>
+              <path d="M380,78 C380,110 632,112 632,148"></path>
+              <path d="M128,216 L128,284"></path>
+              <path d="M380,216 L380,284"></path>
+              <path d="M632,216 L632,284"></path>
+            </g>
+
+            <!-- North Star -->
+            <rect x="210" y="16" width="340" height="60" rx="9" fill="#FBF3DD" stroke="#C79A3A" stroke-width="1.6"></rect>
+            <text x="380" y="41" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#6E4E12">North Star: legitimate members</text>
+            <text x="380" y="60" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#6E4E12">onboarded per week</text>
+
+            <!-- Lagging row -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="16" y="150" width="224" height="66" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="128" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LAGGING</text>
+              <text x="128" y="189" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">new-account</text>
+              <text x="128" y="205" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">fraud loss rate</text>
+
+              <rect x="268" y="150" width="224" height="66" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="380" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LAGGING</text>
+              <text x="380" y="189" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">90-day</text>
+              <text x="380" y="205" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">wrongful-freeze rate</text>
+
+              <rect x="520" y="150" width="224" height="66" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="632" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LAGGING</text>
+              <text x="632" y="189" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">conversion of</text>
+              <text x="632" y="205" text-anchor="middle" font-weight="600" font-size="12.5" fill="#274B6B">good applicants</text>
+            </g>
+
+            <!-- Leading row -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="16" y="286" width="224" height="66" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="128" y="306" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LEADING</text>
+              <text x="128" y="325" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">step-up catch rate</text>
+              <text x="128" y="341" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">on high-risk band</text>
+
+              <rect x="268" y="286" width="224" height="66" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="380" y="306" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LEADING</text>
+              <text x="380" y="330" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">appeal-overturn rate</text>
+
+              <rect x="520" y="286" width="224" height="66" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="632" y="306" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LEADING</text>
+              <text x="632" y="325" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">median time</text>
+              <text x="632" y="341" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">to activation</text>
+            </g>
+          </svg>
+        </div>
+        <div class="metric-legend">
+          <span><span class="swatch sw-star" aria-hidden="true"></span> North Star</span>
+          <span><span class="swatch sw-lag" aria-hidden="true"></span> Lagging outcome</span>
+          <span><span class="swatch sw-lead" aria-hidden="true"></span> Leading indicator</span>
+        </div>
+      </figure>
+
+      <p class="anti"><strong>Anti-metrics, never optimized in isolation:</strong> raw approval speed, raw fraud-catch count, and raw auto-approval rate. Each one looks great on a dashboard while quietly wrecking one of the other axes.</p>
+    </section>
+
+    <!-- BUSINESS IMPACT -->
+    <section id="business" aria-labelledby="business-h">
+      <h2 class="kicker" id="business-h">Business impact</h2>
+      <p class="takeaway">I would frame the money case as hypotheses tied to the public figures, not promises.</p>
+      <p>Chime ran $2.2 billion in FY2025 revenue (up 31%) and $1.5 billion in non-GAAP transaction profit at a 69% transaction margin. <a class="src" href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener">(StockTitan)</a> Against that sits the $407.3 million transaction-and-risk-loss line. Two levers matter.</p>
+      <ul class="clean">
+        <li><strong>Loss avoided flows almost straight to profit.</strong> At a 69% transaction margin, a dollar of new-account fraud loss prevented at signup, without pushing a legitimate member out, is close to a dollar of transaction profit protected. Even a single-digit-percent reduction on a $407.3 million line is a material, board-visible number now that it reports every quarter.</li>
+        <li><strong>The guardrail is itself revenue protection.</strong> The 19% member growth and 1.5 million net-new members are what the stock is priced on. Holding good-member activation flat while tightening on fraud protects that growth. That is the difference between this work adding to profit and it quietly taxing the top line.</li>
+      </ul>
+      <p>Fraud losses already fell 29% since 2022 with AI risk scoring, <a class="src" href="https://www.chime.com/newsroom/news/how-chime-is-using-ai-to-redefine-member-experience/" target="_blank" rel="noopener">(Chime newsroom)</a> which is my confidence signal that further, better-targeted gains at the onboarding layer are realistic rather than wishful.</p>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <div class="timeline">
+        <div class="phase">
+          <span class="day">0 to 30 &middot; listen and map</span>
+          <h3>Understand where the loss actually comes from</h3>
+          <p>Pull the real breakdown behind the $407.3 million and $63.6 million lines. Sit with the onboarding funnel end to end. Talk to Risk, Compliance, Data Science, Ops, and the Bancorp and Stride relationships to learn the KYC and BSA constraints. Ride along on the manual-review and appeal queues. Map where false positives actually originate today, and check the live status of the 2024 consent-order remediation.</p>
+        </div>
+        <div class="phase">
+          <span class="day">30 to 60 &middot; quick win and sharpen</span>
+          <h3>Make the guardrail measurable before anything ships</h3>
+          <p>Stand up the appeal-overturn metric if it is not already tracked, so the false-positive guardrail is measurable before anything ships. Build the shadow-mode risk score on labeled historical data. Get Risk, Compliance, and Growth to agree on the guardrail thresholds in writing: the explicit line we will not cross on wrongful declines.</p>
+        </div>
+        <div class="phase">
+          <span class="day">60 to 90 &middot; ship and validate</span>
+          <h3>Turn on a narrow, measured pilot</h3>
+          <p>Turn on the step-up pilot for the top-risk decile with a holdout. Set the baseline for every metric in the tree. Propose the roadmap, including whether disputes intelligence is the right second bet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">These are risks in the work, and how I would test each one early.</p>
+      <div class="table-wrap">
+        <table class="risk-tbl">
+          <thead>
+            <tr><th scope="col">Risk</th><th scope="col">How I would test it early</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fraud labels lag</td>
+              <td>Synthetic identities can sit dormant, so shadow mode may under-count fraud caught. I would validate with a longer label-maturation window and known-fraud backtests before trusting the read.</td>
+            </tr>
+            <tr>
+              <td>No clean false-positive label</td>
+              <td>Chime may not have a reliable signal for a legitimate member wrongly declined. I would build the appeal-overturn and re-application signal in week one, because the guardrail is worthless without it.</td>
+            </tr>
+            <tr>
+              <td>Partner-bank fragmentation</td>
+              <td>Bancorp and Stride may impose different KYC and BSA rules that limit what step-up we can vary. I would confirm the constraints with Compliance before committing the design. <a class="src" href="https://help.chime.com/i-have-a-stride-checking-account-who-is-the-bancorp-ban-edfdd9d3" target="_blank" rel="noopener">(Chime Help)</a></td>
+            </tr>
+            <tr>
+              <td>Growth tension</td>
+              <td>Any added friction could dent the 19% growth number. I would cap the pilot to a narrow high-risk slice and measure good-member drop-off against a holdout, so the downside is contained and observable.</td>
+            </tr>
+            <tr>
+              <td>Loosening regulation is a trap, not a break</td>
+              <td>With CFPB enforcement capacity down sharply and a May 2026 executive order pushing to reduce fintech friction, <a class="src" href="https://www.consumerfinancemonitor.com/2026/05/21/white-house-executive-order-signals-major-shift-in-federal-policy-for-fintechs-and-payment-systems/" target="_blank" rel="noopener">(Consumer Finance Monitor)</a> the external forcing function is weaker, but the reputational risk from a 2021-style freeze is not. I would anchor guardrail thresholds to Compliance and Legal judgment, not to the regulator's current posture.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <ol class="qs">
+        <li>What is the mix inside the $407.3 million line: new-account fraud versus existing-account fraud versus dispute abuse? Which domain actually owns the most dollars?</li>
+        <li>What is the current wrongful-decline and account-freeze rate on onboarding, and how is it measured today?</li>
+        <li>How do Bancorp and Stride differ on KYC and BSA constraints, and does that split the roadmap in two?</li>
+        <li>Where is the 70%-plus AI-containment ceiling actually binding, and does the money-sensitive frontier belong to this role or to the support role?</li>
+        <li>What is the live status of the 2024 consent-order remediation, and which controls are now mandatory rather than optional?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="fit-intro">I have spent about six years building products in banking, capital markets, and AI, and I am finishing a Master of Science in Information Management at the University of Washington (expected June 2026), on top of an MBA in Finance and a bachelor's in Computer Engineering. The work that maps most directly to this role is a digital lending platform I helped build at Lentra: identity verification, credit-bureau checks, and automated decisioning at the exact point where a bank has to let good customers in fast and keep bad actors out. That is the same constrained tradeoff this role runs on.</p>
+      <div class="table-wrap">
+        <table class="fit">
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Onboarding and identity verification that stops fraud while enabling fast access</td>
+              <td>At Lentra I helped build and scale a digital lending platform to 25,000+ users across 3,000+ branches, integrated credit bureaus (CIBIL, Equifax, Experian), and automated KYC verification and decisioning, cutting manual review 35% and lifting decision accuracy 10%.</td>
+            </tr>
+            <tr>
+              <td>Customer empathy translated into product</td>
+              <td>I ran customer interviews and on-site usability tests, turned them into 25+ product flows, and A/B tested the approval flow to reduce onboarding drop-off.</td>
+            </tr>
+            <tr>
+              <td>High-stakes tradeoffs across risk, ops, and compliance</td>
+              <td>I led operational risk transformation for Global Markets at Nomura, cutting risk events 20% and losses 15%, owning remediation, incident analysis, and preventive controls across FI/FX, tech, audit, and risk.</td>
+            </tr>
+            <tr>
+              <td>Use data, experimentation, and ML/AI for better outcomes</td>
+              <td>I shipped real-time reporting dashboards for senior management, and at UW I evaluated RAG platforms and retrieval methods on groundedness, hallucination, and quality gates for trustworthy retrieval at scale.</td>
+            </tr>
+            <tr>
+              <td>Align cross-functional technical and non-technical stakeholders</td>
+              <td>I rolled out an internal AI assistant to 15,000+ users with compliance and governance built in, reaching 100% policy compliance through a phased adoption plan.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="shell foot aligned">
+  <p class="name">Mayuresh More</p>
+  <p class="contacts">
+    <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+    <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail .toc a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  var current = null;
+  function setActive(id){
+    if(current === id) return;
+    links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    if(map[id]){ map[id].setAttribute('aria-current','true'); current = id; }
+  }
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+    });
+    var best = null, bestRatio = 0;
+    Object.keys(visible).forEach(function(id){
+      if(visible[id] > bestRatio){ bestRatio = visible[id]; best = id; }
+    });
+    if(best) setActive(best);
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>
