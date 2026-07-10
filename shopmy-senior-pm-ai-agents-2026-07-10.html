@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: agent-quality proposal for ShopMy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F7;
+    --paper-2:#F2EDEA;
+    --card:#FFFFFF;
+    --ink:#211A1D;
+    --ink-soft:#584E52;
+    --ink-faint:#79706F;
+    --rule:#E7E0DC;
+    --rule-strong:#D6CCC7;
+    --accent:#9B2C55;
+    --accent-strong:#7C2043;
+    --accent-soft:#F6E7ED;
+
+    --amber-bg:#FBF3DD; --amber-line:#C79A3A; --amber-ink:#6E4E12;
+    --blue-bg:#E7EEF5; --blue-line:#6E93B8; --blue-ink:#274B6B;
+    --green-bg:#E4F1E9; --green-line:#57A67C; --green-ink:#1B5E3A;
+    --plum-bg:#F6E7ED; --plum-line:#C88BA4; --plum-ink:#7C2043;
+
+    --wrap-pad:40px;
+    --rail-w:200px;
+    --rail-gap:56px;
+    --content-max:730px;
+
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(1100px 620px at 10% -8%, rgba(155,44,85,.05), transparent 60%),
+      radial-gradient(900px 520px at 110% 4%, rgba(199,154,58,.045), transparent 60%);
+  }
+
+  a{color:var(--accent)}
+  a:focus-visible, button:focus-visible, summary:focus-visible, .toc a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--accent); color:#fff;
+    padding:.6rem 1rem; z-index:50; border-radius:0 0 8px 0;
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.04em;
+  }
+  .skip-link:focus{left:0}
+
+  .shell{max-width:1080px; margin:0 auto; padding:0 var(--wrap-pad)}
+  .aligned{
+    padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    padding-right:var(--wrap-pad);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-top:clamp(38px,7vw,64px); padding-bottom:8px}
+  .masthead h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2rem,4.6vw,2.7rem);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .lede{
+    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:42ch;
+    margin:0 0 1.1rem;
+    font-weight:400;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  .toc-mobile{display:none}
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,1fr);
+    gap:var(--rail-gap);
+    padding-top:34px;
+    padding-bottom:24px;
+  }
+  .content{max-width:var(--content-max)}
+
+  /* ---------- rail nav ---------- */
+  .rail-inner{position:sticky; top:30px}
+  .rail-label{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 .85rem;
+    padding-left:14px;
+  }
+  .toc{list-style:none; margin:0; padding:0}
+  .toc li{margin:0}
+  .toc a{
+    display:block;
+    padding:.34rem 0 .34rem 14px;
+    border-left:2px solid var(--rule);
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-family:var(--display);
+    font-size:.86rem;
+    font-weight:500;
+    letter-spacing:.005em;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .toc a:hover{color:var(--accent); border-left-color:var(--rule-strong)}
+  .toc a[aria-current="true"]{
+    color:var(--accent);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:30px 0; border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0; padding-top:6px}
+  section h2, section h3{scroll-margin-top:24px}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:.95rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .7rem;
+  }
+  .takeaway{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.18rem,2.5vw,1.42rem);
+    line-height:1.34;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 1rem;
+  }
+  section p{margin:0 0 1rem}
+  section p:last-child{margin-bottom:0}
+  .muted{color:var(--ink-soft)}
+  .note{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    border-left:3px solid var(--rule-strong);
+    padding:.15rem 0 .15rem 1rem;
+    margin:0 0 1.2rem;
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-.01em;
+    margin:1.4rem 0 .5rem;
+    color:var(--ink);
+  }
+
+  strong{font-weight:600; color:var(--ink)}
+
+  /* source links */
+  .src{
+    color:var(--ink-faint);
+    font-size:.8em;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:rgba(148,138,142,.5);
+    white-space:nowrap;
+  }
+  .src:hover, .src:focus{color:var(--accent); text-decoration-color:currentColor}
+
+  /* lists */
+  ul.clean{list-style:none; margin:0 0 1rem; padding:0}
+  ul.clean > li{
+    position:relative;
+    padding:0 0 .85rem 1.25rem;
+    margin:0;
+  }
+  ul.clean > li::before{
+    content:"";
+    position:absolute; left:0; top:.62em;
+    width:7px; height:7px; border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+  ul.clean > li:last-child{padding-bottom:0}
+
+  ol.qs{margin:0; padding-left:1.3rem}
+  ol.qs li{margin:0 0 .8rem; padding-left:.25rem}
+  ol.qs li:last-child{margin-bottom:0}
+
+  ol.steps{margin:0 0 1rem; padding-left:1.3rem}
+  ol.steps li{margin:0 0 .7rem; padding-left:.25rem; line-height:1.55}
+  ol.steps li:last-child{margin-bottom:0}
+
+  /* cards (JTBD + users) */
+  .cards{display:grid; gap:14px; margin:0 0 .4rem}
+  .card{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .card h3{margin:0 0 .3rem; font-size:1rem}
+  .card .role{
+    font-family:var(--mono);
+    font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .card p{margin:.3rem 0 0; font-size:.96rem; color:var(--ink-soft); line-height:1.5}
+  .jtbd{
+    margin:.55rem 0 0;
+    padding:.35rem 0 .35rem .9rem;
+    border-left:2px solid var(--plum-line);
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:.95rem;
+    line-height:1.5;
+  }
+
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    margin:0 0 1rem;
+    background:var(--card);
+  }
+  table{border-collapse:collapse; width:100%; min-width:640px; font-size:.94rem}
+  thead th{
+    font-family:var(--display);
+    font-weight:600; font-size:.78rem;
+    letter-spacing:.02em;
+    text-align:left;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:11px 14px;
+    border-bottom:1px solid var(--rule-strong);
+    white-space:nowrap;
+  }
+  tbody td{padding:12px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.45}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  tr.win td{background:var(--accent-soft)}
+  tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+  .rice-tbl td:first-child{width:26%; font-weight:600; color:var(--ink)}
+  .rice-tbl td:last-child{color:var(--ink-soft)}
+  .win-tag{font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700}
+
+  /* fit table */
+  .fit td:first-child{width:44%; font-weight:500; color:var(--ink)}
+  .fit td:last-child{color:var(--ink-soft)}
+  .fit-intro{margin-bottom:1.2rem}
+
+  /* risks table */
+  .risk-tbl td:first-child{width:44%; font-weight:600; color:var(--ink)}
+  .risk-tbl td:last-child{color:var(--ink-soft)}
+
+  /* ---------- diagrams: shared ---------- */
+  figure.diagram{margin:1.3rem 0 .4rem; padding:0}
+  figcaption{
+    font-family:var(--mono);
+    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:.75rem;
+  }
+
+  /* triage flow (css) */
+  .triage{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:22px 18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+    text-align:center;
+  }
+  .tri-node{
+    font-family:var(--display); font-weight:600; font-size:.92rem; line-height:1.25;
+    border-radius:10px; padding:10px 16px;
+    background:var(--paper-2); border:1px solid var(--rule-strong); color:var(--ink);
+    max-width:340px;
+  }
+  .tri-node.tri-start{ background:var(--blue-bg); border-color:var(--blue-line); color:var(--blue-ink); }
+  .tri-arrow{ color:var(--accent); font-size:1rem; line-height:1; }
+  .tri-no{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); display:flex; flex-direction:column; align-items:center; gap:1px;
+  }
+  .tri-no span{ color:var(--accent); font-size:1rem; line-height:1; }
+  .tri-step{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px;
+    margin:3px 0;
+  }
+  .tri-q{
+    font-family:var(--display); font-weight:600; font-size:.9rem; line-height:1.25;
+    border-radius:10px; padding:10px 16px;
+    background:#fff; border:1.5px dashed var(--blue-line); color:var(--blue-ink);
+    max-width:300px;
+  }
+  .tri-q small{ display:block; font-family:var(--body); font-weight:400; font-style:normal; font-size:.76rem; color:var(--ink-soft); margin-top:3px; }
+  .tri-yes{ display:inline-flex; align-items:center; gap:8px; }
+  .tri-yes em{ font-style:normal; font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .tri-out{
+    font-family:var(--display); font-weight:600; font-size:.88rem; line-height:1.2;
+    background:var(--green-bg); border:1px solid var(--green-line); color:var(--green-ink);
+    border-radius:8px; padding:9px 14px;
+  }
+
+  /* metrics tree (svg) */
+  .tree-wrap{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:18px 14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tree-wrap svg{display:block; width:100%; height:auto; min-width:620px}
+
+  .metric-legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:.82rem; color:var(--ink-soft)}
+  .metric-legend span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:13px; height:13px; border-radius:3px; border:1px solid}
+  .sw-star{background:var(--amber-bg); border-color:var(--amber-line)}
+  .sw-lead{background:var(--blue-bg); border-color:var(--blue-line)}
+  .sw-lag{background:var(--green-bg); border-color:var(--green-line)}
+  .sw-biz{background:var(--plum-bg); border-color:var(--plum-line)}
+
+  /* guardrails list */
+  .guard{display:grid; gap:10px; margin:0 0 1rem}
+  .guard div{
+    background:var(--card); border:1px solid var(--rule); border-radius:10px;
+    padding:11px 15px; font-size:.95rem; line-height:1.5; color:var(--ink-soft);
+  }
+  .guard strong{color:var(--ink)}
+
+  /* approach hypotheses */
+  ul.hyp{list-style:none; margin:0 0 1.1rem; padding:0; display:grid; gap:12px}
+  ul.hyp > li{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    border-left:4px solid var(--accent);
+    padding:13px 16px; font-size:.97rem; line-height:1.5; color:var(--ink-soft);
+  }
+  ul.hyp .h-tag{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    font-weight:700; color:var(--accent); display:block; margin-bottom:3px;
+  }
+  ul.hyp strong{color:var(--ink)}
+
+  /* timeline (30/60/90) */
+  .timeline{display:grid; gap:14px}
+  .phase{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    padding:16px 18px;
+  }
+  .phase .day{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .phase h3{margin:.15rem 0 .5rem}
+  .phase p{margin:0; font-size:.96rem; color:var(--ink-soft); line-height:1.55}
+
+  /* ---------- footer ---------- */
+  .foot{
+    border-top:1px solid var(--rule);
+    padding-top:26px; padding-bottom:56px;
+    margin-top:10px;
+  }
+  .foot .name{font-family:var(--display); font-weight:600; font-size:1rem; margin:0 0 .55rem; color:var(--ink)}
+  .contacts{display:flex; flex-wrap:wrap; gap:8px 22px; margin:0}
+  .contacts a{
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.02em;
+    color:var(--ink-faint); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .contacts a:hover, .contacts a:focus{color:var(--accent); border-bottom-color:currentColor}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    :root{--wrap-pad:22px}
+    .aligned{padding-left:var(--wrap-pad); padding-right:var(--wrap-pad)}
+    .rail{display:none}
+    .layout{grid-template-columns:minmax(0,1fr); gap:0; padding-top:14px}
+    .content{min-width:0}
+    .toc-mobile{
+      display:block;
+      margin-top:22px;
+      border:1px solid var(--rule);
+      border-radius:12px;
+      background:var(--card);
+    }
+    .toc-mobile summary{
+      cursor:pointer;
+      font-family:var(--mono); font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--accent); font-weight:700;
+      padding:13px 16px;
+      list-style:none;
+    }
+    .toc-mobile summary::-webkit-details-marker{display:none}
+    .toc-mobile summary::after{content:"+"; float:right; font-family:var(--mono)}
+    .toc-mobile[open] summary::after{content:"-"; float:right; font-family:var(--mono)}
+    .toc-mobile .toc{padding:2px 16px 14px}
+    .toc-mobile .toc a{border-left:0; padding:.42rem 0}
+  }
+  @media (max-width:560px){
+    body{font-size:17px}
+    .cards{gap:12px}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="shell masthead aligned">
+  <h1>Mayuresh More</h1>
+  <p class="lede">How I would solve the agent-quality problem for the Senior Product Manager, AI Agents role at ShopMy.</p>
+  <p class="prepared">Prepared July 2026</p>
+
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ul class="toc">
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">Ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#business">Business impact</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ul>
+  </details>
+</header>
+
+<div class="shell layout">
+  <aside class="rail">
+    <div class="rail-inner">
+      <p class="rail-label">On this page</p>
+      <nav aria-label="On this page">
+        <ul class="toc">
+          <li><a href="#bet">The bet</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#users">Who it is for</a></li>
+          <li><a href="#priority">Why this problem</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#mvp">Ship first</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#business">Business impact</a></li>
+          <li><a href="#plan">30/60/90</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#questions">Questions</a></li>
+          <li><a href="#fit">Why me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main" class="content">
+
+    <!-- THE BET -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="takeaway">My bet is that ShopMy's agent fleet already does real work, but there is no shared way to know when it does that work reliably.</p>
+      <p>I would build the evaluation and triage layer first, so every fix is decided from transcripts and reliability data instead of a hunch. That is what earns trust from the internal teams, brands, and creators the agents serve, and it protects ShopMy's "humans over algorithms" promise by drawing the autonomy line with evidence.</p>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">I read the failure modes in the job description as one root problem: the fleet grew faster than the measurement around it.</p>
+      <p>The job description names the symptoms plainly: "quality drift, confusing delegation, weak eval coverage, and agents being stretched beyond their shape" <a class="src" href="https://job-boards.greenhouse.io/shopmy/jobs/5309553008" target="_blank" rel="noopener">(ShopMy JD)</a>. The root cause underneath them is the same one: there is no shared definition of "good" per agent, no reliability tracking, and no systematic read of real transcripts. You cannot catch drift you do not measure.</p>
+
+      <h3>Who hurts</h3>
+      <p class="muted">Internal ops and support teams who are handed agent output, plus the brand clients and creators who receive that output. The role sits "between the people an agent serves and the agentic system itself" <a class="src" href="https://job-boards.greenhouse.io/shopmy/jobs/5309553008" target="_blank" rel="noopener">(ShopMy JD)</a>.</p>
+
+      <h3>Why today's workarounds fail</h3>
+      <ul class="clean">
+        <li>Spot-checking outputs by hand does not scale across a fleet.</li>
+        <li>Reacting when someone complains means the failure has already reached a paying brand or creator.</li>
+        <li>A polished, best-case demo is not a reliability number. It hides the failure that hits on the second try.</li>
+      </ul>
+
+      <h3>Why a stumble is expensive</h3>
+      <p class="muted">Failures here are externally visible to paying brands and creators, not just internal staff. That erodes the "curated by the obsessed, not the algorithm" trust that is the whole brand, and it wastes engineering time on the wrong fixes. It also lands in a live feature race: LTK shipped its own AI chatbot in February 2026 <a class="src" href="https://www.netinfluencer.com/ltk-launches-ai-chatbot-powered-by-creator-recommendations-inside-consumer-app/" target="_blank" rel="noopener">(NetInfluencer)</a>, and even Amazon's CEO says most AI shopping agents "lack personalization and often provide inaccurate pricing and delivery estimates" <a class="src" href="https://www.modernretail.co/technology/why-the-ai-shopping-agent-wars-will-heat-up-in-2026/" target="_blank" rel="noopener">(Modern Retail)</a>. Trust is the unsolved problem industry-wide, so a stumble is expensive.</p>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="takeaway">The three users here have different jobs, and I would keep them separate, because collapsing them is how an agent gets stretched beyond its shape.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="role">Internal operator &middot; primary user</span>
+          <h3>Take the repetitive work, reliably</h3>
+          <p>The ops or support person who uses agents to get real work done, such as vetting creators, onboarding brands, or matching campaigns. The specific tasks are not public, so I treat these as examples to confirm in week one.</p>
+          <p class="jtbd">When I am handed more work than I can do by hand, I want an agent to reliably take the repetitive parts, so I can spend my judgment on the parts that need a human.</p>
+        </div>
+        <div class="card">
+          <span class="role">Brand client &middot; external user, economic buyer</span>
+          <h3>Accurate, on-brand automation</h3>
+          <p>Brands pay for the network and expect accurate, on-brand automation. Their trust is the revenue base: ShopMy tells brands they see "an average 5x return" <a class="src" href="https://shopmy.us/home/brands" target="_blank" rel="noopener">(ShopMy for brands)</a>.</p>
+          <p class="jtbd">When I run a creator program on ShopMy, I want the platform's automated help to be accurate and on-brand, so I keep giving ShopMy more of my spend.</p>
+        </div>
+        <div class="card">
+          <span class="role">Creator &middot; external user</span>
+          <h3>Sound like me, and be right</h3>
+          <p>Creators earn "10% to 30% on sales you drive" <a class="src" href="https://shopmy.us/home/creators" target="_blank" rel="noopener">(ShopMy for creators)</a>, so a bad automated recommendation costs them money and credibility.</p>
+          <p class="jtbd">When ShopMy automates part of my work, I want it to sound like me and be right, so I keep earning and do not get embarrassed.</p>
+        </div>
+        <div class="card">
+          <span class="role">The internal buyer &middot; who funds this</span>
+          <h3>A new function that pays for itself</h3>
+          <p>The product and engineering leadership funding this new function. There is also a brand-thesis owner: the company's president publicly champions human taste over algorithms, noting that many creators "come from stylist or editor backgrounds; they have made a living monetizing their taste" <a class="src" href="https://www.tubefilter.com/2026/04/24/shopmy-personal-shopping-for-creators-influencers-noir/" target="_blank" rel="noopener">(Tubefilter)</a>. Whatever I ship cannot undercut that.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY THIS PROBLEM: RICE -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="takeaway">Before building anything, I would rank what to fund. The measurement layer wins because it is the dependency every other bet consumes.</p>
+      <p class="note">Reach and Effort are estimates I would replace with the team's real numbers. Impact uses fixed tiers (0.25 to 3) and Confidence uses 50%, 80%, or 100%, so these are judgment calls, not false precision.</p>
+
+      <div class="table-wrap">
+        <table class="rice-tbl">
+          <thead>
+            <tr>
+              <th scope="col">Candidate first bet</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort</th>
+              <th scope="col">My read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="win">
+              <td>Eval and triage layer <br><span class="win-tag">Fund first</span></td>
+              <td>Whole fleet plus everyone it serves</td>
+              <td class="num">3</td>
+              <td class="num">80% to 100%</td>
+              <td>Low, weeks</td>
+              <td>Every other bet depends on it, so it stays in the MVP regardless of the exact score.</td>
+            </tr>
+            <tr>
+              <td>Ship a new agent or capability</td>
+              <td>Users of that one agent</td>
+              <td class="num">1 to 2</td>
+              <td class="num">50%</td>
+              <td>High, engineering-heavy</td>
+              <td>Later. Hard to justify before I can measure whether it helps.</td>
+            </tr>
+            <tr>
+              <td>Push agents onto more client-facing work</td>
+              <td>High</td>
+              <td class="num">2</td>
+              <td class="num">50%, high downside</td>
+              <td>High</td>
+              <td>Not yet. More client-facing autonomy before measurement is how trust breaks.</td>
+            </tr>
+            <tr>
+              <td>Fix orchestration and handoffs between agents</td>
+              <td>Fleet-wide</td>
+              <td class="num">2 to 3</td>
+              <td class="num">50%</td>
+              <td>Medium to high</td>
+              <td>After measurement. It consumes the eval layer too.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Measurement and triage is not one feature competing with the others. It is what makes ranking the others honest.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">Trust is the goal, and I would test three ways to get there. These are not mutually exclusive, so the decision is about sequence.</p>
+
+      <ul class="hyp">
+        <li><span class="h-tag">H1 &middot; measurement first</span>Define "good" per agent in plain English, build graders, track reliability, and read transcripts. <strong>Decide every fix from data.</strong></li>
+        <li><span class="h-tag">H2 &middot; boundary first</span>Draw the line between where full agent autonomy is fine (internal, backend) and where a human stays in the loop (client and shopper facing). This matches ShopMy's own Noir bet, where AI synthesizes the data but "the resulting recommendations are made by humans" <a class="src" href="https://www.tubefilter.com/2026/04/24/shopmy-personal-shopping-for-creators-influencers-noir/" target="_blank" rel="noopener">(Tubefilter)</a>.</li>
+        <li><span class="h-tag">H3 &middot; orchestration first</span>Fix how agents hand work to each other so the fleet stops dropping or duplicating tasks.</li>
+      </ul>
+
+      <p><strong>How I would decide:</strong> H1 is the prerequisite. You cannot set boundaries (H2) or fix handoffs (H3) rationally without a way to measure them. So I would run H1 first and let it feed the other two, validated on one live, high-traffic agent before generalizing.</p>
+
+      <p>The triage rule the JD asks for, own the agent fix, route the engineering gap, escalate the product ambiguity, runs on top of the measurement layer:</p>
+
+      <figure class="diagram" role="img" aria-label="Agent failure triage. A failure spotted in a real run leads to reading the transcript. First decision: is it fixable in the agent through prompt, instructions, boundary, or eval changes? If yes, own it and change the agent. If no, second decision: is a capability or tool missing? If yes, route it to engineering. If no, escalate it as product ambiguity.">
+        <div class="triage">
+          <div class="tri-node tri-start">Failure spotted in a real run</div>
+          <span class="tri-arrow" aria-hidden="true">&darr;</span>
+          <div class="tri-node">Read the transcript</div>
+          <span class="tri-arrow" aria-hidden="true">&darr;</span>
+          <div class="tri-step">
+            <div class="tri-q">Fixable in the agent?<small>prompt, instructions, boundary, eval</small></div>
+            <span class="tri-yes"><em>Yes</em><span class="tri-arrow" aria-hidden="true">&rarr;</span><span class="tri-out">Own it: change the agent</span></span>
+          </div>
+          <span class="tri-no"><span aria-hidden="true">&darr;</span>No</span>
+          <div class="tri-step">
+            <div class="tri-q">Missing capability or tool?</div>
+            <span class="tri-yes"><em>Yes</em><span class="tri-arrow" aria-hidden="true">&rarr;</span><span class="tri-out">Route to engineering</span></span>
+          </div>
+          <span class="tri-no"><span aria-hidden="true">&darr;</span>No</span>
+          <div class="tri-step">
+            <span class="tri-out">Escalate as product ambiguity</span>
+          </div>
+        </div>
+        <figcaption>Every failure is read, then owned, routed, or escalated.</figcaption>
+      </figure>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">Ship first</h2>
+      <p class="takeaway">One agent proves the loop before I touch the fleet.</p>
+      <p>The biggest assumption is that a lightweight eval and triage loop on a single agent will catch real failures that hand spot-checks miss, and change what actually gets fixed. The smallest test of that, on the one highest-volume or highest-stakes agent that touches paying brands or creators:</p>
+      <ol class="steps">
+        <li>Co-write a plain-language "what good looks like" spec with the team that owns the agent.</li>
+        <li>Build a small eval set from real past runs, labeled by humans.</li>
+        <li>Stand up three grader types: code-based checks for hard rules (format, boundary violations), a model-based judge for quality and on-brand tone, and human review for the ambiguous cases. Current best practice defines exactly these three grader types <a class="src" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">(Anthropic, 2026)</a>.</li>
+        <li>Report reliability as "succeeds every time" (pass^k), not "succeeds at least once" (pass@k), and always read a sample of transcripts. The same guidance warns: "we do not take eval scores at face value until someone digs into the details of the eval and reads some transcripts" <a class="src" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">(Anthropic, 2026)</a>.</li>
+        <li>Run the triage flow above on every failure the loop surfaces.</li>
+      </ol>
+      <p><strong>What it deliberately leaves out:</strong> the rest of the fleet, orchestration and handoff fixes, any new agent capability, and a polished dashboard. One agent, one loop, real transcripts.</p>
+      <p><strong>Why this first:</strong> highest reach because the loop becomes a reusable template, it de-risks every later bet, and the effort is weeks rather than quarters.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">I would chase reliable, accepted work, not how much the fleet automates.</p>
+
+      <h3>North Star: trusted agent task completion rate</h3>
+      <p class="muted">The share of real tasks the fleet completes to the "good" bar consistently and that the receiving user accepts. It passes the three tests: value (if it rises, users and brands genuinely got trustworthy work), leading (it moves before complaints and churn), and actionable (the team can move it with prompt, boundary, and eval fixes).</p>
+
+      <figure class="diagram" role="img" aria-label="Agent quality metrics tree. Four leading indicators feed the North Star: eval reliability per agent measured as pass to the k, drift caught before customer impact, delegation correctness, and triage cycle time. The North Star is trusted agent task completion, done reliably and accepted. It feeds three lagging outcomes: internal team adoption of agents, brand and creator trust and retention, and engineering time saved as ROI. Brand and creator trust drives brand spend and the 5x return promise. Internal team adoption drives creator earnings.">
+        <div class="tree-wrap">
+          <svg viewBox="0 0 840 492" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#9aa39c"></path>
+              </marker>
+            </defs>
+            <g fill="none" stroke="#BEB6BA" stroke-width="1.6" marker-end="url(#ar)">
+              <path d="M114,76 C114,110 330,112 330,144"></path>
+              <path d="M318,76 C318,108 385,112 385,144"></path>
+              <path d="M522,76 C522,108 455,112 455,144"></path>
+              <path d="M726,76 C726,110 510,112 510,144"></path>
+              <path d="M420,220 C420,255 165,258 165,292"></path>
+              <path d="M420,220 L420,292"></path>
+              <path d="M420,220 C420,255 675,258 675,292"></path>
+              <path d="M165,362 L165,406"></path>
+              <path d="M420,362 C420,386 450,384 450,406"></path>
+            </g>
+
+            <!-- Leading row -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="19" y="14" width="190" height="62" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="114" y="30" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LEADING</text>
+              <text x="114" y="49" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">Eval reliability</text>
+              <text x="114" y="65" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">per agent (pass^k)</text>
+
+              <rect x="223" y="14" width="190" height="62" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="318" y="30" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LEADING</text>
+              <text x="318" y="49" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">Drift caught before</text>
+              <text x="318" y="65" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">customer impact</text>
+
+              <rect x="427" y="14" width="190" height="62" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="522" y="30" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LEADING</text>
+              <text x="522" y="49" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">Delegation</text>
+              <text x="522" y="65" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">correctness</text>
+
+              <rect x="631" y="14" width="190" height="62" rx="8" fill="#E7EEF5" stroke="#6E93B8" stroke-width="1.5"></rect>
+              <text x="726" y="30" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#274B6B">LEADING</text>
+              <text x="726" y="49" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">Triage cycle time</text>
+              <text x="726" y="65" text-anchor="middle" font-weight="600" font-size="12" fill="#274B6B">(issue to fix)</text>
+            </g>
+
+            <!-- North Star -->
+            <rect x="260" y="144" width="320" height="76" rx="9" fill="#FBF3DD" stroke="#C79A3A" stroke-width="1.6"></rect>
+            <text x="420" y="166" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.4" fill="#6E4E12">NORTH STAR</text>
+            <text x="420" y="187" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#6E4E12">Trusted agent task completion</text>
+            <text x="420" y="206" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#6E4E12">done reliably AND accepted</text>
+
+            <!-- Lagging row -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="60" y="292" width="210" height="70" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="165" y="310" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LAGGING</text>
+              <text x="165" y="330" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">Internal team</text>
+              <text x="165" y="347" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">adoption of agents</text>
+
+              <rect x="315" y="292" width="210" height="70" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="420" y="310" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LAGGING</text>
+              <text x="420" y="330" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">Brand and creator</text>
+              <text x="420" y="347" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">trust and retention</text>
+
+              <rect x="570" y="292" width="210" height="70" rx="8" fill="#E4F1E9" stroke="#57A67C" stroke-width="1.5"></rect>
+              <text x="675" y="310" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#1B5E3A">LAGGING</text>
+              <text x="675" y="330" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">Engineering time</text>
+              <text x="675" y="347" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1B5E3A">saved (ROI)</text>
+            </g>
+
+            <!-- Business row -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="55" y="406" width="220" height="70" rx="8" fill="#F6E7ED" stroke="#C88BA4" stroke-width="1.5"></rect>
+              <text x="165" y="424" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#7C2043">BUSINESS</text>
+              <text x="165" y="447" text-anchor="middle" font-weight="600" font-size="12.5" fill="#7C2043">Creator earnings</text>
+
+              <rect x="340" y="406" width="220" height="70" rx="8" fill="#F6E7ED" stroke="#C88BA4" stroke-width="1.5"></rect>
+              <text x="450" y="424" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.2" fill="#7C2043">BUSINESS</text>
+              <text x="450" y="444" text-anchor="middle" font-weight="600" font-size="12.5" fill="#7C2043">Brand spend and</text>
+              <text x="450" y="461" text-anchor="middle" font-weight="600" font-size="12.5" fill="#7C2043">the 5x return promise</text>
+            </g>
+          </svg>
+        </div>
+        <div class="metric-legend">
+          <span><span class="swatch sw-lead" aria-hidden="true"></span> Leading indicator</span>
+          <span><span class="swatch sw-star" aria-hidden="true"></span> North Star</span>
+          <span><span class="swatch sw-lag" aria-hidden="true"></span> Lagging outcome</span>
+          <span><span class="swatch sw-biz" aria-hidden="true"></span> Business result</span>
+        </div>
+      </figure>
+
+      <h3>Guardrails and anti-metrics</h3>
+      <div class="guard">
+        <div><strong>Do not optimize raw automation rate or task volume.</strong> Both look good while quality drops.</div>
+        <div><strong>Never report pass@k best-case success alone.</strong> It overstates quality.</div>
+        <div><strong>Do not drive the human-override rate to zero on client-facing work.</strong> That would remove the human check that protects the brand.</div>
+        <div><strong>An eval score is not "green"</strong> until someone has read the transcripts behind it.</div>
+      </div>
+    </section>
+
+    <!-- BUSINESS IMPACT -->
+    <section id="business" aria-labelledby="business-h">
+      <h2 class="kicker" id="business-h">Business impact</h2>
+      <p class="takeaway">The money case rests on numbers ShopMy already reports, and I would size the rest with the team's real take-rate and GMV data.</p>
+      <ul class="clean">
+        <li>ShopMy drives "over $1B in annual platform sales" and promises brands "an average 5x return" <a class="src" href="https://www.prnewswire.com/news-releases/shopmy-raises-70m-at-1-5-billion-valuation-to-scale-the-curated-commerce-infrastructure-for-premium-brands-tastemakers-and-shoppers-302590802.html" target="_blank" rel="noopener">(PR Newswire)</a> <a class="src" href="https://shopmy.us/home/brands" target="_blank" rel="noopener">(ShopMy for brands)</a>. That return depends on brands trusting the platform enough to keep and grow spend. If agents that touch brand programs are unreliable, that is a direct retention risk on the revenue base, and a reliability number is how I would watch it.</li>
+        <li>A trustworthy fleet is leverage. Agents that reliably do repetitive work let ShopMy serve "1,200+ premium brand partners" and "185,000+ tastemakers" <a class="src" href="https://www.prnewswire.com/news-releases/shopmy-raises-70m-at-1-5-billion-valuation-to-scale-the-curated-commerce-infrastructure-for-premium-brands-tastemakers-and-shoppers-302590802.html" target="_blank" rel="noopener">(PR Newswire)</a> without adding headcount in a straight line. Outside analysis flags that ShopMy's take rate on roughly $1B GMV is undisclosed <a class="src" href="https://www.affiversemedia.com/shopmys-1-5b-bet-on-authenticity-is-creator-commerces-latest-unicorn-built-to-last/" target="_blank" rel="noopener">(Affiverse)</a>, which makes agent leverage a margin lever, not just a cost line.</li>
+        <li>In the race with LTK, which reports "$6 billion in annual retail sales powered" <a class="src" href="https://www.netinfluencer.com/ltk-launches-ai-chatbot-powered-by-creator-recommendations-inside-consumer-app/" target="_blank" rel="noopener">(NetInfluencer)</a>, the differentiator is not "we have AI." It is "our automation is trustworthy and stays human where it counts." Reliability is what makes that claim real.</li>
+      </ul>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <p class="takeaway">My first ninety days move from listening, to a working loop, to a proposed roadmap.</p>
+      <div class="timeline">
+        <div class="phase">
+          <span class="day">0 to 30 &middot; listen and map</span>
+          <h3>Learn the fleet and pick one agent</h3>
+          <p>Interview the internal teams and, where possible, the brand and creator clients each agent serves. Inventory the live fleet: what each agent does, who it serves, and where failures show up. Read real transcripts. Sit with engineering to learn the orchestration and tooling and where PM-owned prompt and eval work hands off to ML-owned model and infra work. Pick the one agent for the MVP. Score the four RICE candidates with real numbers.</p>
+        </div>
+        <div class="phase">
+          <span class="day">30 to 60 &middot; quick win and sharper problem</span>
+          <h3>Ship the loop on one agent</h3>
+          <p>Ship the eval and triage loop on that one agent. Produce the first reliability baseline and a shared "what good looks like" spec. Show a real failure the loop caught that spot-checks missed. Draft a first autonomy boundary map, where humans stay in the loop, with the brand thesis in mind. Align stakeholders on the own, route, escalate buckets.</p>
+        </div>
+        <div class="phase">
+          <span class="day">60 to 90 &middot; generalize and propose</span>
+          <h3>Template the loop and propose the roadmap</h3>
+          <p>Roll the loop to two or three more agents using the template. Set a fleet-level reliability baseline and drift alerts. Propose the roadmap: which agents to harden, where orchestration and handoffs need work, and where to route engineering, with a refreshed RICE ranking behind it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">I test the shaky parts of this plan early rather than defend them later.</p>
+      <div class="table-wrap">
+        <table class="risk-tbl">
+          <thead>
+            <tr><th scope="col">Risk</th><th scope="col">How I would test it early</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The biggest failure mode may be orchestration and handoffs, not single-agent quality</td>
+              <td>I would read cross-agent transcripts in week one before locking the MVP onto one agent.</td>
+            </tr>
+            <tr>
+              <td>"Good" is subjective and the team may not agree</td>
+              <td>I would co-write the spec and label a small eval set together. The disagreement rate on labels tells me whether the bar is real.</td>
+            </tr>
+            <tr>
+              <td>A model-based judge can be wrong or gameable</td>
+              <td>I would check its agreement against human labels on a sample before trusting its scores, per the "read the transcripts" rule.</td>
+            </tr>
+            <tr>
+              <td>More automation can collide with the "human curation" brand</td>
+              <td>I would validate the autonomy boundary with brand and product leadership early and treat full client-facing autonomy as escalate-by-default.</td>
+            </tr>
+            <tr>
+              <td>My ROI ranking is directional until I have real per-agent cost and business numbers</td>
+              <td>I would get those and re-score RICE.</td>
+            </tr>
+            <tr>
+              <td>Measurement can turn into busywork</td>
+              <td>I would require every eval to map to a fix or a routing decision, and kill the ones that do not.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">I would let a few answers reshape my sequencing.</p>
+      <ol class="qs">
+        <li>How many agents are live today, what does each one do, and who exactly does each serve (internal, brand, creator)?</li>
+        <li>What orchestration framework and tooling run the fleet, and where does PM-owned prompt and eval work hand off to the ML-engineer-owned model and infra work?</li>
+        <li>Which agent failures have already reached a paying brand or creator, and how did you find out?</li>
+        <li>Is there a current definition of "good" for any agent, and who owns it today?</li>
+        <li>Where does leadership want the hard line between full agent autonomy and human-in-the-loop, given the Noir positioning?</li>
+        <li>What is the real per-agent cost and business impact, so I can prioritize on ROI rather than guesswork?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="fit-intro">I am a product manager and builder with 6+ years across technology, finance, and AI. I hold an MS in Information Management from the University of Washington (expected Aug 2026), an MBA in Finance, and a BE in Computer Engineering. Right now I am building a policy-conflict-detection AI agent for the City of Seattle, which is close to this job in substance: I define what "good" means for an agent, evaluate retrieval and grounding, and set quality gates so the output can be trusted. Alongside that, I have shipped enterprise AI to thousands of users with governance, and I have owned discovery-to-launch products where the measure of success was money saved.</p>
+      <div class="table-wrap">
+        <table class="fit">
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hands-on with agents, prompts, and evals, tested against real runs</td>
+              <td>Building a policy-conflict-detection AI agent for the City of Seattle; assessed 4 retrieval architectures (vector, BM25, hybrid, knowledge graph) on accuracy, groundedness, hallucination, latency, and cost; evaluated 5+ RAG platforms for a build-vs-buy call.</td>
+            </tr>
+            <tr>
+              <td>Knowledge of evaluation frameworks; define "good" and measure reliability</td>
+              <td>Set quality gates for trustworthy retrieval across 9,000+ policy documents from 8 agencies; graded output on groundedness and hallucination, not best-case demos.</td>
+            </tr>
+            <tr>
+              <td>Deploy agents to internal teams with the right scope and boundaries</td>
+              <td>Led the rollout of an internal AI assistant to 15,000+ users with compliance and governance controls, on a phased bank-wide adoption plan.</td>
+            </tr>
+            <tr>
+              <td>Understand customers and translate needs into clear requirements</td>
+              <td>Owned discovery-to-launch of a finance budgeting app at Nomura with research across 15+ stakeholders; turned interviews and usability tests into 25+ product flows at Lentra.</td>
+            </tr>
+            <tr>
+              <td>Strong business judgment on leverage and ROI</td>
+              <td>Delivered $700K in annual savings by re-sourcing market data to Tradeweb; drove a 30% spend reduction; cut operational-risk losses 15%.</td>
+            </tr>
+            <tr>
+              <td>Operate independently in a fast-moving, high-growth environment</td>
+              <td>Owned roadmap and prioritization as we scaled a digital lending platform from MVP to 25,000+ users across 3,000+ branches.</td>
+            </tr>
+            <tr>
+              <td>Technical fluency to prototype and evaluate without being an engineer</td>
+              <td>Python, SQL, Azure AI Studio, RAG, vector search, hybrid retrieval, and prompt engineering, on top of an engineering background building reporting pipelines.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="shell foot aligned">
+  <p class="name">Mayuresh More</p>
+  <p class="contacts">
+    <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+    <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail .toc a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  var current = null;
+  function setActive(id){
+    if(current === id) return;
+    links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    if(map[id]){ map[id].setAttribute('aria-current','true'); current = id; }
+  }
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+    });
+    var best = null, bestRatio = 0;
+    Object.keys(visible).forEach(function(id){
+      if(visible[id] > bestRatio){ bestRatio = visible[id]; best = id; }
+    });
+    if(best) setActive(best);
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>
