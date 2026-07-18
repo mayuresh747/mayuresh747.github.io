@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: scaling the internal operations platform for Splitero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF8;
+    --paper-2:#EDEEEA;
+    --card:#FFFFFF;
+    --ink:#182320;
+    --ink-soft:#4C5854;
+    --ink-faint:#78827E;
+    --rule:#E4E5E0;
+    --rule-strong:#D1D3CD;
+    --accent:#0F6E63;
+    --accent-strong:#0A5147;
+    --accent-soft:#E1F0ED;
+
+    --wrap-pad:40px;
+    --rail-w:200px;
+    --rail-gap:56px;
+    --content-max:730px;
+
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(1100px 620px at 8% -8%, rgba(15,110,99,.055), transparent 60%),
+      radial-gradient(900px 520px at 112% 4%, rgba(202,138,8,.04), transparent 60%);
+  }
+
+  a{color:var(--accent)}
+  a:focus-visible, button:focus-visible, summary:focus-visible, .toc a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--accent); color:#fff;
+    padding:.6rem 1rem; z-index:50; border-radius:0 0 8px 0;
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.04em;
+  }
+  .skip-link:focus{left:0}
+
+  .shell{max-width:1080px; margin:0 auto; padding:0 var(--wrap-pad)}
+  .aligned{
+    padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    padding-right:var(--wrap-pad);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-top:clamp(38px,7vw,64px); padding-bottom:8px}
+  .masthead h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2rem,4.6vw,2.7rem);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .lede{
+    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:44ch;
+    margin:0 0 1.1rem;
+    font-weight:400;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  .toc-mobile{display:none}
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,1fr);
+    gap:var(--rail-gap);
+    padding-top:34px;
+    padding-bottom:24px;
+  }
+  .content{max-width:var(--content-max)}
+
+  /* ---------- rail nav ---------- */
+  .rail-inner{position:sticky; top:30px}
+  .rail-label{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 .85rem;
+    padding-left:14px;
+  }
+  .toc{list-style:none; margin:0; padding:0}
+  .toc li{margin:0}
+  .toc a{
+    display:block;
+    padding:.34rem 0 .34rem 14px;
+    border-left:2px solid var(--rule);
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-family:var(--display);
+    font-size:.86rem;
+    font-weight:500;
+    letter-spacing:.005em;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .toc a:hover{color:var(--accent); border-left-color:var(--rule-strong)}
+  .toc a[aria-current="true"]{
+    color:var(--accent);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:30px 0; border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0; padding-top:6px}
+  section h2, section h3{scroll-margin-top:24px}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:.95rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .7rem;
+  }
+  .takeaway{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.18rem,2.5vw,1.42rem);
+    line-height:1.34;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 1rem;
+  }
+  section p{margin:0 0 1rem}
+  section p:last-child{margin-bottom:0}
+  .muted{color:var(--ink-soft)}
+  .note{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    border-left:3px solid var(--rule-strong);
+    padding:.15rem 0 .15rem 1rem;
+    margin:0 0 1.2rem;
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-.01em;
+    margin:1.4rem 0 .5rem;
+    color:var(--ink);
+  }
+
+  strong{font-weight:600; color:var(--ink)}
+
+  /* source links */
+  .src{
+    color:var(--ink-faint);
+    font-size:.8em;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:rgba(120,130,126,.5);
+  }
+  .src:hover, .src:focus{color:var(--accent); text-decoration-color:currentColor}
+
+  /* lists */
+  ul.clean{list-style:none; margin:0 0 1rem; padding:0}
+  ul.clean > li{
+    position:relative;
+    padding:0 0 .85rem 1.25rem;
+    margin:0;
+  }
+  ul.clean > li::before{
+    content:"";
+    position:absolute; left:0; top:.62em;
+    width:7px; height:7px; border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+  ul.clean > li:last-child{padding-bottom:0}
+
+  ol.qs{margin:0; padding-left:1.3rem}
+  ol.qs li{margin:0 0 1rem; padding-left:.25rem; line-height:1.55}
+  ol.qs li:last-child{margin-bottom:0}
+
+  /* cards (JTBD via table below; approach hyp) */
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    margin:0 0 1rem;
+    background:var(--card);
+  }
+  table{border-collapse:collapse; width:100%; min-width:600px; font-size:.94rem}
+  thead th{
+    font-family:var(--display);
+    font-weight:600; font-size:.78rem;
+    letter-spacing:.02em;
+    text-align:left;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:11px 14px;
+    border-bottom:1px solid var(--rule-strong);
+    white-space:nowrap;
+  }
+  tbody td{padding:12px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.45}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  tr.win td{background:var(--accent-soft)}
+  tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+  .win-tag{font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700}
+
+  /* jtbd table */
+  .jtbd-tbl td:first-child{width:34%; font-weight:600; color:var(--ink)}
+  .jtbd-tbl td:last-child{color:var(--ink-soft)}
+
+  /* rice table */
+  .rice-tbl td:first-child{width:26%; font-weight:600; color:var(--ink)}
+  .rice-tbl td:last-child{color:var(--ink-soft)}
+  .rice-tbl th:first-child{min-width:150px}
+
+  /* fit table */
+  .fit td:first-child{width:44%; font-weight:500; color:var(--ink)}
+  .fit td:last-child{color:var(--ink-soft)}
+  .fit-intro{margin-bottom:1.2rem}
+
+  /* risks table */
+  .risk-tbl td:first-child{width:32%; font-weight:600; color:var(--ink)}
+  .risk-tbl td:last-child{color:var(--ink-soft)}
+
+  /* ---------- diagrams: shared ---------- */
+  figure.diagram{margin:1.4rem 0 .4rem; padding:0}
+  figcaption{
+    font-family:var(--mono);
+    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:.75rem;
+  }
+  .fig-scroll{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:18px 14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .fig-scroll svg{display:block; width:100%; height:auto}
+  .pipeline svg{min-width:720px}
+  .tree svg{min-width:648px}
+
+  .fig-legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:.82rem; color:var(--ink-soft)}
+  .fig-legend span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:13px; height:13px; border-radius:3px; border:1px solid}
+  .sw-green{background:#dcfce7; border-color:#16a34a}
+  .sw-amber{background:#fef9c3; border-color:#ca8a04}
+  .sw-blue{background:#dbeafe; border-color:#2563eb}
+  .sw-red{background:#fee2e2; border-color:#dc2626}
+
+  /* guardrails list */
+  .guard{display:grid; gap:10px; margin:0 0 1rem}
+  .guard div{
+    background:var(--card); border:1px solid var(--rule); border-radius:10px;
+    padding:11px 15px; font-size:.95rem; line-height:1.5; color:var(--ink-soft);
+  }
+  .guard strong{color:var(--ink)}
+
+  /* approach hypotheses */
+  ul.hyp{list-style:none; margin:0 0 1.1rem; padding:0; display:grid; gap:12px}
+  ul.hyp > li{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    border-left:4px solid var(--accent);
+    padding:13px 16px; font-size:.97rem; line-height:1.5; color:var(--ink-soft);
+  }
+  ul.hyp .h-tag{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    font-weight:700; color:var(--accent); display:block; margin-bottom:3px;
+  }
+  ul.hyp strong{color:var(--ink)}
+
+  /* timeline (30/60/90) */
+  .timeline{display:grid; gap:14px}
+  .phase{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    padding:16px 18px;
+  }
+  .phase .day{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .phase h3{margin:.15rem 0 .5rem}
+  .phase p{margin:0; font-size:.96rem; color:var(--ink-soft); line-height:1.55}
+
+  /* ---------- footer ---------- */
+  .foot{
+    border-top:1px solid var(--rule);
+    padding-top:26px; padding-bottom:56px;
+    margin-top:10px;
+  }
+  .foot .name{font-family:var(--display); font-weight:600; font-size:1rem; margin:0 0 .55rem; color:var(--ink)}
+  .contacts{display:flex; flex-wrap:wrap; gap:8px 22px; margin:0}
+  .contacts a{
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.02em;
+    color:var(--ink-faint); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .contacts a:hover, .contacts a:focus{color:var(--accent); border-bottom-color:currentColor}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    :root{--wrap-pad:22px}
+    .aligned{padding-left:var(--wrap-pad); padding-right:var(--wrap-pad)}
+    .rail{display:none}
+    .layout{grid-template-columns:minmax(0,1fr); gap:0; padding-top:14px}
+    .content{min-width:0}
+    .toc-mobile{
+      display:block;
+      margin-top:22px;
+      border:1px solid var(--rule);
+      border-radius:12px;
+      background:var(--card);
+    }
+    .toc-mobile summary{
+      cursor:pointer;
+      font-family:var(--mono); font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--accent); font-weight:700;
+      padding:13px 16px;
+      list-style:none;
+    }
+    .toc-mobile summary::-webkit-details-marker{display:none}
+    .toc-mobile summary::after{content:"+"; float:right; font-family:var(--mono)}
+    .toc-mobile[open] summary::after{content:"-"; float:right; font-family:var(--mono)}
+    .toc-mobile .toc{padding:2px 16px 14px}
+    .toc-mobile .toc a{border-left:0; padding:.42rem 0}
+  }
+  @media (max-width:560px){
+    body{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="shell masthead aligned">
+  <h1>Mayuresh More</h1>
+  <p class="lede">How I would help scale the internal operations platform for the Senior Product Manager, Business Platform role at Splitero.</p>
+  <p class="prepared">Prepared July 2026</p>
+
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ul class="toc">
+      <li><a href="#interest">Why this role</a></li>
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">Ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ul>
+  </details>
+</header>
+
+<div class="shell layout">
+  <aside class="rail">
+    <div class="rail-inner">
+      <p class="rail-label">On this page</p>
+      <nav aria-label="On this page">
+        <ul class="toc">
+          <li><a href="#interest">Why this role</a></li>
+          <li><a href="#bet">The bet</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#users">Who it is for</a></li>
+          <li><a href="#priority">Why this problem</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#mvp">Ship first</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#plan">30/60/90</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#questions">Questions</a></li>
+          <li><a href="#fit">Why me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main" class="content">
+
+    <!-- WHY THIS ROLE -->
+    <section id="interest" aria-labelledby="interest-h">
+      <h2 class="kicker" id="interest-h">Why this role</h2>
+      <p class="takeaway">Splitero built almost exactly the product I once wished existed.</p>
+      <p>About three years ago I bought a home in India. I remember wishing I could unlock some of its value without taking on another monthly loan payment, and picturing almost exactly what Splitero built: cash today for a share of the home's future value, with no monthly bill. Indian regulation did not allow anything like it then, so the idea stayed an idea. Watching Splitero make that real for homeowners across <a class="src" href="https://www.prnewswire.com/news-releases/splitero-closes-296-million-home-equity-investment-securitization-302787820.html" target="_blank" rel="noopener">14 states</a> is what first pulled me toward the company.</p>
+      <p>What pulls me toward this specific role is that it sits behind the product, on the internal system that 140+ underwriting, servicing, funding, and compliance staff use to actually fund those homeowners <a class="src" href="https://job-boards.greenhouse.io/splitero/jobs/5357735008" target="_blank" rel="noopener">(Splitero JD)</a>. That is the work I have done before. At Lentra I built the digital lending platform behind India's largest private bank, and my job was to take a slow, manual, multi-stage process and make it fast without breaking it.</p>
+    </section>
+
+    <!-- THE BET -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="takeaway">My bet is that the fastest way to help Splitero scale is to make the platform show, in real time, where each application loses time, then remove that friction one stage at a time.</p>
+      <p>Splitero closed two rated securitizations in six months, <a class="src" href="https://www.prnewswire.com/news-releases/splitero-funds-managed-by-blue-owl-and-antarctica-capital-close-283-3-million-home-equity-investment-inaugural-securitization-302633568.html" target="_blank" rel="noopener">$283.3 million in November 2025</a> (9.25x oversubscribed) and <a class="src" href="https://www.prnewswire.com/news-releases/splitero-closes-296-million-home-equity-investment-securitization-302787820.html" target="_blank" rel="noopener">$296 million in May 2026</a>. At a growth-stage, non-bank originator with that kind of capital behind it, the constraint is not demand. It is funding more contracts at close to the same headcount.</p>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">I'd frame the platform's real job as moving contracts through a slow, document-heavy pipeline without adding a person for every extra file.</p>
+      <ul class="clean">
+        <li><strong>Who hurts.</strong> The 140+ ops staff across underwriting, servicing, funding, and compliance run every contract through one Salesforce instance they did not choose. They were handed it.</li>
+        <li><strong>What it is.</strong> A manual, judgment-heavy path: a fast online eligibility check, a full application, a human underwriting review that includes a property appraisal, then funding by wire. Public reviews put total time to funding at <a class="src" href="https://lendedu.com/blog/splitero-home-equity-review/" target="_blank" rel="noopener">14 to 30 days</a>.</li>
+        <li><strong>Root cause.</strong> The heavy steps are property valuation and human review, and every handoff between departments adds waiting time.</li>
+        <li><strong>The workarounds today.</strong> First-come-first-served request queues, side spreadsheets, and "how we have always done it." These do not scale, and a mandated tool without genuine buy-in tends to breed <a class="src" href="https://platformengineering.org/blog/product-management-for-internal-developer-platforms" target="_blank" rel="noopener">shadow infrastructure and reduced trust</a>.</li>
+        <li><strong>What it costs.</strong> Slower funding, and higher error and rework risk at the exact moment regulators are tightening. Illinois adopted <a class="src" href="https://natlawreview.com/article/more-regulation-home-equity-investment-products" target="_blank" rel="noopener">HEI-specific rules with a 36% APR cap effective June 1, 2026</a>, Maine reclassified these products as consumer loans in April 2026, and a federal bill (S. 4803) would pull them under the Truth in Lending Act. Compliance now has to be accurate and auditable state by state.</li>
+      </ul>
+
+      <figure class="diagram" role="img" aria-label="Splitero origination to funding pipeline. An application moves left to right through five stages: a fast self-serve eligibility check, a full application, property valuation and appraisal, human underwriting review, and funding by wire. Property valuation and underwriting review are the heavy stages that take the most elapsed time. Compliance runs alongside per state, feeding into underwriting review and funding.">
+        <div class="fig-scroll pipeline">
+          <svg viewBox="0 0 880 244" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="pf" markerWidth="9" markerHeight="9" refX="6.4" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#8B9793"></path>
+              </marker>
+            </defs>
+
+            <!-- flow arrows -->
+            <g fill="none" stroke="#8B9793" stroke-width="1.8" marker-end="url(#pf)">
+              <path d="M164,63 L182,63"></path>
+              <path d="M334,63 L352,63"></path>
+              <path d="M504,63 L522,63"></path>
+              <path d="M674,63 L692,63"></path>
+            </g>
+
+            <!-- compliance dotted links (upward into review + funding) -->
+            <g fill="none" stroke="#8B9793" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#pf)">
+              <path d="M630,160 L601,100"></path>
+              <path d="M740,160 L769,100"></path>
+            </g>
+
+            <!-- stage boxes -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <!-- 1 eligibility (green) -->
+              <rect x="14" y="30" width="150" height="66" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"></rect>
+              <text x="89" y="60" text-anchor="middle" font-weight="600" font-size="12.5" fill="#14532d">Eligibility check</text>
+              <text x="89" y="78" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing=".4" fill="#3f6b4d">fast, self-serve</text>
+
+              <!-- 2 application (blue) -->
+              <rect x="184" y="30" width="150" height="66" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect>
+              <text x="259" y="67" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Full application</text>
+
+              <!-- 3 valuation (amber) -->
+              <rect x="354" y="30" width="150" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"></rect>
+              <text x="429" y="59" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">Property valuation</text>
+              <text x="429" y="76" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">/ appraisal</text>
+
+              <!-- 4 review (amber) -->
+              <rect x="524" y="30" width="150" height="66" rx="9" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"></rect>
+              <text x="599" y="59" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">Underwriting review</text>
+              <text x="599" y="77" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing=".4" fill="#8a5a15">human in the loop</text>
+
+              <!-- 5 funding (blue) -->
+              <rect x="694" y="30" width="150" height="66" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect>
+              <text x="769" y="67" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Funding by wire</text>
+
+              <!-- compliance (blue) -->
+              <rect x="579" y="160" width="210" height="58" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect>
+              <text x="684" y="185" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Compliance</text>
+              <text x="684" y="202" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing=".4" fill="#274b6b">per-state, runs alongside</text>
+            </g>
+          </svg>
+        </div>
+        <div class="fig-legend">
+          <span><span class="swatch sw-green" aria-hidden="true"></span> Fast, self-serve</span>
+          <span><span class="swatch sw-amber" aria-hidden="true"></span> Heavy, most elapsed time</span>
+          <span><span class="swatch sw-blue" aria-hidden="true"></span> Handoff / gate</span>
+        </div>
+        <figcaption>Where time is lost: valuation and human review, plus every handoff between them.</figcaption>
+      </figure>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="takeaway">I'd treat the customer here as internal: the daily users are the 140+ ops staff, and the buyers are the ops leads and the Director of Product who owns the platform outcome.</p>
+      <p>At a direct peer, Hometap, the equivalent leaders are measured on exactly this: <a class="src" href="https://builtin.com/job/director-investment-operations/3980318" target="_blank" rel="noopener">reducing cycle time and improving team capacity</a>, working with Product, Engineering, and Salesforce. Same shape of job.</p>
+
+      <div class="table-wrap">
+        <table class="jtbd-tbl">
+          <thead>
+            <tr><th scope="col">Persona</th><th scope="col">The job they are hiring the platform to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Underwriter</td><td>When a file lands, get property, title, and credit data in one place with the routing already decided, so I can clear it without chasing information.</td></tr>
+            <tr><td>Servicing specialist</td><td>When a contract is live, surface status and the next action automatically, so I am not reconstructing state from email.</td></tr>
+            <tr><td>Funding specialist</td><td>When a file is approved, give me a clean handoff to wire funding, so nothing stalls at the finish line.</td></tr>
+            <tr><td>Compliance analyst</td><td>When we operate in a new state, apply the right disclosures and licensing checks automatically, so we stay auditable without manual patching.</td></tr>
+            <tr><td>Ops lead / Director of Product (buyer)</td><td>Give me confidence that cycle time and capacity are improving, defended with data, not anecdotes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WHY THIS PROBLEM: RICE -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="takeaway">If I were choosing where to start, I would rank the obvious platform bets before committing to any one of them.</p>
+      <p class="note">The scores below are an outside-in read to be recalibrated with real data in week one, not a verdict. Reach is how many people or files a bet touches, impact is how much it moves cycle time or risk, confidence is how sure I am, and effort is rough build cost.</p>
+
+      <div class="table-wrap">
+        <table class="rice-tbl">
+          <thead>
+            <tr>
+              <th scope="col">Bet</th>
+              <th scope="col">Reach</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Effort</th>
+              <th scope="col">Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="win">
+              <td>A. Real-time cycle-time and error instrumentation by stage and department <br><span class="win-tag">Do first</span></td>
+              <td>All ops + leadership</td>
+              <td class="num">High</td>
+              <td class="num">High</td>
+              <td class="num">Medium</td>
+              <td>It exposes where the friction actually is and de-risks every other bet.</td>
+            </tr>
+            <tr>
+              <td>B. Structured intake with data-driven prioritization (replace first-come-first-served)</td>
+              <td>All 4 departments + eng</td>
+              <td class="num">Medium-high</td>
+              <td class="num">High</td>
+              <td class="num">Low-medium</td>
+              <td>Do early. The JD names it, and it makes prioritization transparent.</td>
+            </tr>
+            <tr>
+              <td>C. Compress the valuation and review stage (for example, branch on an AVM confidence score)</td>
+              <td>Every application</td>
+              <td class="num">High</td>
+              <td class="num">Medium</td>
+              <td class="num">High</td>
+              <td>Sequence after A confirms it is the true bottleneck; it carries the most risk sign-off.</td>
+            </tr>
+            <tr>
+              <td>D. Per-state compliance configuration for disclosures and licensing</td>
+              <td>Compliance + underwriting</td>
+              <td class="num">High</td>
+              <td class="num">Medium</td>
+              <td class="num">High</td>
+              <td>Run in parallel with compliance; specifics depend on the current config model.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>A and B are high confidence and lower effort, and they unlock everything else. C is likely the biggest single win on cycle time, but I would not build it until the instrumentation proves the valuation step really is where time is lost. That is why A comes first.</p>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I would resist jumping to a solution and instead let three directions compete on evidence.</p>
+
+      <ul class="hyp">
+        <li><span class="h-tag">Direction 1 &middot; instrument first</span><strong>Instrument before I change anything.</strong> Make each stage's cycle time, error and rework rate, and request turnaround visible first. You cannot cut a bottleneck you cannot see.</li>
+        <li><span class="h-tag">Direction 2 &middot; structured intake</span><strong>Make structured intake the operating rhythm.</strong> One front door for requests across departments, scored against impact, instead of whoever asks loudest going first.</li>
+        <li><span class="h-tag">Direction 3 &middot; config vs build</span><strong>Govern config versus build deliberately.</strong> Default to declarative Salesforce configuration and reserve real engineering, QA, and a release cycle for what genuinely needs it. As one practitioner guide puts it, <a class="src" href="https://productmanagerhandbook.com/strategies/building-enterprise-products-on-platforms/" target="_blank" rel="noopener">just because a customization is possible does not mean you should do it</a>, because each one carries a cost to develop, test, and maintain.</li>
+      </ul>
+
+      <p><strong>How I would decide between directions:</strong> let the instrumentation data and the config-versus-build cost curve pick the next bet, not the loudest department.</p>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">Ship first</h2>
+      <p class="takeaway">I'd start with the smallest useful step: making one number impossible to ignore, a cycle-time and error dashboard for the single highest-friction stage.</p>
+      <p>It breaks down by handoff, with a weekly read for the ops lead and the platform team. My hypothesis is that the valuation and underwriting-review step dominates the 14 to 30 day window, but I would confirm that from real timestamps before building anything else.</p>
+      <p><strong>Why this first, in RICE terms:</strong> high confidence, moderate effort, and it de-risks every heavier bet by naming the real bottleneck.</p>
+      <p><strong>What it deliberately leaves out:</strong> no automation, no AVM branching, no new intake tooling yet. Those wait until the data says where to point them. This is close to a dashboard I have already shipped, so I can move quickly on it.</p>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">I would judge this work by outcomes the ops team feels, not by features shipped.</p>
+      <p class="muted">The North Star ties to the business constraint: funding more contracts without hiring one person per extra file.</p>
+
+      <figure class="diagram" role="img" aria-label="Business Platform metrics tree. Three input drivers feed the North Star: median cycle time per stage, request turnaround, and adoption of shipped workflows. The North Star is funded contracts per ops FTE per month. Two guardrails sit beside it: error and rework rate stays flat or falls, and genuine adoption rather than shadow spreadsheets. The anti-metric not to optimize is feature or ticket count.">
+        <div class="fig-scroll tree">
+          <svg viewBox="0 0 840 392" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="mt" markerWidth="9" markerHeight="9" refX="6.4" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#9aa39c"></path>
+              </marker>
+            </defs>
+
+            <!-- input -> north star -->
+            <g fill="none" stroke="#BEB6BA" stroke-width="1.6" marker-end="url(#mt)">
+              <path d="M138,76 C138,110 330,112 330,148"></path>
+              <path d="M420,76 L420,148"></path>
+              <path d="M702,76 C702,110 510,112 510,148"></path>
+            </g>
+            <!-- north star -> guardrails (undirected) -->
+            <g fill="none" stroke="#BEB6BA" stroke-width="1.6">
+              <path d="M360,232 C360,268 148,266 148,300"></path>
+              <path d="M420,232 L420,300"></path>
+            </g>
+            <!-- north star -.-> anti-metric -->
+            <g fill="none" stroke="#C9A2A2" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#mt)">
+              <path d="M486,232 C486,266 692,266 692,300"></path>
+            </g>
+
+            <!-- input row (blue) -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="16" y="16" width="244" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"></rect>
+              <text x="138" y="34" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#274b6b">INPUT DRIVER</text>
+              <text x="138" y="54" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Median cycle time</text>
+              <text x="138" y="70" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">per stage</text>
+
+              <rect x="298" y="16" width="244" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"></rect>
+              <text x="420" y="34" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#274b6b">INPUT DRIVER</text>
+              <text x="420" y="54" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Request turnaround</text>
+              <text x="420" y="70" text-anchor="middle" font-weight="600" font-size="11.5" fill="#274b6b">(platform responsiveness)</text>
+
+              <rect x="580" y="16" width="244" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"></rect>
+              <text x="702" y="34" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#274b6b">INPUT DRIVER</text>
+              <text x="702" y="54" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">Adoption of</text>
+              <text x="702" y="70" text-anchor="middle" font-weight="600" font-size="12.5" fill="#1e3a5f">shipped workflows</text>
+            </g>
+
+            <!-- north star (green) -->
+            <rect x="234" y="150" width="372" height="82" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.7"></rect>
+            <text x="420" y="173" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.4" fill="#166534">NORTH STAR</text>
+            <text x="420" y="195" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14.5" fill="#14532d">Funded contracts per ops FTE</text>
+            <text x="420" y="215" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14.5" fill="#14532d">per month</text>
+
+            <!-- do not optimize label on dotted edge -->
+            <rect x="546" y="256" width="88" height="17" rx="3" fill="#FAFAF8"></rect>
+            <text x="590" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing=".4" fill="#b45454">do not optimize</text>
+
+            <!-- guardrails (amber) + anti-metric (red) -->
+            <g font-family="'Space Grotesk',sans-serif">
+              <rect x="24" y="300" width="248" height="74" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"></rect>
+              <text x="148" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#8a5a15">GUARDRAIL</text>
+              <text x="148" y="341" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">Error / rework rate</text>
+              <text x="148" y="358" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">stays flat or falls</text>
+
+              <rect x="296" y="300" width="248" height="74" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"></rect>
+              <text x="420" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#8a5a15">GUARDRAIL</text>
+              <text x="420" y="341" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">Genuine adoption,</text>
+              <text x="420" y="358" text-anchor="middle" font-weight="600" font-size="12.5" fill="#713f12">not shadow spreadsheets</text>
+
+              <rect x="568" y="300" width="248" height="74" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"></rect>
+              <text x="692" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1.1" fill="#a12f2f">ANTI-METRIC</text>
+              <text x="692" y="349" text-anchor="middle" font-weight="600" font-size="12.5" fill="#7f1d1d">Feature / ticket count</text>
+            </g>
+          </svg>
+        </div>
+        <div class="fig-legend">
+          <span><span class="swatch sw-blue" aria-hidden="true"></span> Input driver</span>
+          <span><span class="swatch sw-green" aria-hidden="true"></span> North Star</span>
+          <span><span class="swatch sw-amber" aria-hidden="true"></span> Guardrail</span>
+          <span><span class="swatch sw-red" aria-hidden="true"></span> Anti-metric</span>
+        </div>
+        <figcaption>Guardrails matter as much as the North Star.</figcaption>
+      </figure>
+
+      <div class="guard">
+        <div><strong>Error and rework rate is a hard guardrail.</strong> Speeding up funding by trading away accuracy would be the wrong win as regulators tighten.</div>
+        <div><strong>Genuine adoption is the second guardrail.</strong> A tool nobody trusts gets routed around, so I track real use, not logins.</div>
+        <div><strong>The one metric I would not chase is feature or ticket count,</strong> which the JD explicitly rules out.</div>
+      </div>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <p class="takeaway">My first month would be mostly listening, because I am coming in humble about the specifics of this business.</p>
+      <div class="timeline">
+        <div class="phase">
+          <span class="day">Days 0 to 30 &middot; listen</span>
+          <h3>Shadow real files, map the workflows</h3>
+          <p>Shadow underwriting, servicing, funding, and compliance through real files. Map the current intake queue and the existing Salesforce workflows. Sit with the Salesforce engineering manager to learn the config-versus-build cost curve and the release process. Sit with Analytics to see what is already instrumented. No big changes yet.</p>
+        </div>
+        <div class="phase">
+          <span class="day">Days 30 to 60 &middot; a quick win</span>
+          <h3>Ship the dashboard, stand up intake</h3>
+          <p>Ship the cycle-time and error dashboard for the highest-friction stage. Stand up a first pass at structured intake with the Product Operations Manager. Baseline the North Star and the guardrails.</p>
+        </div>
+        <div class="phase">
+          <span class="day">Days 60 to 90 &middot; validate and propose</span>
+          <h3>Pick the first bet, defend a roadmap</h3>
+          <p>Use the data to pick the first friction-removal bet, likely the valuation and review step, and validate it with a small slice. Propose a prioritized platform roadmap defended with data rather than request order.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">The honest risks here sit in the work, and I would test the biggest one in week one.</p>
+      <div class="table-wrap">
+        <table class="risk-tbl">
+          <thead>
+            <tr><th scope="col">Risk</th><th scope="col">What I would validate first</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The bottleneck assumption</td>
+              <td>I am assuming the valuation and review stage dominates the 14 to 30 day window. Validate from real timestamps before building anything.</td>
+            </tr>
+            <tr>
+              <td>Config sprawl</td>
+              <td>Per-state compliance across Illinois, Maine, and whatever the federal bill brings can turn into an unmaintainable patchwork of configuration exceptions. Validate the current config model with compliance and Salesforce engineering early.</td>
+            </tr>
+            <tr>
+              <td>Adoption</td>
+              <td>A mandated internal tool with no buy-in gets routed around. Validate by co-designing with the ops staff who would use it, and by tracking real adoption, not logins.</td>
+            </tr>
+            <tr>
+              <td>Trust in the numbers</td>
+              <td>Dashboards only help if the ops team trusts them. At Lentra the credibility of the data mattered as much as the data itself. Validate definitions and data quality with Analytics before publishing anything.</td>
+            </tr>
+            <tr>
+              <td>Intake politics</td>
+              <td>Every department believes its request is most urgent. Validate a shared scoring model with the ops leads so prioritization is transparent, not imposed from above.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">A handful of answers would reshape my plan, so I would ask them early.</p>
+      <ol class="qs">
+        <li><strong>Is origination self-serve or assisted?</strong> Public reviews describe a roughly two-minute eligibility check followed by a human underwriting review with an <a class="src" href="https://lendedu.com/blog/splitero-home-equity-review/" target="_blank" rel="noopener">appraisal</a>. I would want to confirm where the human-in-the-loop steps sit and which one owns the most elapsed time.</li>
+        <li><strong>Is there a rule engine, and what does underwriting branch on?</strong> Splitero's stated inputs are credit score (minimum 500) and property appraisal, with <a class="src" href="https://lendedu.com/blog/splitero-home-equity-review/" target="_blank" rel="noopener">no income or employment requirement</a>. Does the workflow branch on an AVM confidence score the way modern HELOC stacks do, where AVM-based valuation can <a class="src" href="https://www.clearcapital.com/how-to-enhance-home-equity-loan-underwriting-using-an-avm/" target="_blank" rel="noopener">approve about 30% more loans and run about two days versus one to two weeks for a full appraisal</a>, or is a full appraisal always required given the appreciation-sharing structure?</li>
+        <li><strong>After origination, is the path straight-through or not?</strong> Straight-through processing <a class="src" href="https://www.pennanttech.com/blog/straight-through-processing-in-lending-top-of-the-transformation-agenda/" target="_blank" rel="noopener">automates the lending lifecycle from application to disbursement, which frees skilled staff to focus on the more complex cases</a>. What share of applications short-circuit manual review today, and what does the Salesforce routing logic look like for the rest?</li>
+        <li><strong>What regulatory framework applies to a non-bank HEI company?</strong> With Illinois, Maine, and pending federal action all moving in 2026 (<a class="src" href="https://natlawreview.com/article/more-regulation-home-equity-investment-products" target="_blank" rel="noopener">overview</a>), how does the compliance workflow adapt per-state disclosure and licensing requirements without becoming a config patchwork? That is exactly the config-versus-build trade-off this role owns.</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="fit-intro">I am a product manager with 6+ years building lending and internal platforms across India and the US. I hold an MBA in Finance, and I am finishing a Master of Science in Information Management at the University of Washington (expected Aug 2026). The reason I fit this role is direct: I have already built the thing this platform needs to do, which is compress a slow, multi-stage lending pipeline without breaking it, and I did it by treating internal staff as the real customer.</p>
+      <div class="table-wrap">
+        <table class="fit">
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cut cycle time across a multi-stage lending pipeline</td>
+              <td>At Lentra I built the digital lending platform for India's largest private bank. We took the 2-wheeler lending journey from about 2 days to 2 to 3 hours by automating credit decisioning, KYC, and straight-through processing.</td>
+            </tr>
+            <tr>
+              <td>Give ops real-time visibility into bottlenecks</td>
+              <td>I shipped a real-time dashboard surfacing branch volumes, disbursements, and funnel bottlenecks, which cut 40+ hours a week of manual report compilation.</td>
+            </tr>
+            <tr>
+              <td>Treat internal staff as customers and drive adoption with governance</td>
+              <td>At Capco I led an internal AI assistant rollout to 15,000+ users with compliance and governance, and a finance budgeting app that cost-center owners actually adopted, cutting spend 30%.</td>
+            </tr>
+            <tr>
+              <td>Structured intake and data-driven prioritization</td>
+              <td>I ran discovery-to-launch on internal products with 15+ stakeholders, prioritizing with data, and I led an operational-risk transformation that cut events 20% and losses 15%.</td>
+            </tr>
+            <tr>
+              <td>Lending decisioning and integrations</td>
+              <td>I integrated credit bureaus (CIBIL, Equifax, Experian), improving loan decision accuracy 10% and cutting manual review 35%.</td>
+            </tr>
+            <tr>
+              <td>Startup and growth-stage, in regulated finance</td>
+              <td>I scaled Lentra's platform from MVP to 25,000+ users across 3,000+ branches, and I worked inside a global bank on market data sourcing and operational risk.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Salesforce is a tool I have used as part of my toolkit, not a deep admin or developer specialty. Where I would go deep fast is its configuration-versus-development trade-off, which is precisely where this role lives, and my first weeks would go to learning that cost curve with the Salesforce engineering manager.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="shell foot aligned">
+  <p class="name">Mayuresh More</p>
+  <p class="contacts">
+    <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+    <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail .toc a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  var current = null;
+  function setActive(id){
+    if(current === id) return;
+    links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    if(map[id]){ map[id].setAttribute('aria-current','true'); current = id; }
+  }
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+    });
+    var best = null, bestRatio = 0;
+    Object.keys(visible).forEach(function(id){
+      if(visible[id] > bestRatio){ bestRatio = visible[id]; best = id; }
+    });
+    if(best) setActive(best);
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>
