@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mayuresh More: building adopted, safe AI agents for UW-IT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF8;
+    --paper-2:#EEECF3;
+    --card:#FFFFFF;
+    --ink:#1E1B29;
+    --ink-soft:#524E63;
+    --ink-faint:#807B92;
+    --rule:#E6E3EC;
+    --rule-strong:#D3CEDD;
+    --accent:#4B2E83;
+    --accent-strong:#38215F;
+    --accent-soft:#ECE6F5;
+
+    --wrap-pad:40px;
+    --rail-w:200px;
+    --rail-gap:56px;
+    --content-max:730px;
+
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(1100px 620px at 8% -8%, rgba(75,46,131,.06), transparent 60%),
+      radial-gradient(900px 520px at 112% 4%, rgba(183,165,122,.06), transparent 60%);
+  }
+
+  a{color:var(--accent)}
+  a:focus-visible, button:focus-visible, summary:focus-visible, .toc a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--accent); color:#fff;
+    padding:.6rem 1rem; z-index:50; border-radius:0 0 8px 0;
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.04em;
+  }
+  .skip-link:focus{left:0}
+
+  .shell{max-width:1080px; margin:0 auto; padding:0 var(--wrap-pad)}
+  .aligned{
+    padding-left:calc(var(--wrap-pad) + var(--rail-w) + var(--rail-gap));
+    padding-right:var(--wrap-pad);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-top:clamp(38px,7vw,64px); padding-bottom:8px}
+  .masthead h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2rem,4.6vw,2.7rem);
+    line-height:1.04;
+    letter-spacing:-.02em;
+    margin:0 0 .5rem;
+    color:var(--ink);
+  }
+  .lede{
+    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    line-height:1.4;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 1.1rem;
+    font-weight:400;
+  }
+  .prepared{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  .toc-mobile{display:none}
+
+  /* ---------- layout ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:var(--rail-w) minmax(0,1fr);
+    gap:var(--rail-gap);
+    padding-top:34px;
+    padding-bottom:24px;
+  }
+  .content{max-width:var(--content-max)}
+
+  /* ---------- rail nav ---------- */
+  .rail-inner{position:sticky; top:30px}
+  .rail-label{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 .85rem;
+    padding-left:14px;
+  }
+  .toc{list-style:none; margin:0; padding:0}
+  .toc li{margin:0}
+  .toc a{
+    display:block;
+    padding:.34rem 0 .34rem 14px;
+    border-left:2px solid var(--rule);
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-family:var(--display);
+    font-size:.86rem;
+    font-weight:500;
+    letter-spacing:.005em;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .toc a:hover{color:var(--accent); border-left-color:var(--rule-strong)}
+  .toc a[aria-current="true"]{
+    color:var(--accent);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:30px 0; border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0; padding-top:6px}
+  section h2, section h3{scroll-margin-top:24px}
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:.95rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .7rem;
+  }
+  .takeaway{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.18rem,2.5vw,1.42rem);
+    line-height:1.34;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin:0 0 1rem;
+  }
+  section p{margin:0 0 1rem}
+  section p:last-child{margin-bottom:0}
+  .muted{color:var(--ink-soft)}
+  .note{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    border-left:3px solid var(--rule-strong);
+    padding:.15rem 0 .15rem 1rem;
+    margin:0 0 1.2rem;
+  }
+
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.06rem;
+    letter-spacing:-.01em;
+    margin:1.4rem 0 .5rem;
+    color:var(--ink);
+  }
+
+  strong{font-weight:600; color:var(--ink)}
+
+  /* source links */
+  .src{
+    color:var(--ink-faint);
+    font-size:.8em;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+    text-decoration-color:rgba(128,123,146,.5);
+  }
+  .src:hover, .src:focus{color:var(--accent); text-decoration-color:currentColor}
+
+  /* lists */
+  ul.clean{list-style:none; margin:0 0 1rem; padding:0}
+  ul.clean > li{
+    position:relative;
+    padding:0 0 .85rem 1.25rem;
+    margin:0;
+  }
+  ul.clean > li::before{
+    content:"";
+    position:absolute; left:0; top:.62em;
+    width:7px; height:7px; border-radius:2px;
+    background:var(--accent);
+    transform:rotate(45deg);
+  }
+  ul.clean > li:last-child{padding-bottom:0}
+
+  ol.qs{margin:0; padding-left:1.3rem}
+  ol.qs li{margin:0 0 1rem; padding-left:.25rem; line-height:1.55}
+  ol.qs li:last-child{margin-bottom:0}
+
+  /* tables */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    margin:0 0 1rem;
+    background:var(--card);
+  }
+  table{border-collapse:collapse; width:100%; min-width:600px; font-size:.94rem}
+  thead th{
+    font-family:var(--display);
+    font-weight:600; font-size:.78rem;
+    letter-spacing:.02em;
+    text-align:left;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:11px 14px;
+    border-bottom:1px solid var(--rule-strong);
+    white-space:nowrap;
+  }
+  tbody td{padding:12px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.45}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  tr.win td{background:var(--accent-soft)}
+  tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+  .win-tag{font-family:var(--mono); font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700}
+
+  /* jtbd table */
+  .jtbd-tbl td:first-child{width:32%; font-weight:600; color:var(--ink)}
+  .jtbd-tbl td:last-child{color:var(--ink-soft)}
+
+  /* rice table */
+  .rice-tbl th:first-child{min-width:220px}
+  .rice-tbl td:first-child{font-weight:600; color:var(--ink)}
+  .rice-tbl td:last-child{white-space:nowrap; font-family:var(--mono); font-size:.82rem}
+
+  /* fit table */
+  .fit td:first-child{width:44%; font-weight:500; color:var(--ink)}
+  .fit td:last-child{color:var(--ink-soft)}
+  .fit-intro{margin-bottom:1.2rem}
+
+  /* risks table */
+  .risk-tbl td:first-child{width:30%; font-weight:600; color:var(--ink)}
+  .risk-tbl td:last-child{color:var(--ink-soft)}
+
+  /* ---------- diagrams: shared ---------- */
+  figure.diagram{margin:1.4rem 0 .4rem; padding:0}
+  figcaption{
+    font-family:var(--mono);
+    font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:.75rem;
+  }
+  .fig-scroll{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:18px 14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .fig-scroll svg{display:block; width:100%; height:auto}
+  .flow svg{min-width:760px}
+  .tree svg{min-width:860px}
+
+  .fig-legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:.82rem; color:var(--ink-soft)}
+  .fig-legend span{display:inline-flex; align-items:center; gap:7px}
+  .swatch{width:13px; height:13px; border-radius:3px; border:1px solid}
+  .sw-green{background:#dcfce7; border-color:#16a34a}
+  .sw-amber{background:#fef9c3; border-color:#ca8a04}
+  .sw-blue{background:#dbeafe; border-color:#2563eb}
+  .sw-red{background:#fee2e2; border-color:#dc2626}
+  .sw-grey{background:#eef0ee; border-color:#94a3a0}
+  .sw-indigo{background:#e0e7ff; border-color:#4f46e5}
+
+  /* guardrails list */
+  .guard{display:grid; gap:10px; margin:1.1rem 0 0}
+  .guard div{
+    background:var(--card); border:1px solid var(--rule); border-radius:10px;
+    padding:11px 15px; font-size:.95rem; line-height:1.5; color:var(--ink-soft);
+  }
+  .guard strong{color:var(--ink)}
+  .guard .anti{border-left:4px solid #dc2626}
+  .guard .anti strong{color:#9f1d1d}
+
+  /* approach directions */
+  ul.hyp{list-style:none; margin:0 0 1.1rem; padding:0; display:grid; gap:12px}
+  ul.hyp > li{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    border-left:4px solid var(--accent);
+    padding:13px 16px; font-size:.97rem; line-height:1.5; color:var(--ink-soft);
+  }
+  ul.hyp .h-tag{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    font-weight:700; color:var(--accent); display:block; margin-bottom:3px;
+  }
+  ul.hyp strong{color:var(--ink)}
+
+  /* timeline (30/60/90) */
+  .timeline{display:grid; gap:14px}
+  .phase{
+    background:var(--card); border:1px solid var(--rule); border-radius:12px;
+    padding:16px 18px;
+  }
+  .phase .day{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .phase h3{margin:.15rem 0 .55rem}
+  .phase ul.clean{margin:0}
+  .phase ul.clean > li{font-size:.95rem; color:var(--ink-soft); padding-bottom:.55rem}
+
+  /* ---------- footer ---------- */
+  .foot{
+    border-top:1px solid var(--rule);
+    padding-top:26px; padding-bottom:56px;
+    margin-top:10px;
+  }
+  .foot .name{font-family:var(--display); font-weight:600; font-size:1rem; margin:0 0 .55rem; color:var(--ink)}
+  .contacts{display:flex; flex-wrap:wrap; gap:8px 22px; margin:0}
+  .contacts a{
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.02em;
+    color:var(--ink-faint); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .contacts a:hover, .contacts a:focus{color:var(--accent); border-bottom-color:currentColor}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    :root{--wrap-pad:22px}
+    .aligned{padding-left:var(--wrap-pad); padding-right:var(--wrap-pad)}
+    .rail{display:none}
+    .layout{grid-template-columns:minmax(0,1fr); gap:0; padding-top:14px}
+    .content{min-width:0}
+    .toc-mobile{
+      display:block;
+      margin-top:22px;
+      border:1px solid var(--rule);
+      border-radius:12px;
+      background:var(--card);
+    }
+    .toc-mobile summary{
+      cursor:pointer;
+      font-family:var(--mono); font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--accent); font-weight:700;
+      padding:13px 16px;
+      list-style:none;
+    }
+    .toc-mobile summary::-webkit-details-marker{display:none}
+    .toc-mobile summary::after{content:"+"; float:right; font-family:var(--mono)}
+    .toc-mobile[open] summary::after{content:"-"; float:right; font-family:var(--mono)}
+    .toc-mobile .toc{padding:2px 16px 14px}
+    .toc-mobile .toc a{border-left:0; padding:.42rem 0}
+  }
+  @media (max-width:560px){
+    body{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="shell masthead aligned">
+  <h1>Mayuresh More</h1>
+  <p class="lede">How I would build adopted, safe AI agents for the AI Agent Builder role at the University of Washington.</p>
+  <p class="prepared">Prepared July 2026</p>
+
+  <details class="toc-mobile">
+    <summary>Contents</summary>
+    <ul class="toc">
+      <li><a href="#bet">The bet</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#users">Who it is for</a></li>
+      <li><a href="#priority">Why this problem</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#mvp">Ship first</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#questions">Questions</a></li>
+      <li><a href="#fit">Why me</a></li>
+    </ul>
+  </details>
+</header>
+
+<div class="shell layout">
+  <aside class="rail">
+    <div class="rail-inner">
+      <p class="rail-label">On this page</p>
+      <nav aria-label="On this page">
+        <ul class="toc">
+          <li><a href="#bet">The bet</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#users">Who it is for</a></li>
+          <li><a href="#priority">Why this problem</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#mvp">Ship first</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#plan">30/60/90</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#questions">Questions</a></li>
+          <li><a href="#fit">Why me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main" class="content">
+
+    <!-- THE BET -->
+    <section id="bet" aria-labelledby="bet-h">
+      <h2 class="kicker" id="bet-h">The bet</h2>
+      <p class="takeaway">My bet: UW already shipped the AI capability, so the scarce thing now is proof the agents get adopted, measured, and kept safe across a decentralized campus.</p>
+      <p>Purple, UW's enterprise generative AI tool, went live to faculty and staff on June 16, 2026, and already advertises custom AI agents as a headline feature <a class="src" href="https://it.uw.edu/purple-is-here/" target="_blank" rel="noopener">(Purple is here, UW-IT)</a>. Shipping a capability is not the same as shipping agents people trust and use.</p>
+      <p>So here is what I would do: pick one high-volume, document-heavy administrative workflow, ship a grounded, cited agent that resolves the routine half of the load and hands the rest to a human, with evaluation, guardrails, and Washington records-retention built in from the first commit.</p>
+      <p>The University of Hawai'i system shows the shape is real. 51% of students engaged its chatbots and sent 100,000+ messages, with roughly 1,900 questions answered without a person and about 165 staff hours saved <a class="src" href="https://www.hawaii.edu/news/2026/04/07/uh-ai-chatbots-drive-early-intervention/" target="_blank" rel="noopener">(UH News, Apr 2026)</a>. Prove that pattern on one workflow, then turn it into a template other departments reuse. That is how UW's own goal to launch a vetted, continuously updated AI portfolio <a class="src" href="https://it.uw.edu/uw-it/uw-it-strategy/technology-strategy-roadmap/ai-strategy/" target="_blank" rel="noopener">(UW-IT AI Strategy)</a> becomes measured hours returned instead of a demo.</p>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" aria-labelledby="problem-h">
+      <h2 class="kicker" id="problem-h">The problem</h2>
+      <p class="takeaway">The gap I'd attack is the distance between a capability that exists and agents that staff actually rely on.</p>
+      <ul class="clean">
+        <li><strong>Who hurts.</strong> Frontline staff across a decentralized university (three campuses, UW Medicine, global research) answer the same routine requests all day and do manual lookups across Workday, Canvas, and policy PDFs. The requester, whether a faculty member, staff member, or student, waits in a ticket queue for an answer that already exists somewhere.</li>
+        <li><strong>What it costs, concretely.</strong> UW replaced 850+ legacy finance and HR processes with Workday in a $340 million program. After go-live the supplier-invoice backlog peaked near $90 million and was still $43 million in early 2024, with hundreds of grant awards stuck in processing <a class="src" href="https://www.theregister.com/2024/03/28/washington_uni_workday/" target="_blank" rel="noopener">(The Register, 2024)</a>. UW-IT's own update later reported the balance down to $25 million with outside consultants brought in to remediate <a class="src" href="https://finance.uw.edu/blog/week-522-workday-finance-stabilization-update" target="_blank" rel="noopener">(Workday Finance Stabilization Update)</a>. That surge of "where is my invoice, how do I submit this" work is exactly the repetitive load an agent can absorb.</li>
+        <li><strong>Root cause.</strong> The knowledge to answer these requests is scattered across enterprise systems and long documents, and the only path today is a human reading and re-explaining it.</li>
+        <li><strong>Workarounds, and why they fail.</strong> Staff ask a colleague, dig through a wiki, or open a ticket. These have zero switching cost and are fully trusted, which is precisely why a new tool has to be clearly better, not marginally better, to displace them.</li>
+        <li><strong>The trap that makes this hard.</strong> Every agent that logs a prompt or an output is a potential public record under Washington's Public Records Act (RCW 42.56), and both prompts and outputs can qualify <a class="src" href="https://www.schwabe.com/publication/navigating-the-digital-tide-generative-ai-and-the-washington-public-records-act/" target="_blank" rel="noopener">(Schwabe analysis)</a>. UW's records office says GenAI platforms are not recordkeeping repositories and has partnered with UW-IT to enable auto-deletion on approved tools <a class="src" href="https://finance.uw.edu/recmgt/UW-records-ai-guidance" target="_blank" rel="noopener">(UW Records Management AI guidance)</a>. Purple itself is barred from HIPAA, UW Medicine, CUI, and confidential research data <a class="src" href="https://it.uw.edu/purple-is-here/" target="_blank" rel="noopener">(Purple is here)</a>, and the student-records system (SDB/Keynes) is FERPA-governed with role-based access <a class="src" href="https://registrar.washington.edu/courses/sdb/" target="_blank" rel="noopener">(UW Registrar)</a>. An agent that ignores any of this is a liability, not a win.</li>
+      </ul>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section id="users" aria-labelledby="users-h">
+      <h2 class="kicker" id="users-h">Who it is for</h2>
+      <p class="takeaway">I'd build first for the staffer drowning in the same request all day, and the requester stuck behind them.</p>
+      <p class="muted">This is internal work for a public institution, so the daily user is not the buyer. The staffer uses it, leadership funds it, and Records and Privacy can veto it. All three have to be satisfied.</p>
+
+      <div class="table-wrap">
+        <table class="jtbd-tbl">
+          <thead>
+            <tr><th scope="col">Who</th><th scope="col">The job they are hiring the agent to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Service-desk staffer <br><span class="win-tag">Primary, daily</span></td><td>When the same routine request lands for the tenth time today, give me a trustworthy, cited answer or action without hunting through Workday and policy PDFs, so I can spend my time on the cases that actually need judgment. And so I stop feeling like a lookup service.</td></tr>
+            <tr><td>Requester (faculty, staff, or student)</td><td>When I have a routine question, give me a fast, correct answer with a source I can check, so I am not waiting in a queue.</td></tr>
+            <tr><td>Technology Manager / AI Platforms lead (buyer)</td><td>Own the AI portfolio and answer for adoption, cost, and safety. Show me hours returned, not a demo.</td></tr>
+            <tr><td>Department sponsor</td><td>Feel the burned staff hours already, and supply the pilot users and the real volume data.</td></tr>
+            <tr><td>Records Management + UW Privacy (gatekeepers)</td><td>Can veto on FERPA or Public Records grounds. The demo has to satisfy them, not just the end user.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WHY THIS PROBLEM: RICE -->
+    <section id="priority" aria-labelledby="priority-h">
+      <h2 class="kicker" id="priority-h">Why this problem</h2>
+      <p class="takeaway">I'd fund the workflow agent before the platform, and here is the arithmetic.</p>
+      <p class="note">The role spans five pillars. I scored the candidate bets on Reach (people helped per quarter), Impact (fixed tiers), Confidence, and Effort (person-months). The Reach and Effort figures are my week-one estimates to be replaced with real department volumes, not grounded numbers.</p>
+
+      <div class="table-wrap">
+        <table class="rice-tbl">
+          <thead>
+            <tr>
+              <th scope="col">Bet (what to build)</th>
+              <th scope="col">Reach/qtr</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Conf.</th>
+              <th scope="col">Effort</th>
+              <th scope="col">Score</th>
+              <th scope="col">Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="win">
+              <td>Grounded, cited deflection agent for <strong>one</strong> high-volume workflow <br><span class="win-tag">Do first</span></td>
+              <td class="num">4,000</td>
+              <td class="num">2</td>
+              <td class="num">80%</td>
+              <td class="num">3</td>
+              <td class="num">~2,130</td>
+              <td class="num">1</td>
+            </tr>
+            <tr>
+              <td>Agent-authoring templates + guardrail/eval layer behind Purple (platform)</td>
+              <td class="num">15,000</td>
+              <td class="num">2</td>
+              <td class="num">50%</td>
+              <td class="num">8</td>
+              <td class="num">~1,875</td>
+              <td class="num">2</td>
+            </tr>
+            <tr>
+              <td>Research-support agent (literature review, grant writing) on Tillicum compute</td>
+              <td class="num">1,500</td>
+              <td class="num">2</td>
+              <td class="num">50%</td>
+              <td class="num">5</td>
+              <td class="num">~300</td>
+              <td class="num">4</td>
+            </tr>
+            <tr>
+              <td>Workday invoice-backlog OCR / exception automation</td>
+              <td class="num">1,000</td>
+              <td class="num">1</td>
+              <td class="num">50%</td>
+              <td class="num">6</td>
+              <td class="num">~85</td>
+              <td class="num">5</td>
+            </tr>
+            <tr>
+              <td>nebulaONE build-vs-buy evaluation</td>
+              <td class="num">decision</td>
+              <td class="num">n/a</td>
+              <td class="num">n/a</td>
+              <td class="num">1</td>
+              <td class="num">alongside</td>
+              <td class="num">3 spike</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="clean">
+        <li><strong>Confidence is the highest on the deflection agent.</strong> The pattern is externally proven (UH's roughly 50/50 answered-versus-escalated split) and I have shipped this exact shape twice, so I score it 80% while the others sit at 50%.</li>
+        <li><strong>The platform play has more reach but I'd sequence it second, not first.</strong> Templates built before one real agent works would templatize the wrong thing. Prove one agent by hand, then extract the reusable pieces. That is a judgment call, not a rule.</li>
+        <li><strong>The research agent and the Workday OCR work score low for this role.</strong> Research data is largely barred from Purple, so its data-handling story is heavier. Workday's own AI already runs invoice OCR for healthcare invoices and has a natural-language reporting pilot underway <a class="src" href="https://it.uw.edu/guides/artificial-intelligence/upcoming-ai-tools/" target="_blank" rel="noopener">(UW-IT upcoming AI tools)</a>, so the marginal reach here is small.</li>
+        <li><strong>nebulaONE is a decision input, not a shippable win.</strong> I'd run it as a one-person-month spike alongside the MVP, not as the headline.</li>
+      </ul>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 class="kicker" id="approach-h">Approach</h2>
+      <p class="takeaway">I see three orchestration directions, and I'd let a short evaluation decide, not a preference.</p>
+
+      <ul class="hyp">
+        <li><span class="h-tag">Direction 1 &middot; extend Purple</span><strong>Extend Purple's native agent feature.</strong> Lowest new surface area, stays inside UW's Azure tenant, inherits Purple's data boundary. Open question: what the feature exposes for authoring, templates, logging, and evaluation is not public, so I'd map it in week one.</li>
+        <li><span class="h-tag">Direction 2 &middot; commercial gateway</span><strong>Configure a commercial gateway (nebulaONE).</strong> The JD names it as highly desirable. It is a real Azure-native GenAI gateway that routes across model providers and adds governance and cost controls <a class="src" href="https://gocloudforce.com/nebulaone-ai-launch/" target="_blank" rel="noopener">(Cloudforce)</a>, and higher-ed peers move fast on it: UCLA Anderson launched its first chatbot within two months of adoption <a class="src" href="https://www.ecampusnews.com/innovation-insights/2025/04/17/cloudforce-launches-nebulaone-on-microsoft-azure-the-leading-ai-gateway-for-higher-education/" target="_blank" rel="noopener">(eCampus News)</a>, and Oxford's pilot pitches no-code custom chatbots for staff <a class="src" href="https://oerc.ox.ac.uk/ai-centre/ai-centre-news/piloting-cloudforce-nebulaone-ai-platform" target="_blank" rel="noopener">(Oxford AI Centre)</a>. Trade-off: license cost and a dependency on an outside vendor.</li>
+        <li><span class="h-tag">Direction 3 &middot; build in-house</span><strong>Build lightweight in-house orchestration</strong> (a role-based framework such as CrewAI). Most control, cheapest license, most maintenance load.</li>
+      </ul>
+
+      <p><strong>How I'd decide:</strong> score all three on the same axes I already use in my UW research work: capability, ingestion cost, query cost, governance fit, and time-to-first-agent. UW's deepened Microsoft partnership makes Azure the default substrate to build against <a class="src" href="https://www.washington.edu/news/2026/02/24/uw-and-microsoft-expand-relationship-to-enhance-ai-learning-and-research-with-aim-to-prepare-washingtons-workforce-for-the-future/" target="_blank" rel="noopener">(UW and Microsoft, Feb 2026)</a>, which weights the first two options above a fully custom build.</p>
+
+      <p>Whichever wins, the agent itself follows one shape: retrieve, ground, cite, check confidence, and escalate to a human when unsure. The escalation branch is where trust is won.</p>
+
+      <figure class="diagram" role="img" aria-label="Agent decision flow, left to right. A staff or faculty request goes into a retrieve step over a bounded corpus using hybrid retrieval. That feeds a confidence gate that asks whether the grounded answer is above the confidence bar. If yes, a cited answer goes to the user. If no, the request escalates to a human with context. Both the cited answer and the escalation are logged to an approved retention and auto-delete path.">
+        <div class="fig-scroll flow">
+          <svg viewBox="0 0 940 290" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="fa" markerWidth="9" markerHeight="9" refX="6.4" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#8A8597"></path>
+              </marker>
+            </defs>
+
+            <!-- straight flow arrows -->
+            <g fill="none" stroke="#8A8597" stroke-width="1.8" marker-end="url(#fa)">
+              <path d="M156,145 L176,145"></path>
+              <path d="M344,145 L376,145"></path>
+              <path d="M490,119 L574,106"></path>
+              <path d="M490,171 L574,204"></path>
+            </g>
+            <!-- converge to log -->
+            <g fill="none" stroke="#8A8597" stroke-width="1.8" marker-end="url(#fa)">
+              <path d="M746,104 C762,104 752,124 764,124"></path>
+              <path d="M746,204 C762,204 752,166 764,166"></path>
+            </g>
+
+            <!-- yes / no labels -->
+            <rect x="510" y="90" width="34" height="17" rx="3" fill="#FBFAF8"></rect>
+            <text x="527" y="103" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#166534">Yes</text>
+            <rect x="512" y="186" width="30" height="17" rx="3" fill="#FBFAF8"></rect>
+            <text x="527" y="199" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#8a5a15">No</text>
+
+            <g font-family="'Space Grotesk',sans-serif">
+              <!-- Q request (grey) -->
+              <rect x="6" y="113" width="150" height="64" rx="9" fill="#eef0ee" stroke="#94a3a0" stroke-width="1.6"></rect>
+              <text x="81" y="139" text-anchor="middle" font-weight="600" font-size="12" fill="#334155">Staff or faculty</text>
+              <text x="81" y="157" text-anchor="middle" font-weight="600" font-size="12" fill="#334155">request</text>
+
+              <!-- R retrieve (grey) -->
+              <rect x="176" y="113" width="168" height="64" rx="9" fill="#eef0ee" stroke="#94a3a0" stroke-width="1.6"></rect>
+              <text x="260" y="141" text-anchor="middle" font-weight="600" font-size="12" fill="#334155">Retrieve from corpus</text>
+              <text x="260" y="159" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#5a6472">bounded, hybrid retrieval</text>
+
+              <!-- C confidence gate (amber diamond) -->
+              <polygon points="452,93 528,145 452,197 376,145" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.6"></polygon>
+              <text x="452" y="140" text-anchor="middle" font-weight="600" font-size="11.5" fill="#713f12">Above the</text>
+              <text x="452" y="157" text-anchor="middle" font-weight="600" font-size="11.5" fill="#713f12">confidence bar?</text>
+
+              <!-- A cited answer (green) -->
+              <rect x="574" y="76" width="172" height="56" rx="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"></rect>
+              <text x="660" y="99" text-anchor="middle" font-weight="600" font-size="12" fill="#14532d">Cited answer</text>
+              <text x="660" y="117" text-anchor="middle" font-weight="600" font-size="12" fill="#14532d">to user</text>
+
+              <!-- E escalate (blue) -->
+              <rect x="574" y="176" width="172" height="56" rx="9" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect>
+              <text x="660" y="199" text-anchor="middle" font-weight="600" font-size="12" fill="#1e3a5f">Escalate to a human</text>
+              <text x="660" y="217" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#274b6b">with context</text>
+
+              <!-- L log / retention (grey) -->
+              <rect x="764" y="104" width="170" height="82" rx="9" fill="#eef0ee" stroke="#94a3a0" stroke-width="1.6"></rect>
+              <text x="849" y="132" text-anchor="middle" font-weight="600" font-size="12" fill="#334155">Log prompt + output</text>
+              <text x="849" y="149" text-anchor="middle" font-weight="600" font-size="12" fill="#334155">to approved retention</text>
+              <text x="849" y="166" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#5a6472">auto-delete path</text>
+            </g>
+          </svg>
+        </div>
+        <div class="fig-legend">
+          <span><span class="swatch sw-amber" aria-hidden="true"></span> Confidence gate</span>
+          <span><span class="swatch sw-green" aria-hidden="true"></span> Resolved with a cited answer</span>
+          <span><span class="swatch sw-blue" aria-hidden="true"></span> Escalate to a human</span>
+          <span><span class="swatch sw-grey" aria-hidden="true"></span> Retrieve + retention logging</span>
+        </div>
+        <figcaption>The escalation branch is where trust is won.</figcaption>
+      </figure>
+    </section>
+
+    <!-- MVP -->
+    <section id="mvp" aria-labelledby="mvp-h">
+      <h2 class="kicker" id="mvp-h">Ship first</h2>
+      <p class="takeaway">The first thing I'd ship is deliberately small: one agent, one workflow, one bounded corpus.</p>
+      <p><strong>The biggest assumption to test:</strong> a grounded, cited agent can resolve enough routine volume in a real UW workflow to return meaningful staff hours, while staying inside FERPA and records rules, and staff will trust it enough to come back.</p>
+      <p><strong>The MVP:</strong> one department's high-volume question set, answered over a bounded, low-sensitivity document corpus, deployed on Purple/Azure. Answers carry citations. A confidence threshold routes anything uncertain to a human instead of guessing. Prompt-and-output logging is wired to the approved auto-deletion path from day one, before the agent handles anything real. Run it as a 4-to-6-week pilot with an explicit success bar and kill criteria.</p>
+      <p><strong>What it deliberately leaves out</strong> (per the RICE reasoning):</p>
+      <ul class="clean">
+        <li>No write-actions into systems of record. Read-only first. No Workday or SDB writes.</li>
+        <li>No FERPA or restricted data in v1. Public and low-sensitivity content only, so the pilot clears Privacy review quickly.</li>
+        <li>No multi-agent orchestration and no self-service authoring. Those are phase 2, after one agent proves the pattern.</li>
+      </ul>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" aria-labelledby="metrics-h">
+      <h2 class="kicker" id="metrics-h">Metrics</h2>
+      <p class="takeaway">I'd judge this on routine requests resolved with a trustworthy answer and no human touch, not on message volume.</p>
+      <p class="muted">The North Star rises only when staff time is genuinely returned and the answer was trustworthy. Raw message volume is an anti-metric: it can climb while value falls.</p>
+
+      <figure class="diagram" role="img" aria-label="Metrics tree, top to bottom. Six leading indicators feed the North Star: groundedness versus a review set, hallucination rate below threshold, citation coverage on answers, escalate-when-unsure rate, staff repeat-use rate, and question-type coverage. The North Star is routine requests resolved with a cited, correct answer and no human touch, per quarter. It feeds three business outcomes: staff hours returned, queue and backlog reduction, and cost per resolved request.">
+        <div class="fig-scroll tree">
+          <svg viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="mt" markerWidth="9" markerHeight="9" refX="6.4" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#B7B1C2"></path>
+              </marker>
+            </defs>
+
+            <!-- inputs -> north star -->
+            <g fill="none" stroke="#B7B1C2" stroke-width="1.5" marker-end="url(#mt)">
+              <path d="M90,70 C90,112 280,120 280,156"></path>
+              <path d="M238,70 C238,110 352,120 352,156"></path>
+              <path d="M386,70 C386,112 424,120 424,156"></path>
+              <path d="M534,70 C534,112 496,120 496,156"></path>
+              <path d="M682,70 C682,110 568,120 568,156"></path>
+              <path d="M830,70 C830,112 640,120 640,156"></path>
+            </g>
+            <!-- north star -> outcomes -->
+            <g fill="none" stroke="#B7B1C2" stroke-width="1.5" marker-end="url(#mt)">
+              <path d="M460,252 C460,278 230,276 230,298"></path>
+              <path d="M460,252 L460,298"></path>
+              <path d="M460,252 C460,278 690,276 690,298"></path>
+            </g>
+
+            <!-- input chips (blue) -->
+            <g font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="11" fill="#1e3a5f">
+              <rect x="20" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="90" y="37" text-anchor="middle">Groundedness</text>
+              <text x="90" y="53" text-anchor="middle">vs. review set</text>
+
+              <rect x="168" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="238" y="37" text-anchor="middle">Hallucination rate</text>
+              <text x="238" y="53" text-anchor="middle">below threshold</text>
+
+              <rect x="316" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="386" y="37" text-anchor="middle">Citation coverage</text>
+              <text x="386" y="53" text-anchor="middle">on answers</text>
+
+              <rect x="464" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="534" y="37" text-anchor="middle">Escalate-when-</text>
+              <text x="534" y="53" text-anchor="middle">unsure rate</text>
+
+              <rect x="612" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="682" y="37" text-anchor="middle">Staff repeat-</text>
+              <text x="682" y="53" text-anchor="middle">use rate</text>
+
+              <rect x="760" y="12" width="140" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"></rect>
+              <text x="830" y="37" text-anchor="middle">Question-type</text>
+              <text x="830" y="53" text-anchor="middle">coverage</text>
+            </g>
+
+            <!-- north star (green) -->
+            <rect x="250" y="158" width="420" height="92" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.7"></rect>
+            <text x="460" y="186" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.4" fill="#166534">NORTH STAR</text>
+            <text x="460" y="211" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#14532d">Routine requests resolved with a cited,</text>
+            <text x="460" y="231" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="14" fill="#14532d">correct answer and no human touch, per quarter</text>
+
+            <!-- outcomes (indigo) -->
+            <g font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="12" fill="#312e81">
+              <rect x="130" y="298" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"></rect>
+              <text x="230" y="324" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1" fill="#4338ca">OUTCOME</text>
+              <text x="230" y="343" text-anchor="middle">Staff hours returned</text>
+
+              <rect x="360" y="298" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"></rect>
+              <text x="460" y="324" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1" fill="#4338ca">OUTCOME</text>
+              <text x="460" y="343" text-anchor="middle">Queue / backlog reduction</text>
+
+              <rect x="590" y="298" width="200" height="60" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"></rect>
+              <text x="690" y="324" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1" fill="#4338ca">OUTCOME</text>
+              <text x="690" y="343" text-anchor="middle">Cost per resolved request</text>
+            </g>
+          </svg>
+        </div>
+        <div class="fig-legend">
+          <span><span class="swatch sw-blue" aria-hidden="true"></span> Leading indicator (quality + adoption)</span>
+          <span><span class="swatch sw-green" aria-hidden="true"></span> North Star</span>
+          <span><span class="swatch sw-indigo" aria-hidden="true"></span> Business outcome</span>
+        </div>
+        <figcaption>Guardrails matter as much as the North Star.</figcaption>
+      </figure>
+
+      <div class="guard">
+        <div><strong>Groundedness and hallucination rate</strong> against a labeled review set. This is the exact evaluation I already run on policy text in my UW research.</div>
+        <div><strong>Escalate-when-unsure rate.</strong> The agent should hand off when it is not sure, not paper over gaps to keep the deflection number up.</div>
+        <div><strong>Zero restricted-data exposures, and 100% of prompts and outputs on the approved retention path.</strong> These are pass/fail, not targets to trend.</div>
+        <div><strong>Cost per resolved request.</strong> Purple is free to faculty and staff, but Azure token and compute cost is real, and a gateway license would add to it.</div>
+        <div class="anti"><strong>Anti-metric: raw message volume.</strong> It can climb while value falls, so I would not chase it.</div>
+      </div>
+    </section>
+
+    <!-- 30/60/90 -->
+    <section id="plan" aria-labelledby="plan-h">
+      <h2 class="kicker" id="plan-h">30 / 60 / 90</h2>
+      <p class="takeaway">My first quarter would move from listening to a measured pilot.</p>
+      <div class="timeline">
+        <div class="phase">
+          <span class="day">Days 0 to 30 &middot; listen and map</span>
+          <h3>Learn the constraints before touching anything</h3>
+          <ul class="clean">
+            <li>Meet the AI Platforms team and the Technology Manager. Read UW's AI Guidelines, the records-management GenAI guidance, and Purple's data-boundary rules.</li>
+            <li>Map what Purple's custom-agent feature actually does today: authoring, templates, logging, evaluation hooks.</li>
+            <li>Shortlist 2 to 3 candidate workflows by sitting with the busiest service desks (Workday/finance stabilization, HR, IT/ServiceNow) and pulling real request volumes.</li>
+            <li>Get the FERPA, Public Records, and retention constraints from Records Management and UW Privacy in writing.</li>
+            <li>Stand up a throwaway dev agent in the Azure tenant over a small public corpus to learn the plumbing.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="day">Days 30 to 60 &middot; quick win and sharpen</span>
+          <h3>Build the MVP agent and the evaluation harness</h3>
+          <ul class="clean">
+            <li>Pick the one workflow. Replace my RICE estimates with the real volume and hours data.</li>
+            <li>Build the MVP agent over a bounded, low-sensitivity corpus: citations, confidence-based escalation, retention logging.</li>
+            <li>Stand up the evaluation harness (groundedness and hallucination review set), reusing the method from my research work.</li>
+            <li>Align the department sponsor and Records/Privacy on pilot scope, success bar, and kill criteria.</li>
+            <li>Run the nebulaONE-versus-build spike in parallel and write it up as a one-page decision memo.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="day">Days 60 to 90 &middot; ship, baseline, propose</span>
+          <h3>Run the pilot and turn it into a template</h3>
+          <ul class="clean">
+            <li>Run the 4-to-6-week pilot against the defined success and kill bar.</li>
+            <li>Baseline the North Star, staff hours returned, groundedness, and cost per request.</li>
+            <li>If it clears the bar, extract the reusable pieces (retrieval config, guardrail policy, retention wiring, evaluation harness) into a starter template so a second, deliberately different department goes faster.</li>
+            <li>Propose the phased roadmap: more workflows, then self-service authoring behind Purple, with the buy-vs-build recommendation attached.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 class="kicker" id="risks-h">Risks</h2>
+      <p class="takeaway">Every risk here is about the work itself, and I'd test the biggest ones in week one.</p>
+      <div class="table-wrap">
+        <table class="risk-tbl">
+          <thead>
+            <tr><th scope="col">Risk</th><th scope="col">What I would validate first</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data boundary</td>
+              <td>The chosen workflow may touch FERPA or restricted data sooner than expected. Validate corpus sensitivity with Records and Privacy in week one, and start read-only and low-sensitivity.</td>
+            </tr>
+            <tr>
+              <td>Records and Public Records exposure</td>
+              <td>Every logged prompt and output may be a public record. Validate the approved auto-deletion path before the agent logs anything real.</td>
+            </tr>
+            <tr>
+              <td>Adoption</td>
+              <td>Staff may not trust or return to the agent, and asking a colleague has zero switching cost. Validate with a small pilot group and a repeat-use metric, not a launch announcement.</td>
+            </tr>
+            <tr>
+              <td>Retrieval quality</td>
+              <td>Enterprise and policy text is messy and groundedness may be too low to trust. Validate against a labeled review set before the pilot, not after.</td>
+            </tr>
+            <tr>
+              <td>Buy vs build</td>
+              <td>Purple-native, nebulaONE, and a custom framework could each be right. Validate on capability, ingestion cost, query cost, and governance fit before committing.</td>
+            </tr>
+            <tr>
+              <td>Purple dependency</td>
+              <td>What the native agent feature exposes is unclear. Validate what the platform actually gives before deciding to extend it or build alongside it.</td>
+            </tr>
+            <tr>
+              <td>Decentralization</td>
+              <td>A template that fits one department may not fit the next. Validate by choosing the second department deliberately unlike the first.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="questions-h">
+      <h2 class="kicker" id="questions-h">Questions</h2>
+      <p class="takeaway">A few answers would change my plan, so I'd ask them early.</p>
+      <ol class="qs">
+        <li><strong>Is nebulaONE actually licensed or piloted at UW, or named in the JD as a category example?</strong> The answer decides whether I configure a gateway or build orchestration.</li>
+        <li><strong>What does Purple's custom-agent feature expose today</strong> (authoring, templates, logging, evaluation hooks), and is this role meant to extend it or build alongside it?</li>
+        <li><strong>Which workflow does leadership most want moved first,</strong> and is there a department sponsor already asking? Workday stabilization, an IT/ServiceNow desk, or a specific college?</li>
+        <li><strong>What is the approved records-retention and auto-deletion path for agent prompts and outputs,</strong> and who signs off on FERPA and restricted-data scope?</li>
+        <li><strong>What is the year-one success bar for the AI-portfolio milestone:</strong> adoption, hours saved, cost, safety, or all of them, and against what baseline?</li>
+      </ol>
+    </section>
+
+    <!-- WHY ME -->
+    <section id="fit" aria-labelledby="fit-h">
+      <h2 class="kicker" id="fit-h">Why me</h2>
+      <p class="fit-intro">I'm a product manager and builder with six years across technology, finance, and AI, finishing my MS in Information Management at UW (expected Aug 2026), with an MBA in finance (2021) and a computer-engineering degree (2016) behind that. I'm already building the exact shape of product this role wants, here at UW: a grounded, cited RAG agent over thousands of government policy documents. I use these campus systems as a current student, and I've taken an enterprise AI assistant to 15,000 people with the compliance controls a public institution needs.</p>
+      <div class="table-wrap">
+        <table class="fit">
+          <thead>
+            <tr><th scope="col">What the role needs</th><th scope="col">What I have done</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Design, build, and iterate AI agents</td>
+              <td>Building a policy-conflict RAG agent at UW that surfaces conflicts across 8 Washington and Seattle regulatory bodies; took it from user pain points to a working proof of concept.</td>
+            </tr>
+            <tr>
+              <td>Advanced RAG pipelines: embeddings, vector search, hybrid retrieval, context management</td>
+              <td>Assessed 4 retrieval architectures (vector, BM25, hybrid, knowledge graph with a custom schema) on accuracy, groundedness, hallucination, latency, and cost for legal and policy text.</td>
+            </tr>
+            <tr>
+              <td>Own end-to-end ingestion for trustworthy retrieval</td>
+              <td>Owned the ingestion strategy and pipeline for 9,000+ policy documents across 8 agencies, setting the quality gates for retrieval at scale.</td>
+            </tr>
+            <tr>
+              <td>Deploy agents org-wide with guardrails and responsible-AI mechanisms</td>
+              <td>Led the rollout of an internal AI assistant to 15,000+ users with compliance and governance features, phased bank-wide, at 100% policy compliance.</td>
+            </tr>
+            <tr>
+              <td>Integrate agents with enterprise systems via APIs</td>
+              <td>Delivered API integrations with credit bureaus (CIBIL, Equifax, Experian) and partners; automated credit decisioning and KYC and cut manual review 35%.</td>
+            </tr>
+            <tr>
+              <td>Automate repetitive administrative workflows</td>
+              <td>Built a real-time reporting dashboard that cut manual report compilation 40+ hours a week, and owned a finance budgeting app at Nomura that cut spend 30%.</td>
+            </tr>
+            <tr>
+              <td>Build-vs-buy on platforms, orchestration, and vector DBs</td>
+              <td>Evaluated 5+ RAG platforms (Pinecone, Vertex AI, Azure AI, Bedrock, Vectara) on capability, architecture, ingestion cost, and query cost.</td>
+            </tr>
+            <tr>
+              <td>Cloud (Azure) and Python, plus higher-ed and public-sector context</td>
+              <td>Build on Azure AI Studio and Python; building for the City of Seattle across 8 government agencies as a current UW graduate researcher.</td>
+            </tr>
+            <tr>
+              <td>The PM layer: prioritization, metrics, adoption</td>
+              <td>Six years owning discovery-to-launch, roadmaps, RICE-style prioritization, A/B tests, and OKRs; scaled a lending platform from MVP to 25,000+ users across 3,000+ branches.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="shell foot aligned">
+  <p class="name">Mayuresh More</p>
+  <p class="contacts">
+    <a href="mailto:mayuresh33@live.com">mayuresh33@live.com</a>
+    <a href="https://www.linkedin.com/in/mayureshmore/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/mayuresh747" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail .toc a'));
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  var current = null;
+  function setActive(id){
+    if(current === id) return;
+    links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    if(map[id]){ map[id].setAttribute('aria-current','true'); current = id; }
+  }
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+    });
+    var best = null, bestRatio = 0;
+    Object.keys(visible).forEach(function(id){
+      if(visible[id] > bestRatio){ bestRatio = visible[id]; best = id; }
+    });
+    if(best) setActive(best);
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+  Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>
