@@ -536,7 +536,7 @@
               <td class="num">5</td>
             </tr>
             <tr>
-              <td>nebulaONE build-vs-buy evaluation</td>
+              <td>nebulaONE capability-fit spike</td>
               <td class="num">decision</td>
               <td class="num">n/a</td>
               <td class="num">n/a</td>
@@ -552,7 +552,7 @@
         <li><strong>Confidence is the highest on the deflection agent.</strong> The pattern is externally proven (UH's roughly 50/50 answered-versus-escalated split) and I have shipped this exact shape twice, so I score it 80% while the others sit at 50%.</li>
         <li><strong>The platform play has more reach but I'd sequence it second, not first.</strong> Templates built before one real agent works would templatize the wrong thing. Prove one agent by hand, then extract the reusable pieces. That is a judgment call, not a rule.</li>
         <li><strong>The research agent and the Workday OCR work score low for this role.</strong> Research data is largely barred from Purple, so its data-handling story is heavier. Workday's own AI already runs invoice OCR for healthcare invoices and has a natural-language reporting pilot underway <a class="src" href="https://it.uw.edu/guides/artificial-intelligence/upcoming-ai-tools/" target="_blank" rel="noopener">(UW-IT upcoming AI tools)</a>, so the marginal reach here is small.</li>
-        <li><strong>nebulaONE is a decision input, not a shippable win.</strong> I'd run it as a one-person-month spike alongside the MVP, not as the headline.</li>
+        <li><strong>The nebulaONE capability map is a decision input, not a shippable win.</strong> Purple runs on nebulaONE, so the spike is mapping what the platform already covers versus what needs custom work. I'd run it alongside the MVP, not as the headline.</li>
       </ul>
     </section>
 
@@ -563,7 +563,7 @@
 
       <ul class="hyp">
         <li><span class="h-tag">Direction 1 &middot; extend Purple</span><strong>Extend Purple's native agent feature.</strong> Lowest new surface area, stays inside UW's Azure tenant, inherits Purple's data boundary. Open question: what the feature exposes for authoring, templates, logging, and evaluation is not public, so I'd map it in week one.</li>
-        <li><span class="h-tag">Direction 2 &middot; commercial gateway</span><strong>Configure a commercial gateway (nebulaONE).</strong> The JD names it as highly desirable. It is a real Azure-native GenAI gateway that routes across model providers and adds governance and cost controls <a class="src" href="https://gocloudforce.com/nebulaone-ai-launch/" target="_blank" rel="noopener">(Cloudforce)</a>, and higher-ed peers move fast on it: UCLA Anderson launched its first chatbot within two months of adoption <a class="src" href="https://www.ecampusnews.com/innovation-insights/2025/04/17/cloudforce-launches-nebulaone-on-microsoft-azure-the-leading-ai-gateway-for-higher-education/" target="_blank" rel="noopener">(eCampus News)</a>, and Oxford's pilot pitches no-code custom chatbots for staff <a class="src" href="https://oerc.ox.ac.uk/ai-centre/ai-centre-news/piloting-cloudforce-nebulaone-ai-platform" target="_blank" rel="noopener">(Oxford AI Centre)</a>. Trade-off: license cost and a dependency on an outside vendor.</li>
+        <li><span class="h-tag">Direction 2 &middot; deeper nebulaONE</span><strong>Unlock more of nebulaONE, the platform Purple already runs on.</strong> This is not a future purchase. Purple includes ONEChat <a class="src" href="https://it.uw.edu/purple-is-here/" target="_blank" rel="noopener">(Purple is here, UW-IT)</a>, nebulaONE's chat interface <a class="src" href="https://gocloudforce.com/june-nebulaone-product-release-three-updates-that-change-how-you-work-with-ai/" target="_blank" rel="noopener">(Cloudforce release notes)</a>, so the Azure-native gateway that routes across model providers and adds governance and cost controls <a class="src" href="https://gocloudforce.com/nebulaone-ai-launch/" target="_blank" rel="noopener">(Cloudforce)</a> is already live at UW. Peers on the same platform move fast: UCLA Anderson launched its first chatbot within two months of adoption <a class="src" href="https://www.ecampusnews.com/innovation-insights/2025/04/17/cloudforce-launches-nebulaone-on-microsoft-azure-the-leading-ai-gateway-for-higher-education/" target="_blank" rel="noopener">(eCampus News)</a>, and Oxford's pilot pitches no-code custom chatbots for staff <a class="src" href="https://oerc.ox.ac.uk/ai-centre/ai-centre-news/piloting-cloudforce-nebulaone-ai-platform" target="_blank" rel="noopener">(Oxford AI Centre)</a>. How much of the platform UW has enabled so far is the week-one question. Trade-off: agent capability arrives on the vendor's roadmap, not ours.</li>
         <li><span class="h-tag">Direction 3 &middot; build in-house</span><strong>Build lightweight in-house orchestration</strong> (a role-based framework such as CrewAI). Most control, cheapest license, most maintenance load.</li>
       </ul>
 
@@ -749,7 +749,7 @@
         <div><strong>Groundedness and hallucination rate</strong> against a labeled review set. This is the exact evaluation I already run on policy text in my UW research.</div>
         <div><strong>Escalate-when-unsure rate.</strong> The agent should hand off when it is not sure, not paper over gaps to keep the deflection number up.</div>
         <div><strong>Zero restricted-data exposures, and 100% of prompts and outputs on the approved retention path.</strong> These are pass/fail, not targets to trend.</div>
-        <div><strong>Cost per resolved request.</strong> Purple is free to faculty and staff, but Azure token and compute cost is real, and a gateway license would add to it.</div>
+        <div><strong>Cost per resolved request.</strong> Purple is free to faculty and staff, but Azure token and compute cost is real, and enabling more of the platform may add license cost.</div>
         <div class="anti"><strong>Anti-metric: raw message volume.</strong> It can climb while value falls, so I would not chase it.</div>
       </div>
     </section>
@@ -778,7 +778,7 @@
             <li>Build the MVP agent over a bounded, low-sensitivity corpus: citations, confidence-based escalation, retention logging.</li>
             <li>Stand up the evaluation harness (groundedness and hallucination review set), reusing the method from my research work.</li>
             <li>Align the department sponsor and Records/Privacy on pilot scope, success bar, and kill criteria.</li>
-            <li>Run the nebulaONE-versus-build spike in parallel and write it up as a one-page decision memo.</li>
+            <li>Run the nebulaONE capability-fit spike in parallel (what the platform covers versus what needs custom orchestration) and write it up as a one-page decision memo.</li>
           </ul>
         </div>
         <div class="phase">
@@ -788,7 +788,7 @@
             <li>Run the 4-to-6-week pilot against the defined success and kill bar.</li>
             <li>Baseline the North Star, staff hours returned, groundedness, and cost per request.</li>
             <li>If it clears the bar, extract the reusable pieces (retrieval config, guardrail policy, retention wiring, evaluation harness) into a starter template so a second, deliberately different department goes faster.</li>
-            <li>Propose the phased roadmap: more workflows, then self-service authoring behind Purple, with the buy-vs-build recommendation attached.</li>
+            <li>Propose the phased roadmap: more workflows, then self-service authoring behind Purple, with the platform-fit recommendation attached.</li>
           </ul>
         </div>
       </div>
@@ -821,8 +821,8 @@
               <td>Enterprise and policy text is messy and groundedness may be too low to trust. Validate against a labeled review set before the pilot, not after.</td>
             </tr>
             <tr>
-              <td>Buy vs build</td>
-              <td>Purple-native, nebulaONE, and a custom framework could each be right. Validate on capability, ingestion cost, query cost, and governance fit before committing.</td>
+              <td>Platform fit</td>
+              <td>Purple runs on nebulaONE, but not every workflow will fit inside its agent layer. Validate on capability, ingestion cost, query cost, and governance fit before committing to where each agent runs.</td>
             </tr>
             <tr>
               <td>Purple dependency</td>
@@ -842,7 +842,7 @@
       <h2 class="kicker" id="questions-h">Questions</h2>
       <p class="takeaway">A few answers would change my plan, so I'd ask them early.</p>
       <ol class="qs">
-        <li><strong>Is nebulaONE actually licensed or piloted at UW, or named in the JD as a category example?</strong> The answer decides whether I configure a gateway or build orchestration.</li>
+        <li><strong>Which nebulaONE features are enabled in Purple today, and what is on the enablement roadmap?</strong> Purple already ships the platform's chat interface; the gap between enabled and available decides what I build custom.</li>
         <li><strong>What does Purple's custom-agent feature expose today</strong> (authoring, templates, logging, evaluation hooks), and is this role meant to extend it or build alongside it?</li>
         <li><strong>Which workflow does leadership most want moved first,</strong> and is there a department sponsor already asking? Workday stabilization, an IT/ServiceNow desk, or a specific college?</li>
         <li><strong>What is the approved records-retention and auto-deletion path for agent prompts and outputs,</strong> and who signs off on FERPA and restricted-data scope?</li>
